@@ -52,24 +52,13 @@ RM = "D:\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\vikto\CLionProjects\ComputerGraphics
+CMAKE_SOURCE_DIR = C:\Users\vikto\CLionProjects\Minecraft
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\vikto\CLionProjects\ComputerGraphics\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	echo >nul && "D:\CLion 2020.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache\fast: rebuild_cache
-
-.PHONY : rebuild_cache\fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -82,11 +71,22 @@ edit_cache\fast: edit_cache
 
 .PHONY : edit_cache\fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	echo >nul && "D:\CLion 2020.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache\fast: rebuild_cache
+
+.PHONY : rebuild_cache\fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\vikto\CLionProjects\ComputerGraphics\cmake-build-debug\CMakeFiles C:\Users\vikto\CLionProjects\ComputerGraphics\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\CMakeFiles C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\vikto\CLionProjects\ComputerGraphics\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -115,152 +115,125 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ComputerGraphics
+# Target rules for targets named Minecraft
 
 # Build rule for target.
-ComputerGraphics: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) ComputerGraphics
-.PHONY : ComputerGraphics
+Minecraft: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) Minecraft
+.PHONY : Minecraft
 
 # fast build rule for target.
-ComputerGraphics\fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\build
-.PHONY : ComputerGraphics\fast
+Minecraft\fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\build
+.PHONY : Minecraft\fast
 
-src\core\objects\color_object.obj: src\core\objects\color_object.cpp.obj
+src\core\data\assets.obj: src\core\data\assets.cpp.obj
 
-.PHONY : src\core\objects\color_object.obj
-
-# target to build an object file
-src\core\objects\color_object.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\color_object.cpp.obj
-.PHONY : src\core\objects\color_object.cpp.obj
-
-src\core\objects\color_object.i: src\core\objects\color_object.cpp.i
-
-.PHONY : src\core\objects\color_object.i
-
-# target to preprocess a source file
-src\core\objects\color_object.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\color_object.cpp.i
-.PHONY : src\core\objects\color_object.cpp.i
-
-src\core\objects\color_object.s: src\core\objects\color_object.cpp.s
-
-.PHONY : src\core\objects\color_object.s
-
-# target to generate assembly for a file
-src\core\objects\color_object.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\color_object.cpp.s
-.PHONY : src\core\objects\color_object.cpp.s
-
-src\core\objects\object.obj: src\core\objects\object.cpp.obj
-
-.PHONY : src\core\objects\object.obj
+.PHONY : src\core\data\assets.obj
 
 # target to build an object file
-src\core\objects\object.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\object.cpp.obj
-.PHONY : src\core\objects\object.cpp.obj
+src\core\data\assets.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\assets.cpp.obj
+.PHONY : src\core\data\assets.cpp.obj
 
-src\core\objects\object.i: src\core\objects\object.cpp.i
+src\core\data\assets.i: src\core\data\assets.cpp.i
 
-.PHONY : src\core\objects\object.i
+.PHONY : src\core\data\assets.i
 
 # target to preprocess a source file
-src\core\objects\object.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\object.cpp.i
-.PHONY : src\core\objects\object.cpp.i
+src\core\data\assets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\assets.cpp.i
+.PHONY : src\core\data\assets.cpp.i
 
-src\core\objects\object.s: src\core\objects\object.cpp.s
+src\core\data\assets.s: src\core\data\assets.cpp.s
 
-.PHONY : src\core\objects\object.s
+.PHONY : src\core\data\assets.s
 
 # target to generate assembly for a file
-src\core\objects\object.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\object.cpp.s
-.PHONY : src\core\objects\object.cpp.s
+src\core\data\assets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\assets.cpp.s
+.PHONY : src\core\data\assets.cpp.s
 
-src\core\objects\object_loader.obj: src\core\objects\object_loader.cpp.obj
+src\core\data\cube.obj: src\core\data\cube.cpp.obj
 
-.PHONY : src\core\objects\object_loader.obj
+.PHONY : src\core\data\cube.obj
 
 # target to build an object file
-src\core\objects\object_loader.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\object_loader.cpp.obj
-.PHONY : src\core\objects\object_loader.cpp.obj
+src\core\data\cube.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\cube.cpp.obj
+.PHONY : src\core\data\cube.cpp.obj
 
-src\core\objects\object_loader.i: src\core\objects\object_loader.cpp.i
+src\core\data\cube.i: src\core\data\cube.cpp.i
 
-.PHONY : src\core\objects\object_loader.i
+.PHONY : src\core\data\cube.i
 
 # target to preprocess a source file
-src\core\objects\object_loader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\object_loader.cpp.i
-.PHONY : src\core\objects\object_loader.cpp.i
+src\core\data\cube.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\cube.cpp.i
+.PHONY : src\core\data\cube.cpp.i
 
-src\core\objects\object_loader.s: src\core\objects\object_loader.cpp.s
+src\core\data\cube.s: src\core\data\cube.cpp.s
 
-.PHONY : src\core\objects\object_loader.s
+.PHONY : src\core\data\cube.s
 
 # target to generate assembly for a file
-src\core\objects\object_loader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\object_loader.cpp.s
-.PHONY : src\core\objects\object_loader.cpp.s
+src\core\data\cube.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\cube.cpp.s
+.PHONY : src\core\data\cube.cpp.s
 
-src\core\objects\texture_object.obj: src\core\objects\texture_object.cpp.obj
+src\core\data\data_system.obj: src\core\data\data_system.cpp.obj
 
-.PHONY : src\core\objects\texture_object.obj
+.PHONY : src\core\data\data_system.obj
 
 # target to build an object file
-src\core\objects\texture_object.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\texture_object.cpp.obj
-.PHONY : src\core\objects\texture_object.cpp.obj
+src\core\data\data_system.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\data_system.cpp.obj
+.PHONY : src\core\data\data_system.cpp.obj
 
-src\core\objects\texture_object.i: src\core\objects\texture_object.cpp.i
+src\core\data\data_system.i: src\core\data\data_system.cpp.i
 
-.PHONY : src\core\objects\texture_object.i
+.PHONY : src\core\data\data_system.i
 
 # target to preprocess a source file
-src\core\objects\texture_object.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\texture_object.cpp.i
-.PHONY : src\core\objects\texture_object.cpp.i
+src\core\data\data_system.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\data_system.cpp.i
+.PHONY : src\core\data\data_system.cpp.i
 
-src\core\objects\texture_object.s: src\core\objects\texture_object.cpp.s
+src\core\data\data_system.s: src\core\data\data_system.cpp.s
 
-.PHONY : src\core\objects\texture_object.s
+.PHONY : src\core\data\data_system.s
 
 # target to generate assembly for a file
-src\core\objects\texture_object.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\texture_object.cpp.s
-.PHONY : src\core\objects\texture_object.cpp.s
+src\core\data\data_system.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\data_system.cpp.s
+.PHONY : src\core\data\data_system.cpp.s
 
-src\core\objects\triangle.obj: src\core\objects\triangle.cpp.obj
+src\core\data\entity.obj: src\core\data\entity.cpp.obj
 
-.PHONY : src\core\objects\triangle.obj
+.PHONY : src\core\data\entity.obj
 
 # target to build an object file
-src\core\objects\triangle.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\triangle.cpp.obj
-.PHONY : src\core\objects\triangle.cpp.obj
+src\core\data\entity.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\entity.cpp.obj
+.PHONY : src\core\data\entity.cpp.obj
 
-src\core\objects\triangle.i: src\core\objects\triangle.cpp.i
+src\core\data\entity.i: src\core\data\entity.cpp.i
 
-.PHONY : src\core\objects\triangle.i
+.PHONY : src\core\data\entity.i
 
 # target to preprocess a source file
-src\core\objects\triangle.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\triangle.cpp.i
-.PHONY : src\core\objects\triangle.cpp.i
+src\core\data\entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\entity.cpp.i
+.PHONY : src\core\data\entity.cpp.i
 
-src\core\objects\triangle.s: src\core\objects\triangle.cpp.s
+src\core\data\entity.s: src\core\data\entity.cpp.s
 
-.PHONY : src\core\objects\triangle.s
+.PHONY : src\core\data\entity.s
 
 # target to generate assembly for a file
-src\core\objects\triangle.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\objects\triangle.cpp.s
-.PHONY : src\core\objects\triangle.cpp.s
+src\core\data\entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\data\entity.cpp.s
+.PHONY : src\core\data\entity.cpp.s
 
 src\core\playground.obj: src\core\playground.cpp.obj
 
@@ -268,7 +241,7 @@ src\core\playground.obj: src\core\playground.cpp.obj
 
 # target to build an object file
 src\core\playground.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\playground.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\playground.cpp.obj
 .PHONY : src\core\playground.cpp.obj
 
 src\core\playground.i: src\core\playground.cpp.i
@@ -277,7 +250,7 @@ src\core\playground.i: src\core\playground.cpp.i
 
 # target to preprocess a source file
 src\core\playground.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\playground.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\playground.cpp.i
 .PHONY : src\core\playground.cpp.i
 
 src\core\playground.s: src\core\playground.cpp.s
@@ -286,35 +259,8 @@ src\core\playground.s: src\core\playground.cpp.s
 
 # target to generate assembly for a file
 src\core\playground.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\playground.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\core\playground.cpp.s
 .PHONY : src\core\playground.cpp.s
-
-src\core\tests\viewport_test.obj: src\core\tests\viewport_test.cpp.obj
-
-.PHONY : src\core\tests\viewport_test.obj
-
-# target to build an object file
-src\core\tests\viewport_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\tests\viewport_test.cpp.obj
-.PHONY : src\core\tests\viewport_test.cpp.obj
-
-src\core\tests\viewport_test.i: src\core\tests\viewport_test.cpp.i
-
-.PHONY : src\core\tests\viewport_test.i
-
-# target to preprocess a source file
-src\core\tests\viewport_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\tests\viewport_test.cpp.i
-.PHONY : src\core\tests\viewport_test.cpp.i
-
-src\core\tests\viewport_test.s: src\core\tests\viewport_test.cpp.s
-
-.PHONY : src\core\tests\viewport_test.s
-
-# target to generate assembly for a file
-src\core\tests\viewport_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\core\tests\viewport_test.cpp.s
-.PHONY : src\core\tests\viewport_test.cpp.s
 
 src\desktop\desktop_launcher.obj: src\desktop\desktop_launcher.cpp.obj
 
@@ -322,7 +268,7 @@ src\desktop\desktop_launcher.obj: src\desktop\desktop_launcher.cpp.obj
 
 # target to build an object file
 src\desktop\desktop_launcher.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\desktop\desktop_launcher.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\desktop\desktop_launcher.cpp.obj
 .PHONY : src\desktop\desktop_launcher.cpp.obj
 
 src\desktop\desktop_launcher.i: src\desktop\desktop_launcher.cpp.i
@@ -331,7 +277,7 @@ src\desktop\desktop_launcher.i: src\desktop\desktop_launcher.cpp.i
 
 # target to preprocess a source file
 src\desktop\desktop_launcher.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\desktop\desktop_launcher.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\desktop\desktop_launcher.cpp.i
 .PHONY : src\desktop\desktop_launcher.cpp.i
 
 src\desktop\desktop_launcher.s: src\desktop\desktop_launcher.cpp.s
@@ -340,7 +286,7 @@ src\desktop\desktop_launcher.s: src\desktop\desktop_launcher.cpp.s
 
 # target to generate assembly for a file
 src\desktop\desktop_launcher.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\desktop\desktop_launcher.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\desktop\desktop_launcher.cpp.s
 .PHONY : src\desktop\desktop_launcher.cpp.s
 
 src\lib\application.obj: src\lib\application.cpp.obj
@@ -349,7 +295,7 @@ src\lib\application.obj: src\lib\application.cpp.obj
 
 # target to build an object file
 src\lib\application.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\application.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\application.cpp.obj
 .PHONY : src\lib\application.cpp.obj
 
 src\lib\application.i: src\lib\application.cpp.i
@@ -358,7 +304,7 @@ src\lib\application.i: src\lib\application.cpp.i
 
 # target to preprocess a source file
 src\lib\application.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\application.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\application.cpp.i
 .PHONY : src\lib\application.cpp.i
 
 src\lib\application.s: src\lib\application.cpp.s
@@ -367,7 +313,7 @@ src\lib\application.s: src\lib\application.cpp.s
 
 # target to generate assembly for a file
 src\lib\application.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\application.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\application.cpp.s
 .PHONY : src\lib\application.cpp.s
 
 src\lib\configuration.obj: src\lib\configuration.cpp.obj
@@ -376,7 +322,7 @@ src\lib\configuration.obj: src\lib\configuration.cpp.obj
 
 # target to build an object file
 src\lib\configuration.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\configuration.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\configuration.cpp.obj
 .PHONY : src\lib\configuration.cpp.obj
 
 src\lib\configuration.i: src\lib\configuration.cpp.i
@@ -385,7 +331,7 @@ src\lib\configuration.i: src\lib\configuration.cpp.i
 
 # target to preprocess a source file
 src\lib\configuration.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\configuration.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\configuration.cpp.i
 .PHONY : src\lib\configuration.cpp.i
 
 src\lib\configuration.s: src\lib\configuration.cpp.s
@@ -394,7 +340,7 @@ src\lib\configuration.s: src\lib\configuration.cpp.s
 
 # target to generate assembly for a file
 src\lib\configuration.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\configuration.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\configuration.cpp.s
 .PHONY : src\lib\configuration.cpp.s
 
 src\lib\graphics.obj: src\lib\graphics.cpp.obj
@@ -403,7 +349,7 @@ src\lib\graphics.obj: src\lib\graphics.cpp.obj
 
 # target to build an object file
 src\lib\graphics.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\graphics.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\graphics.cpp.obj
 .PHONY : src\lib\graphics.cpp.obj
 
 src\lib\graphics.i: src\lib\graphics.cpp.i
@@ -412,7 +358,7 @@ src\lib\graphics.i: src\lib\graphics.cpp.i
 
 # target to preprocess a source file
 src\lib\graphics.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\graphics.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\graphics.cpp.i
 .PHONY : src\lib\graphics.cpp.i
 
 src\lib\graphics.s: src\lib\graphics.cpp.s
@@ -421,7 +367,7 @@ src\lib\graphics.s: src\lib\graphics.cpp.s
 
 # target to generate assembly for a file
 src\lib\graphics.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\graphics.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\graphics.cpp.s
 .PHONY : src\lib\graphics.cpp.s
 
 src\lib\input.obj: src\lib\input.cpp.obj
@@ -430,7 +376,7 @@ src\lib\input.obj: src\lib\input.cpp.obj
 
 # target to build an object file
 src\lib\input.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\input.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\input.cpp.obj
 .PHONY : src\lib\input.cpp.obj
 
 src\lib\input.i: src\lib\input.cpp.i
@@ -439,7 +385,7 @@ src\lib\input.i: src\lib\input.cpp.i
 
 # target to preprocess a source file
 src\lib\input.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\input.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\input.cpp.i
 .PHONY : src\lib\input.cpp.i
 
 src\lib\input.s: src\lib\input.cpp.s
@@ -448,7 +394,7 @@ src\lib\input.s: src\lib\input.cpp.s
 
 # target to generate assembly for a file
 src\lib\input.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\input.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\input.cpp.s
 .PHONY : src\lib\input.cpp.s
 
 src\lib\lib.obj: src\lib\lib.cpp.obj
@@ -457,7 +403,7 @@ src\lib\lib.obj: src\lib\lib.cpp.obj
 
 # target to build an object file
 src\lib\lib.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\lib.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\lib.cpp.obj
 .PHONY : src\lib\lib.cpp.obj
 
 src\lib\lib.i: src\lib\lib.cpp.i
@@ -466,7 +412,7 @@ src\lib\lib.i: src\lib\lib.cpp.i
 
 # target to preprocess a source file
 src\lib\lib.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\lib.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\lib.cpp.i
 .PHONY : src\lib\lib.cpp.i
 
 src\lib\lib.s: src\lib\lib.cpp.s
@@ -475,7 +421,7 @@ src\lib\lib.s: src\lib\lib.cpp.s
 
 # target to generate assembly for a file
 src\lib\lib.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\lib.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\lib.cpp.s
 .PHONY : src\lib\lib.cpp.s
 
 src\lib\logger.obj: src\lib\logger.cpp.obj
@@ -484,7 +430,7 @@ src\lib\logger.obj: src\lib\logger.cpp.obj
 
 # target to build an object file
 src\lib\logger.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\logger.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\logger.cpp.obj
 .PHONY : src\lib\logger.cpp.obj
 
 src\lib\logger.i: src\lib\logger.cpp.i
@@ -493,7 +439,7 @@ src\lib\logger.i: src\lib\logger.cpp.i
 
 # target to preprocess a source file
 src\lib\logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\logger.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\logger.cpp.i
 .PHONY : src\lib\logger.cpp.i
 
 src\lib\logger.s: src\lib\logger.cpp.s
@@ -502,8 +448,62 @@ src\lib\logger.s: src\lib\logger.cpp.s
 
 # target to generate assembly for a file
 src\lib\logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\logger.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\logger.cpp.s
 .PHONY : src\lib\logger.cpp.s
+
+src\lib\utils\animation.obj: src\lib\utils\animation.cpp.obj
+
+.PHONY : src\lib\utils\animation.obj
+
+# target to build an object file
+src\lib\utils\animation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\animation.cpp.obj
+.PHONY : src\lib\utils\animation.cpp.obj
+
+src\lib\utils\animation.i: src\lib\utils\animation.cpp.i
+
+.PHONY : src\lib\utils\animation.i
+
+# target to preprocess a source file
+src\lib\utils\animation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\animation.cpp.i
+.PHONY : src\lib\utils\animation.cpp.i
+
+src\lib\utils\animation.s: src\lib\utils\animation.cpp.s
+
+.PHONY : src\lib\utils\animation.s
+
+# target to generate assembly for a file
+src\lib\utils\animation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\animation.cpp.s
+.PHONY : src\lib\utils\animation.cpp.s
+
+src\lib\utils\atlas_region.obj: src\lib\utils\atlas_region.cpp.obj
+
+.PHONY : src\lib\utils\atlas_region.obj
+
+# target to build an object file
+src\lib\utils\atlas_region.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\atlas_region.cpp.obj
+.PHONY : src\lib\utils\atlas_region.cpp.obj
+
+src\lib\utils\atlas_region.i: src\lib\utils\atlas_region.cpp.i
+
+.PHONY : src\lib\utils\atlas_region.i
+
+# target to preprocess a source file
+src\lib\utils\atlas_region.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\atlas_region.cpp.i
+.PHONY : src\lib\utils\atlas_region.cpp.i
+
+src\lib\utils\atlas_region.s: src\lib\utils\atlas_region.cpp.s
+
+.PHONY : src\lib\utils\atlas_region.s
+
+# target to generate assembly for a file
+src\lib\utils\atlas_region.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\atlas_region.cpp.s
+.PHONY : src\lib\utils\atlas_region.cpp.s
 
 src\lib\utils\camera.obj: src\lib\utils\camera.cpp.obj
 
@@ -511,7 +511,7 @@ src\lib\utils\camera.obj: src\lib\utils\camera.cpp.obj
 
 # target to build an object file
 src\lib\utils\camera.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\camera.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\camera.cpp.obj
 .PHONY : src\lib\utils\camera.cpp.obj
 
 src\lib\utils\camera.i: src\lib\utils\camera.cpp.i
@@ -520,7 +520,7 @@ src\lib\utils\camera.i: src\lib\utils\camera.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\camera.cpp.i
 .PHONY : src\lib\utils\camera.cpp.i
 
 src\lib\utils\camera.s: src\lib\utils\camera.cpp.s
@@ -529,7 +529,7 @@ src\lib\utils\camera.s: src\lib\utils\camera.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\camera.cpp.s
 .PHONY : src\lib\utils\camera.cpp.s
 
 src\lib\utils\first_person_camera_controller.obj: src\lib\utils\first_person_camera_controller.cpp.obj
@@ -538,7 +538,7 @@ src\lib\utils\first_person_camera_controller.obj: src\lib\utils\first_person_cam
 
 # target to build an object file
 src\lib\utils\first_person_camera_controller.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\first_person_camera_controller.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\first_person_camera_controller.cpp.obj
 .PHONY : src\lib\utils\first_person_camera_controller.cpp.obj
 
 src\lib\utils\first_person_camera_controller.i: src\lib\utils\first_person_camera_controller.cpp.i
@@ -547,7 +547,7 @@ src\lib\utils\first_person_camera_controller.i: src\lib\utils\first_person_camer
 
 # target to preprocess a source file
 src\lib\utils\first_person_camera_controller.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\first_person_camera_controller.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\first_person_camera_controller.cpp.i
 .PHONY : src\lib\utils\first_person_camera_controller.cpp.i
 
 src\lib\utils\first_person_camera_controller.s: src\lib\utils\first_person_camera_controller.cpp.s
@@ -556,7 +556,7 @@ src\lib\utils\first_person_camera_controller.s: src\lib\utils\first_person_camer
 
 # target to generate assembly for a file
 src\lib\utils\first_person_camera_controller.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\first_person_camera_controller.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\first_person_camera_controller.cpp.s
 .PHONY : src\lib\utils\first_person_camera_controller.cpp.s
 
 src\lib\utils\gl_texture.obj: src\lib\utils\gl_texture.cpp.obj
@@ -565,7 +565,7 @@ src\lib\utils\gl_texture.obj: src\lib\utils\gl_texture.cpp.obj
 
 # target to build an object file
 src\lib\utils\gl_texture.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\gl_texture.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\gl_texture.cpp.obj
 .PHONY : src\lib\utils\gl_texture.cpp.obj
 
 src\lib\utils\gl_texture.i: src\lib\utils\gl_texture.cpp.i
@@ -574,7 +574,7 @@ src\lib\utils\gl_texture.i: src\lib\utils\gl_texture.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\gl_texture.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\gl_texture.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\gl_texture.cpp.i
 .PHONY : src\lib\utils\gl_texture.cpp.i
 
 src\lib\utils\gl_texture.s: src\lib\utils\gl_texture.cpp.s
@@ -583,8 +583,35 @@ src\lib\utils\gl_texture.s: src\lib\utils\gl_texture.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\gl_texture.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\gl_texture.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\gl_texture.cpp.s
 .PHONY : src\lib\utils\gl_texture.cpp.s
+
+src\lib\utils\input_processor.obj: src\lib\utils\input_processor.cpp.obj
+
+.PHONY : src\lib\utils\input_processor.obj
+
+# target to build an object file
+src\lib\utils\input_processor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\input_processor.cpp.obj
+.PHONY : src\lib\utils\input_processor.cpp.obj
+
+src\lib\utils\input_processor.i: src\lib\utils\input_processor.cpp.i
+
+.PHONY : src\lib\utils\input_processor.i
+
+# target to preprocess a source file
+src\lib\utils\input_processor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\input_processor.cpp.i
+.PHONY : src\lib\utils\input_processor.cpp.i
+
+src\lib\utils\input_processor.s: src\lib\utils\input_processor.cpp.s
+
+.PHONY : src\lib\utils\input_processor.s
+
+# target to generate assembly for a file
+src\lib\utils\input_processor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\input_processor.cpp.s
+.PHONY : src\lib\utils\input_processor.cpp.s
 
 src\lib\utils\math\math_utils.obj: src\lib\utils\math\math_utils.cpp.obj
 
@@ -592,7 +619,7 @@ src\lib\utils\math\math_utils.obj: src\lib\utils\math\math_utils.cpp.obj
 
 # target to build an object file
 src\lib\utils\math\math_utils.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\math\math_utils.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\math\math_utils.cpp.obj
 .PHONY : src\lib\utils\math\math_utils.cpp.obj
 
 src\lib\utils\math\math_utils.i: src\lib\utils\math\math_utils.cpp.i
@@ -601,7 +628,7 @@ src\lib\utils\math\math_utils.i: src\lib\utils\math\math_utils.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\math\math_utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\math\math_utils.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\math\math_utils.cpp.i
 .PHONY : src\lib\utils\math\math_utils.cpp.i
 
 src\lib\utils\math\math_utils.s: src\lib\utils\math\math_utils.cpp.s
@@ -610,8 +637,35 @@ src\lib\utils\math\math_utils.s: src\lib\utils\math\math_utils.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\math\math_utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\math\math_utils.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\math\math_utils.cpp.s
 .PHONY : src\lib\utils\math\math_utils.cpp.s
+
+src\lib\utils\music.obj: src\lib\utils\music.cpp.obj
+
+.PHONY : src\lib\utils\music.obj
+
+# target to build an object file
+src\lib\utils\music.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\music.cpp.obj
+.PHONY : src\lib\utils\music.cpp.obj
+
+src\lib\utils\music.i: src\lib\utils\music.cpp.i
+
+.PHONY : src\lib\utils\music.i
+
+# target to preprocess a source file
+src\lib\utils\music.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\music.cpp.i
+.PHONY : src\lib\utils\music.cpp.i
+
+src\lib\utils\music.s: src\lib\utils\music.cpp.s
+
+.PHONY : src\lib\utils\music.s
+
+# target to generate assembly for a file
+src\lib\utils\music.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\music.cpp.s
+.PHONY : src\lib\utils\music.cpp.s
 
 src\lib\utils\orthographic_camera.obj: src\lib\utils\orthographic_camera.cpp.obj
 
@@ -619,7 +673,7 @@ src\lib\utils\orthographic_camera.obj: src\lib\utils\orthographic_camera.cpp.obj
 
 # target to build an object file
 src\lib\utils\orthographic_camera.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\orthographic_camera.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\orthographic_camera.cpp.obj
 .PHONY : src\lib\utils\orthographic_camera.cpp.obj
 
 src\lib\utils\orthographic_camera.i: src\lib\utils\orthographic_camera.cpp.i
@@ -628,7 +682,7 @@ src\lib\utils\orthographic_camera.i: src\lib\utils\orthographic_camera.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\orthographic_camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\orthographic_camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\orthographic_camera.cpp.i
 .PHONY : src\lib\utils\orthographic_camera.cpp.i
 
 src\lib\utils\orthographic_camera.s: src\lib\utils\orthographic_camera.cpp.s
@@ -637,7 +691,7 @@ src\lib\utils\orthographic_camera.s: src\lib\utils\orthographic_camera.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\orthographic_camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\orthographic_camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\orthographic_camera.cpp.s
 .PHONY : src\lib\utils\orthographic_camera.cpp.s
 
 src\lib\utils\perspective_camera.obj: src\lib\utils\perspective_camera.cpp.obj
@@ -646,7 +700,7 @@ src\lib\utils\perspective_camera.obj: src\lib\utils\perspective_camera.cpp.obj
 
 # target to build an object file
 src\lib\utils\perspective_camera.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\perspective_camera.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\perspective_camera.cpp.obj
 .PHONY : src\lib\utils\perspective_camera.cpp.obj
 
 src\lib\utils\perspective_camera.i: src\lib\utils\perspective_camera.cpp.i
@@ -655,7 +709,7 @@ src\lib\utils\perspective_camera.i: src\lib\utils\perspective_camera.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\perspective_camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\perspective_camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\perspective_camera.cpp.i
 .PHONY : src\lib\utils\perspective_camera.cpp.i
 
 src\lib\utils\perspective_camera.s: src\lib\utils\perspective_camera.cpp.s
@@ -664,7 +718,7 @@ src\lib\utils\perspective_camera.s: src\lib\utils\perspective_camera.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\perspective_camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\perspective_camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\perspective_camera.cpp.s
 .PHONY : src\lib\utils\perspective_camera.cpp.s
 
 src\lib\utils\shaders.obj: src\lib\utils\shaders.cpp.obj
@@ -673,7 +727,7 @@ src\lib\utils\shaders.obj: src\lib\utils\shaders.cpp.obj
 
 # target to build an object file
 src\lib\utils\shaders.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\shaders.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\shaders.cpp.obj
 .PHONY : src\lib\utils\shaders.cpp.obj
 
 src\lib\utils\shaders.i: src\lib\utils\shaders.cpp.i
@@ -682,7 +736,7 @@ src\lib\utils\shaders.i: src\lib\utils\shaders.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\shaders.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\shaders.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\shaders.cpp.i
 .PHONY : src\lib\utils\shaders.cpp.i
 
 src\lib\utils\shaders.s: src\lib\utils\shaders.cpp.s
@@ -691,8 +745,35 @@ src\lib\utils\shaders.s: src\lib\utils\shaders.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\shaders.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\shaders.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\shaders.cpp.s
 .PHONY : src\lib\utils\shaders.cpp.s
+
+src\lib\utils\sound.obj: src\lib\utils\sound.cpp.obj
+
+.PHONY : src\lib\utils\sound.obj
+
+# target to build an object file
+src\lib\utils\sound.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\sound.cpp.obj
+.PHONY : src\lib\utils\sound.cpp.obj
+
+src\lib\utils\sound.i: src\lib\utils\sound.cpp.i
+
+.PHONY : src\lib\utils\sound.i
+
+# target to preprocess a source file
+src\lib\utils\sound.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\sound.cpp.i
+.PHONY : src\lib\utils\sound.cpp.i
+
+src\lib\utils\sound.s: src\lib\utils\sound.cpp.s
+
+.PHONY : src\lib\utils\sound.s
+
+# target to generate assembly for a file
+src\lib\utils\sound.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\sound.cpp.s
+.PHONY : src\lib\utils\sound.cpp.s
 
 src\lib\utils\sprite_batch.obj: src\lib\utils\sprite_batch.cpp.obj
 
@@ -700,7 +781,7 @@ src\lib\utils\sprite_batch.obj: src\lib\utils\sprite_batch.cpp.obj
 
 # target to build an object file
 src\lib\utils\sprite_batch.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\sprite_batch.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\sprite_batch.cpp.obj
 .PHONY : src\lib\utils\sprite_batch.cpp.obj
 
 src\lib\utils\sprite_batch.i: src\lib\utils\sprite_batch.cpp.i
@@ -709,7 +790,7 @@ src\lib\utils\sprite_batch.i: src\lib\utils\sprite_batch.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\sprite_batch.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\sprite_batch.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\sprite_batch.cpp.i
 .PHONY : src\lib\utils\sprite_batch.cpp.i
 
 src\lib\utils\sprite_batch.s: src\lib\utils\sprite_batch.cpp.s
@@ -718,7 +799,7 @@ src\lib\utils\sprite_batch.s: src\lib\utils\sprite_batch.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\sprite_batch.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\sprite_batch.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\sprite_batch.cpp.s
 .PHONY : src\lib\utils\sprite_batch.cpp.s
 
 src\lib\utils\texture.obj: src\lib\utils\texture.cpp.obj
@@ -727,7 +808,7 @@ src\lib\utils\texture.obj: src\lib\utils\texture.cpp.obj
 
 # target to build an object file
 src\lib\utils\texture.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\texture.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture.cpp.obj
 .PHONY : src\lib\utils\texture.cpp.obj
 
 src\lib\utils\texture.i: src\lib\utils\texture.cpp.i
@@ -736,7 +817,7 @@ src\lib\utils\texture.i: src\lib\utils\texture.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\texture.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\texture.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture.cpp.i
 .PHONY : src\lib\utils\texture.cpp.i
 
 src\lib\utils\texture.s: src\lib\utils\texture.cpp.s
@@ -745,8 +826,62 @@ src\lib\utils\texture.s: src\lib\utils\texture.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\texture.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\texture.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture.cpp.s
 .PHONY : src\lib\utils\texture.cpp.s
+
+src\lib\utils\texture_atlas.obj: src\lib\utils\texture_atlas.cpp.obj
+
+.PHONY : src\lib\utils\texture_atlas.obj
+
+# target to build an object file
+src\lib\utils\texture_atlas.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture_atlas.cpp.obj
+.PHONY : src\lib\utils\texture_atlas.cpp.obj
+
+src\lib\utils\texture_atlas.i: src\lib\utils\texture_atlas.cpp.i
+
+.PHONY : src\lib\utils\texture_atlas.i
+
+# target to preprocess a source file
+src\lib\utils\texture_atlas.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture_atlas.cpp.i
+.PHONY : src\lib\utils\texture_atlas.cpp.i
+
+src\lib\utils\texture_atlas.s: src\lib\utils\texture_atlas.cpp.s
+
+.PHONY : src\lib\utils\texture_atlas.s
+
+# target to generate assembly for a file
+src\lib\utils\texture_atlas.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture_atlas.cpp.s
+.PHONY : src\lib\utils\texture_atlas.cpp.s
+
+src\lib\utils\texture_region.obj: src\lib\utils\texture_region.cpp.obj
+
+.PHONY : src\lib\utils\texture_region.obj
+
+# target to build an object file
+src\lib\utils\texture_region.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture_region.cpp.obj
+.PHONY : src\lib\utils\texture_region.cpp.obj
+
+src\lib\utils\texture_region.i: src\lib\utils\texture_region.cpp.i
+
+.PHONY : src\lib\utils\texture_region.i
+
+# target to preprocess a source file
+src\lib\utils\texture_region.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture_region.cpp.i
+.PHONY : src\lib\utils\texture_region.cpp.i
+
+src\lib\utils\texture_region.s: src\lib\utils\texture_region.cpp.s
+
+.PHONY : src\lib\utils\texture_region.s
+
+# target to generate assembly for a file
+src\lib\utils\texture_region.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\texture_region.cpp.s
+.PHONY : src\lib\utils\texture_region.cpp.s
 
 src\lib\utils\universal_viewport.obj: src\lib\utils\universal_viewport.cpp.obj
 
@@ -754,7 +889,7 @@ src\lib\utils\universal_viewport.obj: src\lib\utils\universal_viewport.cpp.obj
 
 # target to build an object file
 src\lib\utils\universal_viewport.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\universal_viewport.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\universal_viewport.cpp.obj
 .PHONY : src\lib\utils\universal_viewport.cpp.obj
 
 src\lib\utils\universal_viewport.i: src\lib\utils\universal_viewport.cpp.i
@@ -763,7 +898,7 @@ src\lib\utils\universal_viewport.i: src\lib\utils\universal_viewport.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\universal_viewport.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\universal_viewport.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\universal_viewport.cpp.i
 .PHONY : src\lib\utils\universal_viewport.cpp.i
 
 src\lib\utils\universal_viewport.s: src\lib\utils\universal_viewport.cpp.s
@@ -772,7 +907,7 @@ src\lib\utils\universal_viewport.s: src\lib\utils\universal_viewport.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\universal_viewport.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\universal_viewport.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\universal_viewport.cpp.s
 .PHONY : src\lib\utils\universal_viewport.cpp.s
 
 src\lib\utils\viewport.obj: src\lib\utils\viewport.cpp.obj
@@ -781,7 +916,7 @@ src\lib\utils\viewport.obj: src\lib\utils\viewport.cpp.obj
 
 # target to build an object file
 src\lib\utils\viewport.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\viewport.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\viewport.cpp.obj
 .PHONY : src\lib\utils\viewport.cpp.obj
 
 src\lib\utils\viewport.i: src\lib\utils\viewport.cpp.i
@@ -790,7 +925,7 @@ src\lib\utils\viewport.i: src\lib\utils\viewport.cpp.i
 
 # target to preprocess a source file
 src\lib\utils\viewport.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\viewport.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\viewport.cpp.i
 .PHONY : src\lib\utils\viewport.cpp.i
 
 src\lib\utils\viewport.s: src\lib\utils\viewport.cpp.s
@@ -799,7 +934,7 @@ src\lib\utils\viewport.s: src\lib\utils\viewport.cpp.s
 
 # target to generate assembly for a file
 src\lib\utils\viewport.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ComputerGraphics.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\ComputerGraphics.dir\src\lib\utils\viewport.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Minecraft.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Minecraft.dir\src\lib\utils\viewport.cpp.s
 .PHONY : src\lib\utils\viewport.cpp.s
 
 # Help Target
@@ -810,28 +945,22 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... ComputerGraphics
-	@echo ... src/core/objects/color_object.obj
-	@echo ... src/core/objects/color_object.i
-	@echo ... src/core/objects/color_object.s
-	@echo ... src/core/objects/object.obj
-	@echo ... src/core/objects/object.i
-	@echo ... src/core/objects/object.s
-	@echo ... src/core/objects/object_loader.obj
-	@echo ... src/core/objects/object_loader.i
-	@echo ... src/core/objects/object_loader.s
-	@echo ... src/core/objects/texture_object.obj
-	@echo ... src/core/objects/texture_object.i
-	@echo ... src/core/objects/texture_object.s
-	@echo ... src/core/objects/triangle.obj
-	@echo ... src/core/objects/triangle.i
-	@echo ... src/core/objects/triangle.s
+	@echo ... Minecraft
+	@echo ... src/core/data/assets.obj
+	@echo ... src/core/data/assets.i
+	@echo ... src/core/data/assets.s
+	@echo ... src/core/data/cube.obj
+	@echo ... src/core/data/cube.i
+	@echo ... src/core/data/cube.s
+	@echo ... src/core/data/data_system.obj
+	@echo ... src/core/data/data_system.i
+	@echo ... src/core/data/data_system.s
+	@echo ... src/core/data/entity.obj
+	@echo ... src/core/data/entity.i
+	@echo ... src/core/data/entity.s
 	@echo ... src/core/playground.obj
 	@echo ... src/core/playground.i
 	@echo ... src/core/playground.s
-	@echo ... src/core/tests/viewport_test.obj
-	@echo ... src/core/tests/viewport_test.i
-	@echo ... src/core/tests/viewport_test.s
 	@echo ... src/desktop/desktop_launcher.obj
 	@echo ... src/desktop/desktop_launcher.i
 	@echo ... src/desktop/desktop_launcher.s
@@ -853,6 +982,12 @@ help:
 	@echo ... src/lib/logger.obj
 	@echo ... src/lib/logger.i
 	@echo ... src/lib/logger.s
+	@echo ... src/lib/utils/animation.obj
+	@echo ... src/lib/utils/animation.i
+	@echo ... src/lib/utils/animation.s
+	@echo ... src/lib/utils/atlas_region.obj
+	@echo ... src/lib/utils/atlas_region.i
+	@echo ... src/lib/utils/atlas_region.s
 	@echo ... src/lib/utils/camera.obj
 	@echo ... src/lib/utils/camera.i
 	@echo ... src/lib/utils/camera.s
@@ -862,9 +997,15 @@ help:
 	@echo ... src/lib/utils/gl_texture.obj
 	@echo ... src/lib/utils/gl_texture.i
 	@echo ... src/lib/utils/gl_texture.s
+	@echo ... src/lib/utils/input_processor.obj
+	@echo ... src/lib/utils/input_processor.i
+	@echo ... src/lib/utils/input_processor.s
 	@echo ... src/lib/utils/math/math_utils.obj
 	@echo ... src/lib/utils/math/math_utils.i
 	@echo ... src/lib/utils/math/math_utils.s
+	@echo ... src/lib/utils/music.obj
+	@echo ... src/lib/utils/music.i
+	@echo ... src/lib/utils/music.s
 	@echo ... src/lib/utils/orthographic_camera.obj
 	@echo ... src/lib/utils/orthographic_camera.i
 	@echo ... src/lib/utils/orthographic_camera.s
@@ -874,12 +1015,21 @@ help:
 	@echo ... src/lib/utils/shaders.obj
 	@echo ... src/lib/utils/shaders.i
 	@echo ... src/lib/utils/shaders.s
+	@echo ... src/lib/utils/sound.obj
+	@echo ... src/lib/utils/sound.i
+	@echo ... src/lib/utils/sound.s
 	@echo ... src/lib/utils/sprite_batch.obj
 	@echo ... src/lib/utils/sprite_batch.i
 	@echo ... src/lib/utils/sprite_batch.s
 	@echo ... src/lib/utils/texture.obj
 	@echo ... src/lib/utils/texture.i
 	@echo ... src/lib/utils/texture.s
+	@echo ... src/lib/utils/texture_atlas.obj
+	@echo ... src/lib/utils/texture_atlas.i
+	@echo ... src/lib/utils/texture_atlas.s
+	@echo ... src/lib/utils/texture_region.obj
+	@echo ... src/lib/utils/texture_region.i
+	@echo ... src/lib/utils/texture_region.s
 	@echo ... src/lib/utils/universal_viewport.obj
 	@echo ... src/lib/utils/universal_viewport.i
 	@echo ... src/lib/utils/universal_viewport.s

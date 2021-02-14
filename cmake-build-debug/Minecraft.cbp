@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Minecraft"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\SDL2\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Minecraft">
+				<Option output="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug/Minecraft.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/SDL2/include"/>
+					<Add directory="D:/glew2/include"/>
+					<Add directory="D:\Visual Studio 2019\VC\Tools\MSVC\14.26.28801\ATLMFC\include"/>
+					<Add directory="D:\Visual Studio 2019\VC\Tools\MSVC\14.26.28801\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\ucrt"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\shared"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\um"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\winrt"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 Minecraft"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Minecraft/fast">
+				<Option output="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug/Minecraft.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/SDL2/include"/>
+					<Add directory="D:/glew2/include"/>
+					<Add directory="D:\Visual Studio 2019\VC\Tools\MSVC\14.26.28801\ATLMFC\include"/>
+					<Add directory="D:\Visual Studio 2019\VC\Tools\MSVC\14.26.28801\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\ucrt"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\shared"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\um"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\winrt"/>
+					<Add directory="D:\Windows Kits\10\include\10.0.19041.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 Minecraft/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/vikto/CLionProjects/Minecraft/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\vikto\CLionProjects\Minecraft\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/assets.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/cube.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/data_system.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/entity.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/include/assets.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/include/cube.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/include/cube_type.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/include/data_system.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/data/include/entity.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/include/playground.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/core/playground.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/desktop/desktop_launcher.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/application.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/configuration.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/graphics.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/application.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/configuration.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/graphics.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/input.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/lib.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/listener.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/include/logger.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/input.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/lib.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/logger.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/animation.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/atlas_region.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/camera.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/first_person_camera_controller.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/geometry/include/matrix4.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/geometry/include/quaternion.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/geometry/include/vector2.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/geometry/include/vector3.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/gl_texture.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/animation.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/atlas_region.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/camera.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/first_person_camera_controller.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/gl_texture.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/input_processor.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/music.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/orthographic_camera.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/perspective_camera.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/shaders.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/sound.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/sprite_batch.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/texture.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/texture_atlas.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/texture_region.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/universal_viewport.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/include/viewport.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/input_processor.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/math/include/math_utils.h">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/math/math_utils.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/music.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/orthographic_camera.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/perspective_camera.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/shaders.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/sound.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/sprite_batch.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/texture.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/texture_atlas.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/texture_region.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/universal_viewport.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/src/lib/utils/viewport.cpp">
+			<Option target="Minecraft"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/vikto/CLionProjects/Minecraft/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\SDL2\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

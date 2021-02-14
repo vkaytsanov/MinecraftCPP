@@ -6,6 +6,7 @@
 #include "include/camera.h"
 #include "geometry/include/vector3.h"
 #include "../include/lib.h"
+#include "math/include/math_utils.h"
 
 Camera::Camera() {
     position = new Vector3f(0,0,3);

@@ -5,6 +5,7 @@
 #include "include/gl_texture.h"
 #include "../include/lib.h"
 
+
 GLTexture::GLTexture(std::string path) {
     surface = SDL_LoadBMP(path.c_str());
 

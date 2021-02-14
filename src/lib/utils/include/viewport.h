@@ -2,8 +2,8 @@
 // Created by Viktor on 20.12.2020 г..
 //
 
-#ifndef DUCKHUNT_VIEWPORT_H
-#define DUCKHUNT_VIEWPORT_H
+#ifndef VIEWPORT_H
+#define VIEWPORT_H
 
 #include "SDL.h"
 #include "camera.h"
@@ -32,4 +32,4 @@ public:
 };
 
 
-#endif //DUCKHUNT_VIEWPORT_H
+#endif //VIEWPORT_H

@@ -25,11 +25,6 @@ void Playground::create() {
     textureShaders = new Shaders();
     colorShaders = new Shaders("basic/shader.vert", "basic/shader.frag");
 
-    cube = new TextureObject("../res/cube.obj");
-    cube->setShader(textureShaders->getProgram());
-    cone = new TextureObject("../res/cone.obj");
-    cone->setShader(textureShaders->getProgram());
-//    triangle = new Triangle();
 }
 
 void Playground::render() {
@@ -42,10 +37,6 @@ void Playground::render() {
 
     batch->setProjectionMatrix(viewport->getCamera()->combined);
     batch->begin();
-
-    batch->draw(cube);
-    batch->draw(cone);
-//    triangle->draw();
 
     batch->end();
 
@@ -70,8 +61,6 @@ Playground::~Playground(){
     delete cameraController;
     delete textureShaders;
     delete colorShaders;
-    delete cone;
-    delete cube;
     glDeleteVertexArrays(1, &vertexArray);
 }
 

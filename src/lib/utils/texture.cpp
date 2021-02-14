@@ -15,8 +15,10 @@ Texture::Texture(const std::string& file_path) {
                 Lib::graphics->getRenderer(),
                 surface
                 );
+
         //Free the memory from the created surface
         SDL_FreeSurface(surface);
+
         //Getting the width and height of the texture
         SDL_QueryTexture(rawTexture, nullptr, nullptr, &width, &height);
         //Create drawing rectangle
@@ -43,24 +45,27 @@ int Texture::getHeight() const {
 }
 
 void Texture::draw() const {
-    SDL_Rect srcRect = {0,0, width, height};
-    SDL_RenderCopy(Lib::graphics->getRenderer(), rawTexture, &srcRect, &rect);
-    SDL_RenderPresent(Lib::graphics->getRenderer());
+    SDL_RenderCopy(Lib::graphics->getRenderer(), rawTexture, nullptr, &rect);
 }
 
 void Texture::draw(const int x, const int y) {
-    SDL_Rect srcRect = {0,0, width, height};
     rect.x = x;
     rect.y = y;
-    SDL_RenderCopy(Lib::graphics->getRenderer(), rawTexture, &srcRect, &rect);
-    SDL_RenderPresent(Lib::graphics->getRenderer());
+    SDL_RenderCopy(Lib::graphics->getRenderer(), rawTexture, nullptr, &rect);
 }
 
-void Texture::draw(const int x, const int y, const int width, const int height) {
-    SDL_Rect srcRect = {0,0, width, height};
-    rect = {x, y, width, height};
-    SDL_RenderCopy(Lib::graphics->getRenderer(), rawTexture, &srcRect, &rect);
-    SDL_RenderPresent(Lib::graphics->getRenderer());
+void Texture::draw(const int x, const int y, const int w, const int h) {
+    rect = {x, y, w, h};
+    SDL_RenderCopy(Lib::graphics->getRenderer(), rawTexture, nullptr, &rect);
+
+}
+
+SDL_Texture* Texture::getRawTexture() const {
+	return rawTexture;
+}
+
+const SDL_Rect& Texture::getRect() const {
+	return rect;
 }
 
 

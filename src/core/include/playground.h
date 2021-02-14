@@ -9,8 +9,7 @@
 #include "../../lib/utils/include/shaders.h"
 #include "../../lib/utils/include/sprite_batch.h"
 #include "../../lib/utils/include/first_person_camera_controller.h"
-#include "../objects/include/triangle.h"
-#include "../objects/include/texture_object.h"
+
 
 
 class Playground : public Listener {
@@ -21,8 +20,6 @@ private:
     UniversalViewport* viewport;
     SpriteBatch* batch;
     FirstPersonCameraController* cameraController;
-    TextureObject* cone;
-    TextureObject* cube;
 
 public:
     Playground() = default;

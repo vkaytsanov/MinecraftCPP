@@ -2,8 +2,8 @@
 // Created by Viktor on 19.12.2020 г..
 //
 
-#ifndef DUCKHUNT_TEXTURE_H
-#define DUCKHUNT_TEXTURE_H
+#ifndef TEXTURE_H
+#define TEXTURE_H
 
 
 #include <SDL.h>
@@ -21,10 +21,12 @@ public:
     ~Texture();
     int getWidth() const;
     int getHeight() const;
-    void draw() const;
+	SDL_Texture* getRawTexture() const;
+	const SDL_Rect& getRect() const;
+	void draw() const;
     void draw(const int x, const int y);
     void draw(const int x, const int y, const int width, const int height);
 };
 
 
-#endif //DUCKHUNT_TEXTURE_H
+#endif //TEXTURE_H
