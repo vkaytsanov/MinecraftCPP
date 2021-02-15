@@ -2,8 +2,8 @@
 // Created by Viktor on 18.12.2020 г..
 //
 
-#ifndef DUCKHUNT_MOD_ASSETS_H
-#define DUCKHUNT_MOD_ASSETS_H
+#ifndef MOD_ASSETS_H
+#define MOD_ASSETS_H
 
 #include <unordered_map>
 #include "SDL.h"
@@ -20,8 +20,8 @@ private:
 public:
     Assets();
     ~Assets();
-    Texture* getSprite(std::string name);
+	Texture* getSprite(std::string name);
 };
 
 
-#endif //DUCKHUNT_MOD_ASSETS_H
+#endif //MOD_ASSETS_H

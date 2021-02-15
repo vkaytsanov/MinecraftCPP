@@ -7,4 +7,5 @@ namespace Lib {
     Application* app;
     Graphics* graphics;
     Input* input;
+    Audio* audio;
 }

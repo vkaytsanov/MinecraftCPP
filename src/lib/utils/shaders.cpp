@@ -9,16 +9,13 @@
 
 
 
-Shaders::Shaders() : Shaders("textures/textureShader.vert",
-                             "textures/textureShader.frag") {}
-
 Shaders::Shaders(const std::string& vertexShaderPath, const std::string& fragShaderPath) {
     // assigning to temp std::string, else we get garbage value of the variable that just left the stack
-    std::string parsedVertexShader = readFromFile(shadersPath + vertexShaderPath);
+    parsedVertexShader = readFromFile(shadersPath + vertexShaderPath);
     vertexShader = parsedVertexShader.c_str();
 
-    std::string parsedFragShader = readFromFile(shadersPath + fragShaderPath);
-    fragShader = parsedFragShader.c_str();
+	parsedFragmentShader = readFromFile(shadersPath + fragShaderPath);
+    fragShader = parsedFragmentShader.c_str();
 
 //    Lib::app->log("VertexShader", vertexShader);
 //    Lib::app->log("FragShader", fragShader);

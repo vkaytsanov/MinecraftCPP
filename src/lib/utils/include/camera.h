@@ -17,7 +17,7 @@
 class Camera {
 public:
     /** near clipping plane */
-    float nearPlane = 1.f;
+    float nearPlane = 0.001f;
     /** far clipping plane */
     float farPlane = 100.f;
     /** Camera position vector */

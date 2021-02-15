@@ -31,19 +31,13 @@ void FirstPersonCameraController::handleMouseMovement(const float& dt) {
 
         horizontalAngle += -(Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
         verticalAngle += (Lib::input->getMouseDeltaY()) * dt * CAMERA_MOVEMENT_INTENSITY;
-//        std::cout << "HORIZONTAL:" <<  horizontalAngle << std::endl;
-//        std::cout << "VERTICAL:" <<  verticalAngle << std::endl;
+
         camera->direction->x = std::cos(verticalAngle) * std::sin(horizontalAngle);
         camera->direction->y = std::sin(verticalAngle);
         camera->direction->z = std::cos(verticalAngle) * std::cos(horizontalAngle);
-//        *camera->direction += *camera->position;
+
         Lib::input->resetMouse();
-//        Vector3f right = {
-//                std::sin(horizontalAngle - 3.14f/2.0f),
-//                0,
-//                std::cos(horizontalAngle - 3.14f/2.0f)
-//        };
-//        *camera->up = right.cross(*camera->direction);
+
 
     }
 }

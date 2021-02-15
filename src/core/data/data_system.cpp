@@ -4,8 +4,9 @@
 
 #include "include/data_system.h"
 
-DataSystem::DataSystem() : assets(){
-
+DataSystem::DataSystem(){
+	assets = new Assets();
+	cubesDb = new CubesDB(assets);
 }
 
 

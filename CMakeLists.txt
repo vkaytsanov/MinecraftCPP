@@ -11,6 +11,8 @@ file(GLOB SOURCES
         "src/core/objects/include/*h"
         "src/core/data/*.cpp"
         "src/core/data/include/*h"
+        "src/core/data/cubes/*.cpp"
+        "src/core/data/cubes/include/*h"
         "src/lib/*.cpp"
         "src/lib/include/*.h"
         "src/lib/utils/geometry/*.cpp"

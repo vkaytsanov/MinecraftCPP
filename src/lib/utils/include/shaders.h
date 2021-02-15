@@ -8,10 +8,11 @@
 
 #include "GL/glew.h"
 #include <fstream>
-static const std::string shadersPath = "../src/lib/utils/res/shaders/";
+static const std::string shadersPath = "../src/assets/shaders/";
 
 class Shaders {
 private:
+
     const char* vertexShader;
     const char* fragShader;
     unsigned int vertexShaderID;
@@ -19,8 +20,9 @@ private:
     unsigned int shaderProgram;
 
 public:
+	std::string parsedVertexShader;
+	std::string parsedFragmentShader;
     Shaders(const std::string& vertexShader, const std::string& fragShader);
-    Shaders();
     ~Shaders();
     std::string readFromFile(const std::string& path);
     void compile();

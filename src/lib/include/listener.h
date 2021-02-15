@@ -16,7 +16,7 @@ public:
 	/* when user has restored the window or the game window is no longer in the background */
 	virtual void resume() = 0;
 	/* when user has resized the window, only when maximizing, stretching or shrinking */
-	virtual void resize(const int& width, const int& height) = 0;
+	virtual void resize(const int width, const int height) = 0;
 };
 
 #endif

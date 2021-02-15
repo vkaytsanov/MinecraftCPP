@@ -5,16 +5,14 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "../../lib/utils/include/shaders.h"
+#include "../../../lib/utils/include/shaders.h"
 
 class Entity {
 protected:
 	unsigned int vertexArrayObject;
-//	unsigned int vertexBuffer;
-//	unsigned int normalsBuffer;
-//	unsigned int uvBuffer;
-//	unsigned int indicesBuffer;
-	void generateBuffers(float* vertices, float* normals, float* uvs, float* indices, unsigned int verticesCount,
+	unsigned int indicesBuffer;
+	unsigned int indicesCount;
+	void generateBuffers(GLfloat* vertices, GLfloat* normals, GLfloat* uvs, GLuint* indices, unsigned int verticesCount,
 	                     unsigned int indicesCount);
 
 };

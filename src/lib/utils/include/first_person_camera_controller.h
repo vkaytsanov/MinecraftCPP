@@ -7,8 +7,9 @@
 
 
 #include "camera.h"
+#include "input_processor.h"
 
-class FirstPersonCameraController {
+class FirstPersonCameraController : public InputProcessor{
 private:
     Camera* camera;
     float horizontalAngle = 3.14f;

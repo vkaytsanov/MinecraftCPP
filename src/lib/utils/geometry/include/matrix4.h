@@ -144,6 +144,14 @@ public:
 		return *this;
 	}
 
+	Matrix4<T> &setForTranslation(const Vector3<T>& vec) {
+		identity();
+		a[A30] = vec.x;
+		a[A31] = vec.y;
+		a[A32] = vec.z;
+		return *this;
+	}
+
 	T &operator[](int idx) {
 		return a[idx];
 	}
@@ -167,6 +175,11 @@ public:
 		result[A31] = mat.a[A30] * a[A01] + mat.a[A31] * a[A11] + mat.a[A32] * a[A21] + mat.a[A33] * a[A31];
 		result[A32] = mat.a[A30] * a[A02] + mat.a[A31] * a[A12] + mat.a[A32] * a[A22] + mat.a[A33] * a[A32];
 		result[A33] = mat.a[A30] * a[A03] + mat.a[A31] * a[A13] + mat.a[A32] * a[A23] + mat.a[A33] * a[A33];
+		return result;
+	}
+
+	Matrix4<T> operator*(const Vector3<T>& vec){
+		Matrix4<T> result;
 		return result;
 	}
 

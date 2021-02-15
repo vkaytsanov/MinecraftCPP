@@ -5,6 +5,7 @@
 #include "logger.h"
 #include "graphics.h"
 #include "input.h"
+#include "audio.h"
 
 
 class Application{
@@ -15,6 +16,7 @@ private:
 	Configuration* config;
     Graphics* graphics;
     Logger* logger;
+    Audio* audio;
 	void gameLoop();
 	void exitApp();
 public:
@@ -25,7 +27,8 @@ public:
     void log(const char* tag, const char* message) const;
     void log(const char* tag, int message) const;
     void error(const char* tag, const char* message) const;
-    void error(const char *tag, int message) const;
+    void error(const char* tag, int message) const;
+    void debug(const char *tag, const char *message) const;
 };
 
 

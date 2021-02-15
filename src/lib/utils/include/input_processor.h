@@ -5,6 +5,7 @@
 #ifndef INPUT_PROCESSOR_H
 #define INPUT_PROCESSOR_H
 
+#include "SDL.h"
 
 struct InputProcessor {
     virtual void touchDown(SDL_Event &e, float x, float y);

@@ -2,8 +2,8 @@
 // Created by Viktor on 17.12.2020 г..
 //
 
-#ifndef LIB_H
-#define LIB_H
+#ifndef DUCKHUNT_LIB_H
+#define DUCKHUNT_LIB_H
 
 
 #include "graphics.h"
@@ -13,6 +13,7 @@ namespace Lib {
     extern Application* app;
     extern Graphics* graphics;
     extern Input* input;
+    extern Audio* audio;
 }
 
-#endif //LIB_H
+#endif //DUCKHUNT_LIB_H

@@ -6,48 +6,123 @@
 #include "../include/lib.h"
 #include <cmath>
 
+
+TextureRegion::TextureRegion(Texture* texture) {
+	this->texture = texture;
+	regionWidth = texture->getWidth();
+	regionHeight = texture->getHeight();
+}
+
 TextureRegion::TextureRegion(Texture* texture, int width, int height) {
 	this->texture = texture;
-	this->x = 0;
-	this->y = 0;
-	this->regionWidth = width;
-	this->regionHeight = height;
+	setRegionXY(0, 0, width, height);
 }
 
 TextureRegion::TextureRegion(Texture* texture, int x, int y, int width, int height) {
 	this->texture = texture;
-	this->x = x;
-	this->y = y;
-	this->regionWidth = width;
-	this->regionHeight = height;
+	setRegionXY(x, y, width, height);
 }
 
-void TextureRegion::draw() const {
+void TextureRegion::setRegionXY(int x, int y, int width, int height) {
+	float invWidth = 1.00f / (float) texture->getWidth();
+	float invHeight = 1.00f / (float) texture->getHeight();
+
+	setRegionUV((float) x * invWidth, (float) y * invHeight, (float) (x + width) * invWidth,
+	            (float) (y + height) * invHeight);
 }
 
-void TextureRegion::draw(const int x, const int y) {
-	SDL_Rect srcRect = {this->x, this->y, regionWidth, regionHeight};
-	SDL_Rect dstRect = {x, y, regionWidth, regionHeight};
-	SDL_RenderCopy(Lib::graphics->getRenderer(), texture->getRawTexture(), &srcRect, &dstRect);
+void TextureRegion::setRegionUV(float u, float v, float u2, float v2) {
+	int texWidth = texture->getWidth();
+	int texHeight = texture->getHeight();
+
+	regionWidth = (int) std::round(std::abs(u2 - v) * (float) texWidth);
+	regionHeight = (int) std::round(std::abs(v2 - u) * (float) texHeight);
+
+	this->u = u;
+	this->v = v;
+	this->u2 = u2;
+	this->v2 = v2;
 }
 
-void TextureRegion::draw(const int x, const int y, const int width, const int height) {
-	SDL_Rect srcRect = {this->x, this->y, regionWidth, regionHeight};
-	SDL_Rect dstRect = {x, y, width, height};
-	SDL_RenderCopy(Lib::graphics->getRenderer(), texture->getRawTexture(), &srcRect, &dstRect);
+Texture* TextureRegion::getTexture() const {
+	return texture;
 }
 
-void TextureRegion::draw(const int x, const int y, const int width, const int height, SDL_RendererFlip flip) {
-	SDL_Rect srcRect = {this->x, this->y, regionWidth, regionHeight};
-	SDL_Rect dstRect = {x, y, width, height};
-	SDL_RenderCopyEx(Lib::graphics->getRenderer(), texture->getRawTexture(), &srcRect, &dstRect, 0, nullptr, flip);
+float TextureRegion::getU() const {
+	return u;
+}
+
+float TextureRegion::getV() const {
+	return v;
+}
+
+float TextureRegion::getU2() const {
+	return u2;
+}
+
+float TextureRegion::getV2() const {
+	return v2;
+}
+
+TextureRegion** TextureRegion::split(int blockWidth, int blockHeight) {
+	int rows = regionWidth / blockWidth;
+	int cols = regionHeight / blockHeight;
+
+	TextureRegion** blocks = new TextureRegion* [rows];
+	for (int i = 0; i < rows; i++) {
+		blocks[i] = new TextureRegion[cols];
+	}
+
+
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			blocks[i][j] = TextureRegion(texture, i * blockWidth, j * blockHeight, blockWidth, blockHeight);
+		}
+	}
+	return blocks;
+}
+
+float* TextureRegion::getUVs() {
+	return new float[6 * 4 * 2]{
+			// front
+			u, v2,
+			u2, v2,
+			u2, v,
+			u, v,
+			// back
+			u2, v2,
+			u2, v,
+			u, v,
+			u, v2,
+			// top
+//			u, u,
+//			v, v,
+//			v, v,
+//			u, u,
+			u, v2,
+			u2, v2,
+			u2, v,
+			u, v,
+			//bottom
+			u, v2,
+			u2, v2,
+			u2, v,
+			u, v,
+
+			u, v2,
+			u2, v2,
+			u2, v,
+			u, v,
+
+			u, v2,
+			u2, v2,
+			u2, v,
+			u, v
+	};
+
 
 }
 
-void TextureRegion::set(Texture* texture, int x, int y, int width, int height) {
-	this->texture = texture;
-	this->x = x;
-	this->y = y;
-	this->regionWidth = width;
-	this->regionHeight = height;
-}
+
+
+

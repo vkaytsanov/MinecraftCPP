@@ -11,19 +11,28 @@
 class TextureRegion {
 private:
 	Texture* texture;
-	int x;
-	int y;
+	/** bottom-left corner */
+	float u, v;
+	/** top-right corner */
+	float u2, v2;
+
 	int regionWidth;
 	int regionHeight;
-public:
+	public:
 	TextureRegion() = default;
+	explicit TextureRegion(Texture* texture);
 	TextureRegion(Texture* texture, int width, int height);
 	TextureRegion(Texture* texture, int x, int y, int width, int height);
-	void set(Texture* texture, int x, int y, int width, int height);
+	void setRegionXY(int x, int y, int width, int height);
+	void setRegionUV(float u, float v, float u2, float v2);
 	void draw() const;
-	void draw(const int x, const int y);
-	void draw(const int x, const int y, const int width, const int height);
-	void draw(const int x, const int y, const int width, const int height, SDL_RendererFlip flip);
+	Texture* getTexture() const;
+	float getU() const;
+	float getV() const;
+	float getU2() const;
+	float getV2() const;
+	float* getUVs();
+	TextureRegion** split(int blockWidth, int blockHeight);
 
 
 };

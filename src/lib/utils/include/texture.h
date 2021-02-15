@@ -1,31 +1,47 @@
 //
-// Created by Viktor on 19.12.2020 г..
+// Created by Viktor on 8.1.2021 г..
 //
 
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-
+#include "GL/glew.h"
 #include <SDL.h>
 #include <string>
-#include "SDL_image.h"
+
+enum TextureFilter{
+	Nearest = GL_NEAREST,
+	Linear = GL_LINEAR,
+	MipMap = GL_MIPMAP,
+	MipMapNearestNearest = GL_NEAREST_MIPMAP_NEAREST,
+	MipMapLinearNearest = GL_LINEAR_MIPMAP_NEAREST,
+	MipMapNearestLinear = GL_NEAREST_MIPMAP_LINEAR,
+	MipMapLinearLinear = GL_LINEAR_MIPMAP_LINEAR,
+};
+
+enum TextureWrap{
+	Repeat = GL_REPEAT,
+	RepeatMirrored = GL_MIRRORED_REPEAT,
+	ClampToEdge = GL_CLAMP_TO_EDGE,
+};
 
 class Texture {
 private:
-    SDL_Texture* rawTexture;
-    SDL_Rect rect;
-    int width;
-    int height;
+    unsigned int textureBuffer;
+    SDL_Surface* surface;
+    GLenum textureFormat;
+    int colorCount;
+	int width;
+	int height;
 public:
-    explicit Texture(const std::string& file_path);
+    explicit Texture(std::string path);
+    Texture() = default;
     ~Texture();
-    int getWidth() const;
-    int getHeight() const;
-	SDL_Texture* getRawTexture() const;
-	const SDL_Rect& getRect() const;
-	void draw() const;
-    void draw(const int x, const int y);
-    void draw(const int x, const int y, const int width, const int height);
+    void performChecks();
+    unsigned int getBuffer();
+	int getWidth() const;
+	int getHeight() const;
+
 };
 
 

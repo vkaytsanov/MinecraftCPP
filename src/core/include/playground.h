@@ -9,18 +9,19 @@
 #include "../../lib/utils/include/shaders.h"
 #include "../../lib/utils/include/sprite_batch.h"
 #include "../../lib/utils/include/first_person_camera_controller.h"
-
+#include "../data/include/cube.h"
+#include "../data/include/data_system.h"
+#include "../data/cubes/include/grass_cube.h"
 
 
 class Playground : public Listener {
 private:
-    unsigned int vertexArray;
-    Shaders* textureShaders;
-    Shaders* colorShaders;
     UniversalViewport* viewport;
     SpriteBatch* batch;
     FirstPersonCameraController* cameraController;
-
+    DataSystem* dataSystem;
+	GrassCube* cube;
+	bool isWireframe = false;
 public:
     Playground() = default;
     ~Playground() override;
@@ -29,7 +30,7 @@ public:
     void render() override;
     void pause() override;
     void resume() override;
-    void resize(const int& width, const int& height) override;
+    void resize(const int width, const int height) override;
 };
 
 #endif

@@ -6,6 +6,7 @@
 #define DUCKHUNT_SPRITE_BATCH_H
 
 #include "../geometry/include/matrix4.h"
+#include "../../../core/data/include/cube.h"
 #include "shaders.h"
 
 class SpriteBatch {
@@ -15,13 +16,15 @@ private:
 	Matrix4f transform;
 	Shaders* shaders;
 	bool drawing;
-	void setupMatrices();
+	void setupMatrices(const Vector3f& pos);
+	void setupShaders(Shaders* shaders);
 public:
 	SpriteBatch();
 	~SpriteBatch();
 	void setProjectionMatrix(const Matrix4f& mat);
 	void setTransformMatrix(const Matrix4f& mat);
 	void begin();
+	void draw(Cube* cube);
 	void end();
 
 };
