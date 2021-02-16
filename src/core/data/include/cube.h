@@ -15,17 +15,11 @@
 
 class Cube : public Entity{
 private:
-	CubeType type;
 	TextureRegion textureRegion;
-	Vector3f position;
-	Vector3i chunk;
-	Shaders* shaders;
 public:
-	Cube(TextureRegion textureRegion, CubeType type, Shaders* shaders, int sides = 0);
+	Cube(TextureRegion textureRegion, Shaders* shaders, int sides = 0);
 	~Cube();
 	void draw();
-	Shaders* getShaders();
-	const Vector3f& getPosition() const;
 };
 
 #endif //CUBE_H

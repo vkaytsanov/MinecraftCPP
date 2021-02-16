@@ -5,8 +5,8 @@
 #include "include/cube.h"
 #include "include/cube_data.h"
 
-Cube::Cube(TextureRegion textureRegion, CubeType type, Shaders* shaders, int sides)
-		: textureRegion(textureRegion), type(type){
+Cube::Cube(TextureRegion textureRegion, Shaders* shaders, int sides)
+		: Entity(shaders), textureRegion(textureRegion){
 	GLfloat* uvs = textureRegion.getUVs();
 	if(sides == 3){
 		for(int i = 0; i < 6 * 4 * 2; i++){
@@ -33,20 +33,9 @@ void Cube::draw() {
 
 }
 
-
-
 Cube::~Cube() {
 	glDeleteBuffers(1, &indicesBuffer);
 	glDeleteVertexArrays(1, &vertexArrayObject);
-}
-
-
-Shaders* Cube::getShaders() {
-	return shaders;
-}
-
-const Vector3f& Cube::getPosition() const {
-	return position;
 }
 
 

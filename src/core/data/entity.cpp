@@ -5,6 +5,10 @@
 #include "GL/glew.h"
 #include "include/entity.h"
 
+Entity::Entity(Shaders* shaders) : shaders(shaders){
+
+}
+
 void Entity::generateBuffers(GLfloat* vertices, GLfloat* normals, GLfloat* uvs, GLuint* indices, unsigned int verticesCount,
                              unsigned int indicesCount) {
 	unsigned int vertexBuffer;
@@ -50,4 +54,9 @@ void Entity::generateBuffers(GLfloat* vertices, GLfloat* normals, GLfloat* uvs, 
 
 	glBindVertexArray(0);
 }
+
+Shaders* Entity::getShaders() {
+	return shaders;
+}
+
 

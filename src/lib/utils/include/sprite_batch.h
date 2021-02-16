@@ -24,7 +24,7 @@ public:
 	void setProjectionMatrix(const Matrix4f& mat);
 	void setTransformMatrix(const Matrix4f& mat);
 	void begin();
-	void draw(Cube* cube);
+	void draw(Cube* cube, Vector3f position);
 	void end();
 
 };

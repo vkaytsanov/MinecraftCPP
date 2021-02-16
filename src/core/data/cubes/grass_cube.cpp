@@ -5,7 +5,7 @@
 #include "include/grass_cube.h"
 
 
-GrassCube::GrassCube(TextureRegion textureRegion, Shaders* shaders) : Cube(textureRegion, CubeType::Grass, shaders,
+GrassCube::GrassCube(TextureRegion textureRegion, Shaders* shaders) : Cube(textureRegion, shaders,
                                                                            3) {
 
 }

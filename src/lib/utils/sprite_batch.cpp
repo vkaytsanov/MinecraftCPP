@@ -44,11 +44,10 @@ void SpriteBatch::begin() {
 }
 
 
-void SpriteBatch::draw(Cube* cube) {
+void SpriteBatch::draw(Cube* cube, Vector3f position) {
 	setupShaders(cube->getShaders());
 	shaders->begin();
-	setupMatrices(cube->getPosition());
-
+	setupMatrices(position);
 	cube->draw();
 	shaders->end();
 }

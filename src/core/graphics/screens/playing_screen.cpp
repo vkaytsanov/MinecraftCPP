@@ -8,6 +8,9 @@
 
 PlayingScreen::PlayingScreen(Minecraft* game) : game(game){
 	cameraController = new FirstPersonCameraController(game->graphicsSystem->getViewport()->getCamera());
+	cubeRenderer = new CubeRenderer(game);
+	game->graphicsSystem->getViewport()->getCamera()->position->x = 5;
+	game->graphicsSystem->getViewport()->getCamera()->position->z = 30;
 }
 
 void PlayingScreen::render(const float dt) {
@@ -27,7 +30,8 @@ void PlayingScreen::render(const float dt) {
 
 	game->batch->setProjectionMatrix(game->graphicsSystem->getViewport()->getCamera()->combined);
     game->batch->begin();
-    game->batch->draw(game->dataSystem->cubesDb->getCube(Grass));
+
+    cubeRenderer->render();
 	game->batch->end();
 }
 

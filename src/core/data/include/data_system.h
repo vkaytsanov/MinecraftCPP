@@ -8,12 +8,14 @@
 
 #include "assets.h"
 #include "cubes_db.h"
+#include "world.h"
 
 
 class DataSystem {
 public:
 	Assets* assets;
 	CubesDB* cubesDb;
+	World* world;
 	DataSystem();
 };
 

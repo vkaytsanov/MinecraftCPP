@@ -7,6 +7,7 @@
 DataSystem::DataSystem(){
 	assets = new Assets();
 	cubesDb = new CubesDB(assets);
+	world = new World();
 }
 
 
