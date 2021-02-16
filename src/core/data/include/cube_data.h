@@ -23,9 +23,9 @@ static float vertices[6 * 4 * 3] = {
 
 		// Top
 		-SIZE, SIZE, -SIZE, // 8
-		SIZE, SIZE, -SIZE, // 9
-		SIZE, SIZE, SIZE, // 10
 		-SIZE, SIZE, SIZE, // 11
+		SIZE, SIZE, SIZE, // 10
+		SIZE, SIZE, -SIZE, // 9
 
 		// Bottom
 		-SIZE, -SIZE, -SIZE, // 12
@@ -41,9 +41,9 @@ static float vertices[6 * 4 * 3] = {
 
 		// Right
 		SIZE, -SIZE, -SIZE, // 20
-		SIZE, -SIZE, SIZE, // 21
+		SIZE, SIZE, -SIZE,  // 23
 		SIZE, SIZE, SIZE, // 22
-		SIZE, SIZE, -SIZE  // 23
+		SIZE, -SIZE, SIZE, // 21
 };
 
 static unsigned int indices[6 * 6] = {
@@ -124,9 +124,9 @@ static float uvs3side[6 * 4 * 2]{
 		0.50f, 1.0f,
 		1.0f, 1.0f,
 		//right
+		0.50f, 1.0f,
+		0.50f, 1.0f,
 		1.0f, 1.0f,
-		0.50f, 1.0f,
-		0.50f, 1.0f,
 		1.0f, 1.0f,
 };
 

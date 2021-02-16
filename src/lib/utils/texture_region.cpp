@@ -113,10 +113,17 @@ float* TextureRegion::getUVs() {
 			u2, v,
 			u, v,
 			//right
-			u, v2,
 			u2, v2,
 			u2, v,
-			u, v
+			u, v,
+			u, v2,
+
+
+
+
+
+
+
 	};
 
 

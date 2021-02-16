@@ -27,7 +27,7 @@ GraphicsSystem::GraphicsSystem(Minecraft* game) : game(game),
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_TEXTURE_2D);
-//	glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 //	glCullFace(GL_BACK);
 
 	viewport->update(GRAPHICS_WIDTH, GRAPHICS_HEIGHT, false);

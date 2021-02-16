@@ -5,11 +5,8 @@
 
 #include "../../lib/include/listener.h"
 #include "../../lib/include/application.h"
-#include "../../lib/utils/include/universal_viewport.h"
-#include "../../lib/utils/include/shaders.h"
 #include "../../lib/utils/include/sprite_batch.h"
 
-#include "../data/include/cube.h"
 #include "../data/include/data_system.h"
 #include "../graphics/include/graphics_system.h"
 #include "game_state_manager.h"

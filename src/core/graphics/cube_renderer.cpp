@@ -22,5 +22,11 @@ void CubeRenderer::render() {
 			}
 		}
 	}
+//	game->batch->draw(
+//			game->dataSystem->cubesDb->getCube(
+//					game->dataSystem->world->chunk->getCube(0,0,0)
+//			),
+//			Vector3f(0,0,0)
+//	);
 
 }
