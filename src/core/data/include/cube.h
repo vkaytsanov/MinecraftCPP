@@ -10,7 +10,6 @@
 #include "../../../lib/utils/include/texture_region.h"
 #include "cube_type.h"
 #include "entity.h"
-const float SIZE = 0.5f;
 
 
 
@@ -22,12 +21,11 @@ private:
 	Vector2i chunk;
 	Shaders* shaders;
 public:
-	Cube(TextureRegion textureRegion, CubeType type, Shaders* shaders);
+	Cube(TextureRegion textureRegion, CubeType type, Shaders* shaders, int sides = 0);
 	~Cube();
 	void draw();
 	Shaders* getShaders();
 	const Vector3f& getPosition() const;
 };
-
 
 #endif //CUBE_H

@@ -15,7 +15,6 @@ private:
 	float u, v;
 	/** top-right corner */
 	float u2, v2;
-
 	int regionWidth;
 	int regionHeight;
 	public:
@@ -31,8 +30,12 @@ private:
 	float getV() const;
 	float getU2() const;
 	float getV2() const;
+	int getRegionX() const;
+	int getRegionY() const;
 	float* getUVs();
 	TextureRegion** split(int blockWidth, int blockHeight);
+
+	TextureRegion operator+(const TextureRegion tR);
 
 
 };

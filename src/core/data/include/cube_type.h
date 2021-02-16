@@ -7,7 +7,8 @@
 
 
 enum CubeType {
-	Grass
+	Dirt,
+	Grass,
 };
 
 

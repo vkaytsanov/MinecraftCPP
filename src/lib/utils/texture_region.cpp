@@ -29,14 +29,12 @@ void TextureRegion::setRegionXY(int x, int y, int width, int height) {
 
 	setRegionUV((float) x * invWidth, (float) y * invHeight, (float) (x + width) * invWidth,
 	            (float) (y + height) * invHeight);
+
+	regionWidth = width;
+	regionHeight = height;
 }
 
 void TextureRegion::setRegionUV(float u, float v, float u2, float v2) {
-	int texWidth = texture->getWidth();
-	int texHeight = texture->getHeight();
-
-	regionWidth = (int) std::round(std::abs(u2 - v) * (float) texWidth);
-	regionHeight = (int) std::round(std::abs(v2 - u) * (float) texHeight);
 
 	this->u = u;
 	this->v = v;
@@ -65,8 +63,8 @@ float TextureRegion::getV2() const {
 }
 
 TextureRegion** TextureRegion::split(int blockWidth, int blockHeight) {
-	int rows = regionWidth / blockWidth;
-	int cols = regionHeight / blockHeight;
+	int rows = regionHeight / blockHeight;
+	int cols = regionWidth / blockWidth;
 
 	TextureRegion** blocks = new TextureRegion* [rows];
 	for (int i = 0; i < rows; i++) {
@@ -81,6 +79,7 @@ TextureRegion** TextureRegion::split(int blockWidth, int blockHeight) {
 	}
 	return blocks;
 }
+
 
 float* TextureRegion::getUVs() {
 	return new float[6 * 4 * 2]{
@@ -108,12 +107,12 @@ float* TextureRegion::getUVs() {
 			u2, v2,
 			u2, v,
 			u, v,
-
+			//left
 			u, v2,
 			u2, v2,
 			u2, v,
 			u, v,
-
+			//right
 			u, v2,
 			u2, v2,
 			u2, v,
@@ -121,6 +120,20 @@ float* TextureRegion::getUVs() {
 	};
 
 
+}
+
+int TextureRegion::getRegionX() const {
+	return (int) std::round(u * (float) texture->getWidth());
+}
+
+int TextureRegion::getRegionY() const {
+	return (int) std::round(v * (float) texture->getHeight());
+}
+
+TextureRegion TextureRegion::operator+(const TextureRegion tR) {
+	setRegionXY(std::min(getRegionX(), tR.getRegionX()), std::min(getRegionY(), tR.getRegionY()),
+	            regionWidth + tR.regionWidth, regionHeight);
+	return *this;
 }
 
 
