@@ -12,8 +12,7 @@
 
 class CubesDB {
 private:
-	std::vector<Cube*> cubes;
-	TextureRegion** regions;
+	Cube* cubes[CubeType::TYPES_COUNT];
 	Shaders* textureShaders;
 	Shaders* colorShaders;
 public:

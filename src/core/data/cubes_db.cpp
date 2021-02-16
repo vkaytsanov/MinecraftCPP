@@ -8,12 +8,22 @@
 
 
 CubesDB::CubesDB(Assets* assets) {
+	const int SPRITE_SIZE = 32;
+
 	TextureRegion spriteSheet(assets->getSprite("spriteSheet"));
-	regions = spriteSheet.split(32, 32);
+	TextureRegion** regions = spriteSheet.split(SPRITE_SIZE, SPRITE_SIZE);
+
 	textureShaders = new Shaders("textures/shader.vert", "textures/shader.frag");
 	colorShaders = new Shaders("basic/shader.vert", "basic/shader.frag");
-	cubes.emplace_back(new DirtCube(regions[3][0], textureShaders));
-	cubes.emplace_back(new GrassCube(regions[1][0] + regions[2][0] + regions[3][0], textureShaders));
+
+	cubes[CubeType::Dirt] = new DirtCube(regions[3][0], textureShaders);
+	cubes[CubeType::Grass] = new GrassCube(regions[1][0] + regions[2][0] + regions[3][0], textureShaders);
+
+	const int regionsSize = spriteSheet.getTexture()->getWidth() / SPRITE_SIZE;
+	for(int i = 0; i < regionsSize; i++){
+		delete[] regions[i];
+	}
+	delete[] regions;
 }
 
 Cube* CubesDB::getCube(CubeType type) {
@@ -26,6 +36,6 @@ CubesDB::~CubesDB() {
 	}
 	delete textureShaders;
 	delete colorShaders;
-	delete regions;
+
 
 }

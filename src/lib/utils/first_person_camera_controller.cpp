@@ -23,7 +23,6 @@ void FirstPersonCameraController::handleButtonMovement(const float& dt) {
     if(Lib::input->isKeyPressed(SDLK_s)){
         *camera->position -= (vec.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
     }
-//    std::cout << camera->position->z << "\n";
 }
 
 void FirstPersonCameraController::handleMouseMovement(const float& dt) {

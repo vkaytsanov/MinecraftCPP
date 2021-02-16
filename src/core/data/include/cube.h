@@ -18,7 +18,7 @@ private:
 	CubeType type;
 	TextureRegion textureRegion;
 	Vector3f position;
-	Vector2i chunk;
+	Vector3i chunk;
 	Shaders* shaders;
 public:
 	Cube(TextureRegion textureRegion, CubeType type, Shaders* shaders, int sides = 0);

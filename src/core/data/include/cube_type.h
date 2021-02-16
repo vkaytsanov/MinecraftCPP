@@ -9,6 +9,7 @@
 enum CubeType {
 	Dirt,
 	Grass,
+	TYPES_COUNT,
 };
 
 
