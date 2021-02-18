@@ -19,7 +19,7 @@ public:
     /** near clipping plane */
     float nearPlane = 0.001f;
     /** far clipping plane */
-    float farPlane = 100.f;
+    float farPlane = 10000.f;
     /** Camera position vector */
     Vector3f* position;
     /** Camera up vector */

@@ -7,9 +7,8 @@
 
 
 #include "abstract_screen.h"
-#include "../../../data/cubes/include/grass_cube.h"
 #include "../../../../lib/utils/include/first_person_camera_controller.h"
-#include "../../include/cube_renderer.h"
+#include "../../include/world_renderer.h"
 
 class Minecraft;
 
@@ -17,7 +16,7 @@ class PlayingScreen : public AbstractScreen{
 private:
 	Minecraft* game;
 	FirstPersonCameraController* cameraController;
-	CubeRenderer* cubeRenderer;
+	WorldRenderer* worldRenderer;
 	bool isWireframe = false;
 public:
 	explicit PlayingScreen(Minecraft* game);

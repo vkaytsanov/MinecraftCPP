@@ -25,6 +25,8 @@ file(GLOB SOURCES
         "src/lib/utils/geometry/include/*.h"
         "src/lib/utils/math/*.cpp"
         "src/lib/utils/math/include/*.h"
+        "src/lib/utils/openGL/*.cpp"
+        "src/lib/utils/openGL/include/*.h"
         "src/lib/utils/*.cpp"
         "src/lib/utils/include/*.h"
         )

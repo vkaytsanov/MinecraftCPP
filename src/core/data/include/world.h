@@ -7,11 +7,15 @@
 
 
 #include "chunk.h"
+#include <map>
 
 class World {
 public:
-	Chunk* chunk;
-	World();
+	std::vector<Chunk> chunks;
+	Chunk* getChunk(int x);
+	explicit World();
+	~World();
+	void generate();
 };
 
 

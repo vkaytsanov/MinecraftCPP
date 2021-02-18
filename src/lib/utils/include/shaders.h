@@ -7,6 +7,7 @@
 
 
 #include "GL/glew.h"
+#include "../geometry/include/matrix4.h"
 #include <fstream>
 static const std::string shadersPath = "../src/assets/shaders/";
 
@@ -29,6 +30,10 @@ public:
     void begin();
     void end();
     unsigned int getProgram();
+
+	int getUniformLocation(const char* name);
+	void setMatrix4(const char* name, Matrix4f mat);
+	void setInt(const char* name, int number);
 };
 
 

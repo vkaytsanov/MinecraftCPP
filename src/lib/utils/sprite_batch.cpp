@@ -12,24 +12,8 @@ SpriteBatch::SpriteBatch() {
 
 void SpriteBatch::setupMatrices(const Vector3f& pos) {
 	combined = (projection * transform);
-	unsigned int matrixID = glGetUniformLocation(shaders->getProgram(), "proj");
-
-	if(matrixID == -1){
-		Lib::app->error("uniforms", "invalid location");
-	}
-	else{
-		Matrix4f mat =  combined * Matrix4f().setForTranslation(pos);
-		glUniformMatrix4fv(matrixID, 1, false, mat.a);
-	}
-
-	unsigned int texID = glGetUniformLocation(shaders->getProgram(), "tex_id");
-	if(texID == -1){
-		Lib::app->error("uniforms", "invalid location");
-	}
-	else{
-		glUniform1i(texID, 0);
-	}
-
+	shaders->setMatrix4("proj", combined * Matrix4f().setForTranslation(pos));
+	shaders->setInt("tex_id", 0);
 }
 
 void SpriteBatch::setupShaders(Shaders* shaders) {
@@ -44,12 +28,27 @@ void SpriteBatch::begin() {
 }
 
 
-void SpriteBatch::draw(Cube* cube, Vector3f position) {
-	setupShaders(cube->getShaders());
-	shaders->begin();
-	setupMatrices(position);
-	cube->draw();
-	shaders->end();
+//void SpriteBatch::draw(Cube* cube, Vector3f position) {
+//	setupShaders(cube->getShaders());
+//	shaders->begin();
+//	setupMatrices(position);
+//	cube->draw();
+//	shaders->end();
+//}
+
+void SpriteBatch::draw(Shaders* shaders) {
+	this->shaders = shaders;
+	combined = (projection * transform);
+	unsigned int matrixID = glGetUniformLocation(shaders->getProgram(), "proj");
+
+	if(matrixID == -1){
+		Lib::app->error("uniforms", "invalid location");
+	}
+	else{
+		Matrix4f mat = combined;
+		glUniformMatrix4fv(matrixID, 1, false, mat.a);
+	}
+
 }
 
 void SpriteBatch::end() {
@@ -68,6 +67,8 @@ void SpriteBatch::setTransformMatrix(const Matrix4f& mat) {
 SpriteBatch::~SpriteBatch() {
 	delete shaders;
 }
+
+
 
 
 

@@ -16,6 +16,7 @@ void Minecraft::create() {
 	logicSystem = new LogicSystem(this);
 
 	graphicsSystem->create();
+	dataSystem->world->generate();
 }
 
 void Minecraft::render() {

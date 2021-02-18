@@ -7,16 +7,16 @@
 
 
 #include "assets.h"
-#include "cubes_db.h"
 #include "world.h"
-
+#include "../../../lib/utils/include/shaders.h"
 
 class DataSystem {
 public:
+	Shaders* defaultShader;
 	Assets* assets;
-	CubesDB* cubesDb;
 	World* world;
 	DataSystem();
+	~DataSystem();
 };
 
 

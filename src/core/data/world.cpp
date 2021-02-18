@@ -5,6 +5,18 @@
 #include "include/world.h"
 
 World::World() {
-	chunk = new Chunk();
-	chunk->generate();
+}
+
+void World::generate() {
+	chunks.emplace_back();
+
+
+}
+
+World::~World() {
+
+}
+
+Chunk* World::getChunk(int x) {
+	return &chunks[x];
 }

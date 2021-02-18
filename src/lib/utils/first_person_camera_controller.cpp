@@ -46,3 +46,7 @@ void FirstPersonCameraController::update(const float& dt) {
     handleMouseMovement(dt);
     camera->update();
 }
+
+Camera* FirstPersonCameraController::getCamera() const {
+	return camera;
+}

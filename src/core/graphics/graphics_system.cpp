@@ -18,18 +18,17 @@ float WORLD_WIDTH = 240;
 
 float WORLD_HEIGHT = 120;
 
-GraphicsSystem::GraphicsSystem(Minecraft* game) : game(game),
-                                                  viewport(new UniversalViewport(WORLD_WIDTH, WORLD_HEIGHT,
-                                                                                 new PerspectiveCamera(70))) {
+GraphicsSystem::GraphicsSystem(Minecraft* game) : game(game) {
 	GRAPHICS_WIDTH = Lib::graphics->getWidth();
 	GRAPHICS_HEIGHT = Lib::graphics->getHeight();
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_CULL_FACE);
+//	glEnable(GL_CULL_FACE);
 //	glCullFace(GL_BACK);
 
+	viewport = new UniversalViewport(WORLD_WIDTH, WORLD_HEIGHT,new PerspectiveCamera(70));
 	viewport->update(GRAPHICS_WIDTH, GRAPHICS_HEIGHT, false);
 }
 

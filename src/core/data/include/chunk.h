@@ -5,21 +5,30 @@
 #ifndef CHUNK_H
 #define CHUNK_H
 
-#include "cube_type.h"
+#include <array>
 #include "../../../lib/utils/geometry/include/vector2.h"
+#include "chunk_mesh.h"
+#include "cube_data_base.h"
 
 #define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 16
+#define CHUNK_SIZE_Y 256
 #define CHUNK_SIZE_Z 16
+
+using namespace CubeDatabase;
+
+typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z> ChunkData;
 
 class Chunk {
 private:
-	CubeType cubes[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z];
+	ChunkMesh chunkMesh;
 	Vector2i position;
 public:
+	ChunkData chunkData;
 	Chunk();
+	~Chunk();
 	void generate();
-	CubeType getCube(int x, int y, int z);
+	ChunkData* getChunkForMeshing();
+	ChunkMesh* getChunkMesh();
 };
 
 

@@ -6,17 +6,20 @@
 #define ENTITY_H
 
 #include "../../../lib/utils/include/shaders.h"
+#include "../../../lib/utils/openGL/include/vertex_array.h"
+#include "../../../lib/utils/openGL/include/index_buffer.h"
+#include "../../../lib/utils/openGL/include/vertex_buffer.h"
 
 class Entity {
 protected:
 	Shaders* shaders;
-	unsigned int vertexArrayObject;
-	unsigned int indicesBuffer;
+	VertexArray vertexArray;
+	IndexBuffer indexBuffer;
 	unsigned int indicesCount;
 	void generateBuffers(GLfloat* vertices, GLfloat* normals, GLfloat* uvs, GLuint* indices, unsigned int verticesCount,
 	                     unsigned int indicesCount);
 public:
-	Entity(Shaders* shaders);
+	explicit Entity(Shaders* shaders);
 	Shaders* getShaders();
 
 };

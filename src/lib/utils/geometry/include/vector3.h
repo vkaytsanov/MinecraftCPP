@@ -144,6 +144,12 @@ public:
 		return *this * tmpMat;
 	}
 
+	void set(const T x, const T y, const T z){
+		this->x = x;
+		this->y = y;
+		this->z = z;
+	}
+
 };
 
 typedef Vector3<float> Vector3f;

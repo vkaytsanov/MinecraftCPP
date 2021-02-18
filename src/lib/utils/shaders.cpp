@@ -124,6 +124,24 @@ unsigned int Shaders::getProgram() {
     return shaderProgram;
 }
 
+int Shaders::getUniformLocation(const char* name) {
+	int res = glGetUniformLocation(shaderProgram, name);
+
+	if(res == -1){
+		Lib::app->error("uniforms", "invalid location");
+		exit(-1);
+	}
+	return res;
+}
+
+void Shaders::setMatrix4(const char* name, Matrix4f mat) {
+	glUniformMatrix4fv(getUniformLocation(name), 1, false, mat.a);
+}
+
+void Shaders::setInt(const char* name, int number) {
+	glUniform1i(getUniformLocation(name), number);
+}
+
 
 
 

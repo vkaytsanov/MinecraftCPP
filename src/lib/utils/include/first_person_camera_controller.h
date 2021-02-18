@@ -21,6 +21,7 @@ private:
 public:
     explicit FirstPersonCameraController(Camera* camera);
     void update(const float& dt);
+	Camera* getCamera() const;
 };
 
 
