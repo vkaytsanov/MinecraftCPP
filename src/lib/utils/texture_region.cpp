@@ -89,10 +89,10 @@ float* TextureRegion::getUVs() {
 			u2, v,
 			u, v,
 			// back
-			u2, v,
-			u, v,
-			u, v2,
 			u2, v2,
+			u, v2,
+			u, v,
+			u2, v,
 			// top
 			u, v2,
 			u2, v2,
@@ -104,15 +104,18 @@ float* TextureRegion::getUVs() {
 			u2, v,
 			u, v,
 			//left
-			u, v2,
-			u2, v2,
-			u2, v,
 			u, v,
+			u2, v,
+			u2, v2,
+			u, v2,
 			//right
-			u2, v2,
-			u2, v,
-			u, v,
 			u, v2,
+			u, v,
+			u2, v,
+			u2, v2,
+
+
+
 
 
 

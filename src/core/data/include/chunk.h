@@ -11,7 +11,7 @@
 #include "cube_data_base.h"
 
 #define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 256
+#define CHUNK_SIZE_Y 3
 #define CHUNK_SIZE_Z 16
 
 using namespace CubeDatabase;

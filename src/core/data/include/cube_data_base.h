@@ -132,10 +132,10 @@ namespace CubeDatabase {
 			0.50f, 1.0f,
 			1.0f, 1.0f,
 			//right
-			0.50f, 1.0f,
-			0.50f, 1.0f,
 			1.0f, 1.0f,
 			1.0f, 1.0f,
+			0.50f, 1.0f,
+			0.50f, 1.0f,
 	};
 
 

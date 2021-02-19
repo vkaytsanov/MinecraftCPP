@@ -22,6 +22,8 @@ enum CubeFaceType{
 
 struct Cube {
 	CubeType type = Grass;
+
+	bool isTransparent() const;
 };
 
 

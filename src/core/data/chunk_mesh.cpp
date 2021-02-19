@@ -11,9 +11,9 @@
 ChunkMesh::ChunkMesh() {
 	const unsigned int indicesCount = CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z * 6;
 	unsigned int indicesOffset = 0;
-	static IndexBuffer StaticIBO;
+	IndexBuffer indexBuffer;
 
-	GLuint* buffer = new GLuint[indicesCount * 6];
+	GLuint buffer[indicesCount * 6];
 
 	for (int i = 0; i < indicesCount; i += 6) {
 		buffer[i + 0] = 0 + indicesOffset;
@@ -24,14 +24,13 @@ ChunkMesh::ChunkMesh() {
 		buffer[i + 5] = 0 + indicesOffset;
 		indicesOffset += 4;
 	}
-	StaticIBO.bind();
-	StaticIBO.bufferData(indicesCount * 6 * sizeof(GLuint), buffer, GL_STATIC_DRAW);
+	indexBuffer.bind();
+	indexBuffer.bufferData(indicesCount * 6 * sizeof(GLuint), buffer, GL_STATIC_DRAW);
 	Lib::app->log("IndicesCount", indicesCount);
-	delete[] buffer;
 
 	vertexArray.bind();
 	vertexBuffer.bind();
-	StaticIBO.bind();
+	indexBuffer.bind();
 
 	vertexBuffer.vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 	                                 reinterpret_cast<void*>(offsetof(Vertex, position)));
@@ -62,12 +61,24 @@ void ChunkMesh::constructMesh(Chunk* chunk, Vector2i chunkPosition) {
 				Cube* cube = &chunkData->at(x).at(y).at(z);
 				if (cube->type != CubeType::Air) {
 					cubePosition.set(x, y, z);
-					addFace(cube->type, Top, cubePosition);
-					addFace(cube->type, Front, cubePosition);
-					addFace(cube->type, Left, cubePosition);
-					addFace(cube->type, Right, cubePosition);
-					addFace(cube->type, Back, cubePosition);
-					addFace(cube->type, Bottom, cubePosition);
+
+					if(z == 0) addFace(cube->type, Back, cubePosition);
+					else if(z == CHUNK_SIZE_Z - 1) addFace(cube->type, Front, cubePosition);
+					else if(chunkData->at(x).at(y).at(z - 1).isTransparent()) addFace(cube->type, Back, cubePosition);
+					else if(chunkData->at(x).at(y).at(z + 1).isTransparent()) addFace(cube->type, Front, cubePosition);
+
+					if(y == 0) addFace(cube->type, Bottom, cubePosition);
+					else if(y == CHUNK_SIZE_Y - 1) addFace(cube->type, Top, cubePosition);
+					else if(chunkData->at(x).at(y - 1).at(z).isTransparent()) addFace(cube->type, Bottom, cubePosition);
+					else if(chunkData->at(x).at(y + 1).at(z).isTransparent()) addFace(cube->type, Top, cubePosition);
+
+					if(x == 0) addFace(cube->type, Left, cubePosition);
+					else if(x == CHUNK_SIZE_X - 1) addFace(cube->type, Right, cubePosition);
+					else if(chunkData->at(x - 1).at(y).at(z).isTransparent()) addFace(cube->type, Left, cubePosition);
+					else if(chunkData->at(x + 1).at(y).at(z).isTransparent()) addFace(cube->type, Right, cubePosition);
+
+
+
 				}
 			}
 		}
