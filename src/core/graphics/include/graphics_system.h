@@ -15,9 +15,9 @@ extern int GRAPHICS_HEIGHT;
 extern float WORLD_WIDTH;
 extern float WORLD_HEIGHT;
 
+#define RENDER_DISTANCE 3 // 6
 
 class Minecraft;
-
 
 class GraphicsSystem {
 private:

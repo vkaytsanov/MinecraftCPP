@@ -13,9 +13,16 @@ out DATA{
 // Projection Matrix
 uniform mat4 proj;
 
+uniform int CHUNK_SIZE_X;
+uniform int CHUNK_SIZE_Z;
+uniform int chunkX;
+uniform int chunkZ;
+
+
 void main(){
-    gl_Position = proj * vec4(position, 1.0);
-    vertices_out.position = vec3(proj * vec4(position, 1.0));
+    vec3 world_position = vec3(position.x + chunkX * CHUNK_SIZE_X, position.y, position.z + chunkZ * CHUNK_SIZE_Z);
+    gl_Position = proj * vec4(world_position, 1.0);
+    vertices_out.position = vec3(proj * vec4(world_position, 1.0));
     vertices_out.normal = normal;
     vertices_out.uv = uv;
 }

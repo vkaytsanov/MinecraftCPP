@@ -15,8 +15,8 @@ class Minecraft;
 class PlayingScreen : public AbstractScreen{
 private:
 	Minecraft* game;
-	FirstPersonCameraController* cameraController;
-	WorldRenderer* worldRenderer;
+	FirstPersonCameraController cameraController;
+	WorldRenderer worldRenderer;
 	bool isWireframe = false;
 public:
 	explicit PlayingScreen(Minecraft* game);

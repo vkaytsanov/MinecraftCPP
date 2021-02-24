@@ -5,9 +5,33 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-enum CubeType {
+enum CubeType{
+	Gravel,
 	Grass,
 	Dirt,
+	WoodPlank,
+	StoneProcessed,
+	Stone,
+	Brick,
+	TNT,
+	Web,
+	FlowerBlue,
+	FlowerYellow,
+	Treelet,
+	BrokenStone,
+	Bedrock,
+	Sand,
+	NetherGravel,
+	Wood,
+	IronProcessed,
+	GoldProcessed,
+	DiamondProcessed,
+	ChestSingle,
+	Gold,
+	Iron,
+	Coal,
+	Diamond,
+	Glass,
 	Air,
 };
 
@@ -21,7 +45,7 @@ enum CubeFaceType{
 };
 
 struct Cube {
-	CubeType type = Grass;
+	CubeType type = Air;
 
 	bool isTransparent() const;
 };

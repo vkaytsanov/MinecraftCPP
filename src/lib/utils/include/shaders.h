@@ -8,6 +8,7 @@
 
 #include "GL/glew.h"
 #include "../geometry/include/matrix4.h"
+#include <unordered_map>
 #include <fstream>
 static const std::string shadersPath = "../src/assets/shaders/";
 
@@ -20,6 +21,8 @@ private:
     unsigned int fragShaderID;
     unsigned int shaderProgram;
 
+	std::unordered_map<std::string, GLint> uniforms;
+
 public:
 	std::string parsedVertexShader;
 	std::string parsedFragmentShader;
@@ -31,9 +34,9 @@ public:
     void end();
     unsigned int getProgram();
 
-	int getUniformLocation(const char* name);
-	void setMatrix4(const char* name, Matrix4f mat);
-	void setInt(const char* name, int number);
+	GLint getUniformLocation(std::string name);
+	void setMatrix4(std::string name, Matrix4f& mat);
+	void setInt(std::string name, int number);
 };
 
 

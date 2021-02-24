@@ -13,7 +13,7 @@ class WorldRenderer {
 private:
 	World* world;
 	Camera* camera;
-	ChunkRenderer* chunkRenderer;
+	ChunkRenderer chunkRenderer;
 public:
 	explicit WorldRenderer(DataSystem* dataSystem, Camera* camera);
 	~WorldRenderer();

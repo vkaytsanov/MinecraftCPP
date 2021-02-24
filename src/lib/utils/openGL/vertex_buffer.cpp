@@ -3,13 +3,16 @@
 //
 
 #include "include/vertex_buffer.h"
+#include "../../include/lib.h"
 
 VertexBuffer::VertexBuffer() {
+	buffer = 0;
 	glGenBuffers(1, &buffer);
 }
 
 VertexBuffer::~VertexBuffer() {
 	glDeleteBuffers(1, &buffer);
+	unbind();
 }
 
 void VertexBuffer::bufferData(GLsizeiptr size, void* data, GLenum usage) {
@@ -31,6 +34,6 @@ void VertexBuffer::unbind() {
 }
 
 void VertexBuffer::vertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid* pointer) {
-	glVertexAttribIPointer(index, size, type, stride, pointer);
 	glEnableVertexAttribArray(index);
+	glVertexAttribIPointer(index, size, type, stride, pointer);
 }

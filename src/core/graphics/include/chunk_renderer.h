@@ -16,10 +16,11 @@ private:
 	Texture* texture;
 	Shaders* defaultShader;
 public:
-	ChunkRenderer(DataSystem* dataSystem);
+	explicit ChunkRenderer(DataSystem* dataSystem);
 	~ChunkRenderer();
 	void beginChunkRendering(Camera* camera);
-	void renderChunk(Chunk* chunk);
+	void renderChunk(Chunk* chunk, int x, int z);
+	void renderTransparentChunk(Chunk* chunk, int x, int z);
 	void endChunkRendering();
 };
 

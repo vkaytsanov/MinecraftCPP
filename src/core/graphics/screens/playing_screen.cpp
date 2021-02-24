@@ -6,42 +6,36 @@
 #include "../../include/minecraft.h"
 #include "../../../lib/include/lib.h"
 
-PlayingScreen::PlayingScreen(Minecraft* game) : game(game){
-	cameraController = new FirstPersonCameraController(game->graphicsSystem->getViewport()->getCamera());
-	worldRenderer = new WorldRenderer(game->dataSystem, cameraController->getCamera());
+PlayingScreen::PlayingScreen(Minecraft* game) : game(game),
+                                                cameraController(game->graphicsSystem->getViewport()->getCamera()),
+                                                worldRenderer(game->dataSystem, cameraController.getCamera()) {
 
-	cameraController->getCamera()->position->x = 5;
-	cameraController->getCamera()->position->z = 30;
+
+	cameraController.getCamera()->position->x = 0;
+	cameraController.getCamera()->position->y = CHUNK_SIZE_Y / 1.5f;
+	cameraController.getCamera()->position->z = 0;
 }
 
 void PlayingScreen::render(const float dt) {
-	if(Lib::input->isKeyPressed(SDLK_TAB)) {
-		if(isWireframe){
-			glPolygonMode(GL_FRONT, GL_FILL);
-			glPolygonMode(GL_BACK, GL_FILL);
-		}
-		else {
-			glPolygonMode(GL_FRONT, GL_LINE);
-			glPolygonMode(GL_BACK, GL_LINE);
+	if (Lib::input->isKeyPressed(SDLK_TAB)) {
+		if (isWireframe) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		} else {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 		isWireframe = !isWireframe;
 	}
 
-	cameraController->update(dt);
-
-//	game->batch->setProjectionMatrix(game->graphicsSystem->getViewport()->getCamera()->combined);
-//    game->batch->begin();
-    worldRenderer->render();
-//	game->batch->end();
+	cameraController.update(dt);
+	worldRenderer.render();
 }
 
 void PlayingScreen::start() {
-	Lib::input->setProcessor(cameraController);
+	Lib::input->setProcessor(&cameraController);
 }
 
 PlayingScreen::~PlayingScreen() {
-	delete cameraController;
-	delete worldRenderer;
+
 }
 
 

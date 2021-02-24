@@ -1,6 +1,6 @@
 
-#ifndef PLAYGROUND
-#define PLAYGROUND
+#ifndef MINECRAFT
+#define MINECRAFT
 
 
 #include "../../lib/include/listener.h"
@@ -15,7 +15,6 @@
 
 class Minecraft : public Listener {
 public:
-	SpriteBatch* batch;
 	GameStateManager* gameStateManager;
 	DataSystem* dataSystem;
 	GraphicsSystem* graphicsSystem;

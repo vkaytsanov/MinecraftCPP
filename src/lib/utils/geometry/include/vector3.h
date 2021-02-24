@@ -11,6 +11,11 @@
 template<typename T>
 class Matrix4;
 
+enum Axis{
+	X,
+	Y,
+	Z
+};
 template<typename T>
 class Vector3{
 public:

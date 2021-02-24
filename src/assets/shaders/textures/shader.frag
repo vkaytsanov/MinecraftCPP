@@ -12,5 +12,5 @@ in DATA {
 
 void main() {
     vec3 col = vec3(texture(tex_id, fragments_in.uv));
-    color = vec4(col + 0.05, 1.0);
+    color = vec4(col, 1.0);
 }

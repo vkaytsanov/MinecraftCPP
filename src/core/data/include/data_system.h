@@ -12,9 +12,9 @@
 
 class DataSystem {
 public:
-	Shaders* defaultShader;
-	Assets* assets;
-	World* world;
+	Shaders defaultShader;
+	Assets assets;
+	World world;
 	DataSystem();
 	~DataSystem();
 };

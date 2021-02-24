@@ -10,24 +10,27 @@
 #include "chunk_mesh.h"
 #include "cube_data_base.h"
 
-#define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 3
-#define CHUNK_SIZE_Z 16
+typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z> ChunkContents;
+typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z>* ChunkContentsPtr;
+typedef std::array<std::array<int, CHUNK_SIZE_X>, CHUNK_SIZE_Z> HeightMap;
 
-using namespace CubeDatabase;
-
-typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z> ChunkData;
+enum ChunkState {
+	Generated,
+	Empty
+};
 
 class Chunk {
 private:
+	ChunkContents chunkContents;
 	ChunkMesh chunkMesh;
-	Vector2i position;
 public:
-	ChunkData chunkData;
+	HeightMap heightMap;
+	ChunkState chunkState;
+	ChunkMeshState chunkMeshState;
 	Chunk();
 	~Chunk();
-	void generate();
-	ChunkData* getChunkForMeshing();
+	void setCube(CubeType type, int x, int y, int z);
+	ChunkContentsPtr getChunkContents();
 	ChunkMesh* getChunkMesh();
 };
 

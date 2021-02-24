@@ -1,4 +1,4 @@
-
+#define GLEW_STATIC
 #include "../lib/include/configuration.h"
 #include "../lib/include/application.h"
 #include "../core/include/minecraft.h"

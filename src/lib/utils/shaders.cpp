@@ -114,6 +114,7 @@ void Shaders::end() {
 }
 
 Shaders::~Shaders() {
+	Lib::app->log("Shaders", "deleting");
     glUseProgram(0);
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragShaderID);
@@ -124,21 +125,25 @@ unsigned int Shaders::getProgram() {
     return shaderProgram;
 }
 
-int Shaders::getUniformLocation(const char* name) {
-	int res = glGetUniformLocation(shaderProgram, name);
-
-	if(res == -1){
-		Lib::app->error("uniforms", "invalid location");
-		exit(-1);
+GLint Shaders::getUniformLocation(std::string name) {
+	if(uniforms.find(name) == uniforms.end()){
+		int res = glGetUniformLocation(shaderProgram, name.c_str());
+		if(res == -1){
+			Lib::app->error("uniforms", "invalid location");
+			exit(-1);
+		}
+		uniforms[name] = res;
 	}
-	return res;
+
+
+	return uniforms[name];
 }
 
-void Shaders::setMatrix4(const char* name, Matrix4f mat) {
-	glUniformMatrix4fv(getUniformLocation(name), 1, false, mat.a);
+void Shaders::setMatrix4(std::string name, Matrix4f& mat) {
+	glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, mat.a);
 }
 
-void Shaders::setInt(const char* name, int number) {
+void Shaders::setInt(std::string name, int number) {
 	glUniform1i(getUniformLocation(name), number);
 }
 

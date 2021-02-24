@@ -19,7 +19,7 @@ Texture::Texture(std::string path) {
 
     glTexImage2D(GL_TEXTURE_2D,
                  0,
-                 colorCount,
+                 textureFormat,
                  surface->w,
                  surface->h,
                  0,

@@ -6,12 +6,14 @@
 #include "../../../../../DuckHunt/src/lib/include/lib.h"
 
 VertexArray::VertexArray() {
+	arrayObject = 0;
 	glGenVertexArrays(1, &arrayObject);
+	bind();
 }
 
 VertexArray::~VertexArray() {
-	Lib::app->log("VertexArray", "deleting");
 	glDeleteVertexArrays(1, &arrayObject);
+	unbind();
 }
 
 void VertexArray::bind() const {

@@ -3,6 +3,8 @@
 #include <chrono>
 
 
+
+
 Graphics::Graphics() : Graphics(new Configuration()){}
 
 Graphics::Graphics(Configuration* config) {
@@ -56,6 +58,12 @@ void Graphics::createWindow() {
                    IMG_GetError());
             exit(-1);
         }
+	    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+	    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+	    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+
         //Create window
         window = SDL_CreateWindow(config->title,
                                   config->x,
@@ -70,6 +78,7 @@ void Graphics::createWindow() {
         else {
 	        //Create the context for OpenGL
 	        context = SDL_GL_CreateContext(window);
+
 	        if (!context) {
 		        fprintf(stderr, "Couldn't create context: %s\n", SDL_GetError());
 	        }
@@ -116,6 +125,8 @@ void Graphics::update() {
 }
 
 Graphics::~Graphics() {
+	//Destroy openGL context
+	SDL_GL_DeleteContext(context);
     //Destroy surface
     SDL_FreeSurface(screenSurface);
     screenSurface = nullptr;
@@ -168,6 +179,7 @@ SDL_Window *Graphics::getWindow() {
 SDL_Surface *Graphics::getScreenSurface() const {
     return screenSurface;
 }
+
 
 
 

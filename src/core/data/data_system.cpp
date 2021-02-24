@@ -5,20 +5,12 @@
 #include "include/data_system.h"
 
 
-DataSystem::DataSystem(){
-	assets = new Assets();
-
-	CubeDatabase::init(assets->getSprite("spriteSheet"));
-
-	defaultShader = new Shaders("textures/shader.vert", "textures/shader.frag");
-
-	world = new World();
+DataSystem::DataSystem() : defaultShader("textures/shader.vert", "textures/shader.frag"){
+	CubeDatabase::init(assets.getSprite("spriteSheet"));
 }
 
 DataSystem::~DataSystem() {
 	CubeDatabase::freeMemory();
-	delete assets;
-	delete world;
-}
 
+}
 

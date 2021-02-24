@@ -5,5 +5,5 @@
 #include "include/cube.h"
 
 bool Cube::isTransparent() const {
-	return type == Air;
+	return type >= Glass && type <= Air;
 }

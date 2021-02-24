@@ -9,7 +9,7 @@ FirstPersonCameraController::FirstPersonCameraController(Camera *camera) {
     this->camera = camera;
 }
 
-void FirstPersonCameraController::handleButtonMovement(const float& dt) {
+void FirstPersonCameraController::handleButtonMovement(const float dt) {
     Vector3f vec = *camera->direction;
     if(Lib::input->isKeyPressed(SDLK_a)){
         *camera->position -= (vec.cross(*camera->up).normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
@@ -25,7 +25,7 @@ void FirstPersonCameraController::handleButtonMovement(const float& dt) {
     }
 }
 
-void FirstPersonCameraController::handleMouseMovement(const float& dt) {
+void FirstPersonCameraController::handleMouseMovement(const float dt) {
     if(Lib::input->isMouseLeftClick()) {
 
         horizontalAngle += -(Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
@@ -41,7 +41,7 @@ void FirstPersonCameraController::handleMouseMovement(const float& dt) {
     }
 }
 
-void FirstPersonCameraController::update(const float& dt) {
+void FirstPersonCameraController::update(const float dt) {
     handleButtonMovement(dt);
     handleMouseMovement(dt);
     camera->update();

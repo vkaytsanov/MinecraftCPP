@@ -3,20 +3,36 @@
 //
 
 #include "include/world.h"
+#include "../../lib/include/lib.h"
 
-World::World() {
+World::World(long long seed){
+	this->seed = seed;
 }
 
-void World::generate() {
-	chunks.emplace_back();
-
-
+void World::addChunk(int16_t x, int16_t z) {
+	Coordinates coords = Coordinates(x, z);
+	auto chunkIter = chunks.find(coords);
+	if (chunkIter == chunks.end()){
+		chunks.try_emplace(coords);
+	}
 }
 
-World::~World() {
-
+Chunk* World::getChunk(int16_t x, int16_t z) {
+	Coordinates coords = Coordinates(x, z);
+	auto chunk = chunks.find(coords);
+	if (chunk == chunks.end()) return nullptr;
+	return &chunks.at(Coordinates(x, z));
 }
 
-Chunk* World::getChunk(int x) {
-	return &chunks[x];
-}
+
+
+
+
+
+
+
+
+
+
+
+
