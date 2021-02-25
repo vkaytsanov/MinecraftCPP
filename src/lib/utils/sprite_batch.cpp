@@ -17,13 +17,13 @@ void SpriteBatch::setupMatrices(const Vector3f& pos) {
 }
 
 void SpriteBatch::setupShaders(Shaders* shaders) {
-	if(this->shaders != shaders){
+	if (this->shaders != shaders) {
 		this->shaders = shaders;
 	}
 }
 
 void SpriteBatch::begin() {
-	if(drawing) return;
+	if (drawing) return;
 	drawing = true;
 }
 
@@ -41,10 +41,10 @@ void SpriteBatch::draw(Shaders* shaders) {
 	combined = (projection * transform);
 	unsigned int matrixID = glGetUniformLocation(shaders->getProgram(), "proj");
 
-	if(matrixID == -1){
+	if (matrixID == -1) {
 		Lib::app->error("uniforms", "invalid location");
 	}
-	else{
+	else {
 		Matrix4f mat = combined;
 		glUniformMatrix4fv(matrixID, 1, false, mat.a);
 	}
@@ -52,7 +52,7 @@ void SpriteBatch::draw(Shaders* shaders) {
 }
 
 void SpriteBatch::end() {
-	if(!drawing) return;
+	if (!drawing) return;
 	drawing = false;
 }
 

@@ -7,7 +7,7 @@
 #include <utility>
 
 
-Event::Event(std::string  name) : name(std::move(name)){}
+Event::Event(std::string name) : name(std::move(name)) {}
 
 
 Event::~Event() {

@@ -25,52 +25,48 @@
 
 #include "modulebase.h"
 
-namespace noise
-{
+namespace noise {
 
-  namespace module
-  {
+	namespace module {
 
-    /// @addtogroup libnoise
-    /// @{
-    
-    /// @addtogroup modules
-    /// @{
-    
-    /// @defgroup combinermodules Combiner Modules
-    /// @addtogroup combinermodules
-    /// @{
-    
-    /// Noise module that outputs the sum of the two output values from two
-    /// source modules.
-    ///
-    /// @image html moduleadd.png
-    ///
-    /// This noise module requires two source modules.
-    class Add: public Module
-    {
+		/// @addtogroup libnoise
+		/// @{
 
-      public:
+		/// @addtogroup modules
+		/// @{
 
-        /// Constructor.
-        Add ();
+		/// @defgroup combinermodules Combiner Modules
+		/// @addtogroup combinermodules
+		/// @{
 
-        virtual int GetSourceModuleCount () const
-        {
-          return 2;
-        }
+		/// Noise module that outputs the sum of the two output values from two
+		/// source modules.
+		///
+		/// @image html moduleadd.png
+		///
+		/// This noise module requires two source modules.
+		class Add : public Module {
 
-        virtual double GetValue (double x, double y, double z) const;
+		public:
 
-    };
+			/// Constructor.
+			Add();
 
-    /// @}
+			virtual int GetSourceModuleCount() const {
+				return 2;
+			}
 
-    /// @}
+			virtual double GetValue(double x, double y, double z) const;
 
-    /// @}
+		};
 
-  }
+		/// @}
+
+		/// @}
+
+		/// @}
+
+	}
 
 }
 

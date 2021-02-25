@@ -15,13 +15,13 @@
 
 class Minecraft;
 
-class ModWorldExploration : public ModLogic{
+class ModWorldExploration : public ModLogic {
 private:
-	Minecraft* game;
-	WorldGeneration worldGeneration;
-	ChunkMeshGeneration chunkMeshGeneration;
-	int lastPlayerX;
-	int lastPlayerZ;
+	Minecraft* p_game;
+	WorldGeneration m_worldGeneration;
+	ChunkMeshGeneration m_chunkMeshGeneration;
+	int m_lastPlayerX;
+	int m_lastPlayerZ;
 	void constructNewCoordinates(int x, int z);
 public:
 	explicit ModWorldExploration(Minecraft* game);

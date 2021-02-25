@@ -11,13 +11,14 @@
 template<typename T>
 class Matrix4;
 
-enum Axis{
+enum Axis {
 	X,
 	Y,
 	Z
 };
+
 template<typename T>
-class Vector3{
+class Vector3 {
 public:
 	T x;
 	T y;
@@ -35,55 +36,55 @@ public:
 		this->z = z;
 	}
 
-	Vector3<T> operator+(const Vector3<T> &vec) {
+	Vector3<T> operator+(const Vector3<T>& vec) {
 		return Vector3<T>(this->x + vec.x, this->y + vec.y, this->z + vec.z);
 	}
 
-	Vector3<T> operator-(const Vector3<T> &vec) {
+	Vector3<T> operator-(const Vector3<T>& vec) {
 		return Vector3<T>(this->x - vec.x, this->y - vec.y, this->z - vec.z);
 	}
 
-	Vector3<T> operator*(const Vector3<T> &vec) {
+	Vector3<T> operator*(const Vector3<T>& vec) {
 		return Vector3<T>(this->x * vec.x, this->y * vec.y, this->z * vec.z);
 	}
 
-	Vector3<T> operator*(const T &scale) {
+	Vector3<T> operator*(const T& scale) {
 		return Vector3<T>(this->x * scale, this->y * scale, this->z * scale);
 	}
 
-	Vector3<T> operator/(const Vector3<T> &vec) {
+	Vector3<T> operator/(const Vector3<T>& vec) {
 		return Vector3<T>(this->x / vec.x, this->y / vec.y, this->z / vec.z);
 	}
 
-	Vector3<T> operator=(const Vector3<T> &vec) {
+	Vector3<T> operator=(const Vector3<T>& vec) {
 		this->x = vec.x;
 		this->y = vec.y;
 		this->z = vec.z;
 		return *this;
 	}
 
-	Vector3<T>& operator/=(const Vector3<T> &vec) {
+	Vector3<T>& operator/=(const Vector3<T>& vec) {
 		this->x /= vec.x;
 		this->y /= vec.y;
 		this->z /= vec.z;
 		return *this;
 	}
 
-	Vector3<T>& operator+=(const Vector3<T> &vec) {
+	Vector3<T>& operator+=(const Vector3<T>& vec) {
 		this->x += vec.x;
 		this->y += vec.y;
 		this->z += vec.z;
 		return *this;
 	}
 
-	Vector3<T>& operator-=(const Vector3<T> &vec) {
+	Vector3<T>& operator-=(const Vector3<T>& vec) {
 		this->x -= vec.x;
 		this->y -= vec.y;
 		this->z -= vec.z;
 		return *this;
 	}
 
-	Vector3<T>& operator*=(const Vector3<T> &vec) {
+	Vector3<T>& operator*=(const Vector3<T>& vec) {
 		this->x *= vec.x;
 		this->y *= vec.y;
 		this->z *= vec.z;
@@ -98,35 +99,35 @@ public:
 		);
 	}
 
-	T operator[](const int idx){
+	T operator[](const int idx) {
 		// TODO
-		if(idx == 0) return x;
-		if(idx == 1) return y;
-		if(idx == 2) return z;
+		if (idx == 0) return x;
+		if (idx == 1) return y;
+		if (idx == 2) return z;
 		return -1;
 	}
 
 
 	/** Euclidean length */
-	T length(){
+	T length() {
 		return std::sqrt(x * x + y * y + z * z);
 	}
 
 	/** Squared Euclidean length */
-	T length2(){
+	T length2() {
 		return x * x + y * y + z * z;
 	}
 
 	/** returns normalized vector */
 	Vector3<T> normalize() {
 		const float magnitude = length2();
-		if(magnitude == 0.0f || magnitude == 1.0f) return *this;
+		if (magnitude == 0.0f || magnitude == 1.0f) return *this;
 
 		return *this * (1.0f / std::sqrt(magnitude));
 	}
 
 	/** returns the dot product |a . b| between two vectors */
-	float dot(const Vector3<T>& vec){
+	float dot(const Vector3<T>& vec) {
 		return (this->x * vec.x + this->y * vec.y + this->z * vec.z);
 	}
 
@@ -136,7 +137,7 @@ public:
 	 * @param vec - the pointer finger pointing away
 	 * @return the vector, which is the thumb
 	 * */
-	Vector3<T> cross(const Vector3<T>& vec){
+	Vector3<T> cross(const Vector3<T>& vec) {
 		return Vector3<T>(
 				(y * vec.z) - (z * vec.y),
 				(z * vec.x) - (x * vec.z),
@@ -144,12 +145,12 @@ public:
 		);
 	}
 
-	Vector3<T> rotate(const Vector3<T> axis, const float degrees){
+	Vector3<T> rotate(const Vector3<T> axis, const float degrees) {
 		Matrix4<T> tmpMat(Quaternion<T>().setFromAxis(axis, degrees).normalize());
 		return *this * tmpMat;
 	}
 
-	void set(const T x, const T y, const T z){
+	void set(const T x, const T y, const T z) {
 		this->x = x;
 		this->y = y;
 		this->z = z;

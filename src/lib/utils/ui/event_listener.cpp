@@ -7,9 +7,9 @@
 
 
 void EventListener::handle(SDL_Event& event) {
-    Lib::app->log("EventListener", "Not handling");
+	Lib::app->log("EventListener", "Not handling");
 }
 
 EventListener::~EventListener() {
-    Lib::app->log("EventListener", "Destructor");
+	Lib::app->log("EventListener", "Destructor");
 }

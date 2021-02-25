@@ -16,37 +16,36 @@
 
 class Camera {
 public:
-    /** near clipping plane */
-    float nearPlane = 0.001f;
-    /** far clipping plane */
-    float farPlane = 10000.f;
-    /** Camera position vector */
-    Vector3f* position;
-    /** Camera up vector */
-    Vector3f* up;
-    /** Camera's looking direction vector */
-    Vector3f* direction;
-    /** Camera view matrix */
-    Matrix4f view;
-    /** Camera projection matrix */
-    Matrix4f projection;
-    /** Camera's combined matrix */
-    Matrix4f combined;
+	/** near clipping plane */
+	float nearPlane = 0.001f;
+	/** far clipping plane */
+	float farPlane = 10000.f;
+	/** Camera position vector */
+	Vector3f* position;
+	/** Camera up vector */
+	Vector3f* up;
+	/** Camera's looking direction vector */
+	Vector3f* direction;
+	/** Camera view matrix */
+	Matrix4f view;
+	/** Camera projection matrix */
+	Matrix4f projection;
+	/** Camera's combined matrix */
+	Matrix4f combined;
 
-    float viewportWidth;
-    float viewportHeight;
-    Camera();
-    ~Camera();
-    virtual void update() = 0;
-    void updateCombined();
-    void translate(float x, float y, float z) const;
-    void rotateX(float degree);
-    void rotate(float deltaX, float deltaY) const;
-    void rotateY(float degree);
-    void rotateZ(float degree);
+	float viewportWidth;
+	float viewportHeight;
+	Camera();
+	~Camera();
+	virtual void update() = 0;
+	void updateCombined();
+	void translate(float x, float y, float z) const;
+	void rotateX(float degree);
+	void rotate(float deltaX, float deltaY) const;
+	void rotateY(float degree);
+	void rotateZ(float degree);
 
 };
-
 
 
 #endif //CAMERA_H

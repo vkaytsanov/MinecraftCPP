@@ -12,96 +12,11 @@
 
 namespace CubeDatabase {
 
-	const float SIZE = 0.5f;
-	const int VERTICES_COUNT = 6 * 4 * 3;
-	const int INDICES_COUNT = 6 * 6;
 	const int UVS_COUNT = 6 * 4 * 2;
 
-	static float vertices[VERTICES_COUNT] = {
-			// Front
-			-SIZE, -SIZE, SIZE, // 0
-			SIZE, -SIZE, SIZE, // 1
-			SIZE, SIZE, SIZE, // 2
-			-SIZE, SIZE, SIZE, // 3
-
-			// Back
-			-SIZE, -SIZE, -SIZE, // 4
-			-SIZE, SIZE, -SIZE, // 5
-			SIZE, SIZE, -SIZE, // 6
-			SIZE, -SIZE, -SIZE, // 7
-
-			// Top
-			-SIZE, SIZE, -SIZE, // 8
-			-SIZE, SIZE, SIZE, // 11
-			SIZE, SIZE, SIZE, // 10
-			SIZE, SIZE, -SIZE, // 9
-
-			// Bottom
-			-SIZE, -SIZE, -SIZE, // 12
-			SIZE, -SIZE, -SIZE, // 13
-			SIZE, -SIZE, SIZE, // 14
-			-SIZE, -SIZE, SIZE, // 15
-
-			// Left
-			-SIZE, -SIZE, -SIZE, // 16
-			-SIZE, -SIZE, SIZE, // 17
-			-SIZE, SIZE, SIZE, // 18
-			-SIZE, SIZE, -SIZE, // 19
-
-			// Right
-			SIZE, -SIZE, -SIZE, // 20
-			SIZE, SIZE, -SIZE,  // 23
-			SIZE, SIZE, SIZE, // 22
-			SIZE, -SIZE, SIZE, // 21
+	static uint8_t faceLightningLevel[6]{
+		6, 7, 10, 3, 6, 7
 	};
-
-	static unsigned int indices[INDICES_COUNT] = {
-			0, 1, 2, 2, 3, 0,  // Front
-			4, 5, 6, 6, 7, 4,  // Back
-			8, 9, 10, 10, 11, 8,  // Top
-			12, 13, 14, 14, 15, 12, // Bottom
-			16, 17, 18, 18, 19, 16, // Left
-			20, 21, 22, 22, 23, 20  // Right
-	};
-
-	static float normals[VERTICES_COUNT] = {
-			// Front
-			0.0f, 0.0f, 1.0f,
-			0.0f, 0.0f, 1.0f,
-			0.0f, 0.0f, 1.0f,
-			0.0f, 0.0f, 1.0f,
-
-			// Back
-			0.0f, 0.0f, -1.0f,
-			0.0f, 0.0f, -1.0f,
-			0.0f, 0.0f, -1.0f,
-			0.0f, 0.0f, -1.0f,
-
-			// Top
-			0.0f, 1.0f, 0.0f,
-			0.0f, 1.0f, 0.0f,
-			0.0f, 1.0f, 0.0f,
-			0.0f, 1.0f, 0.0f,
-
-			// Bottom
-			0.0f, -1.0f, 0.0f,
-			0.0f, -1.0f, 0.0f,
-			0.0f, -1.0f, 0.0f,
-			0.0f, -1.0f, 0.0f,
-
-			// Left
-			-1.0f, 0.0f, 0.0f,
-			-1.0f, 0.0f, 0.0f,
-			-1.0f, 0.0f, 0.0f,
-			-1.0f, 0.0f, 0.0f,
-
-			// Right
-			1.0f, 0.0f, 0.0f,
-			1.0f, 0.0f, 0.0f,
-			1.0f, 0.0f, 0.0f,
-			1.0f, 0.0f, 0.0f
-	};
-
 	// u * 3.0f for third part
 	// u * 2.0f, u2 * 0.67  for second part
 	// u2 * 0.50f for first part
@@ -139,15 +54,19 @@ namespace CubeDatabase {
 	};
 
 
-
-	struct TextureData{
-		TextureRegion region{};
+	struct TextureCubeData {
 		float* uvs = nullptr;
 
-		TextureData(TextureRegion region, int sides = 1);
-		TextureData() = default;
+		TextureCubeData(TextureRegion region, int sides = 1);
+		TextureCubeData() = default;
 	};
 
+//	struct TextureEntityData{
+//		float* uvs = nullptr;
+//		float* vertices = nullptr;
+//		TextureEntityData(TextureRegion region);
+//		TextureEntityData() = default;
+//	};
 
 
 	void init(Texture* texture);

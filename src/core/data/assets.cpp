@@ -9,7 +9,7 @@
 
 Assets::Assets() {
 	std::string spritePaths[] = {
-			"spriteSheet.png"
+			"spriteSheet.png",
 	};
 
 	int c = 0;

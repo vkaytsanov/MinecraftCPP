@@ -24,20 +24,17 @@
 using namespace noise;
 using namespace noise::model;
 
-Plane::Plane ():
-  m_pModule (NULL)
-{
+Plane::Plane() :
+		m_pModule(NULL) {
 }
 
-Plane::Plane (const module::Module& module) :
-  m_pModule( &module)
-{
+Plane::Plane(const module::Module& module) :
+		m_pModule(&module) {
 }
 
 // Told you this was trivial.
-double Plane::GetValue (double x, double z) const
-{
-  assert (m_pModule != NULL);
-  
-  return m_pModule->GetValue (x, 0, z);
+double Plane::GetValue(double x, double z) const {
+	assert (m_pModule != NULL);
+
+	return m_pModule->GetValue(x, 0, z);
 }

@@ -8,10 +8,10 @@
 #include "SDL.h"
 
 struct InputProcessor {
-    virtual void touchDown(SDL_Event &e, float x, float y);
-    virtual void touchUp(SDL_Event &e, float x, float y);
-    virtual void keyDown(SDL_Event &e, int key);
-    virtual void keyUp(SDL_Event &e, int key);
+	virtual void touchDown(SDL_Event& e, float x, float y);
+	virtual void touchUp(SDL_Event& e, float x, float y);
+	virtual void keyDown(SDL_Event& e, int key);
+	virtual void keyUp(SDL_Event& e, int key);
 };
 
 

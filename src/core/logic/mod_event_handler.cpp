@@ -7,7 +7,7 @@
 
 
 void ModEventHandler::update(std::vector<ModLogic*>& modules) {
-	while(!events.empty()){
+	while (!events.empty()) {
 		Event* e = events.front();
 		sendToModules(modules, e);
 		events.pop();
@@ -20,14 +20,14 @@ void ModEventHandler::post(Event* e) {
 
 
 void ModEventHandler::sendToModules(std::vector<ModLogic*>& modules, Event* e) {
-	for(ModLogic* mod : modules){
+	for (ModLogic* mod : modules) {
 		mod->post(e);
 	}
-	Lib::app->log("Event", (e->name +  " posted").c_str());
+	Lib::app->log("Event", (e->name + " posted").c_str());
 }
 
 void ModEventHandler::reinit() {
-	while(!events.empty()){
+	while (!events.empty()) {
 		events.pop();
 	}
 }

@@ -25,19 +25,17 @@
 
 using namespace noise::module;
 
-Blend::Blend ():
-  Module (GetSourceModuleCount ())
-{
+Blend::Blend() :
+		Module(GetSourceModuleCount()) {
 }
 
-double Blend::GetValue (double x, double y, double z) const
-{
-  assert (m_pSourceModule[0] != NULL);
-  assert (m_pSourceModule[1] != NULL);
-  assert (m_pSourceModule[2] != NULL);
+double Blend::GetValue(double x, double y, double z) const {
+	assert (m_pSourceModule[0] != NULL);
+	assert (m_pSourceModule[1] != NULL);
+	assert (m_pSourceModule[2] != NULL);
 
-  double v0 = m_pSourceModule[0]->GetValue (x, y, z);
-  double v1 = m_pSourceModule[1]->GetValue (x, y, z);
-  double alpha = (m_pSourceModule[2]->GetValue (x, y, z) + 1.0) / 2.0;
-  return LinearInterp (v0, v1, alpha);
+	double v0 = m_pSourceModule[0]->GetValue(x, y, z);
+	double v1 = m_pSourceModule[1]->GetValue(x, y, z);
+	double alpha = (m_pSourceModule[2]->GetValue(x, y, z) + 1.0) / 2.0;
+	return LinearInterp(v0, v1, alpha);
 }

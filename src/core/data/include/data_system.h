@@ -9,12 +9,15 @@
 #include "assets.h"
 #include "world.h"
 #include "../../../lib/utils/include/shaders.h"
+#include "skybox.h"
 
 class DataSystem {
 public:
 	Shaders defaultShader;
+	Shaders skyboxShader;
 	Assets assets;
 	World world;
+	Skybox skybox;
 	DataSystem();
 	~DataSystem();
 };

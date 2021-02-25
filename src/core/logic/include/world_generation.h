@@ -11,8 +11,11 @@
 
 class WorldGeneration {
 private:
-	noise::module::Perlin perlinNoise;
+	noise::module::Perlin m_perlinNoise;
+	int waterMinLevel = 2;
+	int waterMaxLevel = 110;
 	void generateVerticalLevel(Chunk* chunk, int x, int level, int z);
+	void generateWaterHorizontalLevel(Chunk* chunk);
 public:
 	WorldGeneration(int seed);
 	WorldGeneration();

@@ -38,10 +38,10 @@ ChunkMesh::ChunkMesh() {
 
 		vbo.at(i).vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 		                              (void*) (offsetof(Vertex, position)));
-		vbo.at(i).vertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-		                              (void*) (offsetof(Vertex, normals)));
-		vbo.at(i).vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+		vbo.at(i).vertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 		                              (void*) (offsetof(Vertex, uvs)));
+		vbo.at(i).vertexAttribIPointer(2, 1, GL_UNSIGNED_BYTE, sizeof(Vertex),
+		                               (void*) offsetof(Vertex, lightningLevel));
 
 		vao.at(i).unbind();
 	}
@@ -56,7 +56,8 @@ void ChunkMesh::setMesh(std::array<std::vector<Vertex>, 2>& vertices) {
 	for (int i = 0; i < vertices.size(); i++) {
 		indicesCount.at(i) = 0;
 		Lib::app->log(("ChunkMesh " + std::to_string(i)).c_str(),
-		              (std::to_string(vertices.at(i).size()) + " vertices").c_str());
+		              (std::to_string(vertices.at(i).size()) + (i == 0 ? " normal" : " transparent") +
+		               " vertices").c_str());
 		if (!vertices.at(i).empty()) {
 			vbo.at(i).bind();
 			vbo.at(i).bufferData(vertices.at(i).size() * sizeof(Vertex), &vertices.at(i)[0], GL_STATIC_DRAW);

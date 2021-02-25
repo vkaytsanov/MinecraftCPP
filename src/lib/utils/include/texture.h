@@ -9,7 +9,7 @@
 #include <SDL.h>
 #include <string>
 
-enum TextureFilter{
+enum TextureFilter {
 	Nearest = GL_NEAREST,
 	Linear = GL_LINEAR,
 	MipMap = GL_MIPMAP,
@@ -19,7 +19,7 @@ enum TextureFilter{
 	MipMapLinearLinear = GL_LINEAR_MIPMAP_LINEAR,
 };
 
-enum TextureWrap{
+enum TextureWrap {
 	Repeat = GL_REPEAT,
 	RepeatMirrored = GL_MIRRORED_REPEAT,
 	ClampToEdge = GL_CLAMP_TO_EDGE,
@@ -27,21 +27,20 @@ enum TextureWrap{
 
 class Texture {
 private:
-    unsigned int textureBuffer;
-    SDL_Surface* surface;
-    GLenum textureFormat;
-    int colorCount;
+	unsigned int textureBuffer;
+	SDL_Surface* surface;
+	GLenum textureFormat;
+	int colorCount;
 	int width;
 	int height;
 public:
-    explicit Texture(std::string path);
-    Texture() = default;
-    ~Texture();
-    void performChecks();
-    unsigned int getBuffer();
+	explicit Texture(std::string path);
+	Texture() = default;
+	~Texture();
+	void performChecks();
+	unsigned int getBuffer();
 	int getWidth() const;
 	int getHeight() const;
-
 };
 
 

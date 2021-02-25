@@ -11,18 +11,18 @@
 
 /** Viewport that remains the aspect ratio and its dimensions can't be
  * lesser than the specified in @param minWorldWidth and @param minWorldHeight */
-class UniversalViewport : public Viewport{
+class UniversalViewport : public Viewport {
 private:
-    float minWorldWidth;
-    float minWorldHeight;
+	float minWorldWidth;
+	float minWorldHeight;
 public:
-    UniversalViewport(float minWorldWidth, float minWorldHeight);
-    UniversalViewport(float minWorldWidth, float minWorldHeight, Camera* camera);
-    void update(int screenWidth, int screenHeight, bool centerCamera) override;
-    float getMinWorldWidth() const;
-    void setMinWorldWidth(float minWorldWidth);
-    float getMinWorldHeight() const;
-    void setMinWorldHeight(float minWorldHeight);
+	UniversalViewport(float minWorldWidth, float minWorldHeight);
+	UniversalViewport(float minWorldWidth, float minWorldHeight, Camera* camera);
+	void update(int screenWidth, int screenHeight, bool centerCamera) override;
+	float getMinWorldWidth() const;
+	void setMinWorldWidth(float minWorldWidth);
+	float getMinWorldHeight() const;
+	void setMinWorldHeight(float minWorldHeight);
 };
 
 

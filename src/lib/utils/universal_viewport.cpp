@@ -7,10 +7,10 @@
 #include "include/orthographic_camera.h"
 
 UniversalViewport::UniversalViewport(const float minWorldWidth, const float minWorldHeight)
-		: UniversalViewport(minWorldWidth, minWorldHeight, new OrthographicCamera()){}
+		: UniversalViewport(minWorldWidth, minWorldHeight, new OrthographicCamera()) {}
 
 
-UniversalViewport::UniversalViewport(float minWorldWidth, float minWorldHeight, Camera *camera) {
+UniversalViewport::UniversalViewport(float minWorldWidth, float minWorldHeight, Camera* camera) {
 	this->minWorldWidth = minWorldWidth;
 	this->minWorldHeight = minWorldHeight;
 	setCamera(camera);
@@ -40,30 +40,32 @@ void UniversalViewport::update(int screenWidth, int screenHeight, bool centerCam
 
 	const float screenRatio = (float) screenHeight / (float) screenWidth;
 	const float worldRatio = worldHeight / worldWidth;
-	const float scale = screenRatio > worldRatio ? (float) screenWidth / minWorldWidth : (float) screenHeight / minWorldHeight;
+	const float scale =
+			screenRatio > worldRatio ? (float) screenWidth / minWorldWidth : (float) screenHeight / minWorldHeight;
 
-	int viewportWidth  = (int)std::round(worldWidth * scale);
-	int viewportHeight = (int)std::round(worldHeight * scale);
+	int viewportWidth = (int) std::round(worldWidth * scale);
+	int viewportHeight = (int) std::round(worldHeight * scale);
 
 	// Enlarging the viewport by its short side
-	if(viewportWidth < screenWidth){
+	if (viewportWidth < screenWidth) {
 		float toViewportSpace = (float) viewportHeight / worldHeight;
 		float toWorldSpace = worldHeight / (float) viewportHeight;
 		float lengthen = (float) (screenWidth - viewportWidth) * toWorldSpace;
 		worldWidth += lengthen;
-		viewportWidth += (int)(lengthen * toViewportSpace);
+		viewportWidth += (int) (lengthen * toViewportSpace);
 	}
-	else if(viewportHeight < screenHeight){
+	else if (viewportHeight < screenHeight) {
 		float toViewportSpace = (float) viewportWidth / worldWidth;
 		float toWorldSpace = worldWidth / (float) viewportWidth;
 		float lengthen = (float) (screenHeight - viewportHeight) * toWorldSpace;
 		worldHeight += lengthen;
-		viewportHeight += (int)(lengthen * toViewportSpace);
+		viewportHeight += (int) (lengthen * toViewportSpace);
 	}
 	Lib::app->log("WorldWidth", worldWidth);
 	Lib::app->log("WorldHeight", worldHeight);
 	setWorldSize(worldWidth, worldHeight);
-	setScreenBounds( (screenWidth - viewportWidth) / 2, (screenHeight - viewportHeight) / 2, viewportWidth, viewportHeight);
+	setScreenBounds((screenWidth - viewportWidth) / 2, (screenHeight - viewportHeight) / 2, viewportWidth,
+	                viewportHeight);
 	apply(centerCamera);
 }
 

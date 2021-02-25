@@ -9,7 +9,7 @@
 #include "../generic/include/game_object.h"
 #include "../../../../lib/utils/include/first_person_camera_controller.h"
 
-class Player : public GameObject{
+class Player : public GameObject {
 private:
 	FirstPersonCameraController cameraController;
 public:

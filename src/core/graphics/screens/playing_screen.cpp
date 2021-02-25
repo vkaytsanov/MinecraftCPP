@@ -8,7 +8,8 @@
 
 PlayingScreen::PlayingScreen(Minecraft* game) : game(game),
                                                 cameraController(game->graphicsSystem->getViewport()->getCamera()),
-                                                worldRenderer(game->dataSystem, cameraController.getCamera()) {
+                                                worldRenderer(game->dataSystem, cameraController.getCamera()),
+                                                skyboxRenderer(game->dataSystem, cameraController.getCamera()){
 
 
 	cameraController.getCamera()->position->x = 0;
@@ -20,13 +21,15 @@ void PlayingScreen::render(const float dt) {
 	if (Lib::input->isKeyPressed(SDLK_TAB)) {
 		if (isWireframe) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		} else {
+		}
+		else {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 		isWireframe = !isWireframe;
 	}
 
 	cameraController.update(dt);
+	skyboxRenderer.render();
 	worldRenderer.render();
 }
 

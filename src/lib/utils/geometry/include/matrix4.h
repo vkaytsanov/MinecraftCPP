@@ -113,7 +113,7 @@ public:
 	}
 
 	/** @link https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/gluLookAt.xml */
-	Matrix4<T> &setToLookAt(Vector3<T> &eye, Vector3<T> &center, Vector3<T> &up) {
+	Matrix4<T>& setToLookAt(Vector3<T>& eye, Vector3<T>& center, Vector3<T>& up) {
 		Vector3<T> f = (center - eye).normalize();
 		Vector3<T> s = (f.cross(up)).normalize();
 		Vector3<T> u = s.cross(f);
@@ -136,15 +136,14 @@ public:
 		return *this;
 	}
 
-	Matrix4<T> &setForTranslation(T x, T y, T z) {
-		identity();
+	Matrix4<T>& setForTranslation(T x, T y, T z) {
 		a[A30] = x;
 		a[A31] = y;
 		a[A32] = z;
 		return *this;
 	}
 
-	Matrix4<T> &setForTranslation(const Vector3<T>& vec) {
+	Matrix4<T>& setForTranslation(const Vector3<T>& vec) {
 		identity();
 		a[A30] = vec.x;
 		a[A31] = vec.y;
@@ -152,12 +151,12 @@ public:
 		return *this;
 	}
 
-	T &operator[](int idx) {
+	T& operator[](int idx) {
 		return a[idx];
 	}
 
 
-	Matrix4<T> operator*(const Matrix4<T> &mat) {
+	Matrix4<T> operator*(const Matrix4<T>& mat) {
 		Matrix4<T> result;
 		result[A00] = mat.a[A00] * a[A00] + mat.a[A01] * a[A10] + mat.a[A02] * a[A20] + mat.a[A03] * a[A30];
 		result[A01] = mat.a[A00] * a[A01] + mat.a[A01] * a[A11] + mat.a[A02] * a[A21] + mat.a[A03] * a[A31];
@@ -178,19 +177,19 @@ public:
 		return result;
 	}
 
-	Matrix4<T> operator*(const Vector3<T>& vec){
+	Matrix4<T> operator*(const Vector3<T>& vec) {
 		Matrix4<T> result;
 		return result;
 	}
 
-	Matrix4<T> &operator*(const T &scale) {
-		for (auto &i : a) {
+	Matrix4<T>& operator*(const T& scale) {
+		for (auto& i : a) {
 			i += i * scale;
 		}
 		return *this;
 	}
 
-	Matrix4<T> &operator=(const Matrix4<T> &other) {
+	Matrix4<T>& operator=(const Matrix4<T>& other) {
 		if (this != &other) {
 			for (int i = 0; i < 16; i++) {
 				a[i] = other.a[i];
@@ -199,36 +198,36 @@ public:
 		return *this;
 	}
 
-	void zerofy(){
-		for(int i = 0; i < 16; i++){
+	void zerofy() {
+		for (int i = 0; i < 16; i++) {
 			a[i] = 0;
 		}
 	}
 
 	/** https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix */
-	Matrix4<T> setToProjection(const T fov, const T near, const T far, const T aspectRatio){
+	Matrix4<T> setToProjection(const T fov, const T near, const T far, const T aspectRatio) {
 		const float tanHalfFovy = std::tan(fov / 2.f);
 
 		zerofy();
 
 		a[A00] = 1 / (aspectRatio * tanHalfFovy);
 		a[A11] = 1 / (tanHalfFovy);
-		a[A22] = - (far + near) / (far - near);
+		a[A22] = -(far + near) / (far - near);
 		a[A23] = -1;
-		a[A32] = - (2 * far * near) / (far - near);
+		a[A32] = -(2 * far * near) / (far - near);
 		return *this;
 	}
 
-	Matrix4<T> createFrustum(T l, T r, T b, T t, T n, T f){
+	Matrix4<T> createFrustum(T l, T r, T b, T t, T n, T f) {
 		this->identity();
-		a[0]  =  2.0f * n / (r - l);
-		a[2]  =  (r + l) / (r - l);
-		a[5]  =  2.0f * n / (t - b);
-		a[6]  =  (t + b) / (t - b);
+		a[0] = 2.0f * n / (r - l);
+		a[2] = (r + l) / (r - l);
+		a[5] = 2.0f * n / (t - b);
+		a[6] = (t + b) / (t - b);
 		a[10] = -(f + n) / (f - n);
 		a[11] = -(2.0f * f * n) / (f - n);
 		a[14] = -1.0f;
-		a[15] =  0.0f;
+		a[15] = 0.0f;
 		return *this;
 	}
 

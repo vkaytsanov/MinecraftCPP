@@ -25,86 +25,79 @@
 
 #include "modulebase.h"
 
-namespace noise
-{
+namespace noise {
 
-  namespace module
-  {
+	namespace module {
 
-    /// @addtogroup libnoise
-    /// @{
+		/// @addtogroup libnoise
+		/// @{
 
-    /// @addtogroup modules
-    /// @{
+		/// @addtogroup modules
+		/// @{
 
-    /// @defgroup generatormodules Generator Modules
-    /// @addtogroup generatormodules
-    /// @{
+		/// @defgroup generatormodules Generator Modules
+		/// @addtogroup generatormodules
+		/// @{
 
-    /// Default constant value for the noise::module::Const noise module.
-    const double DEFAULT_CONST_VALUE = 0.0;
+		/// Default constant value for the noise::module::Const noise module.
+		const double DEFAULT_CONST_VALUE = 0.0;
 
-    /// Noise module that outputs a constant value.
-    ///
-    /// @image html moduleconst.png
-    ///
-    /// To specify the constant value, call the SetConstValue() method.
-    ///
-    /// This noise module is not useful by itself, but it is often used as a
-    /// source module for other noise modules.
-    ///
-    /// This noise module does not require any source modules.
-    class Const: public Module
-    {
+		/// Noise module that outputs a constant value.
+		///
+		/// @image html moduleconst.png
+		///
+		/// To specify the constant value, call the SetConstValue() method.
+		///
+		/// This noise module is not useful by itself, but it is often used as a
+		/// source module for other noise modules.
+		///
+		/// This noise module does not require any source modules.
+		class Const : public Module {
 
-      public:
+		public:
 
-        /// Constructor.
-        ///
-        /// The default constant value is set to
-        /// noise::module::DEFAULT_CONST_VALUE.
-        Const ();
+			/// Constructor.
+			///
+			/// The default constant value is set to
+			/// noise::module::DEFAULT_CONST_VALUE.
+			Const();
 
-        /// Returns the constant output value for this noise module.
-        ///
-        /// @returns The constant output value for this noise module.
-        double GetConstValue () const
-        {
-          return m_constValue;
-        }
+			/// Returns the constant output value for this noise module.
+			///
+			/// @returns The constant output value for this noise module.
+			double GetConstValue() const {
+				return m_constValue;
+			}
 
-        virtual int GetSourceModuleCount () const
-        {
-          return 0;
-        }
+			virtual int GetSourceModuleCount() const {
+				return 0;
+			}
 
-        virtual double GetValue (double x, double y, double z) const
-        {
-          return m_constValue;
-        }
+			virtual double GetValue(double x, double y, double z) const {
+				return m_constValue;
+			}
 
-        /// Sets the constant output value for this noise module.
-        ///
-        /// @param constValue The constant output value for this noise module.
-        void SetConstValue (double constValue)
-        {
-          m_constValue = constValue;
-        }
+			/// Sets the constant output value for this noise module.
+			///
+			/// @param constValue The constant output value for this noise module.
+			void SetConstValue(double constValue) {
+				m_constValue = constValue;
+			}
 
-      protected:
+		protected:
 
-        /// Constant value.
-        double m_constValue;
+			/// Constant value.
+			double m_constValue;
 
-    };
+		};
 
-    /// @}
+		/// @}
 
-    /// @}
+		/// @}
 
-    /// @}
+		/// @}
 
-  }
+	}
 
 }
 

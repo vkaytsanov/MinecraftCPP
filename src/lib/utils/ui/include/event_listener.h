@@ -4,13 +4,14 @@
 
 #ifndef EVENT_LISTENER_H
 #define EVENT_LISTENER_H
+
 #include <functional>
 #include <SDL.h>
 
 class EventListener {
 public:
-    virtual void handle(SDL_Event& event);
-    ~EventListener();
+	virtual void handle(SDL_Event& event);
+	~EventListener();
 };
 
 

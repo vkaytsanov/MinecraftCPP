@@ -20,6 +20,6 @@ void VertexArray::bind() const {
 	glBindVertexArray(arrayObject);
 }
 
-void VertexArray::unbind() const{
+void VertexArray::unbind() const {
 	glBindVertexArray(0);
 }

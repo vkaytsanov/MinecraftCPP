@@ -17,14 +17,13 @@ private:
 	float u2, v2;
 	int regionWidth;
 	int regionHeight;
-	public:
+public:
 	TextureRegion() = default;
 	explicit TextureRegion(Texture* texture);
 	TextureRegion(Texture* texture, int width, int height);
 	TextureRegion(Texture* texture, int x, int y, int width, int height);
 	void setRegionXY(int x, int y, int width, int height);
 	void setRegionUV(float u, float v, float u2, float v2);
-	void draw() const;
 	Texture* getTexture() const;
 	float getU() const;
 	float getV() const;
@@ -35,7 +34,7 @@ private:
 	float* getUVs();
 	TextureRegion** split(int blockWidth, int blockHeight);
 
-	TextureRegion operator+(const TextureRegion tR);
+	TextureRegion operator+(const TextureRegion& tR);
 
 
 };

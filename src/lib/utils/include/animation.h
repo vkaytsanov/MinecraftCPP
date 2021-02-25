@@ -22,7 +22,7 @@ private:
 public:
 	Animation() = default;
 
-	void loadFrames(const float frameDuration, const std::vector<T>& frames,  bool looping = false) {
+	void loadFrames(const float frameDuration, const std::vector<T>& frames, bool looping = false) {
 		this->frameDuration = frameDuration;
 		this->frames = frames;
 		this->looping = looping;
@@ -30,11 +30,11 @@ public:
 	}
 
 	T getFrame(float stateTime, bool looping) const {
-		int frameNumber = (int)(stateTime / frameDuration);
-		if(looping){
+		int frameNumber = (int) (stateTime / frameDuration);
+		if (looping) {
 			frameNumber = frameNumber % frames.size();
 		}
-		else{
+		else {
 			frameNumber = frames.size() - 1 > frameNumber ? frameNumber : frames.size() - 1;
 		}
 		const int idx = frameNumber;

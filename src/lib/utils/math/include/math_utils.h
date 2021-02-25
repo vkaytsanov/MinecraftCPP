@@ -7,10 +7,10 @@
 
 
 namespace MathUtils {
-    const float EPS = 0.000001;
-    const float PI  = 3.14159265359;
+	const float EPS = 0.000001;
+	const float PI = 3.14159265359;
 
-    float toRadians(float degree);
+	float toRadians(float degree);
 
 }
 

@@ -5,7 +5,7 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-enum CubeType{
+enum CubeType {
 	Gravel,
 	Grass,
 	Dirt,
@@ -31,11 +31,15 @@ enum CubeType{
 	Iron,
 	Coal,
 	Diamond,
+
+	Water,
+	Lava,
+
 	Glass,
 	Air,
 };
 
-enum CubeFaceType{
+enum CubeFaceType {
 	Front = 0,
 	Back = 1,
 	Top = 2,
@@ -48,6 +52,8 @@ struct Cube {
 	CubeType type = Air;
 
 	bool isTransparent() const;
+	bool isLiquid() const;
+	bool isEntity() const;
 };
 
 

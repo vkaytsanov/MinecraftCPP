@@ -26,7 +26,9 @@ GraphicsSystem::GraphicsSystem(Minecraft* game) : game(game) {
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 
-	viewport = new UniversalViewport(WORLD_WIDTH, WORLD_HEIGHT,new PerspectiveCamera(70));
+
+
+	viewport = new UniversalViewport(WORLD_WIDTH, WORLD_HEIGHT, new PerspectiveCamera(70));
 	viewport->update(GRAPHICS_WIDTH, GRAPHICS_HEIGHT, false);
 }
 

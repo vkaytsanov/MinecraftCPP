@@ -8,12 +8,10 @@
 #include "../../include/lib.h"
 
 
-
-
 ClickListener::ClickListener(std::function<void()> clicked) {
-    this->clicked = std::move(clicked);
-    this->touchUp = [&](float x, float y){
-        this->clicked();
-        Lib::app->log("ClickListener", "touchUp");
-    };
+	this->clicked = std::move(clicked);
+	this->touchUp = [&](float x, float y) {
+		this->clicked();
+		Lib::app->log("ClickListener", "touchUp");
+	};
 }

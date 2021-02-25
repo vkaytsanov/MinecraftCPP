@@ -12,15 +12,15 @@
 
 class LabelStyle {
 public:
-    TTF_Font* font;
-    SDL_Color color;
-    SDL_Color backgroundColor = {255, 255, 255,255};
-    int size;
-    LabelStyle() = default;
+	TTF_Font* font;
+	SDL_Color color;
+	SDL_Color backgroundColor = {255, 255, 255, 255};
+	int size;
+	LabelStyle() = default;
 	explicit LabelStyle(TTF_Font* font);
 	LabelStyle(TTF_Font* font, int size);
 	LabelStyle(TTF_Font* font, const SDL_Color& color);
-    LabelStyle(TTF_Font* font, const SDL_Color &color, int size);
+	LabelStyle(TTF_Font* font, const SDL_Color& color, int size);
 };
 
 

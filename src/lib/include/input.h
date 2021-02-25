@@ -23,27 +23,27 @@ private:
 	void updateKeyboard();
 	void updateMouse();
 public:
-    std::queue<SDL_Event> keyEvents;
-    std::queue<SDL_Event> touchEvents;
-    Input(const float width, const float height);
-    void update();
-    void processEvents();
-    void resetMouse();
-    bool shouldQuit() const;
-    void setProcessor(InputProcessor* processor);
+	std::queue<SDL_Event> keyEvents;
+	std::queue<SDL_Event> touchEvents;
+	Input(const float width, const float height);
+	void update();
+	void processEvents();
+	void resetMouse();
+	bool shouldQuit() const;
+	void setProcessor(InputProcessor* processor);
 	InputProcessor* getProcessor() const;
 	bool isKeyPressed(char key);
-    bool isMouseMoved() const;
-    float getLastMousePosX() const;
-    float getLastMousePosY() const;
-    float getCurrMousePosX() const;
-    float getCurrMousePosY() const;
-    float getMouseMoveX() const;
-    float getMouseMoveY() const;
-    float getMouseDeltaX() const;
-    float getMouseDeltaY() const;
-    bool isMouseLeftClick() const;
-    bool isMouseRightClick() const;
+	bool isMouseMoved() const;
+	float getLastMousePosX() const;
+	float getLastMousePosY() const;
+	float getCurrMousePosX() const;
+	float getCurrMousePosY() const;
+	float getMouseMoveX() const;
+	float getMouseMoveY() const;
+	float getMouseDeltaX() const;
+	float getMouseDeltaY() const;
+	bool isMouseLeftClick() const;
+	bool isMouseRightClick() const;
 };
 
 #endif

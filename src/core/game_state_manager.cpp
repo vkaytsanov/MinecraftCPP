@@ -4,7 +4,7 @@
 
 #include "include/game_state_manager.h"
 
-GameStateManager::GameStateManager(){
+GameStateManager::GameStateManager() {
 	currentState = new GameState(Playing);
 }
 
@@ -18,7 +18,7 @@ void GameStateManager::changeState(const GameState nextState) {
 	*currentState = nextState;
 }
 
-const char *GameStateManager::getCurrentStateName() const {
+const char* GameStateManager::getCurrentStateName() const {
 	switch ((*currentState)) {
 		case Playing:
 			return "Playing";

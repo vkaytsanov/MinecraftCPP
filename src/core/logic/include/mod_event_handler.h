@@ -10,7 +10,7 @@
 #include <vector>
 #include "mod_logic.h"
 
-class ModEventHandler : public ModLogic{
+class ModEventHandler : public ModLogic {
 private:
 	std::queue<Event*> events;
 	void sendToModules(std::vector<ModLogic*>& modules, Event* e);

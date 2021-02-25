@@ -8,11 +8,11 @@
 
 #include "input_listener.h"
 
-class ClickListener : public InputListener{
+class ClickListener : public InputListener {
 public:
-    ClickListener() = default;
-    explicit ClickListener(std::function<void()> clicked);
-    std::function<void()> clicked;
+	ClickListener() = default;
+	explicit ClickListener(std::function<void()> clicked);
+	std::function<void()> clicked;
 };
 
 

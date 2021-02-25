@@ -6,34 +6,34 @@
 #include "../../include/lib.h"
 
 void InputListener::handle(SDL_Event& event) {
-    Lib::app->log("InputListener", "Handling");
-    switch (event.type) {
-        case SDL_KEYDOWN:
-            keyDown(event.key.keysym.sym);
-            return;
-        case SDL_KEYUP:
-            keyUp(event.key.keysym.sym);
-            return;
-        case SDL_MOUSEBUTTONDOWN:
-            touchDown(event.motion.x, event.motion.y);
-            return;
-        case SDL_MOUSEBUTTONUP:
-            touchUp(event.motion.x, event.motion.y);
-            return;
-    }
+	Lib::app->log("InputListener", "Handling");
+	switch (event.type) {
+		case SDL_KEYDOWN:
+			keyDown(event.key.keysym.sym);
+			return;
+		case SDL_KEYUP:
+			keyUp(event.key.keysym.sym);
+			return;
+		case SDL_MOUSEBUTTONDOWN:
+			touchDown(event.motion.x, event.motion.y);
+			return;
+		case SDL_MOUSEBUTTONUP:
+			touchUp(event.motion.x, event.motion.y);
+			return;
+	}
 }
 
 InputListener::InputListener() {
-    keyDown = [&](int key) -> void{
+	keyDown = [&](int key) -> void {
 
-    };
-    keyUp = [&](int key) -> void{
+	};
+	keyUp = [&](int key) -> void {
 
-    };
-    touchDown = [&](float x, float y) -> void{
-        Lib::app->log("InputListener", "touchDown");
-    };
-    touchUp = [&](float x, float y) -> void{
-        Lib::app->log("InputListener", "touchUp");
-    };
+	};
+	touchDown = [&](float x, float y) -> void {
+		Lib::app->log("InputListener", "touchDown");
+	};
+	touchUp = [&](float x, float y) -> void {
+		Lib::app->log("InputListener", "touchUp");
+	};
 }

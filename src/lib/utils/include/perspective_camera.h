@@ -8,14 +8,14 @@
 
 #include "camera.h"
 
-class PerspectiveCamera : public Camera{
+class PerspectiveCamera : public Camera {
 private:
-    float fov;
+	float fov;
 public:
-    PerspectiveCamera();
-    explicit PerspectiveCamera(float fieldOfView);
-    PerspectiveCamera(float fieldOfView, float worldWidth, float worldHeight);
-    void update() override;
+	PerspectiveCamera();
+	explicit PerspectiveCamera(float fieldOfView);
+	PerspectiveCamera(float fieldOfView, float worldWidth, float worldHeight);
+	void update() override;
 };
 
 

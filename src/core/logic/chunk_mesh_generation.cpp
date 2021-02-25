@@ -6,14 +6,14 @@
 
 using namespace CubeDatabase;
 
-ChunkMeshGeneration::ChunkMeshGeneration(World* world) : world(world){}
+ChunkMeshGeneration::ChunkMeshGeneration(World* world) : world(world) {}
 
 void ChunkMeshGeneration::generate(int16_t chunkX, int16_t chunkZ) {
-	Chunk* chunk      = world->getChunk(chunkX, chunkZ);
+	Chunk* chunk = world->getChunk(chunkX, chunkZ);
 	Chunk* frontChunk = world->getChunk(chunkX, chunkZ + 1);
-	Chunk* backChunk  = world->getChunk(chunkX, chunkZ - 1);
+	Chunk* backChunk = world->getChunk(chunkX, chunkZ - 1);
 	Chunk* rightChunk = world->getChunk(chunkX + 1, chunkZ);
-	Chunk* leftChunk  = world->getChunk(chunkX - 1, chunkZ);
+	Chunk* leftChunk = world->getChunk(chunkX - 1, chunkZ);
 
 	if (!frontChunk || !backChunk || !leftChunk || !rightChunk) {
 		return;
@@ -37,32 +37,40 @@ void ChunkMeshGeneration::generate(int16_t chunkX, int16_t chunkZ) {
 					cubePosition.set(x, y, z);
 					bool isTransparent = cube->isTransparent();
 
-					if (isVisibleSide(chunkData, x, y, z, 1, Z)) {
-						addFace(cube->type, Front, cubePosition, isTransparent);
-					}
-					else if (isVisibleSide(chunkData, x, y, z, -1, Z)) {
-						addFace(cube->type, Back, cubePosition, isTransparent);
-					}
-					else if (isVisibleEdge(chunkData, back, front, x, y, z, Z)) {
+					if (isVisibleEdge(chunkData, back, front, x, y, z, Z)) {
 						addFace(cube->type, Front, cubePosition, isTransparent);
 						addFace(cube->type, Back, cubePosition, isTransparent);
+					}
+					else {
+						if (isVisibleSide(chunkData, x, y, z, 1, Z)) {
+							addFace(cube->type, Front, cubePosition, isTransparent);
+						}
+						if (isVisibleSide(chunkData, x, y, z, -1, Z)) {
+							addFace(cube->type, Back, cubePosition, isTransparent);
+						}
 					}
 
-					if (isVisibleSide(chunkData, x, y, z, 1, X)) {
+					if (isVisibleEdge(chunkData, left, right, x, y, z, X)) {
 						addFace(cube->type, Right, cubePosition, isTransparent);
-					}
-					else if (isVisibleSide(chunkData, x, y, z, -1, X)) {
 						addFace(cube->type, Left, cubePosition, isTransparent);
 					}
-					else if (isVisibleEdge(chunkData, left, right, x, y, z, X)) {
-						addFace(cube->type, Left, cubePosition, isTransparent);
-						addFace(cube->type, Right, cubePosition, isTransparent);
+					else {
+						if (isVisibleSide(chunkData, x, y, z, 1, X)) {
+
+							addFace(cube->type, Right, cubePosition, isTransparent);
+						}
+						if (isVisibleSide(chunkData, x, y, z, -1, X)) {
+							addFace(cube->type, Left, cubePosition, isTransparent);
+						}
 					}
 
 					if (isVisibleSide(chunkData, x, y, z, -1, Y) ||
 					    (y == 0 && chunkData->at(x).at(y + 1).at(z).isTransparent())) {
 						addFace(cube->type, Bottom, cubePosition, isTransparent);
-					} else if (isVisibleSide(chunkData, x, y, z, 1, Y) || y == CHUNK_SIZE_Y - 1) {
+					}
+					else if (isVisibleSide(chunkData, x, y, z, 1, Y) || y == CHUNK_SIZE_Y - 1) {
+						// little offset for more realistic water and lava levels
+						if(cube->isLiquid()) cubePosition.y -= 0.2f;
 						addFace(cube->type, Top, cubePosition, isTransparent);
 					}
 				}
@@ -71,7 +79,7 @@ void ChunkMeshGeneration::generate(int16_t chunkX, int16_t chunkZ) {
 	}
 
 	chunk->getChunkMesh()->setMesh(vertices);
-	for(int i = 0; i < vertices.size(); i++){
+	for (int i = 0; i < vertices.size(); i++) {
 		vertices.at(i).clear();
 	}
 
@@ -86,15 +94,16 @@ void ChunkMeshGeneration::addFace(CubeType type, CubeFaceType face, Vector3f& po
 
 	int normalsOffset = 4 * 3 * face;
 	int uvsOffset = 4 * 2 * face;
+
 	for (int i = 0; i < 4; i++) {
 		currVertex.position = position + Vector3f(planes[normalsOffset + i],
 		                                          planes[normalsOffset + i + 1],
 		                                          planes[normalsOffset + i + 2]);
-		currVertex.normals = Vector3f(normals[normalsOffset + i],
-		                              normals[normalsOffset + i + 1],
-		                              normals[normalsOffset + i + 2]);
 		currVertex.uvs = Vector2f(uvs[uvsOffset + i],
 		                          uvs[uvsOffset + i + 1]);
+		currVertex.lightningLevel = faceLightningLevel[face];
+
+
 		normalsOffset += 2;
 		uvsOffset += 1;
 		vertices.at(static_cast<int>(isTransparent)).emplace_back(currVertex);
@@ -104,7 +113,7 @@ void ChunkMeshGeneration::addFace(CubeType type, CubeFaceType face, Vector3f& po
 }
 
 bool ChunkMeshGeneration::isVisibleEdge(ChunkContentsPtr chunkData, ChunkContentsPtr lowerNeighbourData,
-                              ChunkContentsPtr upperNeighbourData, int x, int y, int z, Axis axis) {
+                                        ChunkContentsPtr upperNeighbourData, int x, int y, int z, Axis axis) {
 	int x2, x3;
 	int z2, z3;
 	ChunkContentsPtr neighbourData;
@@ -113,25 +122,30 @@ bool ChunkMeshGeneration::isVisibleEdge(ChunkContentsPtr chunkData, ChunkContent
 			x2 = CHUNK_SIZE_Z - 1;
 			x3 = 1;
 			neighbourData = lowerNeighbourData;
-		} else if (x == CHUNK_SIZE_Z - 1) {
+		}
+		else if (x == CHUNK_SIZE_Z - 1) {
 			x2 = 0;
 			x3 = CHUNK_SIZE_Z - 2;
 			neighbourData = upperNeighbourData;
-		} else {
+		}
+		else {
 			return false;
 		}
 		z2 = z;
 		z3 = z;
-	} else if (axis == Axis::Z) {
+	}
+	else if (axis == Axis::Z) {
 		if (z == 0) {
 			z2 = CHUNK_SIZE_Z - 1;
 			z3 = 1;
 			neighbourData = lowerNeighbourData;
-		} else if (z == CHUNK_SIZE_Z - 1) {
+		}
+		else if (z == CHUNK_SIZE_Z - 1) {
 			z2 = 0;
 			z3 = CHUNK_SIZE_Z - 2;
 			neighbourData = upperNeighbourData;
-		} else {
+		}
+		else {
 			return false;
 		}
 		x2 = x;
@@ -163,12 +177,14 @@ bool ChunkMeshGeneration::isVisibleSide(ChunkContentsPtr chunkData, int x, int y
 		x2 = x + side;
 		y2 = y;
 		z2 = z;
-	} else if (axis == Y) {
+	}
+	else if (axis == Y) {
 		if (y == 0 || y == CHUNK_SIZE_Y - 1) return false;
 		x2 = x;
 		y2 = y + side;
 		z2 = z;
-	} else if (axis == Z) {
+	}
+	else if (axis == Z) {
 		if (z == 0 || z == CHUNK_SIZE_Z - 1) return false;
 		x2 = x;
 		y2 = y;

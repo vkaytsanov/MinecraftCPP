@@ -24,56 +24,52 @@
 
 #include "modulebase.h"
 
-namespace noise
-{
+namespace noise {
 
-  namespace module
-  {
+	namespace module {
 
-    /// @addtogroup libnoise
-    /// @{
+		/// @addtogroup libnoise
+		/// @{
 
-    /// @addtogroup modules
-    /// @{
+		/// @addtogroup modules
+		/// @{
 
-    /// @defgroup combinermodules Combiner Modules
-    /// @addtogroup combinermodules
-    /// @{
+		/// @defgroup combinermodules Combiner Modules
+		/// @addtogroup combinermodules
+		/// @{
 
-    /// Noise module that raises the output value from a first source module
-    /// to the power of the output value from a second source module.
-    ///
-    /// @image html modulepower.png
-    ///
-    /// The first source module must have an index value of 0.
-    ///
-    /// The second source module must have an index value of 1.
-    ///
-    /// This noise module requires two source modules.
-    class Power: public Module
-    {
+		/// Noise module that raises the output value from a first source module
+		/// to the power of the output value from a second source module.
+		///
+		/// @image html modulepower.png
+		///
+		/// The first source module must have an index value of 0.
+		///
+		/// The second source module must have an index value of 1.
+		///
+		/// This noise module requires two source modules.
+		class Power : public Module {
 
-      public:
+		public:
 
-        /// Constructor.
-        Power ();
+			/// Constructor.
+			Power();
 
-        virtual int GetSourceModuleCount () const
-        {
-          return 2;
-        }
+			virtual int GetSourceModuleCount() const {
+				return 2;
+			}
 
-        virtual double GetValue (double x, double y, double z) const;
+			virtual double GetValue(double x, double y, double z) const;
 
-    };
+		};
 
-    /// @}
+		/// @}
 
-    /// @}
+		/// @}
 
-    /// @}
+		/// @}
 
-  }
+	}
 
 }
 

@@ -25,94 +25,88 @@
 
 #include "modulebase.h"
 
-namespace noise
-{
+namespace noise {
 
-  namespace module
-  {
+	namespace module {
 
-    /// @addtogroup libnoise
-    /// @{
+		/// @addtogroup libnoise
+		/// @{
 
-    /// @addtogroup modules
-    /// @{
+		/// @addtogroup modules
+		/// @{
 
-    /// @addtogroup modifiermodules
-    /// @{
+		/// @addtogroup modifiermodules
+		/// @{
 
-    /// Default exponent for the noise::module::Exponent noise module.
-    const double DEFAULT_EXPONENT = 1.0;
+		/// Default exponent for the noise::module::Exponent noise module.
+		const double DEFAULT_EXPONENT = 1.0;
 
-    /// Noise module that maps the output value from a source module onto an
-    /// exponential curve.
-    ///
-    /// @image html moduleexponent.png
-    ///
-    /// Because most noise modules will output values that range from -1.0 to
-    /// +1.0, this noise module first normalizes this output value (the range
-    /// becomes 0.0 to 1.0), maps that value onto an exponential curve, then
-    /// rescales that value back to the original range.
-    ///
-    /// This noise module requires one source module.
-    class Exponent: public Module
-    {
+		/// Noise module that maps the output value from a source module onto an
+		/// exponential curve.
+		///
+		/// @image html moduleexponent.png
+		///
+		/// Because most noise modules will output values that range from -1.0 to
+		/// +1.0, this noise module first normalizes this output value (the range
+		/// becomes 0.0 to 1.0), maps that value onto an exponential curve, then
+		/// rescales that value back to the original range.
+		///
+		/// This noise module requires one source module.
+		class Exponent : public Module {
 
-      public:
+		public:
 
-        /// Constructor.
-        ///
-        /// The default exponent is set to noise::module::DEFAULT_EXPONENT.
-        Exponent ();
+			/// Constructor.
+			///
+			/// The default exponent is set to noise::module::DEFAULT_EXPONENT.
+			Exponent();
 
-        /// Returns the exponent value to apply to the output value from the
-        /// source module.
-        ///
-        /// @returns The exponent value.
-        ///
-        /// Because most noise modules will output values that range from -1.0
-        /// to +1.0, this noise module first normalizes this output value (the
-        /// range becomes 0.0 to 1.0), maps that value onto an exponential
-        /// curve, then rescales that value back to the original range.
-        double GetExponent () const
-        {
-          return m_exponent;
-        }
+			/// Returns the exponent value to apply to the output value from the
+			/// source module.
+			///
+			/// @returns The exponent value.
+			///
+			/// Because most noise modules will output values that range from -1.0
+			/// to +1.0, this noise module first normalizes this output value (the
+			/// range becomes 0.0 to 1.0), maps that value onto an exponential
+			/// curve, then rescales that value back to the original range.
+			double GetExponent() const {
+				return m_exponent;
+			}
 
-        virtual int GetSourceModuleCount () const
-        {
-          return 1;
-        }
+			virtual int GetSourceModuleCount() const {
+				return 1;
+			}
 
-        virtual double GetValue (double x, double y, double z) const;
+			virtual double GetValue(double x, double y, double z) const;
 
-        /// Sets the exponent value to apply to the output value from the
-        /// source module.
-        ///
-        /// @param exponent The exponent value.
-        ///
-        /// Because most noise modules will output values that range from -1.0
-        /// to +1.0, this noise module first normalizes this output value (the
-        /// range becomes 0.0 to 1.0), maps that value onto an exponential
-        /// curve, then rescales that value back to the original range.
-        void SetExponent (double exponent)
-        {
-          m_exponent = exponent;
-        }
+			/// Sets the exponent value to apply to the output value from the
+			/// source module.
+			///
+			/// @param exponent The exponent value.
+			///
+			/// Because most noise modules will output values that range from -1.0
+			/// to +1.0, this noise module first normalizes this output value (the
+			/// range becomes 0.0 to 1.0), maps that value onto an exponential
+			/// curve, then rescales that value back to the original range.
+			void SetExponent(double exponent) {
+				m_exponent = exponent;
+			}
 
-      protected:
+		protected:
 
-        /// Exponent to apply to the output value from the source module.
-        double m_exponent;
+			/// Exponent to apply to the output value from the source module.
+			double m_exponent;
 
-    };
+		};
 
-    /// @}
+		/// @}
 
-    /// @}
+		/// @}
 
-    /// @}
+		/// @}
 
-  }
+	}
 
 }
 

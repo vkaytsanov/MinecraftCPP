@@ -12,7 +12,7 @@
 
 class Minecraft;
 
-class LogicSystem : public ModLogic{
+class LogicSystem : public ModLogic {
 private:
 	Minecraft* game;
 	std::vector<ModLogic*> modules;

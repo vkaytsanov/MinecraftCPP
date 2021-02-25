@@ -115,14 +115,6 @@ float* TextureRegion::getUVs() {
 			u2, v2,
 
 
-
-
-
-
-
-
-
-
 	};
 
 
@@ -136,7 +128,7 @@ int TextureRegion::getRegionY() const {
 	return (int) std::round(v * (float) texture->getHeight());
 }
 
-TextureRegion TextureRegion::operator+(const TextureRegion tR) {
+TextureRegion TextureRegion::operator+(const TextureRegion& tR) {
 	setRegionXY(std::min(getRegionX(), tR.getRegionX()), std::min(getRegionY(), tR.getRegionY()),
 	            regionWidth + tR.regionWidth, regionHeight);
 	return *this;

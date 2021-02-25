@@ -8,14 +8,14 @@
 
 #include "event_listener.h"
 
-class InputListener : public EventListener{
+class InputListener : public EventListener {
 public:
-    InputListener();
-    void handle(SDL_Event& event) override;
-    std::function<void(int)> keyDown;
-    std::function<void(int)> keyUp;
-    std::function<void(float x, float y)> touchDown;
-    std::function<void(float x, float y)> touchUp;
+	InputListener();
+	void handle(SDL_Event& event) override;
+	std::function<void(int)> keyDown;
+	std::function<void(int)> keyUp;
+	std::function<void(float x, float y)> touchDown;
+	std::function<void(float x, float y)> touchUp;
 //    void keyDown(int key);
 //    void keyUp(int key);
 //    virtual void touchDown(float x, float y);

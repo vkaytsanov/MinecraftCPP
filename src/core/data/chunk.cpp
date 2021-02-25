@@ -3,7 +3,6 @@
 //
 
 #include "include/chunk.h"
-#include "../../lib/include/lib.h"
 
 
 Chunk::Chunk() : chunkState(Empty),

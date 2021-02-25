@@ -8,12 +8,12 @@
 
 #include "camera.h"
 
-class OrthographicCamera : public Camera{
+class OrthographicCamera : public Camera {
 public:
-    OrthographicCamera();
-    OrthographicCamera(float viewportWidth, float viewportHeight);
-    void update() override;
-    void translate(float x, float y);
+	OrthographicCamera();
+	OrthographicCamera(float viewportWidth, float viewportHeight);
+	void update() override;
+	void translate(float x, float y);
 };
 
 

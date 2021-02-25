@@ -10,19 +10,18 @@
 #include <typeinfo>
 
 
-
 Application::Application(Listener* listener) :
-	Application(listener, new Configuration()){}
+		Application(listener, new Configuration()) {}
 
 Application::Application(Listener* listener, Configuration* config) :
-	Application(listener, config, new Graphics(config)){}
+		Application(listener, config, new Graphics(config)) {}
 
 /* Initializing here the application */
 Application::Application(Listener* listener, Configuration* config, Graphics* graphics) {
 
-	// Our game
+	// Our p_game
 	this->listener = listener;
-	// Our configuration file for the game
+	// Our configuration file for the p_game
 	this->config = config;
 	// Our library for graphics
 	this->graphics = graphics;
@@ -41,7 +40,7 @@ Application::Application(Listener* listener, Configuration* config, Graphics* gr
 	Lib::graphics = graphics;
 	Lib::input = input;
 	Lib::audio = audio;
-    // creating the objects from the game
+	// creating the objects from the p_game
 	listener->create();
 
 	running = true;
@@ -50,55 +49,55 @@ Application::Application(Listener* listener, Configuration* config, Graphics* gr
 }
 
 void Application::gameLoop() {
-    int lastWidth = graphics->getWidth();
-    int lastHeight = graphics->getHeight();
-    bool wasPaused = false;
+	int lastWidth = graphics->getWidth();
+	int lastHeight = graphics->getHeight();
+	bool wasPaused = false;
 
 	while (running) {
-	    // fetching all the user input
+		// fetching all the user input
 		input->update();
 		// processing the input by giving it to the processors
 		input->processEvents();
 		// user has clicked the top right "X" quit button
 		if (input->shouldQuit()) break;
-        bool isMinimized = !graphics->isVisible();
-        bool isBackground = graphics->isBackground();
-        bool isPaused = isMinimized || isBackground;
-        if(!wasPaused && isPaused){
-            // the game window just became not active on the user's end
-            wasPaused = true;
-            listener->pause();
-        }
-        if(wasPaused && !isPaused){
-            // the game window just became active on the user's end
-            wasPaused = false;
-            listener->resume();
-        }
+		bool isMinimized = !graphics->isVisible();
+		bool isBackground = graphics->isBackground();
+		bool isPaused = isMinimized || isBackground;
+		if (!wasPaused && isPaused) {
+			// the p_game window just became not active on the user's end
+			wasPaused = true;
+			listener->pause();
+		}
+		if (wasPaused && !isPaused) {
+			// the p_game window just became active on the user's end
+			wasPaused = false;
+			listener->resume();
+		}
 
-        const int width = graphics->getWidth();
-        const int height = graphics->getHeight();
-        if(lastWidth != width || lastHeight != height){
-            // we should have received any changes in the input->update()
-            lastWidth = width;
-            lastHeight = height;
-            // sending to the listener that the user has resized
-            // it should update the viewport if there is one
-            listener->resize(width, height);
-        }
+		const int width = graphics->getWidth();
+		const int height = graphics->getHeight();
+		if (lastWidth != width || lastHeight != height) {
+			// we should have received any changes in the input->update()
+			lastWidth = width;
+			lastHeight = height;
+			// sending to the listener that the user has resized
+			// it should update the viewport if there is one
+			listener->resize(width, height);
+		}
 
-        if(!isPaused) {
-            graphics->updateTime();
-            listener->render();
-	        SDL_GL_SwapWindow(graphics->getWindow());
+		if (!isPaused) {
+			graphics->updateTime();
+			listener->render();
+			SDL_GL_SwapWindow(graphics->getWindow());
 
-            /* So we don't use 100% CPU */
-            SDL_Delay(1);
-        }
-        else{
-            SDL_Delay(1000);
-        }
+			/* So we don't use 100% CPU */
+			SDL_Delay(1);
+		}
+		else {
+			SDL_Delay(1000);
+		}
 		int error;
-		while((error = glGetError()) != GL_NO_ERROR){
+		while ((error = glGetError()) != GL_NO_ERROR) {
 			this->error("OpenGL Error", reinterpret_cast<const char*>(gluErrorString(error)));
 		}
 	}
@@ -111,29 +110,29 @@ void Application::exitApp() {
 Application::~Application() {
 	delete listener;
 	delete audio;
-    delete logger;
-    delete graphics;
-    delete config;
+	delete logger;
+	delete graphics;
+	delete config;
 }
 
-void Application::log(const char *tag, const char *message) const {
-    logger->log(tag, message);
+void Application::log(const char* tag, const char* message) const {
+	logger->log(tag, message);
 }
 
-void Application::error(const char *tag, const char *message) const {
-    logger->error(tag, message);
+void Application::error(const char* tag, const char* message) const {
+	logger->error(tag, message);
 }
 
-void Application::error(const char *tag, int message) const {
+void Application::error(const char* tag, int message) const {
 	logger->error(tag, std::to_string(message).c_str());
 }
 
-void Application::log(const char *tag, int message) const {
-    logger->log(tag, std::to_string(message).c_str());
+void Application::log(const char* tag, int message) const {
+	logger->log(tag, std::to_string(message).c_str());
 }
 
-void Application::debug(const char *tag, const char * message) const {
-    logger->debug(tag, message);
+void Application::debug(const char* tag, const char* message) const {
+	logger->debug(tag, message);
 }
 
 

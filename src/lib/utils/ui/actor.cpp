@@ -4,28 +4,28 @@
 
 #include "include/actor.h"
 
-const std::vector<EventListener*> &Actor::getListeners() {
-    return listeners;
+const std::vector<EventListener*>& Actor::getListeners() {
+	return listeners;
 }
 
-void Actor::setListeners(const std::vector<EventListener*> &listeners) {
-    Actor::listeners = listeners;
+void Actor::setListeners(const std::vector<EventListener*>& listeners) {
+	Actor::listeners = listeners;
 }
 
 float Actor::getX() const {
-    return x;
+	return x;
 }
 
 void Actor::setX(const float x) {
-    Actor::x = x;
+	Actor::x = x;
 }
 
 float Actor::getY() const {
-    return y;
+	return y;
 }
 
 void Actor::setY(const float y) {
-    Actor::y = y;
+	Actor::y = y;
 }
 
 void Actor::setPosition(const float x, const float y) {
@@ -38,8 +38,8 @@ void Actor::setSize(const float width, const float height) {
 	this->height = height;
 }
 
-void Actor::addListener(EventListener *e) {
-    listeners.emplace_back(e);
+void Actor::addListener(EventListener* e) {
+	listeners.emplace_back(e);
 }
 
 void Actor::act(const float dt) {
@@ -49,45 +49,45 @@ void Actor::act(const float dt) {
 Actor::Actor(const int ID) : ID(ID) {}
 
 int Actor::getId() const {
-    return ID;
+	return ID;
 }
 
 void Actor::setId(const int id) {
-    ID = id;
+	ID = id;
 }
 
 float Actor::getWidth() const {
-    return width;
+	return width;
 }
 
 float Actor::getHeight() const {
-    return height;
+	return height;
 }
 
 
 void Actor::setWidth(const float width) {
-    Actor::width = width;
+	Actor::width = width;
 }
 
 void Actor::setHeight(const float height) {
-    Actor::height = height;
+	Actor::height = height;
 }
 
 bool Actor::isVisible() const {
-    return visible;
+	return visible;
 }
 
 void Actor::setVisible(const bool visible) {
-    Actor::visible = visible;
+	Actor::visible = visible;
 }
 
 bool Actor::hit(const float mouseX, const float mouseY) {
-    return  x < mouseX && mouseX < (x + width) &&
-            y < mouseY && mouseY < (y + height);
+	return x < mouseX && mouseX < (x + width) &&
+	       y < mouseY && mouseY < (y + height);
 }
 
 Actor::~Actor() {
-    for(EventListener* listener : listeners){
-        delete listener;
-    }
+	for (EventListener* listener : listeners) {
+		delete listener;
+	}
 }

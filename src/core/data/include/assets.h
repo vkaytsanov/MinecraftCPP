@@ -15,11 +15,11 @@ static std::string ASSETS_LOCATION = __FILE__ "/../../../../assets/sprites/";
 
 class Assets {
 private:
-    std::unordered_map<std::string, Texture*> mapped_sprites;
-    static std::string stripName(std::string& name);
+	std::unordered_map<std::string, Texture*> mapped_sprites;
+	static std::string stripName(std::string& name);
 public:
-    Assets();
-    ~Assets();
+	Assets();
+	~Assets();
 	Texture* getSprite(std::string name);
 };
 

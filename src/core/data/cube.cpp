@@ -5,5 +5,13 @@
 #include "include/cube.h"
 
 bool Cube::isTransparent() const {
-	return type >= Glass && type <= Air;
+	return type >= Water && type <= Air;
+}
+
+bool Cube::isLiquid() const {
+	return type >= Water && type <= Lava;
+}
+
+bool Cube::isEntity() const {
+	return type >= FlowerBlue && type <= FlowerYellow;
 }

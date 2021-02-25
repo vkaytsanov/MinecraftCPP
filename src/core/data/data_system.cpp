@@ -5,7 +5,8 @@
 #include "include/data_system.h"
 
 
-DataSystem::DataSystem() : defaultShader("textures/shader.vert", "textures/shader.frag"){
+DataSystem::DataSystem() : defaultShader("textures/shader.vert", "textures/shader.frag"),
+                           skyboxShader("skybox/shader.vert", "skybox/shader.frag") {
 	CubeDatabase::init(assets.getSprite("spriteSheet"));
 }
 

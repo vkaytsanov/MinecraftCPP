@@ -6,8 +6,8 @@
 #include <cassert>
 #include <cmath>
 
-namespace MathUtils{
-    float toRadians(float degree) {
-        return degree * (PI / 180);
-    }
+namespace MathUtils {
+	float toRadians(float degree) {
+		return degree * (PI / 180);
+	}
 }
