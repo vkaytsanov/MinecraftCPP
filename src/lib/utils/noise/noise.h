@@ -28,7 +28,7 @@
 /// @section intro Introduction
 ///
 /// libnoise is a portable C++ library that is used to generate <i>coherent
-/// noise</i>, a type of smoothly-changing noise. libnoise can generate Perlin
+/// noise</i>, a m_type of smoothly-changing noise. libnoise can generate Perlin
 /// noise, ridged multifractal noise, and other types of coherent noise.
 ///
 /// Coherent noise is often used by graphics programmers to generate
@@ -46,9 +46,9 @@
 /// @section noise Noise Modules
 ///
 /// In libnoise, coherent-noise generators are encapsulated in classes called
-/// <i>noise modules</i>. There are many different types of noise modules.
-/// Some noise modules can combine or modify the outputs of other noise
-/// modules in various ways; you can join these modules together to generate
+/// <i>noise m_modules</i>. There are many different types of noise m_modules.
+/// Some noise m_modules can combine or modify the outputs of other noise
+/// m_modules in various ways; you can join these m_modules together to generate
 /// very complex coherent noise.
 ///
 /// A noise module receives a 3-dimensional input value from the application,
@@ -58,7 +58,7 @@
 /// If the application passes the same input value to a noise module, the
 /// noise module returns the same output value.
 ///
-/// All noise modules are derived from the noise::module::Module abstract
+/// All noise m_modules are derived from the noise::module::Module abstract
 /// base class.
 ///
 /// @section contact Contact

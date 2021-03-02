@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup transformermodules

@@ -7,7 +7,7 @@
 
 
 #include "event.h"
-#include "../../../data/include/chunk.h"
+#include "../../../data/terrain/include/chunk.h"
 
 class ChunkTicketEvent : public Event {
 public:

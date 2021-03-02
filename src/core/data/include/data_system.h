@@ -13,8 +13,8 @@
 
 class DataSystem {
 public:
-	Shaders defaultShader;
 	Shaders skyboxShader;
+	Shaders defaultShader;
 	Assets assets;
 	World world;
 	Skybox skybox;

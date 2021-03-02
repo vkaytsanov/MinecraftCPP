@@ -8,10 +8,10 @@
 
 #include <vector>
 #include <array>
-#include "../../../lib/utils/openGL/include/vertex.h"
-#include "../../../lib/utils/openGL/include/vertex_array.h"
-#include "../../../lib/utils/openGL/include/index_buffer.h"
-#include "../../../lib/utils/openGL/include/vertex_buffer.h"
+#include "../../../../lib/utils/openGL/include/vertex.h"
+#include "../../../../lib/utils/openGL/include/vertex_array.h"
+#include "../../../../lib/utils/openGL/include/index_buffer.h"
+#include "../../../../lib/utils/openGL/include/vertex_buffer.h"
 #include "cube_data_base.h"
 #include "cube.h"
 
@@ -26,17 +26,19 @@ enum ChunkMeshState {
 
 class ChunkMesh {
 private:
-	std::array<VertexArray, 2> vao;
-	std::array<VertexBuffer, 2> vbo;
-	std::array<unsigned int, 2> indicesCount;
+	std::array<VertexArray,  3> vao;
+	std::array<VertexBuffer, 3> vbo;
+	std::array<unsigned int, 3> indicesCount;
 public:
 	ChunkMesh();
 	~ChunkMesh();
-	void setMesh(std::array<std::vector<Vertex>, 2>& vertices);
+	void setMesh(std::array<std::vector<Vertex>, 3>& vertices);
 	VertexArray* getVao();
 	VertexArray* getTransparentVao();
+	VertexArray* getModelVao();
 	unsigned int getIndicesCount();
 	unsigned int getTransparentIndicesCount();
+	unsigned int getModelIndicesCount();
 
 
 };

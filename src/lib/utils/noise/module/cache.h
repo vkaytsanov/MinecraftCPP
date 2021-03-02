@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @defgroup miscmodules Miscellaneous Modules
@@ -57,7 +57,7 @@ namespace noise {
 		/// method, the cache is invalidated.
 		///
 		/// Caching a noise module is useful if it is used as a source module for
-		/// multiple noise modules.  If a source module is not cached, the source
+		/// multiple noise m_modules.  If a source module is not cached, the source
 		/// module will redundantly calculate the same output value once for each
 		/// noise module in which it is included.
 		///

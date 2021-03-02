@@ -17,7 +17,7 @@ void SkyboxRenderer::render() {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->textureCubeMap.getBuffer());
 
-	Matrix4f mat = camera->combined;
+	Matrix4f mat = camera->m_combined;
 	mat.a[A31] = 0;
 	mat.a[A32] = 0;
 	mat.a[A33] = 1;

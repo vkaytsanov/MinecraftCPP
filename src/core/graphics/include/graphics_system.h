@@ -15,15 +15,15 @@ extern int GRAPHICS_HEIGHT;
 extern float WORLD_WIDTH;
 extern float WORLD_HEIGHT;
 
-#define RENDER_DISTANCE 3 // 6
+#define RENDER_DISTANCE 6 // 6
 
 class Minecraft;
 
 class GraphicsSystem {
 private:
-	Minecraft* game;
-	UniversalViewport* viewport;
-	AbstractScreen* screens[1];
+	Minecraft* m_pGame;
+	UniversalViewport* m_pViewport;
+	AbstractScreen* m_pScreen[1];
 public:
 	explicit GraphicsSystem(Minecraft* game);
 	~GraphicsSystem();

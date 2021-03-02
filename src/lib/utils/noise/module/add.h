@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @defgroup combinermodules Combiner Modules
@@ -40,11 +40,11 @@ namespace noise {
 		/// @{
 
 		/// Noise module that outputs the sum of the two output values from two
-		/// source modules.
+		/// source m_modules.
 		///
 		/// @image html moduleadd.png
 		///
-		/// This noise module requires two source modules.
+		/// This noise module requires two source m_modules.
 		class Add : public Module {
 
 		public:

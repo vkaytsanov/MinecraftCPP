@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @defgroup generatormodules Generator Modules
@@ -49,9 +49,9 @@ namespace noise {
 		/// To specify the constant value, call the SetConstValue() method.
 		///
 		/// This noise module is not useful by itself, but it is often used as a
-		/// source module for other noise modules.
+		/// source module for other noise m_modules.
 		///
-		/// This noise module does not require any source modules.
+		/// This noise module does not require any source m_modules.
 		class Const : public Module {
 
 		public:

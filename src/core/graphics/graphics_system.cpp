@@ -7,7 +7,7 @@
 #include "../../lib/include/lib.h"
 #include "screens/include/playing_screen.h"
 #include "../include/minecraft.h"
-#include "../../lib/utils/include/perspective_camera.h"
+#include "../../lib/utils/camera/include/perspective_camera.h"
 
 
 int GRAPHICS_WIDTH;
@@ -18,7 +18,7 @@ float WORLD_WIDTH = 240;
 
 float WORLD_HEIGHT = 120;
 
-GraphicsSystem::GraphicsSystem(Minecraft* game) : game(game) {
+GraphicsSystem::GraphicsSystem(Minecraft* game) : m_pGame(game) {
 	GRAPHICS_WIDTH = Lib::graphics->getWidth();
 	GRAPHICS_HEIGHT = Lib::graphics->getHeight();
 
@@ -28,42 +28,42 @@ GraphicsSystem::GraphicsSystem(Minecraft* game) : game(game) {
 
 
 
-	viewport = new UniversalViewport(WORLD_WIDTH, WORLD_HEIGHT, new PerspectiveCamera(70));
-	viewport->update(GRAPHICS_WIDTH, GRAPHICS_HEIGHT, false);
+	m_pViewport = new UniversalViewport(WORLD_WIDTH, WORLD_HEIGHT, new PerspectiveCamera(70));
+	m_pViewport->update(GRAPHICS_WIDTH, GRAPHICS_HEIGHT, false);
 }
 
 void GraphicsSystem::create() {
-	screens[Playing] = new PlayingScreen(game);
+	m_pScreen[Playing] = new PlayingScreen(m_pGame);
 
-	screens[Playing]->start();
+	m_pScreen[Playing]->start();
 }
 
 void GraphicsSystem::render(const float dt) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.4, 0.4, 0.4, 1.0);
 
-	screens[game->gameStateManager->getCurrentState()]->render(dt);
+	m_pScreen[m_pGame->m_gameStateManager.getCurrentState()]->render(dt);
 }
 
 void GraphicsSystem::resizeViewport(const int width, const int height) {
-	viewport->update(width, height, false);
+	m_pViewport->update(width, height, false);
 }
 
 void GraphicsSystem::start(int state) {
-	screens[state]->start();
+	m_pScreen[state]->start();
 }
 
 UniversalViewport* GraphicsSystem::getViewport() const {
-	return viewport;
+	return m_pViewport;
 }
 
 
 GraphicsSystem::~GraphicsSystem() {
-	for (auto& screen : screens) {
+	for (auto& screen : m_pScreen) {
 		delete screen;
 	}
 
-	delete viewport;
+	delete m_pViewport;
 }
 
 

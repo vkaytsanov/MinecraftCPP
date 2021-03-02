@@ -38,7 +38,7 @@ Curve::~Curve() {
 
 void Curve::AddControlPoint(double inputValue, double outputValue) {
 	// Find the insertion point for the new control point and insert the new
-	// point at that position.  The control point array will remain sorted by
+	// point at that p_position.  The control point array will remain sorted by
 	// input value.
 	int insertionPos = FindInsertionPos(inputValue);
 	InsertAtPos(insertionPos, inputValue, outputValue);
@@ -114,8 +114,8 @@ double Curve::GetValue(double x, double y, double z) const {
 
 void Curve::InsertAtPos(int insertionPos, double inputValue,
                         double outputValue) {
-	// Make room for the new control point at the specified position within the
-	// control point array.  The position is determined by the input value of
+	// Make room for the new control point at the specified p_position within the
+	// control point array.  The p_position is determined by the input value of
 	// the control point; the control points must be sorted by input value
 	// within that array.
 	ControlPoint* newControlPoints = new ControlPoint[m_controlPointCount + 1];

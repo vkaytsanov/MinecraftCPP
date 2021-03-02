@@ -45,10 +45,10 @@ int Turbulence::GetSeed() const {
 double Turbulence::GetValue(double x, double y, double z) const {
 	assert (m_pSourceModule[0] != NULL);
 
-	// Get the values from the three noise::module::Perlin noise modules and
+	// Get the values from the three noise::module::Perlin noise m_modules and
 	// add each value to each coordinate of the input value.  There are also
 	// some offsets added to the coordinates of the input values.  This prevents
-	// the distortion modules from returning zero if the (x, y, z) coordinates,
+	// the distortion m_modules from returning zero if the (x, y, z) coordinates,
 	// when multiplied by the frequency, are near an integer boundary.  This is
 	// due to a property of gradient coherent noise, which returns zero at
 	// integer boundaries.
@@ -77,7 +77,7 @@ double Turbulence::GetValue(double x, double y, double z) const {
 }
 
 void Turbulence::SetSeed(int seed) {
-	// Set the seed of each noise::module::Perlin noise modules.  To prevent any
+	// Set the seed of each noise::module::Perlin noise m_modules.  To prevent any
 	// sort of weird artifacting, use a slightly different seed for each noise
 	// module.
 	m_xDistortModule.SetSeed(seed);

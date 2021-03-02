@@ -123,7 +123,7 @@ unsigned int Shaders::getProgram() {
 	return shaderProgram;
 }
 
-GLint Shaders::getUniformLocation(std::string name) {
+GLint Shaders::getUniformLocation(std::string& name) {
 	if (uniforms.find(name) == uniforms.end()) {
 		int res = glGetUniformLocation(shaderProgram, name.c_str());
 		if (res == -1) {
@@ -145,6 +145,9 @@ void Shaders::setInt(std::string name, int number) {
 	glUniform1i(getUniformLocation(name), number);
 }
 
+void Shaders::setFloat(std::string name, float number) {
+	glUniform1f(getUniformLocation(name), number);
+}
 
 void Shaders::setVector3f(std::string name, float x, float y, float z) {
 	glUniform3f(getUniformLocation(name), x, y, z);
@@ -153,6 +156,8 @@ void Shaders::setVector3f(std::string name, float x, float y, float z) {
 void Shaders::setVector3f(std::string name, Vector3f& vec) {
 	glUniform3f(getUniformLocation(name), vec.x, vec.y, vec.z);
 }
+
+
 
 
 

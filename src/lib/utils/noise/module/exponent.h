@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup modifiermodules
@@ -46,7 +46,7 @@ namespace noise {
 		///
 		/// @image html moduleexponent.png
 		///
-		/// Because most noise modules will output values that range from -1.0 to
+		/// Because most noise m_modules will output values that range from -1.0 to
 		/// +1.0, this noise module first normalizes this output value (the range
 		/// becomes 0.0 to 1.0), maps that value onto an exponential curve, then
 		/// rescales that value back to the original range.
@@ -66,7 +66,7 @@ namespace noise {
 			///
 			/// @returns The exponent value.
 			///
-			/// Because most noise modules will output values that range from -1.0
+			/// Because most noise m_modules will output values that range from -1.0
 			/// to +1.0, this noise module first normalizes this output value (the
 			/// range becomes 0.0 to 1.0), maps that value onto an exponential
 			/// curve, then rescales that value back to the original range.
@@ -85,7 +85,7 @@ namespace noise {
 			///
 			/// @param exponent The exponent value.
 			///
-			/// Because most noise modules will output values that range from -1.0
+			/// Because most noise m_modules will output values that range from -1.0
 			/// to +1.0, this noise module first normalizes this output value (the
 			/// range becomes 0.0 to 1.0), maps that value onto an exponential
 			/// curve, then rescales that value back to the original range.

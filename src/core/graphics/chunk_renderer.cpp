@@ -17,11 +17,12 @@ void ChunkRenderer::beginChunkRendering(Camera* camera) {
 	defaultShader->begin();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->getBuffer());
-	defaultShader->setMatrix4("viewMatrix", camera->view);
-	defaultShader->setMatrix4("projMatrix", camera->projection);
+	defaultShader->setMatrix4("viewMatrix", camera->m_view);
+	defaultShader->setMatrix4("projMatrix", camera->m_projection);
 	defaultShader->setInt("tex_id", 0);
 	defaultShader->setInt("CHUNK_SIZE_X", CHUNK_SIZE_X);
 	defaultShader->setInt("CHUNK_SIZE_Z", CHUNK_SIZE_Z);
+	defaultShader->setInt("renderDistance", RENDER_DISTANCE);
 }
 
 void ChunkRenderer::renderChunk(Chunk* chunk, int x, int z) {
@@ -46,10 +47,24 @@ void ChunkRenderer::renderTransparentChunk(Chunk* chunk, int x, int z) {
 	}
 }
 
+void ChunkRenderer::renderModelChunk(Chunk* chunk, int x, int z) {
+	if (chunk->getChunkMesh()->getModelIndicesCount() > 0) {
+		defaultShader->setInt("chunkX", x);
+		defaultShader->setInt("chunkZ", z);
+
+		chunk->getChunkMesh()->getModelVao()->bind();
+		glDrawElements(GL_TRIANGLES, chunk->getChunkMesh()->getModelIndicesCount(), GL_UNSIGNED_INT, nullptr);
+		chunk->getChunkMesh()->getModelVao()->unbind();
+	}
+}
+
 
 void ChunkRenderer::endChunkRendering() {
-
 	glBindTexture(GL_TEXTURE_2D, 0);
 	defaultShader->end();
 }
+
+
+
+
 

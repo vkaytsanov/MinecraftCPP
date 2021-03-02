@@ -68,3 +68,7 @@ double Perlin::GetValue(double x, double y, double z) const {
 
 	return value;
 }
+
+double Perlin::GetValuePositive(double x, double y, double z) const {
+	return (GetValue(x, y, z) + 1.0f) / 2;
+}

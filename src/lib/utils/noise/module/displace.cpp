@@ -34,7 +34,7 @@ double Displace::GetValue(double x, double y, double z) const {
 	assert (m_pSourceModule[2] != NULL);
 	assert (m_pSourceModule[3] != NULL);
 
-	// Get the output values from the three displacement modules.  Add each
+	// Get the output values from the three displacement m_modules.  Add each
 	// value to the corresponding coordinate in the input value.
 	double xDisplace = x + (m_pSourceModule[1]->GetValue(x, y, z));
 	double yDisplace = y + (m_pSourceModule[2]->GetValue(x, y, z));

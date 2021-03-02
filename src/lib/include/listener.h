@@ -10,11 +10,11 @@ public:
 	virtual ~Listener() = default;
 	/* create all platform independent things */
 	virtual void create() = 0;
-	/* looping method for the p_game */
+	/* looping method for the m_pGame */
 	virtual void render() = 0;
-	/* when user has minimized or the p_game window is in the background */
+	/* when user has minimized or the m_pGame window is in the background */
 	virtual void pause() = 0;
-	/* when user has restored the window or the p_game window is no longer in the background */
+	/* when user has restored the window or the m_pGame window is no longer in the background */
 	virtual void resume() = 0;
 	/* when user has resized the window, only when maximizing, stretching or shrinking */
 	virtual void resize(const int width, const int height) = 0;

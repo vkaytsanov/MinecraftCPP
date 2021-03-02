@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup generatormodules
@@ -48,7 +48,7 @@ namespace noise {
 		/// This noise module is not really useful by itself, but it is often used
 		/// for debugging purposes.
 		///
-		/// This noise module does not require any source modules.
+		/// This noise module does not require any source m_modules.
 		class Checkerboard : public Module {
 
 		public:

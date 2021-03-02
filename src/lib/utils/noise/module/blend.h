@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @defgroup selectormodules Selector Modules
@@ -40,11 +40,11 @@ namespace noise {
 		/// @{
 
 		/// Noise module that outputs a weighted blend of the output values from
-		/// two source modules given the output value supplied by a control module.
+		/// two source m_modules given the output value supplied by a control module.
 		///
 		/// @image html moduleblend.png
 		///
-		/// Unlike most other noise modules, the index value assigned to a source
+		/// Unlike most other noise m_modules, the index value assigned to a source
 		/// module determines its role in the blending operation:
 		/// - Source module 0 (upper left in the diagram) outputs one of the
 		///   values to blend.
@@ -64,7 +64,7 @@ namespace noise {
 		/// This noise module uses linear interpolation to perform the blending
 		/// operation.
 		///
-		/// This noise module requires three source modules.
+		/// This noise module requires three source m_modules.
 		class Blend : public Module {
 
 		public:

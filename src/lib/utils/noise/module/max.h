@@ -32,18 +32,18 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup combinermodules
 		/// @{
 
 		/// Noise module that outputs the larger of the two output values from two
-		/// source modules.
+		/// source m_modules.
 		///
 		/// @image html modulemax.png
 		///
-		/// This noise module requires two source modules.
+		/// This noise module requires two source m_modules.
 		class Max : public Module {
 
 		public:

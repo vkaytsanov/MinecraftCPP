@@ -4,7 +4,7 @@
 
 #include "include/chunk_mesh.h"
 #include "include/chunk.h"
-#include "../../lib/include/lib.h"
+#include "../../../lib/include/lib.h"
 
 
 ChunkMesh::ChunkMesh() {
@@ -12,12 +12,12 @@ ChunkMesh::ChunkMesh() {
 	static IndexBuffer indexBuffer;
 	if (!indexBufferInitialized) {
 		indexBufferInitialized = true;
-		const unsigned int indicesCount = CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z * 6;
+		const unsigned int indices = CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z * 6;
 		unsigned int indicesOffset = 0;
 		// indices count will be 16 x 256 x 16 x 6 = 393216
-		auto* buffer = new GLuint[indicesCount * 6];
+		auto* buffer = new GLuint[indices * 6];
 
-		for (int i = 0; i < indicesCount; i += 6) {
+		for (int i = 0; i < indices; i += 6) {
 			buffer[i + 0] = 0 + indicesOffset;
 			buffer[i + 1] = 1 + indicesOffset;
 			buffer[i + 2] = 2 + indicesOffset;
@@ -27,7 +27,7 @@ ChunkMesh::ChunkMesh() {
 			indicesOffset += 4;
 		}
 		indexBuffer.bind();
-		indexBuffer.bufferData(indicesCount * 6 * sizeof(GLuint), buffer, GL_STATIC_DRAW);
+		indexBuffer.bufferData(indices * 6 * sizeof(GLuint), buffer, GL_STATIC_DRAW);
 		delete[] buffer;
 	}
 
@@ -52,12 +52,22 @@ ChunkMesh::~ChunkMesh() {
 
 }
 
-void ChunkMesh::setMesh(std::array<std::vector<Vertex>, 2>& vertices) {
+void ChunkMesh::setMesh(std::array<std::vector<Vertex>, 3>& vertices) {
 	for (int i = 0; i < vertices.size(); i++) {
 		indicesCount.at(i) = 0;
+		std::string type;
+		if(i == 0){
+			type = " normal";
+		}
+		else if(i == 1){
+			type = " transparent";
+		}
+		else{
+			type = " model";
+		}
 		Lib::app->log(("ChunkMesh " + std::to_string(i)).c_str(),
-		              (std::to_string(vertices.at(i).size()) + (i == 0 ? " normal" : " transparent") +
-		               " vertices").c_str());
+		              (std::to_string(vertices.at(i).size()) + type +
+		               " m_vertices").c_str());
 		if (!vertices.at(i).empty()) {
 			vbo.at(i).bind();
 			vbo.at(i).bufferData(vertices.at(i).size() * sizeof(Vertex), &vertices.at(i)[0], GL_STATIC_DRAW);
@@ -76,6 +86,10 @@ VertexArray* ChunkMesh::getTransparentVao() {
 	return &vao.at(1);
 }
 
+VertexArray* ChunkMesh::getModelVao() {
+	return &vao.at(2);
+}
+
 unsigned int ChunkMesh::getIndicesCount() {
 	return indicesCount.at(0);
 }
@@ -83,6 +97,12 @@ unsigned int ChunkMesh::getIndicesCount() {
 unsigned int ChunkMesh::getTransparentIndicesCount() {
 	return indicesCount.at(1);
 }
+
+unsigned int ChunkMesh::getModelIndicesCount() {
+	return indicesCount.at(2);
+}
+
+
 
 
 

@@ -14,10 +14,10 @@ class Minecraft;
 
 class LogicSystem : public ModLogic {
 private:
-	Minecraft* game;
-	std::vector<ModLogic*> modules;
-	ModEventHandler eventHandler;
-	ModWorldExploration modWorldGeneration;
+	Minecraft* m_pGame;
+	std::vector<ModLogic*> m_modules;
+	ModEventHandler m_eventHandler;
+	ModWorldExploration m_modWorldGeneration;
 public:
 	explicit LogicSystem(Minecraft* game);
 	void init() override;

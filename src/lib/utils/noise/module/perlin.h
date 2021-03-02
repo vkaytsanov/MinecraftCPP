@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup generatormodules
@@ -78,7 +78,7 @@ namespace noise {
 		/// For a better description of Perlin noise, see the links in the
 		/// <i>References and Acknowledgments</i> section.
 		///
-		/// This noise module does not require any source modules.
+		/// This noise module does not require any source m_modules.
 		///
 		/// <b>Octaves</b>
 		///
@@ -235,6 +235,7 @@ namespace noise {
 			}
 
 			virtual double GetValue(double x, double y, double z) const;
+			virtual double GetValuePositive(double x, double y, double z) const;
 
 			/// Sets the frequency of the first octave.
 			///

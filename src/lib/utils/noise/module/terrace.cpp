@@ -41,7 +41,7 @@ Terrace::~Terrace() {
 
 void Terrace::AddControlPoint(double value) {
 	// Find the insertion point for the new control point and insert the new
-	// point at that position.  The control point array will remain sorted by
+	// point at that p_position.  The control point array will remain sorted by
 	// value.
 	int insertionPos = FindInsertionPos(value);
 	InsertAtPos(insertionPos, value);
@@ -116,8 +116,8 @@ double Terrace::GetValue(double x, double y, double z) const {
 }
 
 void Terrace::InsertAtPos(int insertionPos, double value) {
-	// Make room for the new control point at the specified position within
-	// the control point array.  The position is determined by the value of
+	// Make room for the new control point at the specified p_position within
+	// the control point array.  The p_position is determined by the value of
 	// the control point; the control points must be sorted by value within
 	// that array.
 	double* newControlPoints = new double[m_controlPointCount + 1];

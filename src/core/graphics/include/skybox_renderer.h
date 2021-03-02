@@ -7,7 +7,7 @@
 
 #include "../../data/include/skybox.h"
 #include "../../../lib/utils/include/shaders.h"
-#include "../../../lib/utils/include/camera.h"
+#include "../../../lib/utils/camera/include/camera.h"
 #include "../../data/include/data_system.h"
 
 class SkyboxRenderer {

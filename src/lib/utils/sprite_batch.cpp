@@ -28,10 +28,10 @@ void SpriteBatch::begin() {
 }
 
 
-//void SpriteBatch::draw(Cube* cube, Vector3f position) {
+//void SpriteBatch::draw(Cube* cube, Vector3f p_position) {
 //	setupShaders(cube->getShaders());
 //	shaders->begin();
-//	setupMatrices(position);
+//	setupMatrices(p_position);
 //	cube->draw();
 //	shaders->end();
 //}

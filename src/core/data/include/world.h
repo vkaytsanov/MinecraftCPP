@@ -8,7 +8,7 @@
 
 #include <unordered_map>
 #include <map>
-#include "chunk.h"
+#include "../terrain/include/chunk.h"
 
 struct Coordinates {
 	uint64_t x;

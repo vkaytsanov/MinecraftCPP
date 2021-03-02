@@ -46,8 +46,8 @@ namespace noise {
 		///  - disaffected college students
 		///
 		/// To generate an output value, pass an input value between 0.0 and 1.0
-		/// to the GetValue() method.  0.0 represents the start position of the
-		/// line segment and 1.0 represents the end position of the line segment.
+		/// to the GetValue() method.  0.0 represents the start p_position of the
+		/// line segment and 1.0 represents the end p_position of the line segment.
 		class Line {
 
 		public:
@@ -114,12 +114,12 @@ namespace noise {
 				m_attenuate = att;
 			}
 
-			/// Sets the position ( @a x, @a y, @a z ) of the end of the line
+			/// Sets the p_position ( @a x, @a y, @a z ) of the end of the line
 			/// segment to choose values along.
 			///
-			/// @param x x coordinate of the end position.
-			/// @param y y coordinate of the end position.
-			/// @param z z coordinate of the end position.
+			/// @param x x coordinate of the end p_position.
+			/// @param y y coordinate of the end p_position.
+			/// @param z z coordinate of the end p_position.
 			void SetEndPoint(double x, double y, double z) {
 				m_x1 = x;
 				m_y1 = y;
@@ -137,12 +137,12 @@ namespace noise {
 				m_pModule = &module;
 			}
 
-			/// Sets the position ( @a x, @a y, @a z ) of the start of the line
+			/// Sets the p_position ( @a x, @a y, @a z ) of the start of the line
 			/// segment to choose values along.
 			///
-			/// @param x x coordinate of the start position.
-			/// @param y y coordinate of the start position.
-			/// @param z z coordinate of the start position.
+			/// @param x x coordinate of the start p_position.
+			/// @param y y coordinate of the start p_position.
+			/// @param z z coordinate of the start p_position.
 			void SetStartPoint(double x, double y, double z) {
 				m_x0 = x;
 				m_y0 = y;

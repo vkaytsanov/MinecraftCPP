@@ -4,7 +4,7 @@
 
 #include "../include/lib.h"
 #include "include/universal_viewport.h"
-#include "include/orthographic_camera.h"
+#include "camera/include/orthographic_camera.h"
 
 UniversalViewport::UniversalViewport(const float minWorldWidth, const float minWorldHeight)
 		: UniversalViewport(minWorldWidth, minWorldHeight, new OrthographicCamera()) {}
@@ -46,7 +46,7 @@ void UniversalViewport::update(int screenWidth, int screenHeight, bool centerCam
 	int viewportWidth = (int) std::round(worldWidth * scale);
 	int viewportHeight = (int) std::round(worldHeight * scale);
 
-	// Enlarging the viewport by its short side
+	// Enlarging the m_pViewport by its short side
 	if (viewportWidth < screenWidth) {
 		float toViewportSpace = (float) viewportHeight / worldHeight;
 		float toWorldSpace = worldHeight / (float) viewportHeight;

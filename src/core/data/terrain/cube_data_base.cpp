@@ -4,6 +4,7 @@
 
 #include "include/cube_data_base.h"
 
+
 namespace CubeDatabase {
 
 	CubeDatabase::TextureCubeData::TextureCubeData(TextureRegion region, int sides) {
@@ -11,6 +12,11 @@ namespace CubeDatabase {
 		if (sides == 3) {
 			for (int i = 0; i < 6 * 4 * 2; i++) {
 				uvs[i] *= uvs3side[i];
+			}
+		}
+		else if(sides == 2){
+			for (int i = 0; i < 6 * 4 * 2; i++) {
+				uvs[i] *= uvs2side[i];
 			}
 		}
 	}
@@ -34,22 +40,35 @@ namespace CubeDatabase {
 		mappedTextures[FlowerBlue] = TextureCubeData(regions[12][0]);
 		mappedTextures[FlowerYellow] = TextureCubeData(regions[13][0]);
 		mappedTextures[Treelet] = TextureCubeData(regions[15][0]);
+
 		mappedTextures[BrokenStone] = TextureCubeData(regions[0][1]);
 		mappedTextures[Bedrock] = TextureCubeData(regions[1][1]);
 		mappedTextures[Sand] = TextureCubeData(regions[2][1]);
-		mappedTextures[NetherGravel] = TextureCubeData(regions[4][1]);
-		mappedTextures[Wood] = TextureCubeData(regions[5][1] + regions[6][1]);
-		mappedTextures[IronProcessed] = TextureCubeData(regions[7][1]);
-		mappedTextures[GoldProcessed] = TextureCubeData(regions[8][1]);
-		mappedTextures[DiamondProcessed] = TextureCubeData(regions[9][1]);
-		mappedTextures[ChestSingle] = TextureCubeData(regions[10][1] + regions[11][1] + regions[12][1], 3);
+		mappedTextures[NetherGravel] = TextureCubeData(regions[3][1]);
+		mappedTextures[Wood] = TextureCubeData(regions[4][1] + regions[5][1], 2);
+		mappedTextures[IronProcessed] = TextureCubeData(regions[6][1]);
+		mappedTextures[GoldProcessed] = TextureCubeData(regions[7][1]);
+		mappedTextures[DiamondProcessed] = TextureCubeData(regions[8][1]);
+		mappedTextures[ChestSingle] = TextureCubeData(regions[9][1] + regions[10][1] + regions[11][1], 3);
+
 		mappedTextures[Gold] = TextureCubeData(regions[0][2]);
 		mappedTextures[Iron] = TextureCubeData(regions[1][2]);
 		mappedTextures[Coal] = TextureCubeData(regions[2][2]);
+
 		mappedTextures[Glass] = TextureCubeData(regions[1][3]);
 		mappedTextures[Diamond] = TextureCubeData(regions[2][3]);
+		mappedTextures[Redstone] = TextureCubeData(regions[3][3]);
+		mappedTextures[Leaves] = TextureCubeData(regions[4][3]);
+
+		mappedTextures[Cactus] = TextureCubeData(regions[5][4] + regions[6][4], 2);
+		mappedTextures[SugarCane] = TextureCubeData(regions[9][4]);
+		mappedTextures[Bush] = TextureCubeData(regions[9][9]);
+
+
 		mappedTextures[Stone] = TextureCubeData(regions[12][12]);
 		mappedTextures[Water] = TextureCubeData(regions[13][12]);
+
+		mappedTextures[Sandstone] = TextureCubeData(regions[5][14] + regions[6][14], 2);
 		mappedTextures[Lava] = TextureCubeData(regions[13][14]);
 		mappedTextures[Air] = TextureCubeData();
 

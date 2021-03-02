@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup transformermodules
@@ -103,7 +103,7 @@ namespace noise {
 		/// are generating values for textures, you can use this noise module to
 		/// produce realistic marble-like or "oily" textures.
 		///
-		/// Internally, there are three noise::module::Perlin noise modules
+		/// Internally, there are three noise::module::Perlin noise m_modules
 		/// that displace the input value; one for the @a x, one for the @a y,
 		/// and one for the @a z coordinate.
 		///
@@ -157,12 +157,12 @@ namespace noise {
 				return m_xDistortModule.GetOctaveCount();
 			}
 
-			/// Returns the seed value of the internal Perlin-noise modules that
+			/// Returns the seed value of the internal Perlin-noise m_modules that
 			/// are used to displace the input values.
 			///
 			/// @returns The seed value.
 			///
-			/// Internally, there are three noise::module::Perlin noise modules
+			/// Internally, there are three noise::module::Perlin noise m_modules
 			/// that displace the input value; one for the @a x, one for the @a y,
 			/// and one for the @a z coordinate.
 			int GetSeed() const;
@@ -205,11 +205,11 @@ namespace noise {
 			/// the displacement amount.  High values roughly change the
 			/// displacement amount, which produces more "kinky" changes.
 			///
-			/// Internally, there are three noise::module::Perlin noise modules
+			/// Internally, there are three noise::module::Perlin noise m_modules
 			/// that displace the input value; one for the @a x, one for the @a y,
 			/// and one for the @a z coordinate.  The roughness value is equal to
 			/// the number of octaves used by the noise::module::Perlin noise
-			/// modules.
+			/// m_modules.
 			void SetRoughness(int roughness) {
 				// Set the octave count for each Perlin-noise module.
 				m_xDistortModule.SetOctaveCount(roughness);
@@ -217,15 +217,15 @@ namespace noise {
 				m_zDistortModule.SetOctaveCount(roughness);
 			}
 
-			/// Sets the seed value of the internal noise modules that are used to
+			/// Sets the seed value of the internal noise m_modules that are used to
 			/// displace the input values.
 			///
 			/// @param seed The seed value.
 			///
-			/// Internally, there are three noise::module::Perlin noise modules
+			/// Internally, there are three noise::module::Perlin noise m_modules
 			/// that displace the input value; one for the @a x, one for the @a y,
 			/// and one for the @a z coordinate.  This noise module assigns the
-			/// following seed values to the noise::module::Perlin noise modules:
+			/// following seed values to the noise::module::Perlin noise m_modules:
 			/// - It assigns the seed value (@a seed + 0) to the @a x noise module.
 			/// - It assigns the seed value (@a seed + 1) to the @a y noise module.
 			/// - It assigns the seed value (@a seed + 2) to the @a z noise module.

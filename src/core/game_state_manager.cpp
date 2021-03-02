@@ -5,21 +5,21 @@
 #include "include/game_state_manager.h"
 
 GameStateManager::GameStateManager() {
-	currentState = new GameState(Playing);
+	m_currentState = Playing;
 }
 
 
 GameState GameStateManager::getCurrentState() const {
-	return *currentState;
+	return m_currentState;
 }
 
 
 void GameStateManager::changeState(const GameState nextState) {
-	*currentState = nextState;
+	m_currentState = nextState;
 }
 
 const char* GameStateManager::getCurrentStateName() const {
-	switch ((*currentState)) {
+	switch ((m_currentState)) {
 		case Playing:
 			return "Playing";
 		default:
@@ -28,7 +28,7 @@ const char* GameStateManager::getCurrentStateName() const {
 }
 
 GameStateManager::~GameStateManager() {
-	delete currentState;
+
 }
 
 

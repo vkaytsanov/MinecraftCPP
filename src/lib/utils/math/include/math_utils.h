@@ -11,6 +11,10 @@ namespace MathUtils {
 	const float PI = 3.14159265359;
 
 	float toRadians(float degree);
+	float bilerp(float bottomLeft, float topLeft, float bottomRight, float topRight,
+	             float xMin,       float xMax,
+	             float yMin,       float yMax,
+	             float xToCalc,    float yToCalc);
 
 }
 

@@ -12,28 +12,43 @@ WorldRenderer::WorldRenderer(DataSystem* dataSystem, Camera* camera) : world(&da
 }
 
 void WorldRenderer::render() {
-	int playerX = (int) camera->position->x / CHUNK_SIZE_X;
-	int playerZ = (int) camera->position->z / CHUNK_SIZE_Z;
+	int playerX = (int) camera->m_position.x / CHUNK_SIZE_X;
+	int playerZ = (int) camera->m_position.z / CHUNK_SIZE_Z;
 
 	chunkRenderer.beginChunkRendering(camera);
 	for (int x = playerX - RENDER_DISTANCE; x < playerX + RENDER_DISTANCE; x++) {
 		for (int z = playerZ - RENDER_DISTANCE; z < playerZ + RENDER_DISTANCE; z++) {
-			chunkRenderer.renderChunk(world->getChunk(x, z), x, z);
+			Chunk* chunk = world->getChunk(x, z);
+			if(camera->m_frustum.boxInFrustum(chunk->m_frustumAABB)){
+				chunkRenderer.renderChunk(chunk, x, z);
+			}
 		}
 	}
 
+	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	for (int x = playerX - RENDER_DISTANCE; x < playerX + RENDER_DISTANCE; x++) {
 		for (int z = playerZ - RENDER_DISTANCE; z < playerZ + RENDER_DISTANCE; z++) {
-			chunkRenderer.renderTransparentChunk(world->getChunk(x, z), x, z);
+			Chunk* chunk = world->getChunk(x, z);
+			if(camera->m_frustum.boxInFrustum(chunk->m_frustumAABB)){
+				chunkRenderer.renderTransparentChunk(chunk, x, z);
+			}
 		}
 	}
 
-	glDisable(GL_BLEND);
+	for (int x = playerX - RENDER_DISTANCE; x < playerX + RENDER_DISTANCE; x++) {
+		for (int z = playerZ - RENDER_DISTANCE; z < playerZ + RENDER_DISTANCE; z++) {
+			Chunk* chunk = world->getChunk(x, z);
+			if(camera->m_frustum.boxInFrustum(chunk->m_frustumAABB)){
+				chunkRenderer.renderModelChunk(chunk, x, z);
+			}
+		}
+	}
 	chunkRenderer.endChunkRendering();
-
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
 }
 
 WorldRenderer::~WorldRenderer() {

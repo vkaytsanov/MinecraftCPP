@@ -7,7 +7,7 @@
 
 
 #include "abstract_screen.h"
-#include "../../../../lib/utils/include/first_person_camera_controller.h"
+#include "../../../../lib/utils/camera/include/first_person_camera_controller.h"
 #include "../../include/world_renderer.h"
 #include "../../include/skybox_renderer.h"
 
@@ -15,11 +15,11 @@ class Minecraft;
 
 class PlayingScreen : public AbstractScreen {
 private:
-	Minecraft* game;
-	FirstPersonCameraController cameraController;
-	SkyboxRenderer skyboxRenderer;
-	WorldRenderer worldRenderer;
-	bool isWireframe = false;
+	Minecraft* m_pGame;
+	FirstPersonCameraController m_cameraController;
+	SkyboxRenderer m_skyboxRenderer;
+	WorldRenderer m_worldRenderer;
+	bool m_isWireframe = false;
 public:
 	explicit PlayingScreen(Minecraft* game);
 	void render(float dt) override;

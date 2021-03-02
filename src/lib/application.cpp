@@ -19,9 +19,9 @@ Application::Application(Listener* listener, Configuration* config) :
 /* Initializing here the application */
 Application::Application(Listener* listener, Configuration* config, Graphics* graphics) {
 
-	// Our p_game
+	// Our m_pGame
 	this->listener = listener;
-	// Our configuration file for the p_game
+	// Our configuration file for the m_pGame
 	this->config = config;
 	// Our library for graphics
 	this->graphics = graphics;
@@ -40,7 +40,7 @@ Application::Application(Listener* listener, Configuration* config, Graphics* gr
 	Lib::graphics = graphics;
 	Lib::input = input;
 	Lib::audio = audio;
-	// creating the objects from the p_game
+	// creating the objects from the m_pGame
 	listener->create();
 
 	running = true;
@@ -64,12 +64,12 @@ void Application::gameLoop() {
 		bool isBackground = graphics->isBackground();
 		bool isPaused = isMinimized || isBackground;
 		if (!wasPaused && isPaused) {
-			// the p_game window just became not active on the user's end
+			// the m_pGame window just became not active on the user's end
 			wasPaused = true;
 			listener->pause();
 		}
 		if (wasPaused && !isPaused) {
-			// the p_game window just became active on the user's end
+			// the m_pGame window just became active on the user's end
 			wasPaused = false;
 			listener->resume();
 		}
@@ -81,7 +81,7 @@ void Application::gameLoop() {
 			lastWidth = width;
 			lastHeight = height;
 			// sending to the listener that the user has resized
-			// it should update the viewport if there is one
+			// it should update the m_pViewport if there is one
 			listener->resize(width, height);
 		}
 

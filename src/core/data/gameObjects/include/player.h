@@ -7,7 +7,7 @@
 
 
 #include "../generic/include/game_object.h"
-#include "../../../../lib/utils/include/first_person_camera_controller.h"
+#include "../../../../lib/utils/camera/include/first_person_camera_controller.h"
 
 class Player : public GameObject {
 private:

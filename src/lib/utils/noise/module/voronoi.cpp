@@ -50,14 +50,14 @@ double Voronoi::GetValue(double x, double y, double z) const {
 	double yCandidate = 0;
 	double zCandidate = 0;
 
-	// Inside each unit cube, there is a seed point at a random position.  Go
+	// Inside each unit cube, there is a seed point at a random p_position.  Go
 	// through each of the nearby cubes until we find a cube with a seed point
-	// that is closest to the specified position.
+	// that is closest to the specified p_position.
 	for (int zCur = zInt - 2; zCur <= zInt + 2; zCur++) {
 		for (int yCur = yInt - 2; yCur <= yInt + 2; yCur++) {
 			for (int xCur = xInt - 2; xCur <= xInt + 2; xCur++) {
 
-				// Calculate the position and distance to the seed point inside of
+				// Calculate the p_position and distance to the seed point inside of
 				// this unit cube.
 				double xPos = xCur + ValueNoise3D(xCur, yCur, zCur, m_seed);
 				double yPos = yCur + ValueNoise3D(xCur, yCur, zCur, m_seed + 1);

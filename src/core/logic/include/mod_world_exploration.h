@@ -10,14 +10,14 @@
 #include "world_generation.h"
 #include "chunk_mesh_generation.h"
 
-#define EXPLORATION_DISTANCE 5
-#define BUILD_DISTANCE 4
+#define EXPLORATION_DISTANCE 8
+#define BUILD_DISTANCE 7
 
 class Minecraft;
 
 class ModWorldExploration : public ModLogic {
 private:
-	Minecraft* p_game;
+	Minecraft* m_pGame;
 	WorldGeneration m_worldGeneration;
 	ChunkMeshGeneration m_chunkMeshGeneration;
 	int m_lastPlayerX;

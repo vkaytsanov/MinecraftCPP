@@ -99,7 +99,7 @@ namespace noise {
 	/// to one.
 	///
 	/// A <i>gradient</i>-noise function generates better-quality noise than a
-	/// <i>value</i>-noise function.  Most noise modules use gradient noise for
+	/// <i>value</i>-noise function.  Most noise m_modules use gradient noise for
 	/// this reason, although it takes much longer to calculate.
 	///
 	/// The return value ranges from -1.0 to +1.0.
@@ -146,7 +146,7 @@ namespace noise {
 	/// This function does not modify @a n.
 	///
 	/// In libnoise, the noise-generating algorithms are all integer-based;
-	/// they use variables of type noise::int32.  Before calling a noise
+	/// they use variables of m_type noise::int32.  Before calling a noise
 	/// function, pass the @a x, @a y, and @a z coordinates to this function to
 	/// ensure that these coordinates can be cast to a noise::int32 value.
 	///

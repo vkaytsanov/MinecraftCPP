@@ -31,25 +31,25 @@ namespace noise {
 	/// @addtogroup libnoise
 	/// @{
 
-	/// Unsigned integer type.
+	/// Unsigned integer m_type.
 	typedef unsigned int uint;
 
-	/// 32-bit unsigned integer type.
+	/// 32-bit unsigned integer m_type.
 	typedef unsigned int uint32;
 
-	/// 16-bit unsigned integer type.
+	/// 16-bit unsigned integer m_type.
 	typedef unsigned short uint16;
 
-	/// 8-bit unsigned integer type.
+	/// 8-bit unsigned integer m_type.
 	typedef unsigned char uint8;
 
-	/// 32-bit signed integer type.
+	/// 32-bit signed integer m_type.
 	typedef int int32;
 
-	/// 16-bit signed integer type.
+	/// 16-bit signed integer m_type.
 	typedef short int16;
 
-	/// 8-bit signed integer type.
+	/// 8-bit signed integer m_type.
 	typedef char int8;
 
 	/// @}

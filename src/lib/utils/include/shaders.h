@@ -35,9 +35,10 @@ public:
 	void end();
 	unsigned int getProgram();
 
-	GLint getUniformLocation(std::string name);
+	GLint getUniformLocation(std::string& name);
 	void setMatrix4(std::string name, Matrix4f& mat);
 	void setInt(std::string name, int number);
+	void setFloat(std::string name, float number);
 	void setVector3f(std::string name, float x, float y, float z);
 	void setVector3f(std::string name, Vector3f& vec);
 };

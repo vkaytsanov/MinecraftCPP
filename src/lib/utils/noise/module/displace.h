@@ -32,20 +32,20 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @defgroup transformermodules Transformer Modules
 		/// @addtogroup transformermodules
 		/// @{
 
-		/// Noise module that uses three source modules to displace each
+		/// Noise module that uses three source m_modules to displace each
 		/// coordinate of the input value before returning the output value from
 		/// a source module.
 		///
 		/// @image html moduledisplace.png
 		///
-		/// Unlike most other noise modules, the index value assigned to a source
+		/// Unlike most other noise m_modules, the index value assigned to a source
 		/// module determines its role in the displacement operation:
 		/// - Source module 0 (left in the diagram) outputs a value.
 		/// - Source module 1 (lower left in the diagram) specifies the offset to
@@ -57,13 +57,13 @@ namespace noise {
 		///
 		/// The GetValue() method modifies the ( @a x, @a y, @a z ) coordinates of
 		/// the input value using the output values from the three displacement
-		/// modules before retrieving the output value from the source module.
+		/// m_modules before retrieving the output value from the source module.
 		///
 		/// The noise::module::Turbulence noise module is a special case of the
-		/// displacement module; internally, there are three Perlin-noise modules
+		/// displacement module; internally, there are three Perlin-noise m_modules
 		/// that perform the displacement operation.
 		///
-		/// This noise module requires four source modules.
+		/// This noise module requires four source m_modules.
 		class Displace : public Module {
 
 		public:
@@ -140,7 +140,7 @@ namespace noise {
 				return *(m_pSourceModule[3]);
 			}
 
-			/// Sets the @a x, @a y, and @a z displacement modules.
+			/// Sets the @a x, @a y, and @a z displacement m_modules.
 			///
 			/// @param xDisplaceModule Displacement module that displaces the @a x
 			/// coordinate of the input value.
@@ -150,7 +150,7 @@ namespace noise {
 			/// coordinate of the input value.
 			///
 			/// The GetValue() method displaces the input value by adding the output
-			/// value from each of the displacement modules to the corresponding
+			/// value from each of the displacement m_modules to the corresponding
 			/// coordinates of the input value before returning the output value
 			/// from the source module.
 			///
@@ -158,7 +158,7 @@ namespace noise {
 			/// module, an index value of 2 to the @a y displacement module, and an
 			/// index value of 3 to the @a z displacement module.
 			///
-			/// These displacement modules must exist throughout the lifetime of
+			/// These displacement m_modules must exist throughout the lifetime of
 			/// this noise module unless another displacement module replaces it.
 			void SetDisplaceModules(const Module& xDisplaceModule,
 			                        const Module& yDisplaceModule, const Module& zDisplaceModule) {

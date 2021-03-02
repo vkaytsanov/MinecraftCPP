@@ -6,35 +6,35 @@
 #include "../../include/minecraft.h"
 #include "../../../lib/include/lib.h"
 
-PlayingScreen::PlayingScreen(Minecraft* game) : game(game),
-                                                cameraController(game->graphicsSystem->getViewport()->getCamera()),
-                                                worldRenderer(game->dataSystem, cameraController.getCamera()),
-                                                skyboxRenderer(game->dataSystem, cameraController.getCamera()){
+PlayingScreen::PlayingScreen(Minecraft* game) : m_pGame(game),
+                                                m_cameraController(game->m_pGraphicsSystem->getViewport()->getCamera()),
+                                                m_worldRenderer(game->m_pDataSystem, m_cameraController.getCamera()),
+                                                m_skyboxRenderer(game->m_pDataSystem, m_cameraController.getCamera()){
 
 
-	cameraController.getCamera()->position->x = 0;
-	cameraController.getCamera()->position->y = CHUNK_SIZE_Y / 1.5f;
-	cameraController.getCamera()->position->z = 0;
+	m_cameraController.getCamera()->m_position.x = 0;
+	m_cameraController.getCamera()->m_position.y = 95;
+	m_cameraController.getCamera()->m_position.z = 0;
 }
 
 void PlayingScreen::render(const float dt) {
 	if (Lib::input->isKeyPressed(SDLK_TAB)) {
-		if (isWireframe) {
+		if (m_isWireframe) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 		else {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
-		isWireframe = !isWireframe;
+		m_isWireframe = !m_isWireframe;
 	}
 
-	cameraController.update(dt);
-	skyboxRenderer.render();
-	worldRenderer.render();
+	m_cameraController.update(dt);
+	m_skyboxRenderer.render();
+	m_worldRenderer.render();
 }
 
 void PlayingScreen::start() {
-	Lib::input->setProcessor(&cameraController);
+	Lib::input->setProcessor(&m_cameraController);
 }
 
 PlayingScreen::~PlayingScreen() {

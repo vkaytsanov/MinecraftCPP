@@ -49,7 +49,7 @@ double Select::GetValue(double x, double y, double z) const {
 		else if (controlValue < (m_lowerBound + m_edgeFalloff)) {
 			// The output value from the control module is near the lower end of the
 			// selector threshold and within the smooth curve. Interpolate between
-			// the output values from the first and second source modules.
+			// the output values from the first and second source m_modules.
 			double lowerCurve = (m_lowerBound - m_edgeFalloff);
 			double upperCurve = (m_lowerBound + m_edgeFalloff);
 			alpha = SCurve3(
@@ -68,7 +68,7 @@ double Select::GetValue(double x, double y, double z) const {
 		else if (controlValue < (m_upperBound + m_edgeFalloff)) {
 			// The output value from the control module is near the upper end of the
 			// selector threshold and within the smooth curve. Interpolate between
-			// the output values from the first and second source modules.
+			// the output values from the first and second source m_modules.
 			double lowerCurve = (m_upperBound - m_edgeFalloff);
 			double upperCurve = (m_upperBound + m_edgeFalloff);
 			alpha = SCurve3(

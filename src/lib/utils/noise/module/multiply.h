@@ -32,18 +32,18 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup combinermodules
 		/// @{
 
 		/// Noise module that outputs the product of the two output values from
-		/// two source modules.
+		/// two source m_modules.
 		///
 		/// @image html modulemultiply.png
 		///
-		/// This noise module requires two source modules.
+		/// This noise module requires two source m_modules.
 		class Multiply : public Module {
 
 		public:

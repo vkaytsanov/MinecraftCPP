@@ -45,7 +45,7 @@ namespace noise {
 
 		};
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup modifiermodules
@@ -150,22 +150,22 @@ namespace noise {
 			/// sorted control point array.
 			int FindInsertionPos(double inputValue);
 
-			/// Inserts the control point at the specified position in the
+			/// Inserts the control point at the specified p_position in the
 			/// internal control point array.
 			///
-			/// @param insertionPos The zero-based array position in which to
+			/// @param insertionPos The zero-based array p_position in which to
 			/// insert the control point.
 			/// @param inputValue The input value stored in the control point.
 			/// @param outputValue The output value stored in the control point.
 			///
 			/// To make room for this new control point, this method reallocates
 			/// the control point array and shifts all control points occurring
-			/// after the insertion position up by one.
+			/// after the insertion p_position m_up by one.
 			///
 			/// Because the curve mapping algorithm used by this noise module
 			/// requires that all control points in the array must be sorted by
 			/// input value, the new control point should be inserted at the
-			/// position in which the order is still preserved.
+			/// p_position in which the order is still preserved.
 			void InsertAtPos(int insertionPos, double inputValue,
 			                 double outputValue);
 

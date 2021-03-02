@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup generatormodules
@@ -64,7 +64,7 @@ namespace noise {
 		/// This noise module, modified with some low-frequency, low-power
 		/// turbulence, is useful for generating agate-like textures.
 		///
-		/// This noise module does not require any source modules.
+		/// This noise module does not require any source m_modules.
 		class Spheres : public Module {
 
 		public:

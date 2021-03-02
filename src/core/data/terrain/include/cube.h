@@ -16,13 +16,17 @@ enum CubeType {
 	TNT,
 	Web,
 	FlowerBlue,
+	SugarCane,
+	Bush,
 	FlowerYellow,
 	Treelet,
 	BrokenStone,
 	Bedrock,
 	Sand,
+	Sandstone,
 	NetherGravel,
 	Wood,
+	Cactus,
 	IronProcessed,
 	GoldProcessed,
 	DiamondProcessed,
@@ -31,6 +35,9 @@ enum CubeType {
 	Iron,
 	Coal,
 	Diamond,
+	Redstone,
+
+	Leaves,
 
 	Water,
 	Lava,
@@ -49,11 +56,13 @@ enum CubeFaceType {
 };
 
 struct Cube {
-	CubeType type = Air;
+	CubeType m_type = Air;
 
+	bool isOpaque() const;
 	bool isTransparent() const;
 	bool isLiquid() const;
-	bool isEntity() const;
+	bool isModel() const;
+	bool isGround() const;
 };
 
 

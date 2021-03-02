@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup selectormodules
@@ -50,11 +50,11 @@ namespace noise {
 		const double DEFAULT_SELECT_UPPER_BOUND = 1.0;
 
 		/// Noise module that outputs the value selected from one of two source
-		/// modules chosen by the output value from a control module.
+		/// m_modules chosen by the output value from a control module.
 		///
 		/// @image html moduleselect.png
 		///
-		/// Unlike most other noise modules, the index value assigned to a source
+		/// Unlike most other noise m_modules, the index value assigned to a source
 		/// module determines its role in the selection operation:
 		/// - Source module 0 (upper left in the diagram) outputs a value.
 		/// - Source module 1 (lower left in the diagram) outputs a value.
@@ -74,11 +74,11 @@ namespace noise {
 		/// application code easier to read.
 		///
 		/// By default, there is an abrupt transition between the output values
-		/// from the two source modules at the selection-range boundary.  To
+		/// from the two source m_modules at the selection-range boundary.  To
 		/// smooth the transition, pass a non-zero value to the SetEdgeFalloff()
 		/// method.  Higher values result in a smoother transition.
 		///
-		/// This noise module requires three source modules.
+		/// This noise module requires three source m_modules.
 		class Select : public Module {
 
 		public:
@@ -126,7 +126,7 @@ namespace noise {
 			/// edge of the selection range.
 			///
 			/// By default, there is an abrupt transition between the output
-			/// values from the two source modules at the selection-range
+			/// values from the two source m_modules at the selection-range
 			/// boundary.
 			double GetEdgeFalloff() const {
 				return m_edgeFalloff;
@@ -211,7 +211,7 @@ namespace noise {
 			/// edge of the selection range.
 			///
 			/// By default, there is an abrupt transition between the values from
-			/// the two source modules at the boundaries of the selection range.
+			/// the two source m_modules at the boundaries of the selection range.
 			///
 			/// For example, if the selection range is 0.5 to 0.8, and the edge
 			/// falloff value is 0.1, then the GetValue() method outputs:
@@ -219,13 +219,13 @@ namespace noise {
 			///   if the output value from the control module is less than 0.4
 			///   ( = 0.5 - 0.1).
 			/// - a linear blend between the two output values from the two source
-			///   modules if the output value from the control module is between
+			///   m_modules if the output value from the control module is between
 			///   0.4 ( = 0.5 - 0.1) and 0.6 ( = 0.5 + 0.1).
 			/// - the output value from the source module with an index value of 1
 			///   if the output value from the control module is between 0.6
 			///   ( = 0.5 + 0.1) and 0.7 ( = 0.8 - 0.1).
 			/// - a linear blend between the output values from the two source
-			///   modules if the output value from the control module is between
+			///   m_modules if the output value from the control module is between
 			///   0.7 ( = 0.8 - 0.1 ) and 0.9 ( = 0.8 + 0.1).
 			/// - the output value from the source module with an index value of 0
 			///   if the output value from the control module is greater than 0.9

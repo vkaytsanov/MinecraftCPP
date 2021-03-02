@@ -40,7 +40,7 @@ using namespace noise;
 // Constants used by the original version of libnoise.
 // Because X_NOISE_GEN is not relatively prime to the other values, and
 // Z_NOISE_GEN is close to 256 (the number of random gradient vectors),
-// patterns show up in high-frequency coherent noise.
+// patterns show m_up in high-frequency coherent noise.
 const int X_NOISE_GEN = 1;
 const int Y_NOISE_GEN = 31337;
 const int Z_NOISE_GEN = 263;
@@ -128,7 +128,7 @@ double noise::GradientNoise3D(double fx, double fy, double fz, int ix,
 	double yvGradient = g_randomVectors[(vectorIndex << 2) + 1];
 	double zvGradient = g_randomVectors[(vectorIndex << 2) + 2];
 
-	// Set up us another vector equal to the distance between the two vectors
+	// Set m_up us another vector equal to the distance between the two vectors
 	// passed to this function.
 	double xvPoint = (fx - (double) ix);
 	double yvPoint = (fy - (double) iy);

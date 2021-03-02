@@ -13,7 +13,7 @@ enum GameState {
 
 class GameStateManager {
 private:
-	GameState* currentState;
+	GameState m_currentState;
 public:
 	GameStateManager();
 	~GameStateManager();

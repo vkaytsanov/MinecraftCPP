@@ -6,17 +6,17 @@
 #define VIEWPORT_H
 
 #include "SDL.h"
-#include "camera.h"
+#include "../camera/include/camera.h"
 
 class Viewport {
 private:
-	Camera* camera;
-	float worldWidth;
-	float worldHeight;
-	int screenX;
-	int screenY;
-	int screenWidth;
-	int screenHeight;
+	Camera* m_pCamera;
+	float m_worldWidth;
+	float m_worldHeight;
+	int m_screenX;
+	int m_screenY;
+	int m_screenWidth;
+	int m_screenHeight;
 protected:
 	void setScreenBounds(int x, int y, const int& width, const int& height);
 public:

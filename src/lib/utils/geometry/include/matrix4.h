@@ -74,7 +74,7 @@ public:
 
 	void setToOrthogonal2D(T x, T y, T width, T height) {
 		// in 2D we dont use the z coordinate, instead we use 0 for near clipping
-		// plane that is at the start of the camera and 1 for far clipping plane
+		// plane that is at the start of the m_pCamera and 1 for far clipping plane
 		setToOrthogonal(x, x + width, y, y + height, 0, 1);
 	}
 
@@ -204,7 +204,7 @@ public:
 		}
 	}
 
-	/** https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix */
+	/** https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-m_projection-matrix/opengl-perspective-m_projection-matrix */
 	Matrix4<T> setToProjection(const T fov, const T near, const T far, const T aspectRatio) {
 		const float tanHalfFovy = std::tan(fov / 2.f);
 

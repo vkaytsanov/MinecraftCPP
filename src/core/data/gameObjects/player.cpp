@@ -6,7 +6,7 @@
 
 void Player::update(float dt) {
 	cameraController.update(dt);
-	setX(cameraController.getCamera()->position->x);
-	setY(cameraController.getCamera()->position->y);
-	setZ(cameraController.getCamera()->position->z);
+	setX(cameraController.getCamera()->m_position.x);
+	setY(cameraController.getCamera()->m_position.y);
+	setZ(cameraController.getCamera()->m_position.z);
 }

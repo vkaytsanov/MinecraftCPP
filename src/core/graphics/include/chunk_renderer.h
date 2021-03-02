@@ -7,7 +7,7 @@
 
 #include "../../../lib/utils/include/shaders.h"
 #include "graphics_system.h"
-#include "../../data/include/chunk.h"
+#include "../../data/terrain/include/chunk.h"
 #include "../../data/include/data_system.h"
 
 
@@ -21,6 +21,7 @@ public:
 	void beginChunkRendering(Camera* camera);
 	void renderChunk(Chunk* chunk, int x, int z);
 	void renderTransparentChunk(Chunk* chunk, int x, int z);
+	void renderModelChunk(Chunk* chunk, int x, int z);
 	void endChunkRendering();
 };
 

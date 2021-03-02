@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup generatormodules
@@ -84,7 +84,7 @@ namespace noise {
 		/// Ridged-multifractal noise is often used to generate craggy mountainous
 		/// terrain or marble-like textures.
 		///
-		/// This noise module does not require any source modules.
+		/// This noise module does not require any source m_modules.
 		///
 		/// <b>Octaves</b>
 		///

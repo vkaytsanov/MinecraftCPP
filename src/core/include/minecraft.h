@@ -15,10 +15,10 @@
 
 class Minecraft : public Listener {
 public:
-	GameStateManager* gameStateManager;
-	DataSystem* dataSystem;
-	GraphicsSystem* graphicsSystem;
-	LogicSystem* logicSystem;
+	GameStateManager m_gameStateManager;
+	DataSystem* m_pDataSystem;
+	GraphicsSystem* m_pGraphicsSystem;
+	LogicSystem* m_pLogicSystem;
 
 	Minecraft() = default;
 	~Minecraft() override;

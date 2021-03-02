@@ -10,12 +10,12 @@
 
 class PerspectiveCamera : public Camera {
 private:
-	float fov;
+	float m_fov;
 public:
 	PerspectiveCamera();
 	explicit PerspectiveCamera(float fieldOfView);
 	PerspectiveCamera(float fieldOfView, float worldWidth, float worldHeight);
-	void update() override;
+	void update(bool updateFrustum) override;
 };
 
 

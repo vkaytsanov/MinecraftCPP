@@ -27,7 +27,7 @@ using namespace noise::module;
 Module::Module(int sourceModuleCount) {
 	m_pSourceModule = NULL;
 
-	// Create an array of pointers to all source modules required by this
+	// Create an array of pointers to all source m_modules required by this
 	// noise module.  Set these pointers to NULL.
 	if (sourceModuleCount > 0) {
 		m_pSourceModule = new const Module* [sourceModuleCount];

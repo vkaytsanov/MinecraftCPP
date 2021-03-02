@@ -31,7 +31,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @defgroup combinermodules Combiner Modules
@@ -47,7 +47,7 @@ namespace noise {
 		///
 		/// The second source module must have an index value of 1.
 		///
-		/// This noise module requires two source modules.
+		/// This noise module requires two source m_modules.
 		class Power : public Module {
 
 		public:

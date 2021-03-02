@@ -32,7 +32,7 @@ namespace noise {
 		/// @addtogroup libnoise
 		/// @{
 
-		/// @addtogroup modules
+		/// @addtogroup m_modules
 		/// @{
 
 		/// @addtogroup generatormodules
@@ -84,7 +84,7 @@ namespace noise {
 		/// Voronoi cells are often used to generate cracked-mud terrain
 		/// formations or crystal-like textures
 		///
-		/// This noise module requires no source modules.
+		/// This noise module requires no source m_modules.
 		class Voronoi : public Module {
 
 		public:

@@ -7,14 +7,14 @@
 #include "../include/minecraft.h"
 #include "../../lib/include/lib.h"
 
-ModWorldExploration::ModWorldExploration(Minecraft* game) : p_game(game),
-                                                            m_chunkMeshGeneration(&game->dataSystem->world) {
+ModWorldExploration::ModWorldExploration(Minecraft* game) : m_pGame(game),
+                                                            m_chunkMeshGeneration(&game->m_pDataSystem->world) {
 
 }
 
 void ModWorldExploration::init() {
-	int x = (int) p_game->graphicsSystem->getViewport()->getCamera()->position->x / CHUNK_SIZE_X;
-	int z = (int) p_game->graphicsSystem->getViewport()->getCamera()->position->z / CHUNK_SIZE_Z;
+	int x = (int) m_pGame->m_pGraphicsSystem->getViewport()->getCamera()->m_position.x / CHUNK_SIZE_X;
+	int z = (int) m_pGame->m_pGraphicsSystem->getViewport()->getCamera()->m_position.z / CHUNK_SIZE_Z;
 
 	constructNewCoordinates(x, z);
 
@@ -25,8 +25,8 @@ void ModWorldExploration::init() {
 
 void ModWorldExploration::update() {
 	// 2 cubes difference so it can start constructing before
-	int x = (int) p_game->graphicsSystem->getViewport()->getCamera()->position->x / (CHUNK_SIZE_X - 2);
-	int z = (int) p_game->graphicsSystem->getViewport()->getCamera()->position->z / (CHUNK_SIZE_Z - 2);
+	int x = (int) m_pGame->m_pGraphicsSystem->getViewport()->getCamera()->m_position.x / (CHUNK_SIZE_X);
+	int z = (int) m_pGame->m_pGraphicsSystem->getViewport()->getCamera()->m_position.z / (CHUNK_SIZE_Z);
 
 	if (m_lastPlayerX != x || m_lastPlayerZ != z) {
 		constructNewCoordinates(x, z);
@@ -47,10 +47,10 @@ void ModWorldExploration::constructNewCoordinates(int x, int z) {
 	int counter = 0;
 	for (int i = x - EXPLORATION_DISTANCE; i < x + EXPLORATION_DISTANCE; i++) {
 		for (int j = z - EXPLORATION_DISTANCE; j < z + EXPLORATION_DISTANCE; j++) {
-			p_game->dataSystem->world.addChunk(i, j);
-			if (p_game->dataSystem->world.getChunk(i, j)->chunkState == Empty) {
+			m_pGame->m_pDataSystem->world.addChunk(i, j);
+			if (m_pGame->m_pDataSystem->world.getChunk(i, j)->m_chunkState == Empty) {
+				m_worldGeneration.generateChunkContents(m_pGame->m_pDataSystem->world.getChunk(i, j), i, j);
 				counter++;
-				m_worldGeneration.generateChunkContents(p_game->dataSystem->world.getChunk(i, j), i, j);
 			}
 
 		}
@@ -59,7 +59,7 @@ void ModWorldExploration::constructNewCoordinates(int x, int z) {
 	counter = 0;
 	for (int i = x - BUILD_DISTANCE; i < x + BUILD_DISTANCE; i++) {
 		for (int j = z - BUILD_DISTANCE; j < z + BUILD_DISTANCE; j++) {
-			if (p_game->dataSystem->world.getChunk(i, j)->chunkMeshState == UnBuilt) {
+			if (m_pGame->m_pDataSystem->world.getChunk(i, j)->m_chunkMeshState == UnBuilt) {
 				m_chunkMeshGeneration.generate(i, j);
 				counter++;
 			}

@@ -70,6 +70,13 @@ public:
 		return *this;
 	}
 
+	Vector3<T>& operator/=(const T value) {
+		this->x /= value;
+		this->y /= value;
+		this->z /= value;
+		return *this;
+	}
+
 	Vector3<T>& operator+=(const Vector3<T>& vec) {
 		this->x += vec.x;
 		this->y += vec.y;

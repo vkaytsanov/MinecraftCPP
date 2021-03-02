@@ -10,51 +10,52 @@
 #include <vector>
 #include "../../lib/utils/openGL/include/vertex.h"
 #include "../../data/include/world.h"
-#include "../../data/include/cube.h"
-#include "../../data/include/cube_data_base.h"
+#include "../../data/terrain/include/cube.h"
+#include "../../data/terrain/include/cube_data_base.h"
 
 
 typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z> ChunkContents;
 typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z>* ChunkContentsPtr;
 
-static float planes[6 * 4 * 3] = {
+static const int8_t planes[6 * 4 * 3] = {
 		// Front
-		0.0f, 0.0f, 1.0f,
-		1.0f, 0.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		0.0f, 1.0f, 1.0f,
+		0, 0, 1,
+		1, 0, 1,
+		1, 1, 1,
+		0, 1, 1,
 		// Back
-		1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,
+		1, 0, 0,
+		0, 0, 0,
+		0, 1, 0,
+		1, 1, 0,
 		// Top
-		0.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
+		0, 1, 1,
+		1, 1, 1,
+		1, 1, 0,
+		0, 1, 0,
 		// Bottom
-		0.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
+		0, 0, 0,
+		1, 0, 0,
+		1, 0, 1,
+		0, 0, 1,
 		// Left
-		0.0f, 1.0f, 1.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f,
+		0, 1, 1,
+		0, 1, 0,
+		0, 0, 0,
+		0, 0, 1,
 		// Right
-		1.0f, 0.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 1.0f,
+		1, 0, 0,
+		1, 1, 0,
+		1, 1, 1,
+		1, 0, 1,
 };
 
 class ChunkMeshGeneration {
 private:
-	World* world;
-	std::array<std::vector<Vertex>, 2> vertices;
+	World* m_world;
+	std::array<std::vector<Vertex>, 3> m_vertices;
 	void addFace(CubeType type, CubeFaceType face, Vector3f& position, bool isTransparent);
+	void addModel(CubeType type, Vector3f& position);
 	static bool isVisibleEdge(ChunkContentsPtr chunkData, ChunkContentsPtr lowerNeighbourData,
 	                          ChunkContentsPtr upperNeighbourData, int x, int y, int z, Axis axis);
 	static bool isVisibleSide(ChunkContentsPtr chunkData, int x, int y, int z, int side, Axis axis);
