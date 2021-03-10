@@ -11,17 +11,15 @@
 
 class FirstPersonCameraController : public InputProcessor {
 private:
-	Camera* camera;
-	float horizontalAngle = 3.14f;
-	float verticalAngle = 0;
-	const float CHARACTER_MOVEMENT_INTENSITY = 45.f;
-	const float CAMERA_MOVEMENT_INTENSITY = 0.5f;
+	Camera* m_pCamera;
+	const float CAMERA_MOVEMENT_INTENSITY = 25.f;
+	const float CHARACTER_MOVEMENT_INTENSITY = 7.f;
 	void handleButtonMovement(const float dt);
 	void handleMouseMovement(const float dt);
 public:
 	explicit FirstPersonCameraController(Camera* camera);
+	FirstPersonCameraController() = default;
 	void update(const float dt);
-	Camera* getCamera() const;
 };
 
 

@@ -6,6 +6,7 @@
 #define VECTOR3_H
 
 
+#include <cmath>
 #include "quaternion.h"
 
 template<typename T>
@@ -36,23 +37,23 @@ public:
 		this->z = z;
 	}
 
-	Vector3<T> operator+(const Vector3<T>& vec) {
+	Vector3<T> operator+(const Vector3<T>& vec) const {
 		return Vector3<T>(this->x + vec.x, this->y + vec.y, this->z + vec.z);
 	}
 
-	Vector3<T> operator-(const Vector3<T>& vec) {
+	Vector3<T> operator-(const Vector3<T>& vec) const{
 		return Vector3<T>(this->x - vec.x, this->y - vec.y, this->z - vec.z);
 	}
 
-	Vector3<T> operator*(const Vector3<T>& vec) {
+	Vector3<T> operator*(const Vector3<T>& vec) const {
 		return Vector3<T>(this->x * vec.x, this->y * vec.y, this->z * vec.z);
 	}
 
-	Vector3<T> operator*(const T& scale) {
+	Vector3<T> operator*(const T scale) const {
 		return Vector3<T>(this->x * scale, this->y * scale, this->z * scale);
 	}
 
-	Vector3<T> operator/(const Vector3<T>& vec) {
+	Vector3<T> operator/(const Vector3<T>& vec) const {
 		return Vector3<T>(this->x / vec.x, this->y / vec.y, this->z / vec.z);
 	}
 
@@ -98,7 +99,7 @@ public:
 		return *this;
 	}
 
-	Vector3<T> operator*(const Matrix4<T>& mat) {
+	Vector3<T> operator*(const Matrix4<T>& mat) const {
 		return Vector3<T>(
 				x * mat.a[0] + y * mat.a[1] + z * mat.a[2] + mat.a[3],
 				x * mat.a[4] + y * mat.a[5] + z * mat.a[6] + mat.a[7],
@@ -138,6 +139,12 @@ public:
 		return (this->x * vec.x + this->y * vec.y + this->z * vec.z);
 	}
 
+	float distance(const Vector3<T>& vec){
+		int xD = vec.x - this->x;
+		int yD = vec.y - this->y;
+		return std::sqrt((xD * xD) + (yD * yD));
+	}
+
 	/** returns the cross product |a x b| between two vectors,
 	 * using the right hand rule where:
 	 * @param this - middle finger pointing at us
@@ -163,9 +170,18 @@ public:
 		this->z = z;
 	}
 
+	static Vector3<T> floor(Vector3<T> a){
+		return Vector3<T>(std::floor(a.x), std::floor(a.y), std::floor(a.z));
+	}
+
+	void debug() {
+		Lib::app->log("vector", (std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(z)).c_str());
+	}
 };
 
 typedef Vector3<float> Vector3f;
 typedef Vector3<int> Vector3i;
+
+
 
 #endif //VECTOR3_H

@@ -9,7 +9,7 @@
 
 
 Shaders::Shaders(const std::string& vertexShaderPath, const std::string& fragShaderPath) {
-	// assigning to temp std::string, else we get garbage value of the variable that just left the stack
+	// assigning to temp std::string, else we getComponent garbage value of the variable that just left the stack
 	parsedVertexShader = readFromFile(shadersPath + vertexShaderPath);
 	vertexShader = parsedVertexShader.c_str();
 
@@ -137,23 +137,23 @@ GLint Shaders::getUniformLocation(std::string& name) {
 	return uniforms[name];
 }
 
-void Shaders::setMatrix4(std::string name, Matrix4f& mat) {
+void Shaders::setMatrix4(std::string name, const Matrix4f& mat) {
 	glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, mat.a);
 }
 
-void Shaders::setInt(std::string name, int number) {
+void Shaders::setInt(std::string name, const int number) {
 	glUniform1i(getUniformLocation(name), number);
 }
 
-void Shaders::setFloat(std::string name, float number) {
+void Shaders::setFloat(std::string name, const float number) {
 	glUniform1f(getUniformLocation(name), number);
 }
 
-void Shaders::setVector3f(std::string name, float x, float y, float z) {
+void Shaders::setVector3f(std::string name, const float x, const float y, const float z) {
 	glUniform3f(getUniformLocation(name), x, y, z);
 }
 
-void Shaders::setVector3f(std::string name, Vector3f& vec) {
+void Shaders::setVector3f(std::string name, const Vector3f& vec) {
 	glUniform3f(getUniformLocation(name), vec.x, vec.y, vec.z);
 }
 

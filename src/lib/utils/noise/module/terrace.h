@@ -64,7 +64,7 @@ namespace noise {
 		/// that value is less than the value of the lowest control point or
 		/// greater than the value of the highest control point.
 		///
-		/// This noise module is often used to generate terrain features such as
+		/// This noise module is often used to build terrain features such as
 		/// your stereotypical desert canyon.
 		///
 		/// This noise module requires one source module.
@@ -156,7 +156,7 @@ namespace noise {
 			/// Creates a number of equally-spaced control points that range from
 			/// -1 to +1.
 			///
-			/// @param controlPointCount The number of control points to generate.
+			/// @param controlPointCount The number of control points to build.
 			///
 			/// @pre The number of control points must be greater than or equal to
 			/// 2.

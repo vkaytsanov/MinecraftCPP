@@ -92,7 +92,7 @@ double Curve::GetValue(double x, double y, double z) const {
 
 	// If some control points are missing (which occurs if the value from the
 	// source module is greater than the largest input value or less than the
-	// smallest input value of the control point array), get the corresponding
+	// smallest input value of the control point array), getComponent the corresponding
 	// output value of the nearest control point and exit now.
 	if (index1 == index2) {
 		return m_pControlPoints[index1].outputValue;

@@ -6,41 +6,41 @@
 Graphics::Graphics() : Graphics(new Configuration()) {}
 
 Graphics::Graphics(Configuration* config) {
-	this->config = config;
-	screenSurface = nullptr;
-	window = nullptr;
-	renderer = nullptr;
+	this->m_config = config;
+	m_screenSurface = nullptr;
+	m_window = nullptr;
+	m_renderer = nullptr;
 }
 
 void Graphics::updateTime() {
 	// calculating the delta time
 	uint64_t time = SDL_GetTicks();
-	deltaTime = (time - lastTime) / 1000.0f;
-	lastTime = time;
+	m_deltaTime = (time - m_lastTime) / 1000.0f;
+	m_lastTime = time;
 
-	// calculating fps
-	if (time - frameStart >= 1000) {
-		fps = frames;
-		frames = 0;
-		frameStart = time;
+	// calculating m_fps
+	if (time - m_frameStart >= 1000) {
+		m_fps = m_frames;
+		m_frames = 0;
+		m_frameStart = time;
 	}
-	frames++;
+	m_frames++;
 }
 
-int Graphics::getWidth() {
-	return config->width;
+int Graphics::getWidth() const{
+	return m_config->width;
 }
 
-int Graphics::getHeight() {
-	return config->height;
+int Graphics::getHeight() const {
+	return m_config->height;
 }
 
 float Graphics::getDeltaTime() const {
-	return deltaTime;
+	return m_deltaTime;
 }
 
 float Graphics::getFps() {
-	return fps;
+	return m_fps;
 }
 
 void Graphics::createWindow() {
@@ -62,23 +62,24 @@ void Graphics::createWindow() {
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 
-		//Create window
-		window = SDL_CreateWindow(config->title,
-		                          config->x,
-		                          config->y,
-		                          config->width,
-		                          config->height,
-		                          config->isVisible | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-		if (window == nullptr) {
+		//Create m_window
+		m_window = SDL_CreateWindow(m_config->title,
+		                            m_config->x,
+		                            m_config->y,
+		                            m_config->width,
+		                            m_config->height,
+		                          m_config->isVisible | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+		if (m_window == nullptr) {
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			exit(-1);
 		}
 		else {
-			//Create the context for OpenGL
-			context = SDL_GL_CreateContext(window);
+			//Create the m_context for OpenGL
+			m_context = SDL_GL_CreateContext(m_window);
 
-			if (!context) {
-				fprintf(stderr, "Couldn't create context: %s\n", SDL_GetError());
+
+			if (!m_context) {
+				fprintf(stderr, "Couldn't create m_context: %s\n", SDL_GetError());
 			}
 			else {
 				GLenum err = glewInit();
@@ -93,18 +94,18 @@ void Graphics::createWindow() {
 
 			}
 
-			//Get window surface
-			screenSurface = SDL_GetWindowSurface(window);
-			if (screenSurface == nullptr) {
+			//Get m_window surface
+			m_screenSurface = SDL_GetWindowSurface(m_window);
+			if (m_screenSurface == nullptr) {
 				printf("ScreenSurface could not be created! SDL_Error: %s\n", SDL_GetError());
 				exit(-1);
 			}
 			else {
 				//Update the surface
-				SDL_UpdateWindowSurface(window);
-				//Create renderer
-				renderer = SDL_CreateRenderer(window, -1, 0);
-				if (renderer == nullptr) {
+				SDL_UpdateWindowSurface(m_window);
+				//Create m_renderer
+				m_renderer = SDL_CreateRenderer(m_window, -1, 0);
+				if (m_renderer == nullptr) {
 					printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
 					exit(-1);
 				}
@@ -119,21 +120,21 @@ void Graphics::createWindow() {
 }
 
 void Graphics::update() {
-	SDL_UpdateWindowSurface(window);
+	SDL_UpdateWindowSurface(m_window);
 }
 
 Graphics::~Graphics() {
-	//Destroy openGL context
-	SDL_GL_DeleteContext(context);
+	//Destroy openGL m_context
+	SDL_GL_DeleteContext(m_context);
 	//Destroy surface
-	SDL_FreeSurface(screenSurface);
-	screenSurface = nullptr;
-	//Destroy renderer
-	SDL_DestroyRenderer(renderer);
-	renderer = nullptr;
-	//Destroy window
-	SDL_DestroyWindow(window);
-	window = nullptr;
+	SDL_FreeSurface(m_screenSurface);
+	m_screenSurface = nullptr;
+	//Destroy m_renderer
+	SDL_DestroyRenderer(m_renderer);
+	m_renderer = nullptr;
+	//Destroy m_window
+	SDL_DestroyWindow(m_window);
+	m_window = nullptr;
 	//Shutdown SDL_TTF
 	TTF_Quit();
 	//Shut down SDL_Image
@@ -143,39 +144,39 @@ Graphics::~Graphics() {
 }
 
 SDL_Renderer* Graphics::getRenderer() const {
-	return renderer;
+	return m_renderer;
 }
 
-void Graphics::setWidth(const int& width) {
-	config->width = width;
+void Graphics::setWidth(const int width) const{
+	m_config->width = width;
 }
 
-void Graphics::setHeight(const int& height) {
-	config->height = height;
+void Graphics::setHeight(const int height) const{
+	m_config->height = height;
 }
 
 bool Graphics::isBackground() const {
-	return background;
+	return m_background;
 }
 
-void Graphics::setBackground(bool background) {
-	Graphics::background = background;
+void Graphics::setBackground(const bool background) {
+	this->m_background = background;
 }
 
 bool Graphics::isVisible() const {
-	return visible;
+	return m_visible;
 }
 
-void Graphics::setVisible(bool visible) {
-	Graphics::visible = visible;
+void Graphics::setVisible(const bool visible) {
+	this->m_visible = visible;
 }
 
-SDL_Window* Graphics::getWindow() {
-	return window;
+SDL_Window* Graphics::getWindow() const {
+	return m_window;
 }
 
 SDL_Surface* Graphics::getScreenSurface() const {
-	return screenSurface;
+	return m_screenSurface;
 }
 
 

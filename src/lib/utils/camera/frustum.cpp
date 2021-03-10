@@ -4,37 +4,7 @@
 
 #include "include/frustum.h"
 
-FrustumAABB::FrustumAABB(Vector3f dimensions, Vector3f position) :m_dimensions(dimensions), m_position(position){
 
-}
-
-Vector3f FrustumAABB::getNegativeFarPoint(const Vector3f& normal) {
-	Vector3f result = m_position;
-	if(normal.x < 0){
-		result.x += m_dimensions.x;
-	}
-	if(normal.y < 0){
-		result.y += m_dimensions.y;
-	}
-	if(normal.z < 0){
-		result.z += m_dimensions.z;
-	}
-	return result;
-}
-
-Vector3f FrustumAABB::getPositiveFarPoint(const Vector3f& normal) {
-	Vector3f result = m_position;
-	if(normal.x > 0){
-		result.x += m_dimensions.x;
-	}
-	if(normal.y > 0){
-		result.y += m_dimensions.y;
-	}
-	if(normal.z > 0){
-		result.z += m_dimensions.z;
-	}
-	return result;
-}
 
 float Plane::distanceToPoint(Vector3f point) {
 	return point.dot(m_normal) + m_distanceToOrigin;
@@ -71,12 +41,6 @@ void Frustum::update(Matrix4f* combined) {
 	m_planes[PlaneType::RightPlane].m_normal.z = combined->a[A23] - combined->a[A20];
 	m_planes[PlaneType::RightPlane].m_distanceToOrigin = combined->a[A33] - combined->a[A30];
 
-
-
-
-
-
-
 	for(auto& plane: m_planes){
 		float length = plane.m_normal.length();
 		plane.m_normal /= length;
@@ -85,9 +49,9 @@ void Frustum::update(Matrix4f* combined) {
 	}
 }
 
-bool Frustum::boxInFrustum(FrustumAABB& box) {
+bool Frustum::boxInFrustum(FrustumAABB* box) {
 	for(auto& plane : m_planes){
-		if(plane.distanceToPoint(box.getPositiveFarPoint(plane.m_normal)) < 0){
+		if(plane.distanceToPoint(box->getPositiveFarPoint(plane.m_normal)) < 0){
 			return false;
 		}
 	}

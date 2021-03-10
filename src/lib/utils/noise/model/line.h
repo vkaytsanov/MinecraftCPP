@@ -45,7 +45,7 @@ namespace noise {
 		///  - roads and rivers
 		///  - disaffected college students
 		///
-		/// To generate an output value, pass an input value between 0.0 and 1.0
+		/// To build an output value, pass an input value between 0.0 and 1.0
 		/// to the GetValue() method.  0.0 represents the start p_position of the
 		/// line segment and 1.0 represents the end p_position of the line segment.
 		class Line {
@@ -57,7 +57,7 @@ namespace noise {
 
 			/// Constructor
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			Line(const module::Module& module);
 
@@ -72,7 +72,7 @@ namespace noise {
 				return m_attenuate;
 			}
 
-			/// Returns the noise module that is used to generate the output
+			/// Returns the noise module that is used to build the output
 			/// values.
 			///
 			/// @returns A reference to the noise module.
@@ -126,9 +126,9 @@ namespace noise {
 				m_z1 = z;
 			}
 
-			/// Sets the noise module that is used to generate the output values.
+			/// Sets the noise module that is used to build the output values.
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			///
 			/// This noise module must exist for the lifetime of this object,
@@ -155,7 +155,7 @@ namespace noise {
 			/// (moved toward 0.0) as the ends of the line segment are approached.
 			bool m_attenuate;
 
-			/// A pointer to the noise module used to generate the output values.
+			/// A pointer to the noise module used to build the output values.
 			const module::Module* m_pModule;
 
 			/// @a x coordinate of the start of the line segment.

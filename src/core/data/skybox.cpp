@@ -4,9 +4,9 @@
 
 #include <vector>
 #include "include/skybox.h"
-#include "include/assets.h"
+#include "include/asset_manager.h"
 
-Skybox::Skybox() {
+Skybox::Skybox(){
 	float vertices[3 * 6 * 6] = {
 			-10.0f,  10.0f, -10.0f,
 			-10.0f, -10.0f, -10.0f,
@@ -50,10 +50,12 @@ Skybox::Skybox() {
 			-10.0f, -10.0f,  10.0f,
 			10.0f, -10.0f,  10.0f
 	};
+	// to get the path to the assets
+	AssetManager::getInstance();
 	std::vector<std::string> paths = {
 			ASSETS_LOCATION + "skybox/skybox-right.png",
 			ASSETS_LOCATION + "skybox/skybox-left.png",
-			ASSETS_LOCATION + "skybox/skybox-top.png",
+			ASSETS_LOCATION + "skybox/skybox-front.png",
 			ASSETS_LOCATION + "skybox/skybox-bottom.png",
 			ASSETS_LOCATION + "skybox/skybox-front.png",
 			ASSETS_LOCATION + "skybox/skybox-back.png",
@@ -68,8 +70,10 @@ Skybox::Skybox() {
 	vao.unbind();
 }
 
+
 const VertexArray& Skybox::getVao() const {
 	return vao;
 }
+
 
 

@@ -10,9 +10,9 @@ void Viewport::apply(bool centerCamera) const {
 	m_pCamera->m_viewportWidth = m_worldWidth;
 	m_pCamera->m_viewportHeight = m_worldHeight;
 	if (centerCamera) {
-		m_pCamera->m_position.x = m_worldWidth / 2;
-		m_pCamera->m_position.y = m_worldHeight / 2;
-		m_pCamera->m_position.z = 0;
+		m_pCamera->m_pTransform->position.x = m_worldWidth / 2;
+		m_pCamera->m_pTransform->position.y = m_worldHeight / 2;
+		m_pCamera->m_pTransform->position.z = 0;
 	}
 	m_pCamera->update(true);
 }

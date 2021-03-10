@@ -7,8 +7,7 @@
 #include <cmath>
 
 
-TextureRegion::TextureRegion(Texture* texture) {
-	this->texture = texture;
+TextureRegion::TextureRegion(const Texture* texture) : texture(texture){
 	regionWidth = texture->getWidth();
 	regionHeight = texture->getHeight();
 }
@@ -18,8 +17,7 @@ TextureRegion::TextureRegion(Texture* texture, int width, int height) {
 	setRegionXY(0, 0, width, height);
 }
 
-TextureRegion::TextureRegion(Texture* texture, int x, int y, int width, int height) {
-	this->texture = texture;
+TextureRegion::TextureRegion(const Texture* texture, int x, int y, int width, int height) : texture(texture){
 	setRegionXY(x, y, width, height);
 }
 
@@ -42,7 +40,7 @@ void TextureRegion::setRegionUV(float u, float v, float u2, float v2) {
 	this->v2 = v2;
 }
 
-Texture* TextureRegion::getTexture() const {
+const Texture* TextureRegion::getTexture() const {
 	return texture;
 }
 
@@ -93,7 +91,7 @@ float* TextureRegion::getUVs() {
 			u, v2,
 			u, v,
 			u2, v,
-			// top
+			// front
 			u, v2,
 			u2, v2,
 			u2, v,
@@ -128,7 +126,7 @@ int TextureRegion::getRegionY() const {
 	return (int) std::round(v * (float) texture->getHeight());
 }
 
-TextureRegion TextureRegion::operator+(const TextureRegion& tR) {
+TextureRegion& TextureRegion::operator+(const TextureRegion& tR) {
 	setRegionXY(std::min(getRegionX(), tR.getRegionX()), std::min(getRegionY(), tR.getRegionY()),
 	            regionWidth + tR.regionWidth, regionHeight);
 	return *this;

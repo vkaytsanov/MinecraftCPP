@@ -6,47 +6,40 @@
 #include "../../include/lib.h"
 
 FirstPersonCameraController::FirstPersonCameraController(Camera* camera) {
-	this->camera = camera;
+	m_pCamera = camera;
 }
 
 void FirstPersonCameraController::handleButtonMovement(const float dt) {
-	Vector3f vec = camera->m_direction;
+	Vector3f f = m_pCamera->getForwardVector();
+	Vector3f r = m_pCamera->getRightVector();
 	if (Lib::input->isKeyPressed(SDLK_a)) {
-		camera->m_position -= (vec.cross(camera->m_up).normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
+		m_pCamera->m_pTransform->position -= (r.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
 	}
 	if (Lib::input->isKeyPressed(SDLK_d)) {
-		camera->m_position += (vec.cross(camera->m_up).normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
+		m_pCamera->m_pTransform->position += (r.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
 	}
 	if (Lib::input->isKeyPressed(SDLK_w)) {
-		camera->m_position += (vec.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
+		m_pCamera->m_pTransform->position -= (f.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
 	}
 	if (Lib::input->isKeyPressed(SDLK_s)) {
-		camera->m_position -= (vec.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
+		m_pCamera->m_pTransform->position += (f.normalize() * dt * CHARACTER_MOVEMENT_INTENSITY);
 	}
 }
 
 void FirstPersonCameraController::handleMouseMovement(const float dt) {
-	if (Lib::input->isMouseLeftClick()) {
-
-		horizontalAngle += -(Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
-		verticalAngle += (Lib::input->getMouseDeltaY()) * dt * CAMERA_MOVEMENT_INTENSITY;
-
-		camera->m_direction.x = std::cos(verticalAngle) * std::sin(horizontalAngle);
-		camera->m_direction.y = std::sin(verticalAngle);
-		camera->m_direction.z = std::cos(verticalAngle) * std::cos(horizontalAngle);
+	if (Lib::input->isMouseRightClick()) {
+		float xRot = -(Lib::input->getMouseDeltaY()) * dt * CAMERA_MOVEMENT_INTENSITY;
+		float yRot = (Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
+		m_pCamera->m_pTransform->rotation = Vector3f(std::clamp(m_pCamera->m_pTransform->rotation.x + xRot, -90.f, 90.f),
+		                                             m_pCamera->m_pTransform->rotation.y + yRot,
+		                                             0);
 
 		Lib::input->resetMouse();
-
-
 	}
 }
 
 void FirstPersonCameraController::update(const float dt) {
 	handleButtonMovement(dt);
 	handleMouseMovement(dt);
-	camera->update(true);
 }
 
-Camera* FirstPersonCameraController::getCamera() const {
-	return camera;
-}

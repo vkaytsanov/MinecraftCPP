@@ -6,12 +6,12 @@
 #include "../../include/lib.h"
 
 VertexBuffer::VertexBuffer() {
-	buffer = 0;
-	glGenBuffers(1, &buffer);
+	m_buffer = 0;
+	glGenBuffers(1, &m_buffer);
 }
 
 VertexBuffer::~VertexBuffer() {
-	glDeleteBuffers(1, &buffer);
+	glDeleteBuffers(1, &m_buffer);
 	unbind();
 }
 
@@ -25,8 +25,8 @@ void VertexBuffer::vertexAttribPointer(GLuint index, GLint size, GLenum type, GL
 	glVertexAttribPointer(index, size, type, normalized, stride, pointer);
 }
 
-void VertexBuffer::bind() {
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+void VertexBuffer::bind() const {
+	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
 }
 
 void VertexBuffer::unbind() {

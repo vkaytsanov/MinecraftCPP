@@ -5,9 +5,9 @@
 #ifndef TEXTURE_CUBE_MAP_H
 #define TEXTURE_CUBE_MAP_H
 
+#include "GL/glew.h"
 #include <string>
 #include <vector>
-#include "GL/glew.h"
 #include "SDL.h"
 #include "SDL_image.h"
 

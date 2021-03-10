@@ -33,7 +33,7 @@ Application::Application(Listener* listener, Configuration* config, Graphics* gr
 	this->audio = new Audio();
 	// if we dont have declared title, we will use the name of the class
 	if (config->title == nullptr) config->title = typeid(listener).name();
-	// creating the window
+	// creating the m_window
 	graphics->createWindow();
 	// creating the environment lib
 	Lib::app = this;
@@ -58,18 +58,18 @@ void Application::gameLoop() {
 		input->update();
 		// processing the input by giving it to the processors
 		input->processEvents();
-		// user has clicked the top right "X" quit button
+		// user has clicked the front right "X" m_quit button
 		if (input->shouldQuit()) break;
 		bool isMinimized = !graphics->isVisible();
 		bool isBackground = graphics->isBackground();
 		bool isPaused = isMinimized || isBackground;
 		if (!wasPaused && isPaused) {
-			// the m_pGame window just became not active on the user's end
+			// the m_pGame m_window just became not active on the user's end
 			wasPaused = true;
 			listener->pause();
 		}
 		if (wasPaused && !isPaused) {
-			// the m_pGame window just became active on the user's end
+			// the m_pGame m_window just became active on the user's end
 			wasPaused = false;
 			listener->resume();
 		}

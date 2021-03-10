@@ -31,6 +31,20 @@ file(GLOB SOURCES
         "src/core/logic/events/include/*.h"
         "src/lib/*.cpp"
         "src/lib/include/*.h"
+        "src/lib/entityx/*.h"
+        "src/lib/entityx/*.cc"
+        "src/lib/entityx/3rdparty/*.hpp"
+        "src/lib/entityx/3rdparty/*.h"
+        "src/lib/entityx/deps/*.h"
+        "src/lib/entityx/help/*.h"
+        "src/lib/entityx/help/*.cc"
+        "src/lib/entityx/tags/*.h"
+        "src/lib/entityx/tags/*.cc"
+        "src/core/systems/*.cpp"
+        "src/core/systems/include/*.h"
+        "src/core/components/*.cpp"
+        "src/core/components/include/*.h"
+        "src/core/events/*.h"
         "src/lib/utils/camera/*.cpp"
         "src/lib/utils/camera/include/*.h"
         "src/lib/utils/geometry/*.cpp"
@@ -51,7 +65,7 @@ file(GLOB SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # in case CMake doesn't find the libraries uncomment the following lines
-# and put your path to the dependencies and add the cmake/sdl2-config.cmake
+# and put your path to the dependencies and add the cmake/sdl2-m_config.cmake
 # file to the root of that directory
 
 list(APPEND CMAKE_PREFIX_PATH "D:/SDL2")

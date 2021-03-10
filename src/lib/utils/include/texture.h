@@ -38,7 +38,7 @@ public:
 	Texture() = default;
 	~Texture();
 	void performChecks();
-	unsigned int getBuffer();
+	unsigned int getBuffer() const;
 	int getWidth() const;
 	int getHeight() const;
 };

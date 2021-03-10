@@ -11,10 +11,11 @@
 #include "../../../lib/utils/openGL/include/vertex_buffer.h"
 #include "../../../lib/utils/include/texture_cube_map.h"
 
+
 class Skybox {
 private:
-	VertexArray vao;
 	VertexBuffer vbo;
+	VertexArray vao;
 public:
 	Skybox();
 	const VertexArray& getVao() const;

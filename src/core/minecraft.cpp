@@ -4,6 +4,13 @@
 
 #include "include/minecraft.h"
 #include "../lib/include/lib.h"
+#include "systems/include/terrain_system.h"
+#include "systems/include/world_meshing.h"
+#include "systems/include/render_system.h"
+#include "systems/include/player_system.h"
+#include "components/include/player_controller.h"
+#include "../lib/utils/camera/include/first_person_camera_controller.h"
+
 
 
 void GLAPIENTRY
@@ -20,21 +27,33 @@ MessageCallback(GLenum source,
 }
 
 void Minecraft::create() {
-	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(MessageCallback, 0);
 
-	m_pDataSystem = new DataSystem();
-	m_pGraphicsSystem = new GraphicsSystem(this);
-	m_pLogicSystem = new LogicSystem(this);
+//	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+//	glEnable(GL_DEBUG_OUTPUT);
+//	glDebugMessageCallback(MessageCallback, 0);
 
-	m_pGraphicsSystem->create();
-	m_pLogicSystem->init();
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glEnable(GL_CULL_FACE);
+
+
+	m_entityX.systems.add<PlayerSystem>(&m_world);
+	m_entityX.systems.add<TerrainSystem>(&m_world);
+	m_entityX.systems.add<RenderSystem>(&m_world);
+
+	m_entityX.systems.configure();
+
 }
 
 void Minecraft::render() {
-	m_pLogicSystem->update();
-	m_pGraphicsSystem->render(Lib::graphics->getDeltaTime());
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.4, 0.4, 0.4, 1.0);
+
+	const float dt = Lib::graphics->getDeltaTime();
+
+	m_entityX.systems.update<TerrainSystem>(dt);
+	m_entityX.systems.update<RenderSystem>(dt);
+	m_entityX.systems.update<PlayerSystem>(dt);
 }
 
 void Minecraft::pause() {
@@ -46,12 +65,9 @@ void Minecraft::resume() {
 }
 
 void Minecraft::resize(const int width, const int height) {
-	m_pGraphicsSystem->resizeViewport(width, height);
+	//m_pGraphicsSystem->resizeViewport(width, height);
 }
 
 Minecraft::~Minecraft() {
-	delete m_pGraphicsSystem;
-	delete m_pDataSystem;
-	delete m_pLogicSystem;
 }
 

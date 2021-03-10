@@ -9,16 +9,16 @@
 
 class VertexBuffer {
 private:
-	unsigned int buffer;
+	unsigned int m_buffer;
 public:
 	VertexBuffer();
 	~VertexBuffer();
-	void bufferData(GLsizeiptr size, void* data, GLenum usage);
-	void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride,
+	static void bufferData(GLsizeiptr size, void* data, GLenum usage);
+	static void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride,
 	                         const GLvoid* pointer);
-	void vertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid* pointer);
-	void bind();
-	void unbind();
+	static void vertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid* pointer);
+	void bind() const;
+	static void unbind();
 };
 
 

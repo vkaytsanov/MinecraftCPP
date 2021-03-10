@@ -9,30 +9,30 @@
 class Input {
 private:
 	SDL_Event e;
-	bool quit = false;
+	bool m_quit = false;
 	/* check SDL_KeyCode, max elements = 322 */
-	bool keys[322];
-	bool mouseMoved = false;
-	bool mouseLeftClick = false;
-	bool mouseRightClick = false;
-	float lastMousePosX = 0;
-	float lastMousePosY = 0;
-	float currMousePosX = 0;
-	float currMousePosY = 0;
-	InputProcessor* processor = nullptr;
+	bool m_keys[322];
+	bool m_mouseMoved = false;
+	bool m_mouseLeftClick = false;
+	bool m_mouseRightClick = false;
+	float m_lastMousePosX = 0;
+	float m_lastMousePosY = 0;
+	float m_currMousePosX = 0;
+	float m_currMousePosY = 0;
+	InputProcessor* m_pProcessor = nullptr;
 	void updateKeyboard();
 	void updateMouse();
 public:
-	std::queue<SDL_Event> keyEvents;
-	std::queue<SDL_Event> touchEvents;
+	std::queue<SDL_Event> m_keyEvents;
+	std::queue<SDL_Event> m_touchEvents;
 	Input(const float width, const float height);
 	void update();
 	void processEvents();
-	void resetMouse();
+	void resetMouse() const;
 	bool shouldQuit() const;
 	void setProcessor(InputProcessor* processor);
 	InputProcessor* getProcessor() const;
-	bool isKeyPressed(char key);
+	bool isKeyPressed(char key) const;
 	bool isMouseMoved() const;
 	float getLastMousePosX() const;
 	float getLastMousePosY() const;

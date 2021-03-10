@@ -87,7 +87,7 @@ double noise::GradientCoherentNoise3D(double x, double y, double z, int seed,
 			break;
 	}
 
-	// Now calculate the noise values at each vertex of the cube.  To generate
+	// Now calculate the noise values at each vertex of the cube.  To build
 	// the coherent-noise value at the input point, interpolate these eight
 	// noise values using the S-curve value as the interpolant (trilinear
 	// interpolation.)
@@ -112,7 +112,7 @@ double noise::GradientCoherentNoise3D(double x, double y, double z, int seed,
 
 double noise::GradientNoise3D(double fx, double fy, double fz, int ix,
                               int iy, int iz, int seed) {
-	// Randomly generate a gradient vector given the integer coordinates of the
+	// Randomly build a gradient vector given the integer coordinates of the
 	// input value.  This implementation generates a random number and uses it
 	// as an index into a normalized-vector lookup table.
 	int vectorIndex = (
@@ -187,7 +187,7 @@ double noise::ValueCoherentNoise3D(double x, double y, double z, int seed,
 			break;
 	}
 
-	// Now calculate the noise values at each vertex of the cube.  To generate
+	// Now calculate the noise values at each vertex of the cube.  To build
 	// the coherent-noise value at the input point, interpolate these eight
 	// noise values using the S-curve value as the interpolant (trilinear
 	// interpolation.)

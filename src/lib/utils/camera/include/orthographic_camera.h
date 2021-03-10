@@ -13,7 +13,6 @@ public:
 	OrthographicCamera();
 	OrthographicCamera(float viewportWidth, float viewportHeight);
 	void update(bool updateFrustum) override;
-	void translate(float x, float y);
 };
 
 

@@ -40,7 +40,7 @@ namespace noise {
 		/// coordinates of an input value located on the surface of an ( @a x,
 		/// @a z ) plane.
 		///
-		/// To generate an output value, pass the ( @a x, @a z ) coordinates of
+		/// To build an output value, pass the ( @a x, @a z ) coordinates of
 		/// an input value to the GetValue() method.
 		///
 		/// This model is useful for creating:
@@ -57,11 +57,11 @@ namespace noise {
 
 			/// Constructor
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			Plane(const module::Module& module);
 
-			/// Returns the noise module that is used to generate the output
+			/// Returns the noise module that is used to build the output
 			/// values.
 			///
 			/// @returns A reference to the noise module.
@@ -87,9 +87,9 @@ namespace noise {
 			/// SetModule() method.
 			double GetValue(double x, double z) const;
 
-			/// Sets the noise module that is used to generate the output values.
+			/// Sets the noise module that is used to build the output values.
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			///
 			/// This noise module must exist for the lifetime of this object,
@@ -100,7 +100,7 @@ namespace noise {
 
 		private:
 
-			/// A pointer to the noise module used to generate the output values.
+			/// A pointer to the noise module used to build the output values.
 			const module::Module* m_pModule;
 
 		};

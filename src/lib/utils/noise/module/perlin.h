@@ -93,7 +93,7 @@ namespace noise {
 		/// An application may specify the frequency of the first octave by
 		/// calling the SetFrequency() method.
 		///
-		/// An application may specify the number of octaves that generate Perlin
+		/// An application may specify the number of octaves that build Perlin
 		/// noise by calling the SetOctaveCount() method.
 		///
 		/// These coherent-noise functions are called octaves because each octave
@@ -142,7 +142,7 @@ namespace noise {
 		/// Perlin Noise</a> - Hugo Elias's webpage contains a very good
 		/// description of Perlin noise and describes its many applications.  This
 		/// page gave me the inspiration to create libnoise in the first place.
-		/// Now that I know how to generate Perlin noise, I will never again use
+		/// Now that I know how to build Perlin noise, I will never again use
 		/// cheesy subdivision algorithms to create terrain (unless I absolutely
 		/// need the speed.)
 		///
@@ -154,7 +154,7 @@ namespace noise {
 		/// with some "regularity" to the terrain features.  This page describes a
 		/// better coherent-noise function called <i>gradient noise</i>.  This
 		/// version of noise::module::Perlin uses gradient coherent noise to
-		/// generate Perlin noise.
+		/// build Perlin noise.
 		class Perlin : public Module {
 
 		public:
@@ -204,9 +204,9 @@ namespace noise {
 				return m_noiseQuality;
 			}
 
-			/// Returns the number of octaves that generate the Perlin noise.
+			/// Returns the number of octaves that build the Perlin noise.
 			///
-			/// @returns The number of octaves that generate the Perlin noise.
+			/// @returns The number of octaves that build the Perlin noise.
 			///
 			/// The number of octaves controls the amount of detail in the Perlin
 			/// noise.
@@ -267,9 +267,9 @@ namespace noise {
 				m_noiseQuality = noiseQuality;
 			}
 
-			/// Sets the number of octaves that generate the Perlin noise.
+			/// Sets the number of octaves that build the Perlin noise.
 			///
-			/// @param octaveCount The number of octaves that generate the Perlin
+			/// @param octaveCount The number of octaves that build the Perlin
 			/// noise.
 			///
 			/// @pre The number of octaves ranges from 1 to
@@ -320,7 +320,7 @@ namespace noise {
 			/// Quality of the Perlin noise.
 			noise::NoiseQuality m_noiseQuality;
 
-			/// Total number of octaves that generate the Perlin noise.
+			/// Total number of octaves that build the Perlin noise.
 			int m_octaveCount;
 
 			/// Persistence of the Perlin noise.

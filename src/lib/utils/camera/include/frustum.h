@@ -8,6 +8,8 @@
 #include <array>
 #include "../../geometry/include/vector3.h"
 #include "../../geometry/include/matrix4.h"
+#include "../../../../core/components/include/frustum_aabb.h"
+
 
 enum PlaneType{
 	FarPlane,
@@ -16,16 +18,6 @@ enum PlaneType{
 	BottomPlane,
 	LeftPlane,
 	RightPlane
-};
-
-class FrustumAABB{
-private:
-	Vector3f m_dimensions;
-	Vector3f m_position;
-public:
-	FrustumAABB(Vector3f dimensions, Vector3f position);
-	Vector3f getNegativeFarPoint(const Vector3f& normal);
-	Vector3f getPositiveFarPoint(const Vector3f& normal);
 };
 
 class Plane{
@@ -41,7 +33,7 @@ private:
 	std::array<Plane, 6> m_planes;
 public:
 	void update(Matrix4f* combined);
-	bool boxInFrustum(FrustumAABB& box);
+	bool boxInFrustum(FrustumAABB* box);
 };
 
 

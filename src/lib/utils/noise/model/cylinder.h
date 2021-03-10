@@ -46,7 +46,7 @@ namespace noise {
 		/// This model returns an output value from a noise module given the
 		/// coordinates of an input value located on the surface of a cylinder.
 		///
-		/// To generate an output value, pass the (angle, height) coordinates of
+		/// To build an output value, pass the (angle, height) coordinates of
 		/// an input value to the GetValue() method.
 		///
 		/// This model is useful for creating:
@@ -63,11 +63,11 @@ namespace noise {
 
 			/// Constructor
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			Cylinder(const module::Module& module);
 
-			/// Returns the noise module that is used to generate the output
+			/// Returns the noise module that is used to build the output
 			/// values.
 			///
 			/// @returns A reference to the noise module.
@@ -97,9 +97,9 @@ namespace noise {
 			/// origin.
 			double GetValue(double angle, double height) const;
 
-			/// Sets the noise module that is used to generate the output values.
+			/// Sets the noise module that is used to build the output values.
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			///
 			/// This noise module must exist for the lifetime of this object,
@@ -110,7 +110,7 @@ namespace noise {
 
 		private:
 
-			/// A pointer to the noise module used to generate the output values.
+			/// A pointer to the noise module used to build the output values.
 			const module::Module* m_pModule;
 
 		};

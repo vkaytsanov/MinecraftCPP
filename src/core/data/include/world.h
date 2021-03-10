@@ -8,7 +8,10 @@
 
 #include <unordered_map>
 #include <map>
-#include "../terrain/include/chunk.h"
+#include "../../../lib/entityx/Entity.h"
+#include "asset_manager.h"
+//#include "../terrain/include/chunk.h"
+
 
 struct Coordinates {
 	uint64_t x;
@@ -53,9 +56,10 @@ private:
 public:
 	World() = default;
 	World(long long seed);
-	std::unordered_map<Coordinates, Chunk, HashPair> chunks;
-	void addChunk(int16_t x, int16_t z);
-	Chunk* getChunk(int16_t x, int16_t z);
+	std::unordered_map<Coordinates, entityx::Entity, HashPair> m_chunks;
+	entityx::Entity* addChunk(entityx::EntityManager& entityManager, int16_t x, int16_t z);
+	entityx::Entity* getChunk(int16_t x, int16_t z);
+	Cube* getCubeFromWorldCoordinates(int x, int y, int z);
 };
 
 

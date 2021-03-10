@@ -43,7 +43,7 @@ namespace noise {
 		/// This model returns an output value from a noise module given the
 		/// coordinates of an input value located on the surface of a sphere.
 		///
-		/// To generate an output value, pass the (latitude, longitude)
+		/// To build an output value, pass the (latitude, longitude)
 		/// coordinates of an input value to the GetValue() method.
 		///
 		/// This model is useful for creating:
@@ -61,11 +61,11 @@ namespace noise {
 
 			/// Constructor
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			Sphere(const module::Module& module);
 
-			/// Returns the noise module that is used to generate the output
+			/// Returns the noise module that is used to build the output
 			/// values.
 			///
 			/// @returns A reference to the noise module.
@@ -97,9 +97,9 @@ namespace noise {
 			/// western hemisphere.
 			double GetValue(double lat, double lon) const;
 
-			/// Sets the noise module that is used to generate the output values.
+			/// Sets the noise module that is used to build the output values.
 			///
-			/// @param module The noise module that is used to generate the output
+			/// @param module The noise module that is used to build the output
 			/// values.
 			///
 			/// This noise module must exist for the lifetime of this object,
@@ -110,7 +110,7 @@ namespace noise {
 
 		private:
 
-			/// A pointer to the noise module used to generate the output values.
+			/// A pointer to the noise module used to build the output values.
 			const module::Module* m_pModule;
 
 		};

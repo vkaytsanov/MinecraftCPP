@@ -122,9 +122,9 @@ namespace noise {
 				return m_noiseQuality;
 			}
 
-			/// Returns the number of octaves that generate the billowy noise.
+			/// Returns the number of octaves that build the billowy noise.
 			///
-			/// @returns The number of octaves that generate the billowy noise.
+			/// @returns The number of octaves that build the billowy noise.
 			///
 			/// The number of octaves controls the amount of detail in the billowy
 			/// noise.
@@ -184,9 +184,9 @@ namespace noise {
 				m_noiseQuality = noiseQuality;
 			}
 
-			/// Sets the number of octaves that generate the billowy noise.
+			/// Sets the number of octaves that build the billowy noise.
 			///
-			/// @param octaveCount The number of octaves that generate the billowy
+			/// @param octaveCount The number of octaves that build the billowy
 			/// noise.
 			///
 			/// @pre The number of octaves ranges from 1 to
@@ -237,7 +237,7 @@ namespace noise {
 			/// Quality of the billowy noise.
 			noise::NoiseQuality m_noiseQuality;
 
-			/// Total number of octaves that generate the billowy noise.
+			/// Total number of octaves that build the billowy noise.
 			int m_octaveCount;
 
 			/// Persistence value of the billowy noise.

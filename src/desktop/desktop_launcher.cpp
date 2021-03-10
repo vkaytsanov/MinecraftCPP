@@ -5,7 +5,7 @@
 #include "../core/include/minecraft.h"
 
 int main(int argc, char* args[]) {
-	auto* config = new Configuration("OpenGL App", 960, 480);
+	auto* config = new Configuration("Minecraft", 960, 480);
 
 	auto* app = new Application(new Minecraft(), config);
 

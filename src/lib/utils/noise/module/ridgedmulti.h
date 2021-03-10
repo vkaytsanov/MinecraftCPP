@@ -81,7 +81,7 @@ namespace noise {
 		/// @note For ridged-multifractal noise generated with only one octave,
 		/// the output value ranges from -1.0 to 0.0.
 		///
-		/// Ridged-multifractal noise is often used to generate craggy mountainous
+		/// Ridged-multifractal noise is often used to build craggy mountainous
 		/// terrain or marble-like textures.
 		///
 		/// This noise module does not require any source m_modules.
@@ -93,7 +93,7 @@ namespace noise {
 		/// of the ridged-multifractal noise, but with the drawback of increasing
 		/// the calculation time.
 		///
-		/// An application may specify the number of octaves that generate
+		/// An application may specify the number of octaves that build
 		/// ridged-multifractal noise by calling the SetOctaveCount() method.
 		///
 		/// <b>Frequency</b>
@@ -169,10 +169,10 @@ namespace noise {
 				return m_noiseQuality;
 			}
 
-			/// Returns the number of octaves that generate the
+			/// Returns the number of octaves that build the
 			/// ridged-multifractal noise.
 			///
-			/// @returns The number of octaves that generate the
+			/// @returns The number of octaves that build the
 			/// ridged-multifractal noise.
 			///
 			/// The number of octaves controls the amount of detail in the
@@ -226,10 +226,10 @@ namespace noise {
 				m_noiseQuality = noiseQuality;
 			}
 
-			/// Sets the number of octaves that generate the ridged-multifractal
+			/// Sets the number of octaves that build the ridged-multifractal
 			/// noise.
 			///
-			/// @param octaveCount The number of octaves that generate the
+			/// @param octaveCount The number of octaves that build the
 			/// ridged-multifractal noise.
 			///
 			/// @pre The number of octaves ranges from 1 to
@@ -274,7 +274,7 @@ namespace noise {
 			/// Quality of the ridged-multifractal noise.
 			noise::NoiseQuality m_noiseQuality;
 
-			/// Total number of octaves that generate the ridged-multifractal
+			/// Total number of octaves that build the ridged-multifractal
 			/// noise.
 			int m_octaveCount;
 

@@ -93,7 +93,7 @@ double Terrace::GetValue(double x, double y, double z) const {
 
 	// If some control points are missing (which occurs if the output value from
 	// the source module is greater than the largest value or less than the
-	// smallest value of the control point array), get the value of the nearest
+	// smallest value of the control point array), getComponent the value of the nearest
 	// control point and exit now.
 	if (index0 == index1) {
 		return m_pControlPoints[index1];

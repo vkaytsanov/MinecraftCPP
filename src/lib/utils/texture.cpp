@@ -63,7 +63,7 @@ void Texture::performChecks() {
 
 }
 
-unsigned int Texture::getBuffer() {
+unsigned int Texture::getBuffer() const{
 	return textureBuffer;
 }
 

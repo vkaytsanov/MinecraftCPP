@@ -7,18 +7,17 @@
 #include "../../lib/include/application.h"
 #include "../../lib/utils/include/sprite_batch.h"
 
-#include "../data/include/data_system.h"
-#include "../graphics/include/graphics_system.h"
 #include "game_state_manager.h"
-#include "../logic/include/logic_system.h"
+#include "../data/include/asset_manager.h"
+#include "../data/include/world.h"
+#include "../../lib/entityx/entityx.h"
 
 
 class Minecraft : public Listener {
 public:
+	World m_world;
+	entityx::EntityX m_entityX;
 	GameStateManager m_gameStateManager;
-	DataSystem* m_pDataSystem;
-	GraphicsSystem* m_pGraphicsSystem;
-	LogicSystem* m_pLogicSystem;
 
 	Minecraft() = default;
 	~Minecraft() override;

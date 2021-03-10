@@ -60,16 +60,16 @@ namespace noise {
 		///
 		/// - It can be used as an elevation value for a terrain height map
 		/// - It can be used as a grayscale (or an RGB-channel) value for a
-		///   procedural texture
+		///   procedural m_texture
 		/// - It can be used as a p_position value for controlling the movement of a
 		///   simulated lifeform.
 		///
-		/// A noise module defines a near-infinite 3-dimensional texture.  Each
-		/// p_position in this "texture" has a specific value.
+		/// A noise module defines a near-infinite 3-dimensional m_texture.  Each
+		/// p_position in this "m_texture" has a specific value.
 		///
 		/// <b>Combining noise m_modules</b>
 		///
-		/// Noise m_modules can be m_combined with other noise m_modules to generate
+		/// Noise m_modules can be m_combined with other noise m_modules to build
 		/// complex output values.  A noise module that is used as a source of
 		/// output values for another noise module is called a <i>source
 		/// module</i>.  Each of these source m_modules may be connected to other
@@ -176,15 +176,15 @@ namespace noise {
 		/// <b>Generating output values with a noise module</b>
 		///
 		/// Once an application has connected all required source m_modules to a
-		/// noise module, the application can now begin to generate output values
+		/// noise module, the application can now begin to build output values
 		/// with that noise module.
 		///
-		/// To generate an output value, pass the ( @a x, @a y, @a z ) coordinates
+		/// To build an output value, pass the ( @a x, @a y, @a z ) coordinates
 		/// of an input value to the GetValue() method.
 		///
-		/// <b>Using a noise module to generate terrain height maps or textures</b>
+		/// <b>Using a noise module to build terrain height maps or textures</b>
 		///
-		/// One way to generate a terrain height map or a texture is to first
+		/// One way to build a terrain height map or a m_texture is to first
 		/// allocate a 2-dimensional array of floating-point values.  For each
 		/// array element, pass the array subscripts as @a x and @a y coordinates
 		/// to the GetValue() method (leaving the @a z coordinate set to zero) and
@@ -303,7 +303,7 @@ namespace noise {
 			/// specified; see the preconditions for more information.
 			///
 			/// A noise module mathematically combines the output values from the
-			/// source m_modules to generate the value returned by GetValue().
+			/// source m_modules to build the value returned by GetValue().
 			///
 			/// The index value to assign a source module is a unique identifier
 			/// for that source module.  If an index value has already been

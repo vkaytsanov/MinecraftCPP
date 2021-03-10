@@ -21,12 +21,8 @@ public:
 	float m_nearPlane = 0.001f;
 	/** far clipping plane */
 	float m_farPlane = 100.0f;
-	/** Camera p_position vector */
-	Vector3f m_position;
-	/** Camera m_up vector */
-	Vector3f m_up;
-	/** Camera's looking m_direction vector */
-	Vector3f m_direction;
+
+	Transform* m_pTransform;
 	/** Camera m_view matrix */
 	Matrix4f m_view;
 	/** Camera m_projection matrix */
@@ -38,16 +34,12 @@ public:
 
 	float m_viewportWidth;
 	float m_viewportHeight;
+
 	Camera();
 	~Camera();
 	virtual void update(bool updateFrustum = true) = 0;
-	void updateCombined();
-	void translate(float x, float y, float z);
-	void rotateX(float degree);
-	void rotate(float deltaX, float deltaY) const;
-	void rotateY(float degree);
-	void rotateZ(float degree);
-
+	Vector3f getForwardVector();
+	Vector3f getRightVector();
 };
 
 

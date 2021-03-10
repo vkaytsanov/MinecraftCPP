@@ -10,21 +10,21 @@
 
 class TextureRegion {
 private:
-	Texture* texture;
+	const Texture* texture;
 	/** bottom-left corner */
 	float u, v;
-	/** top-right corner */
+	/** front-right corner */
 	float u2, v2;
 	int regionWidth;
 	int regionHeight;
 public:
 	TextureRegion() = default;
-	explicit TextureRegion(Texture* texture);
+	explicit TextureRegion(const Texture* texture);
 	TextureRegion(Texture* texture, int width, int height);
-	TextureRegion(Texture* texture, int x, int y, int width, int height);
+	TextureRegion(const Texture* texture, int x, int y, int width, int height);
 	void setRegionXY(int x, int y, int width, int height);
 	void setRegionUV(float u, float v, float u2, float v2);
-	Texture* getTexture() const;
+	const Texture* getTexture() const;
 	float getU() const;
 	float getV() const;
 	float getU2() const;
@@ -34,7 +34,7 @@ public:
 	float* getUVs();
 	TextureRegion** split(int blockWidth, int blockHeight);
 
-	TextureRegion operator+(const TextureRegion& tR);
+	TextureRegion& operator+(const TextureRegion& tR);
 
 
 };

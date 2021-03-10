@@ -81,7 +81,7 @@ namespace noise {
 		/// to increase in value the further away that point is from the nearest
 		/// seed point.
 		///
-		/// Voronoi cells are often used to generate cracked-mud terrain
+		/// Voronoi cells are often used to build cracked-mud terrain
 		/// formations or crystal-like textures
 		///
 		/// This noise module requires no source m_modules.
@@ -111,7 +111,7 @@ namespace noise {
 			/// value causes the points in the Voronoi cells to increase in value
 			/// the further away that point is from the nearest seed point.
 			/// Setting this value to @a true (and setting the displacement to a
-			/// near-zero value) causes this noise module to generate cracked mud
+			/// near-zero value) causes this noise module to build cracked mud
 			/// formations.
 			void EnableDistance(bool enable = true) {
 				m_enableDistance = enable;
