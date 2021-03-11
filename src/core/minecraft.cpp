@@ -10,7 +10,7 @@
 #include "systems/include/player_system.h"
 #include "components/include/player_controller.h"
 #include "../lib/utils/camera/include/first_person_camera_controller.h"
-
+#include "systems/include/transform_system.h"
 
 
 void GLAPIENTRY
@@ -37,6 +37,7 @@ void Minecraft::create() {
 	glEnable(GL_CULL_FACE);
 
 
+	m_entityX.systems.add<TransformSystem>();
 	m_entityX.systems.add<PlayerSystem>(&m_world);
 	m_entityX.systems.add<TerrainSystem>(&m_world);
 	m_entityX.systems.add<RenderSystem>(&m_world);
@@ -51,6 +52,7 @@ void Minecraft::render() {
 
 	const float dt = Lib::graphics->getDeltaTime();
 
+	m_entityX.systems.update<TransformSystem>(dt);
 	m_entityX.systems.update<TerrainSystem>(dt);
 	m_entityX.systems.update<RenderSystem>(dt);
 	m_entityX.systems.update<PlayerSystem>(dt);

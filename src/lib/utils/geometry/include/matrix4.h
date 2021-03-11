@@ -29,10 +29,10 @@
 
 /**
  *  Column major matrix
- *  [ A00 ] [ A01 ] [ A02 ] [ A03 ]
- *  [ A10 ] [ A11 ] [ A12 ] [ A13 ]
- *  [ A20 ] [ A21 ] [ A22 ] [ A23 ]
- *  [ A30 ] [ A31 ] [ A32 ] [ A33 ]
+ *  [ A00 ] [ A01 ] [ A02 ] [ A03 ]	x
+ *  [ A10 ] [ A11 ] [ A12 ] [ A13 ]	y
+ *  [ A20 ] [ A21 ] [ A22 ] [ A23 ]	z
+ *  [ A30 ] [ A31 ] [ A32 ] [ A33 ]	w
  *
  *  A00, A10, A20 - Right Vector
  *  A01, A11, A21 - Up Vector
@@ -68,13 +68,12 @@ public:
 	Matrix4<T> setToProjection(const T fov, const T near, const T far, const T aspectRatio);
 	Matrix4<T>&
 	setToLookAt(const Vector3<T>& eye, const Vector3<T>& center, const Vector3<T>& up = Vector3<T>(0, 1, 0));
-	Matrix4<T>& setToTransform(const Vector3<T>& position, const Vector3<T>& rotation);
+	Matrix4<T> setToTransform(const Vector3<T>& position, const Quaternion<T>& rotation);
 	Matrix4<T>& setForTranslation(T x, T y, T z);
 	Matrix4<T>& setForTranslation(const Vector3<T>& vec);
 	Matrix4<T> noTranslation();
 	Matrix4<T> angleToMatrix(const Vector3<T>& angle);
 	Matrix4<T> fromQuaternion(const Quaternion<T>& q);
-	Matrix4<T> fromQuaternion(const Quaternion<T>& q, const Vector3<T>& position, const Vector3<T>& scale);
 
 	T& operator[](int idx);
 	Matrix4<T> operator*(const Matrix4<T>& mat);
@@ -277,39 +276,11 @@ Matrix4<T> Matrix4<T>::fromQuaternion(const Quaternion<T>& q) {
 }
 
 template<typename T>
-Matrix4<T>& Matrix4<T>::setToTransform(const Vector3<T>& position, const Vector3<T>& rotation) {
-	Quaternionf rq = Quaternionf().fromEulers(rotation.x * MathUtils::DEG2RADIANS, 0, 0);
-	rq = rq * Quaternionf().fromEulers(0, rotation.y * MathUtils::DEG2RADIANS, 0);
-	return fromQuaternion(rq, position, {1, 1, 1});
+Matrix4<T> Matrix4<T>::setToTransform(const Vector3<T>& position, const Quaternion<T>& rotation) {
+	// TODO FIX THIS FUNCTION TO RETURN BY REFERENCE BY CHANGING THIS MATRIX'S CONTENTS
+	return Matrix4f().fromQuaternion(rotation) * Matrix4f().setForTranslation(position * (-1));
 }
 
-template<typename T>
-Matrix4<T> Matrix4<T>::fromQuaternion(const Quaternion<T>& q, const Vector3<T>& position, const Vector3<T>& scale) {
-	Matrix4<T> result;
-
-	T qxx = q.x * q.x;
-	T qyy = q.y * q.y;
-	T qzz = q.z * q.z;
-	T qxz = q.x * q.z;
-	T qxy = q.x * q.y;
-	T qyz = q.y * q.z;
-	T qwx = q.w * q.x;
-	T qwy = q.w * q.y;
-	T qwz = q.w * q.z;
-
-
-	result[A00] = 1 - 2 * (qyy + qzz) * scale.x * position.x;
-	result[A01] = 2 * (qxy + qwz);
-	result[A02] = 2 * (qxz - qwy);
-	result[A10] = 2 * (qxy - qwz);
-	result[A11] = 1 - 2 * (qxx + qzz) * scale.y * position.y;
-	result[A12] = 2 * (qyz + qwx);
-	result[A20] = 2 * (qxz + qwy);
-	result[A21] = 2 * (qyz - qwx);
-	result[A22] = 1 - 2 * (qxx + qyy) * scale.z * position.z;
-
-	return result;
-}
 
 
 typedef Matrix4<float> Matrix4f;

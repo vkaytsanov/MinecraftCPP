@@ -45,12 +45,17 @@ void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 }
 
 void PlayerSystem::rayCast(entityx::EventManager& events, bool destroyBlock) {
-	Ray ray(m_playerTransform->rotation.x * MathUtils::DEG2RADIANS,
-	        (m_playerTransform->rotation.y + 90) * MathUtils::DEG2RADIANS,
+	Ray ray(m_playerTransform->eulerAngles.x * MathUtils::DEG2RADIANS,
+	        (m_playerTransform->eulerAngles.y + 90) * MathUtils::DEG2RADIANS,
 	        m_playerTransform->position);
 
 	while(std::abs(ray.getLength()) < MAX_CUBE_REACH){
-		ray.shoot(0.9f);
+		if(m_playerTransform->eulerAngles.y > 0){
+			ray.shoot(0.9f);
+		}
+		else{
+			ray.shoot(-0.9f);
+		}
 		const Vector3i point = {static_cast<int>(ray.getEndPoint().x), static_cast<int>(ray.getEndPoint().y), static_cast<int>(ray.getEndPoint().z)};
 		if(point.y < 0 || point.y > CHUNK_SIZE_Y - 1) break;
 		Cube* cube = m_pWorld->getCubeFromWorldCoordinates(point.x, point.y, point.z);

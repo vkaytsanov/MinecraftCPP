@@ -10,7 +10,8 @@ PerspectiveCamera::PerspectiveCamera() : PerspectiveCamera(70) {
 
 }
 
-PerspectiveCamera::PerspectiveCamera(const float fieldOfView) : PerspectiveCamera(fieldOfView, Lib::graphics->getWidth(),
+PerspectiveCamera::PerspectiveCamera(const float fieldOfView) : PerspectiveCamera(fieldOfView,
+                                                                                  Lib::graphics->getWidth(),
                                                                                   Lib::graphics->getHeight()) {
 
 }
@@ -28,13 +29,8 @@ void PerspectiveCamera::update(bool updateFrustum) {
 	                             m_farPlane,
 	                             m_viewportWidth / m_viewportHeight);
 
-	Quaternionf rotation = Quaternionf().fromEulers(m_pTransform->rotation.x * MathUtils::DEG2RADIANS, 0, 0);
-	rotation = rotation * Quaternionf().fromEulers(0, m_pTransform->rotation.y * MathUtils::DEG2RADIANS, 0);
-
-	Matrix4f rotationMatrix = Matrix4f().fromQuaternion(rotation);
-	Matrix4f translationMatrix = Matrix4f().setForTranslation(m_pTransform->position * (-1));
-
-	m_view = rotationMatrix * translationMatrix;
+	m_view = m_pTransform->transformMatrix;
+	//m_pTransform->transformMatrix.debug();
 
 	m_combined = m_projection * m_view;
 	if (updateFrustum) {

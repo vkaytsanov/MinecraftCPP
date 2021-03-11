@@ -177,10 +177,12 @@ public:
 	void debug() {
 		Lib::app->log("vector", (std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(z)).c_str());
 	}
+
 };
 
 typedef Vector3<float> Vector3f;
 typedef Vector3<int> Vector3i;
+
 
 
 
