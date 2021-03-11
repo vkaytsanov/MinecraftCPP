@@ -38,57 +38,83 @@ void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 		rayCast(events, true);
 	}
 	else if (Lib::input->isMouseRightClick()) {
-		// Add block
-		//rayCast(false);
+		 //Add block
+		rayCast(events, false);
 	}
 
 }
 
 void PlayerSystem::rayCast(entityx::EventManager& events, bool destroyBlock) {
-	Ray ray(m_playerTransform->eulerAngles.x * MathUtils::DEG2RADIANS,
-	        (m_playerTransform->eulerAngles.y + 90) * MathUtils::DEG2RADIANS,
-	        m_playerTransform->position);
+	Ray ray(m_playerTransform->position,
+	        m_playerTransform->forward);
+	Vector3f lastPosition
+	;
+	for (int i = 0; i < MAX_CUBE_REACH; i++) {
+		ray.shoot(1.00f);
+		Vector3f position = ray.getEndPoint();
+		if (position.y < 0 || position.y > CHUNK_SIZE_Y - 1) break;
+		Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(position);
+		Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, position);
+		entityx::Entity* chunk = m_pWorld->getChunk(chunkPos.x, chunkPos.z);
+		Cube* cube = &chunk->getComponent<Chunk>()->getChunkContents()->at(cubePos.x).at(cubePos.y).at(cubePos.z);
 
-	while(std::abs(ray.getLength()) < MAX_CUBE_REACH){
-		if(m_playerTransform->eulerAngles.y > 0){
-			ray.shoot(0.9f);
+		if (cube->m_type != Air && !cube->isLiquid()) {
+			if (destroyBlock) {
+				Lib::app->log("player", "broke cube");
+				cube->m_type = Air;
+				Cube* upperCube = &m_pWorld->getChunk(chunkPos.x,
+				                                      chunkPos.z)->getComponent<Chunk>()->getChunkContents()->at(
+						cubePos.x).at(cubePos.y + 1).at(cubePos.z);
+				if (upperCube->isModel()) {
+					upperCube->m_type = Air;
+				}
+//				std::cout << "fx" <<  m_playerTransform->forward.x << "\n";
+//				std::cout << "fy" <<  m_playerTransform->forward.y << "\n";
+//				std::cout << "fz" <<  m_playerTransform->forward.z << "\n";
+				onRayCastEnd(chunkPos, cubePos);
+				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
+				break;
+			}
+			else {
+				// place block
+				Vector3i lastChunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(lastPosition);
+				Vector3i lastCubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(lastChunkPos, lastPosition);
+				entityx::Entity* lastChunk = m_pWorld->getChunk(lastChunkPos.x, lastChunkPos.z);
+				Cube* lastCube = &lastChunk->getComponent<Chunk>()->getChunkContents()->at(lastCubePos.x).at(lastCubePos.y).at(lastCubePos.z);
+				if(lastCube->m_type == Air){
+					lastCube->m_type = Diamond;
+				}
+				onRayCastEnd(chunkPos, cubePos);
+				lastChunk->getComponent<Chunk>()->getHeightMap()->at(lastCubePos.x).at(lastCubePos.z)++;
+				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
+				break;
+			}
 		}
-		else{
-			ray.shoot(-0.9f);
-		}
-		const Vector3i point = {static_cast<int>(ray.getEndPoint().x), static_cast<int>(ray.getEndPoint().y), static_cast<int>(ray.getEndPoint().z)};
-		if(point.y < 0 || point.y > CHUNK_SIZE_Y - 1) break;
-		Cube* cube = m_pWorld->getCubeFromWorldCoordinates(point.x, point.y, point.z);
 
-		if(cube->m_type != Air && !cube->isLiquid()){
-			Lib::app->log("player", "broke cube");
-			Lib::app->log("playerx", m_playerTransform->position.x);
-			Lib::app->log("playery", m_playerTransform->position.y);
-			Lib::app->log("playerz", m_playerTransform->position.z);
-			Lib::app->log("x", point.x);
-			Lib::app->log("y", point.y);
-			Lib::app->log("z", point.z);
-			cube->m_type = Air;
-			int chunkX = m_playerTransform->position.x / CHUNK_SIZE_X;
-			int chunkZ = m_playerTransform->position.z / CHUNK_SIZE_Z;
-			m_pWorld->getChunk(chunkX, chunkZ)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
-			// TODO
-			if (point.x == 0) {
-				m_pWorld->getChunk(chunkX - 1, chunkZ)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
-			}
-			else if (point.x == CHUNK_SIZE_X - 1) {
-				m_pWorld->getChunk(chunkX + 1, chunkZ)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
-			}
-
-			if (point.z == 0) {
-				m_pWorld->getChunk(chunkX, chunkZ - 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
-			}
-			else if (point.z == CHUNK_SIZE_Z - 1) {
-				m_pWorld->getChunk(chunkX, chunkZ + 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
-			}
-			events.post<ChunkRegenerationEvent>(chunkX, chunkZ);
-			break;
-		}
+		lastPosition = position;
 	}
+}
+
+void PlayerSystem::onRayCastEnd(const Vector3i& chunkPos, const Vector3i& cubePos) {
+	m_pWorld->getChunk(chunkPos.x, chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+
+	if (cubePos.x == 0) {
+		m_pWorld->getChunk(chunkPos.x - 1,
+		                   chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+	}
+	else if (cubePos.x == CHUNK_SIZE_X - 1) {
+		m_pWorld->getChunk(chunkPos.x + 1,
+		                   chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+	}
+
+	if (cubePos.z == 0) {
+		m_pWorld->getChunk(chunkPos.x,
+		                   chunkPos.z - 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+	}
+	else if (cubePos.z == CHUNK_SIZE_Z - 1) {
+		m_pWorld->getChunk(chunkPos.x,
+		                   chunkPos.z + 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+	}
+
 }
 

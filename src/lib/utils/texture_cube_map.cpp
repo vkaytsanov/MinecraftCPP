@@ -10,12 +10,26 @@ TextureCubeMap::TextureCubeMap(std::vector<std::string>& paths) {
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureBuffer);
 
-
-	for (int i = 0; i < paths.size(); i++) {
-		surface = IMG_Load(paths[i].c_str());
+	if(paths.size() == 2){
+		surface = IMG_Load(paths[0].c_str());
 		performChecks();
+		for(int i = 0; i < 6; i++) {
+			if(i == 2) continue;
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+			             0,
+			             textureFormat,
+			             surface->w,
+			             surface->h,
+			             0,
+			             textureFormat,
+			             GL_UNSIGNED_BYTE,
+			             surface->pixels);
+		}
+		SDL_FreeSurface(surface);
 
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+		surface = IMG_Load(paths[1].c_str());
+		performChecks();
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 2,
 		             0,
 		             textureFormat,
 		             surface->w,
@@ -24,10 +38,26 @@ TextureCubeMap::TextureCubeMap(std::vector<std::string>& paths) {
 		             textureFormat,
 		             GL_UNSIGNED_BYTE,
 		             surface->pixels);
-
 		SDL_FreeSurface(surface);
 	}
+	else if(paths.size() == 6){
+		for (int i = 0; i < paths.size(); i++) {
+			surface = IMG_Load(paths[i].c_str());
+			performChecks();
 
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+			             0,
+			             textureFormat,
+			             surface->w,
+			             surface->h,
+			             0,
+			             textureFormat,
+			             GL_UNSIGNED_BYTE,
+			             surface->pixels);
+
+			SDL_FreeSurface(surface);
+		}
+	}
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

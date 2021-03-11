@@ -27,19 +27,20 @@ void TerrainSystem::configure(entityx::EntityManager& entities, entityx::EventMa
 		break;
 	}
 
-	const int chunkX = static_cast<int>(m_playerTransform->position.x / CHUNK_SIZE_X);
-	const int chunkZ = static_cast<int>(m_playerTransform->position.z / CHUNK_SIZE_Z);
+	const int chunkX = static_cast<int>(floor(m_playerTransform->position.x / CHUNK_SIZE_X));
+	const int chunkZ = static_cast<int>(floor(m_playerTransform->position.z / CHUNK_SIZE_Z));
 
 	exploreNewCoordinates(entities, chunkX, chunkZ);
 	buildNewCoordinates(chunkX, chunkZ);
 	m_lastPlayerX = chunkX;
 	m_lastPlayerZ = chunkZ;
+
 	events.subscribe<ChunkRegenerationEvent>(*this);
 }
 
 void TerrainSystem::update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
-	const int chunkX = static_cast<int>(m_playerTransform->position.x / CHUNK_SIZE_X);
-	const int chunkZ = static_cast<int>(m_playerTransform->position.z / CHUNK_SIZE_Z);
+	const int chunkX = static_cast<int>(floor(m_playerTransform->position.x / CHUNK_SIZE_X));
+	const int chunkZ = static_cast<int>(floor(m_playerTransform->position.z / CHUNK_SIZE_Z));
 
 	if (m_lastPlayerX != chunkX || m_lastPlayerZ != chunkZ) {
 		exploreNewCoordinates(entities, chunkX, chunkZ);
@@ -75,8 +76,8 @@ void TerrainSystem::buildNewCoordinates(const int chunkX, const int chunkZ) {
 						m_pWorld->getChunk(chunkX, z + 1),
 						m_pWorld->getChunk(x, z - 1),
 						m_pWorld->getChunk(x, z),
-						m_pWorld->getChunk(x + 1, z),
-						m_pWorld->getChunk(x - 1, z)));
+						m_pWorld->getChunk(x - 1, z),
+						m_pWorld->getChunk(x + 1, z)));
 				counter++;
 			}
 		}

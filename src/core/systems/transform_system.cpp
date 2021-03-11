@@ -8,10 +8,9 @@
 void TransformSystem::update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
 	for(entityx::Entity entity : entities.entities_with_components<Transform>()){
 		if(entity.getComponent<Transform>()->hasChanged){
-			Lib::app->log("TransformSystem", "updating");
 			entityx::ComponentHandle<Transform> transform = entity.getComponent<Transform>();
 
-			// rotation order X -> Y -> Z
+			// rotation order Z -> Y -> X
 			transform->rotation = Quaternionf().fromEulers(transform->eulerAngles.x * MathUtils::DEG2RADIANS, 0, 0) *
 		                          Quaternionf().fromEulers(0, transform->eulerAngles.y * MathUtils::DEG2RADIANS, 0) *
 		                          Quaternionf().fromEulers(0, 0, transform->eulerAngles.z * MathUtils::DEG2RADIANS);

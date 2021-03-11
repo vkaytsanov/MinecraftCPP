@@ -53,12 +53,8 @@ Skybox::Skybox(){
 	// to get the path to the assets
 	AssetManager::getInstance();
 	std::vector<std::string> paths = {
-			ASSETS_LOCATION + "skybox/skybox-right.png",
-			ASSETS_LOCATION + "skybox/skybox-left.png",
-			ASSETS_LOCATION + "skybox/skybox-front.png",
-			ASSETS_LOCATION + "skybox/skybox-bottom.png",
-			ASSETS_LOCATION + "skybox/skybox-front.png",
-			ASSETS_LOCATION + "skybox/skybox-back.png",
+			ASSETS_LOCATION + "skybox2/sky-side.png",
+			ASSETS_LOCATION + "skybox2/sky-top.png",
 	};
 
 	textureCubeMap = TextureCubeMap(paths);

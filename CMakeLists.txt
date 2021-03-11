@@ -59,6 +59,8 @@ file(GLOB SOURCES
         "src/lib/utils/noise/module/*.cpp"
         "src/lib/utils/openGL/*.cpp"
         "src/lib/utils/openGL/include/*.h"
+        "src/lib/utils/ui/*.cpp"
+        "src/lib/utils/ui/include/*.h"
         "src/lib/utils/*.cpp"
         "src/lib/utils/include/*.h"
         )

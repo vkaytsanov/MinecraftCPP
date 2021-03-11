@@ -10,12 +10,11 @@
 
 class Ray {
 private:
-	float m_yaw;
-	float m_pitch;
 	Vector3f m_startPoint;
 	Vector3f m_endPoint;
+	Vector3f m_direction;
 public:
-	Ray(float pitch, float yaw, const Vector3f& start);
+	Ray(const Vector3f& start, const Vector3f& direction);
 	void shoot(float step);
 	Vector3f getEndPoint();
 	float getLength();

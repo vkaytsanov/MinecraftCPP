@@ -22,11 +22,13 @@ private:
 
 	void handleButtons(float dt);
 	void handleMouse(entityx::EventManager& events, float dt);
+	void rayCast(entityx::EventManager& events, bool destroyBlock);
+	void onRayCastEnd(const Vector3i& chunkPos, const Vector3i& cubePos);
 public:
 	PlayerSystem(World* world);
 	void configure(entityx::EntityManager& entities, entityx::EventManager& events) override;
 	void update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
-	void rayCast(entityx::EventManager& events, bool destroyBlock);
+
 };
 
 

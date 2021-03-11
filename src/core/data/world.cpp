@@ -33,18 +33,22 @@ entityx::Entity* World::getChunk(int16_t x, int16_t z) {
 	return &m_chunks.at(Coordinates(x, z));
 }
 
-Cube* World::getCubeFromWorldCoordinates(int x, int y, int z) {
-	int chunkX = x / CHUNK_SIZE_X;
-	int chunkZ = z / CHUNK_SIZE_Z;
-
-	int cubePosX = std::abs(x % CHUNK_SIZE_X);
-	int cubePosZ = std::abs(z % CHUNK_SIZE_Z);
-//	if(cubePosX == 0 || cubePosZ == 0) {
-//		3 + 3;
-//	}
-	std::cout << cubePosX << ", " << cubePosZ << "\n";
-	return &getChunk(chunkX, chunkZ)->getComponent<Chunk>()->getChunkContents()->at(cubePosX).at(y).at(cubePosZ);
+Cube* World::getCubeFromWorldCoordinates(Vector3f& point) {
+	return nullptr;
 }
+
+Vector3i World::fromWorldCoordinatesToChunkCoordinates(const Vector3f& position) {
+	return Vector3i(static_cast<int>(std::floor(position.x / CHUNK_SIZE_X)),
+	                0,
+	                static_cast<int>(floor(position.z / CHUNK_SIZE_Z)));
+}
+
+Vector3i World::fromWorldCoordinatesToCubeCoordinates(const Vector3i& chunk, const Vector3f& position) {
+	return Vector3i(std::floor(position.x) - static_cast<int>(chunk.x * CHUNK_SIZE_X),
+	                static_cast<int>(floor(position.y)),
+	                std::floor(position.z) - static_cast<int>(chunk.z * CHUNK_SIZE_Z));
+}
+
 
 
 

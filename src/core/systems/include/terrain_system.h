@@ -14,10 +14,10 @@
 #include "../../events/chunk_regeneration_event.h"
 
 
-struct TerrainSystem : public entityx::System<TerrainSystem>, public entityx::Receiver<TerrainSystem> {
-
-	const int EXPLORE_DISTANCE = 4;
-	const int BUILD_DISTANCE = EXPLORE_DISTANCE - 1;
+class TerrainSystem : public entityx::System<TerrainSystem>, public entityx::Receiver<TerrainSystem> {
+private:
+	const int EXPLORE_DISTANCE = 6;
+	const int BUILD_DISTANCE = 4;
 
 	World* m_pWorld;
 	Transform* m_playerTransform;
@@ -31,7 +31,7 @@ struct TerrainSystem : public entityx::System<TerrainSystem>, public entityx::Re
 
 	void exploreNewCoordinates(entityx::EntityManager& entities, int chunkX, int chunkZ);
 	void buildNewCoordinates(const int chunkX, const int chunkZ);
-
+public:
 	TerrainSystem(World* world);
 	~TerrainSystem();
 	void configure(entityx::EntityManager& entities, entityx::EventManager& events);

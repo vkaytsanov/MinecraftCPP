@@ -60,8 +60,8 @@ const LabelStyle* Label::getStyle() const {
 	return m_style;
 }
 
-void Label::setAlign(Align align) {
-	Label::align = align;
-}
+//void Label::setAlign(Align align) {
+//	Label::align = align;
+//}
 
 

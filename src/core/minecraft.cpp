@@ -8,6 +8,7 @@
 #include "systems/include/world_meshing.h"
 #include "systems/include/render_system.h"
 #include "systems/include/player_system.h"
+#include "systems/include/debug_system.h"
 #include "components/include/player_controller.h"
 #include "../lib/utils/camera/include/first_person_camera_controller.h"
 #include "systems/include/transform_system.h"
@@ -41,6 +42,7 @@ void Minecraft::create() {
 	m_entityX.systems.add<PlayerSystem>(&m_world);
 	m_entityX.systems.add<TerrainSystem>(&m_world);
 	m_entityX.systems.add<RenderSystem>(&m_world);
+	m_entityX.systems.add<DebugSystem>();
 
 	m_entityX.systems.configure();
 
@@ -51,11 +53,20 @@ void Minecraft::render() {
 	glClearColor(0.4, 0.4, 0.4, 1.0);
 
 	const float dt = Lib::graphics->getDeltaTime();
-
+	if (Lib::input->isKeyPressed(SDLK_TAB)) {
+		if (m_isWireframe) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+		else {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+		m_isWireframe = !m_isWireframe;
+	}
 	m_entityX.systems.update<TransformSystem>(dt);
 	m_entityX.systems.update<TerrainSystem>(dt);
 	m_entityX.systems.update<RenderSystem>(dt);
 	m_entityX.systems.update<PlayerSystem>(dt);
+	m_entityX.systems.update<DebugSystem>(dt);
 }
 
 void Minecraft::pause() {
