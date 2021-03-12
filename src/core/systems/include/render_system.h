@@ -19,7 +19,7 @@
 
 class RenderSystem : public entityx::System<RenderSystem>{
 private:
-	static constexpr int RENDER_DISTANCE = 2;
+	static constexpr int RENDER_DISTANCE = 6;
 	World* m_pWorld;
 	PerspectiveCamera m_camera;
 	FirstPersonCameraController m_cameraController;

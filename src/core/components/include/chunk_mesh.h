@@ -27,7 +27,7 @@ class ChunkMesh : public entityx::Component<ChunkMesh>{
 private:
 	std::array<VertexArray, 3> m_vao;
 	std::array<VertexBuffer, 3> m_vbo;
-	std::array<unsigned int, 3> m_indicesCount;
+	std::array<uint32_t, 3> m_indicesCount;
 public:
 	ChunkMesh();
 	ChunkMeshState m_chunkMeshState;

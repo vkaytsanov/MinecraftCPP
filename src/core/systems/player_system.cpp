@@ -68,9 +68,9 @@ void PlayerSystem::rayCast(entityx::EventManager& events, bool destroyBlock) {
 				if (upperCube->isModel()) {
 					upperCube->m_type = Air;
 				}
-//				std::cout << "fx" <<  m_playerTransform->forward.x << "\n";
-//				std::cout << "fy" <<  m_playerTransform->forward.y << "\n";
-//				std::cout << "fz" <<  m_playerTransform->forward.z << "\n";
+				std::cout << "px" <<  (int) position.x << "\n";
+				std::cout << "py" <<  (int) position.y << "\n";
+				std::cout << "pz" <<  (int) position.z << "\n";
 				onRayCastEnd(chunkPos, cubePos);
 				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
 				break;

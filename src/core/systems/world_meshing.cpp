@@ -27,10 +27,12 @@ void WorldMeshing::build(const ChunksPacked& chunksPacked) {
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++) {
 		for (int z = 0; z < CHUNK_SIZE_Z; z++) {
-			for (int y = std::max(heightMap->at(x).at(z) - 64, 0); y < heightMap->at(x).at(z); y++) {
+//			assert(std::abs(heightMap->at(x).at(z) - heightMap->at(x).at(z - 1)) < 10);
+			for (int y = 0; y < heightMap->at(x).at(z); y++) {
 				Cube* cube = &chunkData->at(x).at(y).at(z);
 				if (cube->m_type != CubeType::Air) {
 					cubePosition.set(x, y, z);
+
 
 					if (cube->isModel()) {
 						addModel(cube->m_type, cubePosition);
@@ -39,11 +41,7 @@ void WorldMeshing::build(const ChunksPacked& chunksPacked) {
 
 					bool isTransparent = cube->isTransparent();
 
-					if (isVisibleEdge(chunkData, back, front, x, y, z, Z)) {
-						addFace(cube->m_type, Front, cubePosition, isTransparent);
-						addFace(cube->m_type, Back, cubePosition, isTransparent);
-					}
-					else {
+					if (z > 0 && z < CHUNK_SIZE_Z - 1) {
 						if (isVisibleSide(chunkData, x, y, z, 1, Z)) {
 							addFace(cube->m_type, Front, cubePosition, isTransparent);
 						}
@@ -51,31 +49,73 @@ void WorldMeshing::build(const ChunksPacked& chunksPacked) {
 							addFace(cube->m_type, Back, cubePosition, isTransparent);
 						}
 					}
-
-					if (isVisibleEdge(chunkData, left, right, x, y, z, X)) {
-						addFace(cube->m_type, Left, cubePosition, isTransparent);
-						addFace(cube->m_type, Right, cubePosition, isTransparent);
+					else if (z == 0) {
+						if (isVisibleLowerInsideEdge(chunkData, x, y, z, Z)){
+							addFace(cube->m_type, Front, cubePosition, isTransparent);
+							//addFace(cube->m_type, Back, cubePosition, isTransparent);
+						}
+						if (isVisibleLowerEdge(chunkData, back, x, y, z, Z)){
+							//addFace(cube->m_type, Front, cubePosition, isTransparent);
+							addFace(cube->m_type, Back, cubePosition, isTransparent);
+						}
 					}
-					else {
+					else if (z == CHUNK_SIZE_Z - 1) {
+						if (isVisibleUpperEdge(chunkData, front, x, y, z, Z)){
+							addFace(cube->m_type, Front, cubePosition, isTransparent);
+							//addFace(cube->m_type, Back, cubePosition, isTransparent);
+						}
+						if (isVisibleUpperInsideEdge(chunkData, x, y, z, Z)){
+							//addFace(cube->m_type, Front, cubePosition, isTransparent);
+							addFace(cube->m_type, Back, cubePosition, isTransparent);
+						}
+					}
 
-						if (isVisibleSide(chunkData, x, y, z, -1, X)) {
+					if (x > 0 && x < CHUNK_SIZE_X - 1) {
+						if (isVisibleSide(chunkData, x, y, z, -1, X))
 							addFace(cube->m_type, Left, cubePosition, isTransparent);
-						}
-						if (isVisibleSide(chunkData, x, y, z, 1, X)) {
+						if (isVisibleSide(chunkData, x, y, z, 1, X))
 							addFace(cube->m_type, Right, cubePosition, isTransparent);
+
+
+					}
+					else if (x == 0) {
+						if (isVisibleLowerEdge(chunkData, left, x, y, z, X)) {
+							//addFace(cube->m_type, Right, cubePosition, isTransparent);
+							addFace(cube->m_type, Left, cubePosition, isTransparent);
+
+						}
+						 if (isVisibleLowerInsideEdge(chunkData, x, y, z, X)) {
+							//addFace(cube->m_type, Left, cubePosition, isTransparent);
+							addFace(cube->m_type, Right, cubePosition, isTransparent);
+
+						}
+					}
+					else if (x == CHUNK_SIZE_X - 1) {
+						if (isVisibleUpperEdge(chunkData, right, x, y, z, X)){
+							addFace(cube->m_type, Right, cubePosition, isTransparent);
+							//addFace(cube->m_type, Left, cubePosition, isTransparent);
+
+						}
+						if (isVisibleUpperInsideEdge(chunkData, x, y, z, X)){
+							//addFace(cube->m_type, Right, cubePosition, isTransparent);
+							addFace(cube->m_type, Left, cubePosition, isTransparent);
+
 						}
 					}
 
-					if (isVisibleSide(chunkData, x, y, z, 1, Y) || y == CHUNK_SIZE_Y - 1) {
-						// little offset for more realistic water and lava levels
+					if(y > 0 && y < CHUNK_SIZE_Y - 1){
+						if(isVisibleSide(chunkData, x, y, z, -1, Y)){
+							addFace(cube->m_type, Bottom, cubePosition, isTransparent);
+						}
+						if(isVisibleSide(chunkData, x, y, z, 1, Y)){
+							if (cube->isLiquid()) cubePosition.y -= 0.2f;
+							addFace(cube->m_type, Top, cubePosition, isTransparent);
+						}
+					}
+					else if(y == CHUNK_SIZE_Y - 1){
 						if (cube->isLiquid()) cubePosition.y -= 0.2f;
 						addFace(cube->m_type, Top, cubePosition, isTransparent);
 					}
-					if (isVisibleSide(chunkData, x, y, z, -1, Y) ||
-					    (y == 0 && chunkData->at(x).at(y + 1).at(z).isTransparent())) {
-						addFace(cube->m_type, Bottom, cubePosition, isTransparent);
-					}
-
 				}
 			}
 		}
@@ -213,4 +253,87 @@ bool WorldMeshing::isVisibleSide(ChunkContentsPtr chunkData, int x, int y, int z
 	}
 	return chunkData->at(x2).at(y2).at(z2).isTransparent();
 }
+
+/** Check if compared to the +1 chunk it is visible */
+bool WorldMeshing::isVisibleUpperEdge(ChunkContentsPtr chunkData, ChunkContentsPtr neighbourData, int x, int y, int z,
+                                      Axis axis) {
+	int x2;
+	int z2;
+	if (axis == Axis::X) {
+		x2 = 0;
+		z2 = z;
+	}
+		// Z Axis
+	else {
+		x2 = x;
+		z2 = 0;
+	}
+	if (chunkData->at(x).at(y).at(z).isTransparent()) {
+		return (neighbourData->at(x2).at(y).at(z2).isTransparent() &&
+		        neighbourData->at(x2).at(y).at(z2).m_type != chunkData->at(x).at(y).at(z).m_type);
+	}
+	return neighbourData->at(x2).at(y).at(z2).isTransparent();
+}
+
+/** Check if compared to the inside block it is visible */
+bool WorldMeshing::isVisibleUpperInsideEdge(ChunkContentsPtr chunkData, int x, int y, int z, Axis axis) {
+	int x2;
+	int z2;
+	if (axis == Axis::X) {
+		x2 = CHUNK_SIZE_X - 2;
+		z2 = z;
+	}
+	// Z Axis
+	else {
+		x2 = x;
+		z2 = CHUNK_SIZE_Z - 2;
+	}
+	if (chunkData->at(x).at(y).at(z).isTransparent()) {
+		return (chunkData->at(x2).at(y).at(z2).isTransparent() &&
+		        chunkData->at(x2).at(y).at(z2).m_type != chunkData->at(x).at(y).at(z).m_type);
+	}
+	return chunkData->at(x2).at(y).at(z2).isTransparent();
+}
+
+/** Check if compared to the -1 chunk it is visible */
+bool WorldMeshing::isVisibleLowerEdge(ChunkContentsPtr chunkData, ChunkContentsPtr neighbourData, int x, int y, int z,
+                                      Axis axis) {
+	int x2;
+	int z2;
+	if (axis == Axis::X) {
+		x2 = CHUNK_SIZE_X - 1;
+		z2 = z;
+	}
+		// Z Axis
+	else {
+		x2 = x;
+		z2 = CHUNK_SIZE_Z - 1;
+	}
+	if (chunkData->at(x).at(y).at(z).isTransparent()) {
+		return (neighbourData->at(x2).at(y).at(z2).isTransparent() &&
+		        neighbourData->at(x2).at(y).at(z2).m_type != chunkData->at(x).at(y).at(z).m_type);
+	}
+	return neighbourData->at(x2).at(y).at(z2).isTransparent();
+}
+
+/** Check if compared to the inside block it is visible */
+bool WorldMeshing::isVisibleLowerInsideEdge(ChunkContentsPtr chunkData, int x, int y, int z, Axis axis) {
+	int x2;
+	int z2;
+	if (axis == Axis::X) {
+		x2 = 1;
+		z2 = z;
+	}
+		// Z Axis
+	else {
+		x2 = x;
+		z2 = 1;
+	}
+	if (chunkData->at(x).at(y).at(z).isTransparent()) {
+		return (chunkData->at(x2).at(y).at(z2).isTransparent() &&
+		        chunkData->at(x2).at(y).at(z2).m_type != chunkData->at(x).at(y).at(z).m_type);
+	}
+	return chunkData->at(x2).at(y).at(z2).isTransparent();
+}
+
 

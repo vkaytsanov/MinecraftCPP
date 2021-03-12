@@ -19,7 +19,7 @@
 typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z> ChunkContents;
 typedef std::array<std::array<std::array<Cube, CHUNK_SIZE_X>, CHUNK_SIZE_Y>, CHUNK_SIZE_Z>* ChunkContentsPtr;
 
-static const int8_t planes[6 * 4 * 3] = {
+static const float planes[6 * 4 * 3] = {
 		// Front
 		0, 0, 1,
 		1, 0, 1,
@@ -61,6 +61,10 @@ private:
 	static bool isVisibleEdge(ChunkContentsPtr chunkData, ChunkContentsPtr lowerNeighbourData,
 	                          ChunkContentsPtr upperNeighbourData, int x, int y, int z, Axis axis);
 	static bool isVisibleSide(ChunkContentsPtr chunkData, int x, int y, int z, int side, Axis axis);
+	static bool isVisibleUpperEdge(ChunkContentsPtr chunkData, ChunkContentsPtr neighbourData, int x, int y, int z, Axis axis);
+	static bool isVisibleUpperInsideEdge(ChunkContentsPtr chunkData, int x, int y, int z, Axis axis);
+	static bool isVisibleLowerEdge(ChunkContentsPtr chunkData, ChunkContentsPtr neighbourData, int x, int y, int z, Axis axis);
+	static bool isVisibleLowerInsideEdge(ChunkContentsPtr chunkData, int x, int y, int z, Axis axis);
 public:
 	void build(const ChunksPacked& chunksPacked);
 

@@ -19,11 +19,13 @@ struct Coordinates {
 	int64_t m_y;
 	const int64_t code;
 
-	Coordinates(int64_t x, int64_t y) : m_x(x), m_y(y), code(toMorton(x, y)) {
+	Coordinates(int64_t x, int64_t y) : m_x(x), m_y(y), code(toMorton()) {
 
 	}
 
-	uint64_t toMorton(int64_t x, int64_t y) {
+	int64_t toMorton() {
+		int64_t x = m_x;
+		int64_t y = m_y;
 		x = (x | (x << 16)) & 0x0000FFFF0000FFFF;
 		x = (x | (x << 8)) & 0x00FF00FF00FF00FF;
 		x = (x | (x << 4)) & 0x0F0F0F0F0F0F0F0F;
@@ -41,6 +43,14 @@ struct Coordinates {
 
 	bool operator==(const Coordinates& rhs) const {
 		return code == rhs.code;
+	}
+
+	bool operator<(const Coordinates& rhs) const {
+		return code < rhs.code;
+	}
+
+	bool operator>(const Coordinates& rhs) const {
+		return code > rhs.code;
 	}
 };
 
@@ -62,7 +72,6 @@ public:
 	entityx::Entity* getChunk(int16_t x, int16_t z);
 	Vector3i fromWorldCoordinatesToChunkCoordinates(const Vector3f& position);
 	Vector3i fromWorldCoordinatesToCubeCoordinates(const Vector3i& chunk, const Vector3f& position);
-	Cube* getCubeFromWorldCoordinates(Vector3f& point);
 
 };
 

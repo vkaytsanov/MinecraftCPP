@@ -16,8 +16,9 @@
 
 class TerrainSystem : public entityx::System<TerrainSystem>, public entityx::Receiver<TerrainSystem> {
 private:
-	const int EXPLORE_DISTANCE = 6;
-	const int BUILD_DISTANCE = 4;
+	const int EXPLORE_DISTANCE = 8;
+	const int BUILD_DISTANCE = 7;
+	const int REGENERATION_DISTANCE = 1;
 
 	World* m_pWorld;
 	Transform* m_playerTransform;
@@ -31,6 +32,7 @@ private:
 
 	void exploreNewCoordinates(entityx::EntityManager& entities, int chunkX, int chunkZ);
 	void buildNewCoordinates(const int chunkX, const int chunkZ);
+	void regenerateCoordinates(const int chunkX, const int chunkZ);
 public:
 	TerrainSystem(World* world);
 	~TerrainSystem();

@@ -59,9 +59,9 @@ void ChunkMesh::setMesh(std::array<std::vector<Vertex>, 3>& vertices) {
 		else{
 			type = " model";
 		}
-		Lib::app->log(("ChunkMesh " + std::to_string(i)).c_str(),
-		              (std::to_string(vertices.at(i).size()) + type +
-		               " m_vertices").c_str());
+//		Lib::app->log(("ChunkMesh " + std::to_string(i)).c_str(),
+//		              (std::to_string(vertices.at(i).size()) + type +
+//		               " m_vertices").c_str());
 		if (!vertices.at(i).empty()) {
 			m_vbo.at(i).bind();
 			m_vbo.at(i).bufferData(vertices.at(i).size() * sizeof(Vertex), &vertices.at(i)[0], GL_STATIC_DRAW);

@@ -29,9 +29,9 @@ MessageCallback(GLenum source,
 
 void Minecraft::create() {
 
-//	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-//	glEnable(GL_DEBUG_OUTPUT);
-//	glDebugMessageCallback(MessageCallback, 0);
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(MessageCallback, 0);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

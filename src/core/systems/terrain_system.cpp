@@ -18,7 +18,9 @@ TerrainSystem::~TerrainSystem() {
 
 
 void TerrainSystem::receive(const ChunkRegenerationEvent& cre) {
-	buildNewCoordinates(cre.x, cre.z);
+	Lib::app->log("crex", cre.x);
+	Lib::app->log("crez", cre.z);
+	regenerateCoordinates(cre.x, cre.z);
 }
 
 void TerrainSystem::configure(entityx::EntityManager& entities, entityx::EventManager& events) {
@@ -68,12 +70,14 @@ void TerrainSystem::exploreNewCoordinates(entityx::EntityManager& entities, int 
 
 void TerrainSystem::buildNewCoordinates(const int chunkX, const int chunkZ) {
 	int counter = 0;
+	Lib::app->log("cx", chunkX);
+	Lib::app->log("cz", chunkZ);
 	for (int x = chunkX - BUILD_DISTANCE; x < chunkX + BUILD_DISTANCE; x++) {
 		for (int z = chunkZ - BUILD_DISTANCE; z < chunkZ + BUILD_DISTANCE; ++z) {
 			ChunkMesh* chunkMesh = m_pWorld->getChunk(x, z)->getComponent<ChunkMesh>().get();
 			if (chunkMesh->m_chunkMeshState == UnBuilt) {
 				m_worldMeshing.build(ChunksPacked(
-						m_pWorld->getChunk(chunkX, z + 1),
+						m_pWorld->getChunk(x, z + 1),
 						m_pWorld->getChunk(x, z - 1),
 						m_pWorld->getChunk(x, z),
 						m_pWorld->getChunk(x - 1, z),
@@ -83,6 +87,27 @@ void TerrainSystem::buildNewCoordinates(const int chunkX, const int chunkZ) {
 		}
 	}
 	Lib::app->log("WorldGeneration", ("Constructed " + std::to_string(counter) + " meshes").c_str());
+}
+
+void TerrainSystem::regenerateCoordinates(const int chunkX, const int chunkZ) {
+	int counter = 0;
+	Lib::app->log("cx", chunkX);
+	Lib::app->log("cz", chunkZ);
+	for (int x = chunkX - REGENERATION_DISTANCE; x < chunkX + REGENERATION_DISTANCE; x++) {
+		for (int z = chunkZ - REGENERATION_DISTANCE; z < chunkZ + REGENERATION_DISTANCE; ++z) {
+			ChunkMesh* chunkMesh = m_pWorld->getChunk(x, z)->getComponent<ChunkMesh>().get();
+			if (chunkMesh->m_chunkMeshState == UnBuilt) {
+				m_worldMeshing.build(ChunksPacked(
+						m_pWorld->getChunk(x, z + 1),
+						m_pWorld->getChunk(x, z - 1),
+						m_pWorld->getChunk(x, z),
+						m_pWorld->getChunk(x - 1, z),
+						m_pWorld->getChunk(x + 1, z)));
+				counter++;
+			}
+		}
+	}
+	Lib::app->log("WorldGeneration", ("Regenerated " + std::to_string(counter) + " meshes").c_str());
 }
 
 

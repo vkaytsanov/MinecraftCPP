@@ -33,19 +33,27 @@ void FirstPersonCameraController::handleButtonMovement(const float dt) {
 }
 
 void FirstPersonCameraController::handleMouseMovement(const float dt) {
-	//if (Lib::input->isMouseRightClick()) {
-		float xRot = -(Lib::input->getMouseDeltaY()) * dt * CAMERA_MOVEMENT_INTENSITY;
-		float yRot = (Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
+		if(!firstTime) {
+			//if (Lib::input->isMouseRightClick()) {
+			float xRot = -(Lib::input->getMouseDeltaY()) * dt * CAMERA_MOVEMENT_INTENSITY;
+			float yRot = (Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
 //		m_pCamera->m_pTransform->rotate(xRot,yRot,0);
-		m_pCamera->m_pTransform->eulerAngles += Vector3f(xRot, yRot, 0);
-		m_pCamera->m_pTransform->eulerAngles.x = std::clamp(m_pCamera->m_pTransform->eulerAngles.x, -90.f, 90.f);
-		m_pCamera->m_pTransform->hasChanged = true;
+			m_pCamera->m_pTransform->eulerAngles += Vector3f(xRot, yRot, 0);
+			m_pCamera->m_pTransform->eulerAngles.x = std::clamp(m_pCamera->m_pTransform->eulerAngles.x, -90.f, 90.f);
+			m_pCamera->m_pTransform->hasChanged = true;
+		}else{
+			firstTime = false;
+		}
 		Lib::input->resetMouse();
 	//}
 }
 
 void FirstPersonCameraController::update(const float dt) {
 	handleButtonMovement(dt);
+	if(Lib::input->isKeyPressed(SDLK_ESCAPE)){
+		shouldMouseMove = !shouldMouseMove;
+	}
+	if(!shouldMouseMove) return;
 	handleMouseMovement(dt);
 }
 

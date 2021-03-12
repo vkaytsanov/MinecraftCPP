@@ -42,8 +42,8 @@ void WorldGeneration::generateChunkContents(Chunk* chunk, int16_t i, int16_t j) 
 			float worldX = (float) (x + i * CHUNK_SIZE_X);
 			float worldZ = (float) (z + j * CHUNK_SIZE_Z);
 
-			Biome& biome = m_biomes[chunk->getHeightMap()->at(x).at(z)];
-			int height = (int) std::round((m_heightGenerator.GetValuePositive(worldX, worldZ, 0.8) * 60) +
+			Biome& biome = m_biomes[chunk->getBiomeMap()->at(x).at(z)];
+			int height = (int) std::round((m_heightGenerator.GetValuePositive(worldX, worldZ, 0.8) * 64) +
 					biome.m_minHeight);
 //			std::cout << "Height: " << height << "\n";
 			chunk->setHeight(height, x, z);
@@ -57,6 +57,7 @@ void WorldGeneration::generateChunkContents(Chunk* chunk, int16_t i, int16_t j) 
 }
 
 void WorldGeneration::generateVerticalLevel(Chunk* chunk, Biome* biome, int x, int level, int z) {
+	assert(level > 10);
 	chunk->setCube(Bedrock, x, 0, z);
 	for (int y = 1; y < level - 5; y++) chunk->setCube(Stone, x, y, z);
 	for (int y = level - 5; y < level - 1; y++) chunk->setCube(biome->m_cubes[0], x, y, z);
