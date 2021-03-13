@@ -45,6 +45,53 @@ Vector3i World::fromWorldCoordinatesToCubeCoordinates(const Vector3i& chunk, con
 	                static_cast<int>(std::floor(position.z)) - static_cast<int>(chunk.z * CHUNK_SIZE_Z));
 }
 
+bool World::tryAddCube(const Vector3i& chunkPos, const Vector3i& cubePos) {
+	entityx::Entity* lastChunkEntity = getChunk(chunkPos.x, chunkPos.z);
+	Cube* lastCube = &lastChunkEntity->getComponent<Chunk>()->getChunkContents()->at(cubePos.x).at(cubePos.y).at(cubePos.z);
+	if (lastCube->m_type == Air) {
+		lastCube->m_type = Diamond;
+		// update the heightmap
+		HeightMap* lastChunkHeightmap = lastChunkEntity->getComponent<Chunk>()->getHeightMap();
+		lastChunkHeightmap->at(cubePos.x).at(cubePos.z) = std::max(lastChunkHeightmap->at(cubePos.x).at(cubePos.z), cubePos.y + 1);
+		return true;
+	}
+	return false;
+}
+
+bool World::tryRemoveCube(const Vector3i& chunkPos, const Vector3i& cubePos) {
+	entityx::Entity* chunkEntity = getChunk(chunkPos.x, chunkPos.z);
+	entityx::ComponentHandle<Chunk> chunk = chunkEntity->getComponent<Chunk>();
+	ChunkContentsPtr chunkContents = chunk->getChunkContents();
+	Cube* cube = &chunkContents->at(cubePos.x).at(cubePos.y).at(cubePos.z);
+	if (cube->m_type != Air && !cube->isLiquid()) {
+		cube->m_type = Air;
+		// update the heightmap
+		int level = cubePos.y;
+		if (chunk->getHeightMap()->at(cubePos.x).at(cubePos.z) == level) {
+			while(chunkContents->at(cubePos.x).at(level).at(cubePos.y).m_type == Air){
+				level--;
+			}
+			chunk->getHeightMap()->at(cubePos.x).at(cubePos.z) = level;
+		}
+		else {
+			level++;
+			Cube* upperCube = &chunkContents->at(cubePos.x).at(level).at(cubePos.z);
+			if (upperCube->isModel()) {
+				upperCube->m_type = Air;
+				// update the heightmap
+				if (chunk->getHeightMap()->at(cubePos.x).at(cubePos.z) == level) {
+					while(chunkContents->at(cubePos.x).at(level).at(cubePos.y).m_type == Air){
+						level--;
+					}
+					chunk->getHeightMap()->at(cubePos.x).at(cubePos.z) = level;
+				}
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
 
 
 

@@ -94,7 +94,7 @@ void TerrainSystem::regenerateCoordinates(const int chunkX, const int chunkZ) {
 	Lib::app->log("cx", chunkX);
 	Lib::app->log("cz", chunkZ);
 	for (int x = chunkX - REGENERATION_DISTANCE; x < chunkX + REGENERATION_DISTANCE; x++) {
-		for (int z = chunkZ - REGENERATION_DISTANCE; z < chunkZ + REGENERATION_DISTANCE; ++z) {
+		for (int z = chunkZ - REGENERATION_DISTANCE; z < chunkZ + REGENERATION_DISTANCE; z++) {
 			ChunkMesh* chunkMesh = m_pWorld->getChunk(x, z)->getComponent<ChunkMesh>().get();
 			if (chunkMesh->m_chunkMeshState == UnBuilt) {
 				m_worldMeshing.build(ChunksPacked(

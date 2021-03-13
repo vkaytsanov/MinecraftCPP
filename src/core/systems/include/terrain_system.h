@@ -18,7 +18,7 @@ class TerrainSystem : public entityx::System<TerrainSystem>, public entityx::Rec
 private:
 	const int EXPLORE_DISTANCE = 8;
 	const int BUILD_DISTANCE = 7;
-	const int REGENERATION_DISTANCE = 1;
+	const int REGENERATION_DISTANCE = 2;
 
 	World* m_pWorld;
 	Transform* m_playerTransform;

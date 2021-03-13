@@ -38,7 +38,7 @@ void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 		rayCast(events, true);
 	}
 	else if (Lib::input->isMouseRightClick()) {
-		 //Add block
+		//Add block
 		rayCast(events, false);
 	}
 
@@ -47,51 +47,38 @@ void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 void PlayerSystem::rayCast(entityx::EventManager& events, bool destroyBlock) {
 	Ray ray(m_playerTransform->position,
 	        m_playerTransform->forward);
-	Vector3f lastPosition
-	;
-	for (int i = 0; i < MAX_CUBE_REACH; i++) {
-		ray.shoot(1.00f);
-		Vector3f position = ray.getEndPoint();
-		if (position.y < 0 || position.y > CHUNK_SIZE_Y - 1) break;
-		Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(position);
-		Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, position);
-		entityx::Entity* chunk = m_pWorld->getChunk(chunkPos.x, chunkPos.z);
-		Cube* cube = &chunk->getComponent<Chunk>()->getChunkContents()->at(cubePos.x).at(cubePos.y).at(cubePos.z);
+	Vector3f lastPosition;
 
-		if (cube->m_type != Air && !cube->isLiquid()) {
+	m_breakingTimer += Lib::graphics->getDeltaTime();
+	if (m_breakingTimer > BREAKING_TIME) {
+		for (int i = 0; i < MAX_CUBE_REACH; i++) {
+			ray.shoot(1.00f);
+			Vector3f position = ray.getEndPoint();
+			if (position.y < 0 || position.y > CHUNK_SIZE_Y - 1) break;
+
 			if (destroyBlock) {
-				Lib::app->log("player", "broke cube");
-				cube->m_type = Air;
-				Cube* upperCube = &m_pWorld->getChunk(chunkPos.x,
-				                                      chunkPos.z)->getComponent<Chunk>()->getChunkContents()->at(
-						cubePos.x).at(cubePos.y + 1).at(cubePos.z);
-				if (upperCube->isModel()) {
-					upperCube->m_type = Air;
+				Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(position);
+				Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, position);
+				if (m_pWorld->tryRemoveCube(chunkPos, cubePos)) {
+					onRayCastEnd(chunkPos, cubePos);
+					events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
+					m_breakingTimer = 0.0f;
+					break;
 				}
-				std::cout << "px" <<  (int) position.x << "\n";
-				std::cout << "py" <<  (int) position.y << "\n";
-				std::cout << "pz" <<  (int) position.z << "\n";
-				onRayCastEnd(chunkPos, cubePos);
-				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
-				break;
 			}
 			else {
 				// place block
 				Vector3i lastChunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(lastPosition);
 				Vector3i lastCubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(lastChunkPos, lastPosition);
-				entityx::Entity* lastChunk = m_pWorld->getChunk(lastChunkPos.x, lastChunkPos.z);
-				Cube* lastCube = &lastChunk->getComponent<Chunk>()->getChunkContents()->at(lastCubePos.x).at(lastCubePos.y).at(lastCubePos.z);
-				if(lastCube->m_type == Air){
-					lastCube->m_type = Diamond;
+				if (m_pWorld->tryAddCube(lastChunkPos, lastCubePos)) {
+					onRayCastEnd(lastChunkPos, lastCubePos);
+					events.post<ChunkRegenerationEvent>(lastChunkPos.x, lastChunkPos.z);
+					m_breakingTimer = 0.0f;
+					break;
 				}
-				onRayCastEnd(chunkPos, cubePos);
-				lastChunk->getComponent<Chunk>()->getHeightMap()->at(lastCubePos.x).at(lastCubePos.z)++;
-				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
-				break;
+				lastPosition = position;
 			}
 		}
-
-		lastPosition = position;
 	}
 }
 
@@ -99,21 +86,16 @@ void PlayerSystem::onRayCastEnd(const Vector3i& chunkPos, const Vector3i& cubePo
 	m_pWorld->getChunk(chunkPos.x, chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
 
 	if (cubePos.x == 0) {
-		m_pWorld->getChunk(chunkPos.x - 1,
-		                   chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+		m_pWorld->getChunk(chunkPos.x - 1, chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
 	}
 	else if (cubePos.x == CHUNK_SIZE_X - 1) {
-		m_pWorld->getChunk(chunkPos.x + 1,
-		                   chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+		m_pWorld->getChunk(chunkPos.x + 1, chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
 	}
-
 	if (cubePos.z == 0) {
-		m_pWorld->getChunk(chunkPos.x,
-		                   chunkPos.z - 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+		m_pWorld->getChunk(chunkPos.x, chunkPos.z - 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
 	}
 	else if (cubePos.z == CHUNK_SIZE_Z - 1) {
-		m_pWorld->getChunk(chunkPos.x,
-		                   chunkPos.z + 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
+		m_pWorld->getChunk(chunkPos.x, chunkPos.z + 1)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
 	}
 
 }

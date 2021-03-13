@@ -15,7 +15,8 @@ class PlayerSystem : public entityx::System<PlayerSystem>{
 private:
 	// ray casting
 	const int MAX_CUBE_REACH = 3;
-
+	const float BREAKING_TIME = 0.10f;
+	float m_breakingTimer = 0.0f;
 	World* m_pWorld;
 	entityx::Entity m_player;
 	entityx::ComponentHandle<Transform> m_playerTransform;
