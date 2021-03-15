@@ -9,15 +9,25 @@
 
 
 Shaders::Shaders(const std::string& vertexShaderPath, const std::string& fragShaderPath) {
-	// assigning to temp std::string, else we getComponent garbage value of the variable that just left the stack
-	parsedVertexShader = readFromFile(shadersPath + vertexShaderPath);
+	std::string parsedVertexShader = readFromFile(shadersPath + vertexShaderPath);
 	vertexShader = parsedVertexShader.c_str();
 
-	parsedFragmentShader = readFromFile(shadersPath + fragShaderPath);
+	std::string parsedFragmentShader = readFromFile(shadersPath + fragShaderPath);
 	fragShader = parsedFragmentShader.c_str();
 
-//    Lib::app->log("VertexShader", vertexShader);
-//    Lib::app->log("FragShader", fragShader);
+	geomShader = nullptr;
+	compile();
+}
+
+Shaders::Shaders(const std::string& vertexShaderPath, const std::string& fragShaderPath, const std::string& geomShaderPath) {
+	std::string parsedVertexShader = readFromFile(shadersPath + vertexShaderPath);
+	vertexShader = parsedVertexShader.c_str();
+
+	std::string parsedFragmentShader = readFromFile(shadersPath + fragShaderPath);
+	fragShader = parsedFragmentShader.c_str();
+
+	std::string parsedGeometryShader = readFromFile(shadersPath + geomShaderPath);
+	geomShader = parsedGeometryShader.c_str();
 
 	compile();
 }
@@ -51,48 +61,38 @@ void Shaders::compile() {
 	glShaderSource(vertexShaderID, 1, &vertexShader, nullptr);
 	glCompileShader(vertexShaderID);
 
-	int status;
-	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &status);
-	if (status != GL_TRUE) {
-		int log_length = 0;
-		char message[1024];
-		glGetShaderInfoLog(vertexShaderID, 1024, &log_length, message);
-		// Write the error to a log
-		Lib::app->error("VertexShaderError", message);
-	}
-	else {
-		Lib::app->log("VertexShader", "compiled successfully");
-	}
+	checkForCompileError(vertexShaderID);
 
 	// compiling now the fragment shader
 	fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragShaderID, 1, &fragShader, nullptr);
 	glCompileShader(fragShaderID);
 
-	status = GL_FALSE;
-	glGetShaderiv(fragShaderID, GL_COMPILE_STATUS, &status);
-	if (status != GL_TRUE) {
-		int log_length = 0;
-		char message[1024];
-		glGetShaderInfoLog(fragShaderID, 1024, &log_length, message);
-		// Write the error to a log
-		Lib::app->error("FragmentShaderError", message);
-		exit(-1);
-	}
-	else {
-		Lib::app->log("FragmentShader", "compiled successfully");
+	checkForCompileError(fragShaderID);
+
+	// if there is geometry shader
+	if(geomShader){
+		geomShaderID = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(geomShaderID, 1, &geomShader, nullptr);
+		glCompileShader(geomShaderID);
+		checkForCompileError(geomShaderID);
 	}
 
 	shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShaderID);
 	glAttachShader(shaderProgram, fragShaderID);
+	if(geomShader){
+		glAttachShader(shaderProgram, geomShaderID);
+	}
+
 	glLinkProgram(shaderProgram);
 
+	int status;
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);
 	if (status != GL_TRUE) {
-		int log_length = 0;
+		int logLength = 0;
 		char message[1024];
-		glGetProgramInfoLog(shaderProgram, 1024, &log_length, message);
+		glGetProgramInfoLog(shaderProgram, 1024, &logLength, message);
 		// Write the error to a log
 		Lib::app->error("LinkingShaderProgramError", message);
 		exit(-1);
@@ -101,6 +101,22 @@ void Shaders::compile() {
 		Lib::app->log("LinkingShaderProgram", "successful");
 	}
 
+}
+
+
+void Shaders::checkForCompileError(unsigned int type) {
+	int status;
+	glGetShaderiv(type, GL_COMPILE_STATUS, &status);
+	if (status != GL_TRUE) {
+		int logLength = 0;
+		char message[1024];
+		glGetShaderInfoLog(type, 1024, &logLength, message);
+		// Write the error to a log
+		Lib::app->error("ShaderError", message);
+	}
+	else {
+		Lib::app->log("Shader", "compiled successfully");
+	}
 }
 
 void Shaders::begin() {
@@ -156,6 +172,12 @@ void Shaders::setVector3f(std::string name, const float x, const float y, const 
 void Shaders::setVector3f(std::string name, const Vector3f& vec) {
 	glUniform3f(getUniformLocation(name), vec.x, vec.y, vec.z);
 }
+
+
+
+
+
+
 
 
 

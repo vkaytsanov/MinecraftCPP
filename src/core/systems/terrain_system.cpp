@@ -70,8 +70,6 @@ void TerrainSystem::exploreNewCoordinates(entityx::EntityManager& entities, int 
 
 void TerrainSystem::buildNewCoordinates(const int chunkX, const int chunkZ) {
 	int counter = 0;
-	Lib::app->log("cx", chunkX);
-	Lib::app->log("cz", chunkZ);
 	for (int x = chunkX - BUILD_DISTANCE; x < chunkX + BUILD_DISTANCE; x++) {
 		for (int z = chunkZ - BUILD_DISTANCE; z < chunkZ + BUILD_DISTANCE; ++z) {
 			ChunkMesh* chunkMesh = m_pWorld->getChunk(x, z)->getComponent<ChunkMesh>().get();

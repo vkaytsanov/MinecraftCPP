@@ -54,7 +54,9 @@ class BaseSystem : entityx::help::NonCopyable {
    *
    * Called every game step.
    */
+  virtual void preUpdate(EntityManager &entities, EventManager &events, TimeDelta dt) = 0;
   virtual void update(EntityManager &entities, EventManager &events, TimeDelta dt) = 0;
+  virtual void postUpdate(EntityManager &entities, EventManager &events, TimeDelta dt) = 0;
 
   static Family family_counter_;
 
@@ -83,6 +85,19 @@ private:
     static Family family = family_counter_++;
     return family;
   }
+
+public:
+	virtual void preUpdate(EntityManager& entities, EventManager& events, TimeDelta dt) {
+
+	}
+
+	virtual void update(EntityManager& entities, EventManager& events, TimeDelta dt) {
+
+	}
+
+	virtual void postUpdate(EntityManager& entities, EventManager& events, TimeDelta dt) {
+
+	}
 };
 
 
@@ -138,6 +153,14 @@ class SystemManager : entityx::help::NonCopyable {
         : std::shared_ptr<S>(std::static_pointer_cast<S>(it->second));
   }
 
+
+  template <typename S>
+  void preUpdate(TimeDelta dt) {
+    assert(initialized_ && "SystemManager::configure() not called");
+    std::shared_ptr<S> s = system<S>();
+    s->preUpdate(entity_manager_, event_manager_, dt);
+  }
+
   /**
    * Call the System::update() method for a registered system.
    */
@@ -146,6 +169,13 @@ class SystemManager : entityx::help::NonCopyable {
     assert(initialized_ && "SystemManager::configure() not called");
     std::shared_ptr<S> s = system<S>();
     s->update(entity_manager_, event_manager_, dt);
+  }
+
+  template <typename S>
+  void postUpdate(TimeDelta dt) {
+    assert(initialized_ && "SystemManager::configure() not called");
+    std::shared_ptr<S> s = system<S>();
+    s->postUpdate(entity_manager_, event_manager_, dt);
   }
 
   /**
@@ -157,9 +187,9 @@ class SystemManager : entityx::help::NonCopyable {
    *
    * If the order in which systems update is important, use SystemManager::update()
    * to manually specify the update order. EntityX does not yet support a way of
-   * specifying priority for update_all().
+   * specifying priority for updateAll().
    */
-  void update_all(TimeDelta dt);
+  void updateAll(TimeDelta dt);
 
   /**
    * Configure the system. Call after adding all Systems.

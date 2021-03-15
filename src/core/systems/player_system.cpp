@@ -7,6 +7,7 @@
 #include "../../lib/utils/geometry/include/ray.h"
 #include "../events/chunk_regeneration_event.h"
 #include "include/terrain_system.h"
+#include "include/physics_system.h"
 
 
 PlayerSystem::PlayerSystem(World* world) : m_pWorld(world) {
@@ -17,9 +18,11 @@ void PlayerSystem::configure(entityx::EntityManager& entities, entityx::EventMan
 	// create player
 	m_player = entities.create();
 	m_player.addComponent<PlayerController>();
-	m_playerTransform = m_player.addComponent<Transform>(Vector3f(0, 95, 0));
+	m_playerTransform = m_player.addComponent<Transform>(Vector3f(0, 100, 0));
+	m_playerRigidBody = m_player.addComponent<RigidBody>();
+	m_player.addComponent<BoxCollider>(Vector3f(0.75f, 1.65f, 0.75f));
 
-	//m_cameraController.setTransform(m_playerTransform.get());
+	//m_cameraController.setTransform(m_pPlayerTransform.get());
 }
 
 void PlayerSystem::update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
@@ -30,9 +33,16 @@ void PlayerSystem::update(entityx::EntityManager& entities, entityx::EventManage
 
 void PlayerSystem::handleButtons(float dt) {
 	// TODO Inventory etc
+	handleButtonMovement(dt);
 }
 
 void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
+	if (Lib::input->isKeyPressed(SDLK_ESCAPE)) {
+		shouldMouseMove = !shouldMouseMove;
+	}
+	if (shouldMouseMove){
+		handleMouseMovement(dt);
+	}
 	if (Lib::input->isMouseLeftClick()) {
 		// Destroy block
 		rayCast(events, true);
@@ -100,3 +110,43 @@ void PlayerSystem::onRayCastEnd(const Vector3i& chunkPos, const Vector3i& cubePo
 
 }
 
+void PlayerSystem::handleButtonMovement(float dt) {
+	float horizontalInput = 0.0f;
+	float verticalInput = 0.0f;
+
+	if (Lib::input->isKeyPressed(SDLK_a)) {
+		horizontalInput -= (CHARACTER_MOVEMENT_THRUST);
+	}
+	if (Lib::input->isKeyPressed(SDLK_d)) {
+		horizontalInput += (CHARACTER_MOVEMENT_THRUST);
+	}
+	if (Lib::input->isKeyPressed(SDLK_w)) {
+		verticalInput -= (CHARACTER_MOVEMENT_THRUST);
+	}
+	if (Lib::input->isKeyPressed(SDLK_s)) {
+		verticalInput += (CHARACTER_MOVEMENT_THRUST);
+	}
+	if(Lib::input->isKeyPressed(SDLK_SPACE) && m_playerRigidBody->m_isGrounded){
+		m_playerRigidBody->addForceImpulse(Vector3f(0, 1, 0) * CHARACTER_JUMPING_THRUST);
+		m_playerRigidBody->m_isGrounded = false;
+	}
+
+	if (horizontalInput != 0.0f || verticalInput != 0.0f) {
+		Vector3f totalForce = m_playerTransform->forward * verticalInput + m_playerTransform->right * horizontalInput;
+		// so it doesnt fly when the forward vector is pointing the sky or ground
+		totalForce.y = 0;
+		m_playerRigidBody->addForce(totalForce);
+	}
+}
+
+void PlayerSystem::handleMouseMovement(float dt) {
+	if (!m_firstTimeMovingMouse) {
+		float xRot = -(Lib::input->getMouseDeltaY()) * dt * CAMERA_MOVEMENT_INTENSITY;
+		float yRot = (Lib::input->getMouseDeltaX()) * dt * CAMERA_MOVEMENT_INTENSITY;
+		m_playerTransform->rotateClampX(Vector3f(xRot, yRot, 0), 90.0f);
+	}
+	else {
+		m_firstTimeMovingMouse = false;
+	}
+	Lib::input->resetMouse();
+}

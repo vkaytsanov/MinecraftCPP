@@ -4,12 +4,17 @@
 
 #include "include/debug_system.h"
 #include "../components/include/player_controller.h"
+#include "../../lib/utils/ui/include/input_listener.h"
+
+DebugSystem::DebugSystem(){
+
+}
 
 void DebugSystem::configure(entityx::EntityManager& entities, entityx::EventManager& events) {
 	for(entityx::Entity entity : entities.entities_with_components<PlayerController>()){
 		m_transform = entity.getComponent<Transform>().get();
 	}
-	std::string pixelEmulatorPath = "C:\\Users\\vikto\\CLionProjects\\MinecraftCPP\\src\\assets\\fonts\\pixel-emulator.ttf";
+	std::string pixelEmulatorPath = R"(C:\Users\vikto\CLionProjects\MinecraftCPP\src\assets\fonts\pixel-emulator.ttf)";
 	m_pFont = TTF_OpenFont((pixelEmulatorPath).c_str(), 20);
 	if (!m_pFont) {
 		Lib::app->error("LabelStyle", "Can't load font.");
@@ -27,7 +32,20 @@ void DebugSystem::configure(entityx::EntityManager& entities, entityx::EventMana
 	m_playerForward.setSize(200, 100);
 	m_userInterface.addActor(&m_playerPos);
 	m_userInterface.addActor(&m_playerForward);
-
+	auto* inputListener = new InputListener();
+	inputListener->keyDown = [&](int key) -> void {
+		if(key == SDLK_TAB){
+			if (m_isWireframe) {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			}
+			else {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			}
+			m_isWireframe = !m_isWireframe;
+		}
+	};
+	m_userInterface.addListener(inputListener);
+	Lib::input->setProcessor(&m_userInterface);
 	m_userInterface.debug = true;
 }
 
@@ -44,5 +62,7 @@ DebugSystem::~DebugSystem() {
 	delete m_pLabelStyle;
 	TTF_CloseFont(m_pFont);
 }
+
+
 
 

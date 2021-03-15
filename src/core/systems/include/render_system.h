@@ -19,11 +19,10 @@
 
 class RenderSystem : public entityx::System<RenderSystem>{
 private:
-	static constexpr int RENDER_DISTANCE = 6;
+	static constexpr int RENDER_DISTANCE = 3;
 	World* m_pWorld;
 	PerspectiveCamera m_camera;
-	FirstPersonCameraController m_cameraController;
-	Transform* m_playerTransform;
+	Transform* m_pPlayerTransform;
 	Skybox m_pSkybox;
 	Shaders m_skyboxShader;
 
@@ -34,6 +33,7 @@ public:
 	RenderSystem(World* world);
 	void configure(entityx::EntityManager& entities, entityx::EventManager& events) override;
 	void update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
+	void preUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
 };
 
 

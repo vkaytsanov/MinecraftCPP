@@ -5,6 +5,8 @@
 #ifndef CUBE_H
 #define CUBE_H
 
+#include "../../../../lib/utils/geometry/include/vector3.h"
+
 enum CubeType {
 	Gravel,
 	Grass,
@@ -55,6 +57,7 @@ enum CubeFaceType {
 	Right = 5
 };
 
+
 struct Cube {
 	CubeType m_type = Air;
 
@@ -63,6 +66,7 @@ struct Cube {
 	bool isLiquid() const;
 	bool isModel() const;
 	bool isGround() const;
+	bool isCollidable() const;
 };
 
 

@@ -18,7 +18,7 @@ public:
 	World m_world;
 	entityx::EntityX m_entityX;
 	GameStateManager m_gameStateManager;
-	bool m_isWireframe = false;
+
 
 	Minecraft() = default;
 	~Minecraft() override;

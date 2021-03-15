@@ -27,7 +27,7 @@ void OrthographicCamera::update(bool updateFrustum) {
 //			m_nearPlane,
 //			m_farPlane
 //	);
-//	m_view.setToLookAt(m_position, m_direction, m_up);
+//	m_view.setToLookAt(position, m_direction, m_up);
 //	m_combined = m_projection * m_view;
 //
 //	if (updateFrustum){

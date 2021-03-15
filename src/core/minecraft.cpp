@@ -12,6 +12,7 @@
 #include "components/include/player_controller.h"
 #include "../lib/utils/camera/include/first_person_camera_controller.h"
 #include "systems/include/transform_system.h"
+#include "systems/include/physics_system.h"
 
 
 void GLAPIENTRY
@@ -29,18 +30,18 @@ MessageCallback(GLenum source,
 
 void Minecraft::create() {
 
-	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(MessageCallback, 0);
+//	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+//	glEnable(GL_DEBUG_OUTPUT);
+//	glDebugMessageCallback(MessageCallback, 0);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 
-
 	m_entityX.systems.add<TransformSystem>();
 	m_entityX.systems.add<PlayerSystem>(&m_world);
 	m_entityX.systems.add<TerrainSystem>(&m_world);
+	m_entityX.systems.add<PhysicsSystem>(&m_world);
 	m_entityX.systems.add<RenderSystem>(&m_world);
 	m_entityX.systems.add<DebugSystem>();
 
@@ -53,20 +54,13 @@ void Minecraft::render() {
 	glClearColor(0.4, 0.4, 0.4, 1.0);
 
 	const float dt = Lib::graphics->getDeltaTime();
-	if (Lib::input->isKeyPressed(SDLK_TAB)) {
-		if (m_isWireframe) {
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		}
-		else {
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
-		m_isWireframe = !m_isWireframe;
-	}
-	m_entityX.systems.update<TransformSystem>(dt);
-	m_entityX.systems.update<TerrainSystem>(dt);
-	m_entityX.systems.update<RenderSystem>(dt);
-	m_entityX.systems.update<PlayerSystem>(dt);
-	m_entityX.systems.update<DebugSystem>(dt);
+	m_entityX.systems.updateAll(dt);
+//	m_entityX.systems.update<PhysicsSystem>(dt);
+//	m_entityX.systems.update<TransformSystem>(dt);
+//	m_entityX.systems.update<TerrainSystem>(dt);
+//	m_entityX.systems.update<PlayerSystem>(dt);
+//	m_entityX.systems.update<RenderSystem>(dt);
+//	m_entityX.systems.update<DebugSystem>(dt);
 }
 
 void Minecraft::pause() {

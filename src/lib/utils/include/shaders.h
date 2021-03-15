@@ -15,22 +15,23 @@ static const std::string shadersPath = "../src/assets/shaders/";
 
 class Shaders {
 private:
-
 	const char* vertexShader;
 	const char* fragShader;
+	const char* geomShader;
 	unsigned int vertexShaderID;
 	unsigned int fragShaderID;
+	unsigned int geomShaderID;
 	unsigned int shaderProgram;
-
 	std::unordered_map<std::string, GLint> uniforms;
-
+	void checkForCompileError(unsigned int type);
 public:
-	std::string parsedVertexShader;
-	std::string parsedFragmentShader;
 	Shaders(const std::string& vertexShader, const std::string& fragShader);
+	Shaders(const std::string& vertexShader, const std::string& fragShader, const std::string& geomShader);
 	~Shaders();
 	std::string readFromFile(const std::string& path);
 	void compile();
+
+
 	void begin();
 	void end();
 	unsigned int getProgram();

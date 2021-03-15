@@ -16,8 +16,8 @@
 
 class TerrainSystem : public entityx::System<TerrainSystem>, public entityx::Receiver<TerrainSystem> {
 private:
-	const int EXPLORE_DISTANCE = 8;
-	const int BUILD_DISTANCE = 7;
+	const int EXPLORE_DISTANCE = 6;
+	const int BUILD_DISTANCE = 5;
 	const int REGENERATION_DISTANCE = 2;
 
 	World* m_pWorld;

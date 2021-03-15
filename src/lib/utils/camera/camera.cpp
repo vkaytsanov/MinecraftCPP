@@ -5,7 +5,7 @@
 #include "include/camera.h"
 
 Camera::Camera() {
-	m_pTransform = new Transform();
+	m_pTransform = nullptr;
 	m_viewportWidth = 0;
 	m_viewportHeight = 0;
 }
@@ -14,10 +14,14 @@ Camera::Camera() {
 Camera::~Camera() {
 }
 
-Vector3f Camera::getForwardVector() {
-	return Vector3f(m_view[A02], m_view[A12], m_view[A22]);
+Matrix4f& Camera::getTransformMatrix() const{
+	return m_pTransform->transformMatrix;
 }
 
-Vector3f Camera::getRightVector() {
-	return Vector3f(m_view[A00], m_view[A10], m_view[A20]);
+Matrix4f& Camera::getProjectionMatrix() {
+	return m_projection;
+}
+
+Matrix4f& Camera::getCombinedMatrix() {
+	return m_combined;
 }

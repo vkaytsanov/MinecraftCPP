@@ -8,6 +8,7 @@
 
 
 class Graphics {
+	friend class Application;
 private:
 	Configuration* m_config;
 	SDL_Window* m_window;

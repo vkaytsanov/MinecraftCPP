@@ -57,6 +57,10 @@ public:
 		return Vector3<T>(this->x / vec.x, this->y / vec.y, this->z / vec.z);
 	}
 
+	Vector3<T> operator/(const T scale) const {
+		return Vector3<T>(this->x / scale, this->y / scale, this->z / scale);
+	}
+
 	Vector3<T> operator=(const Vector3<T>& vec) {
 		this->x = vec.x;
 		this->y = vec.y;
@@ -92,10 +96,24 @@ public:
 		return *this;
 	}
 
+	Vector3<T>& operator-=(const T scale) {
+		this->x -= scale;
+		this->y -= scale;
+		this->z -= scale;
+		return *this;
+	}
+
 	Vector3<T>& operator*=(const Vector3<T>& vec) {
 		this->x *= vec.x;
 		this->y *= vec.y;
 		this->z *= vec.z;
+		return *this;
+	}
+
+	Vector3<T>& operator*=(const T scale) {
+		this->x *= scale;
+		this->y *= scale;
+		this->z *= scale;
 		return *this;
 	}
 
@@ -176,6 +194,10 @@ public:
 
 	void debug() {
 		Lib::app->log("vector", (std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(z)).c_str());
+	}
+
+	bool isZero() const {
+		return x == 0 && y == 0 && z == 0;
 	}
 
 };

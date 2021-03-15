@@ -24,3 +24,7 @@ bool Cube::isGround() const {
 	return m_type == Grass || m_type == Sand;
 }
 
+bool Cube::isCollidable() const {
+	return !isLiquid() && !isModel() && m_type != Air;
+}
+

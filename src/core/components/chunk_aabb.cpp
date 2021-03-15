@@ -2,13 +2,13 @@
 // Created by Viktor on 7.3.2021 г..
 //
 
-#include "include/frustum_aabb.h"
+#include "include/chunk_aabb.h"
 
-FrustumAABB::FrustumAABB(Vector3f dimensions, Vector3f position) : m_dimensions(dimensions), m_position(position) {
+ChunkAABB::ChunkAABB(Vector3f dimensions, Vector3f position) : m_dimensions(dimensions), m_position(position) {
 
 }
 
-Vector3f FrustumAABB::getNegativeFarPoint(const Vector3f& normal) {
+Vector3f ChunkAABB::getNegativeFarPoint(const Vector3f& normal) {
 	Vector3f result = m_position;
 	if (normal.x < 0) {
 		result.x += m_dimensions.x;
@@ -22,7 +22,7 @@ Vector3f FrustumAABB::getNegativeFarPoint(const Vector3f& normal) {
 	return result;
 }
 
-Vector3f FrustumAABB::getPositiveFarPoint(const Vector3f& normal) {
+Vector3f ChunkAABB::getPositiveFarPoint(const Vector3f& normal) {
 	Vector3f result = m_position;
 	if (normal.x > 0) {
 		result.x += m_dimensions.x;

@@ -6,7 +6,6 @@
 #include "../../include/lib.h"
 
 void InputListener::handle(SDL_Event& event) {
-	Lib::app->log("InputListener", "Handling");
 	switch (event.type) {
 		case SDL_KEYDOWN:
 			keyDown(event.key.keysym.sym);

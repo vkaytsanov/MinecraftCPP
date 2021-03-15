@@ -30,3 +30,9 @@ void Transform::rotate(const Vector3f& vec) {
 
 	hasChanged = true;
 }
+
+void Transform::rotateClampX(const Vector3f& vec, const float value) {
+	eulerAngles += vec;
+	eulerAngles.x = std::clamp(eulerAngles.x, -value, value);
+	hasChanged = true;
+}

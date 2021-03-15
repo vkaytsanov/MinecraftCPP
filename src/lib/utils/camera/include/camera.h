@@ -16,20 +16,17 @@
 
 
 class Camera {
-public:
+protected:
 	/** near clipping plane */
 	float m_nearPlane = 0.001f;
 	/** far clipping plane */
 	float m_farPlane = 100.0f;
-
-	Transform* m_pTransform;
-	/** Camera m_view matrix */
-	Matrix4f m_view;
 	/** Camera m_projection matrix */
 	Matrix4f m_projection;
 	/** Camera's m_combined matrix */
 	Matrix4f m_combined;
-
+public:
+	Transform* m_pTransform;
 	Frustum m_frustum;
 
 	float m_viewportWidth;
@@ -38,8 +35,10 @@ public:
 	Camera();
 	~Camera();
 	virtual void update(bool updateFrustum = true) = 0;
-	Vector3f getForwardVector();
-	Vector3f getRightVector();
+	Matrix4f& getTransformMatrix() const;
+	Matrix4f& getProjectionMatrix();
+	Matrix4f& getCombinedMatrix();
+
 };
 
 

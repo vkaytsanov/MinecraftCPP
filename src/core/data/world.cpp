@@ -5,7 +5,7 @@
 #include "include/world.h"
 #include "../components/include/chunk_mesh.h"
 #include "../components/include/chunk.h"
-#include "../components/include/frustum_aabb.h"
+#include "../components/include/chunk_aabb.h"
 
 World::World(long long seed) {
 	this->seed = seed;
@@ -18,8 +18,8 @@ entityx::Entity* World::addChunk(entityx::EntityManager& entityManager, int16_t 
 		entityx::Entity entity = entityManager.create();
 		entity.addComponent<Chunk>();
 		entity.addComponent<ChunkMesh>();
-		entity.addComponent<FrustumAABB>(Vector3f(CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z),
-		                                 Vector3f(x * CHUNK_SIZE_X, 0, z * CHUNK_SIZE_Z));
+		entity.addComponent<ChunkAABB>(Vector3f(CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z),
+		                               Vector3f(x * CHUNK_SIZE_X, 0, z * CHUNK_SIZE_Z));
 		m_chunks.try_emplace(coords, entity);
 	}
 	return &m_chunks.at(coords);
@@ -91,6 +91,13 @@ bool World::tryRemoveCube(const Vector3i& chunkPos, const Vector3i& cubePos) {
 	}
 	return false;
 }
+
+Cube* World::getCubeFromWorldCoordinates(const Vector3f& position) {
+	Vector3i chunkPos = fromWorldCoordinatesToChunkCoordinates(position);
+	Vector3i cubePos = fromWorldCoordinatesToCubeCoordinates(chunkPos, position);
+	return &getChunk(chunkPos.x, chunkPos.z)->getComponent<Chunk>()->getChunkContents()->at(cubePos.x).at(cubePos.y).at(cubePos.z);
+}
+
 
 
 

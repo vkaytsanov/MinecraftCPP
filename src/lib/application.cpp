@@ -42,7 +42,8 @@ Application::Application(Listener* listener, Configuration* config, Graphics* gr
 	Lib::audio = audio;
 	// creating the objects from the m_pGame
 	listener->create();
-
+	// reset the delta time so we dont get huge value after long initialization of the game
+	graphics->m_lastTime = SDL_GetTicks();
 	running = true;
 
 	gameLoop();

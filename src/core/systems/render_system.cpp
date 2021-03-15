@@ -3,30 +3,31 @@
 //
 
 #include "include/render_system.h"
-#include "../components/include/chunk.h"
-#include "../../lib/include/lib.h"
 #include "../components/include/player_controller.h"
 
 
 RenderSystem::RenderSystem(World* world) : m_pWorld(world),
                                            m_skyboxShader("skybox/shader.vert", "skybox/shader.frag"),
-                                           m_camera(70),
-                                           m_cameraController(&m_camera){
+                                           m_camera(70){
 
 }
 
 void RenderSystem::configure(entityx::EntityManager& entities, entityx::EventManager& events) {
 	for (const auto& entity : entities.entities_with_components<PlayerController>()) {
-		m_playerTransform = entity.getComponent<Transform>().get();
+		m_pPlayerTransform = entity.getComponent<Transform>().get();
 	}
 
-	// follow the player
-	delete m_camera.m_pTransform;
-	m_camera.m_pTransform = m_playerTransform;
+	m_camera.m_pTransform = m_pPlayerTransform;
+
+}
+
+void RenderSystem::preUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
+//	m_camera.m_pTransform->position = m_pPlayerTransform->position + Vector3f(0, 2, 0);
+//	m_camera.m_pTransform->rotation = m_pPlayerTransform->rotation;
 }
 
 void RenderSystem::update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
-	m_cameraController.update(dt);
+	// follow the player
 	m_camera.update(true);
 	renderSkybox();
 	renderWorld();
@@ -38,7 +39,7 @@ void RenderSystem::renderSkybox() {
 	m_skyboxShader.begin();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_pSkybox.textureCubeMap.getBuffer());
-	const Matrix4f& mat = m_camera.m_combined.noTranslation();
+	const Matrix4f& mat = m_camera.getCombinedMatrix().noTranslation();
 	m_skyboxShader.setMatrix4("proj", mat);
 	m_skyboxShader.setInt("texSkybox", 0);
 
@@ -60,7 +61,7 @@ void RenderSystem::renderWorld() {
 	for (int x = playerX - RENDER_DISTANCE; x < playerX + RENDER_DISTANCE; x++) {
 		for (int z = playerZ - RENDER_DISTANCE; z < playerZ + RENDER_DISTANCE; z++) {
 			entityx::Entity* chunk = m_pWorld->getChunk(x, z);
-			if (m_camera.m_frustum.boxInFrustum(chunk->getComponent<FrustumAABB>().get())) {
+			if (m_camera.m_frustum.boxInFrustum(chunk->getComponent<ChunkAABB>().get())) {
 				m_chunkRenderer.renderChunk(chunk->getComponent<ChunkMesh>().get(), x, z);
 			}
 		}
@@ -73,7 +74,7 @@ void RenderSystem::renderWorld() {
 	for (int x = playerX - RENDER_DISTANCE; x < playerX + RENDER_DISTANCE; x++) {
 		for (int z = playerZ - RENDER_DISTANCE; z < playerZ + RENDER_DISTANCE; z++) {
 			entityx::Entity* chunk = m_pWorld->getChunk(x, z);
-			if (m_camera.m_frustum.boxInFrustum(chunk->getComponent<FrustumAABB>().get())) {
+			if (m_camera.m_frustum.boxInFrustum(chunk->getComponent<ChunkAABB>().get())) {
 				m_chunkRenderer.renderTransparentChunk(chunk->getComponent<ChunkMesh>().get(), x, z);
 			}
 		}
@@ -82,7 +83,7 @@ void RenderSystem::renderWorld() {
 	for (int x = playerX - RENDER_DISTANCE; x < playerX + RENDER_DISTANCE; x++) {
 		for (int z = playerZ - RENDER_DISTANCE; z < playerZ + RENDER_DISTANCE; z++) {
 			entityx::Entity* chunk = m_pWorld->getChunk(x, z);
-			if (m_camera.m_frustum.boxInFrustum(chunk->getComponent<FrustumAABB>().get())) {
+			if (m_camera.m_frustum.boxInFrustum(chunk->getComponent<ChunkAABB>().get())) {
 				m_chunkRenderer.renderModelChunk(chunk->getComponent<ChunkMesh>().get(), x, z);
 			}
 		}

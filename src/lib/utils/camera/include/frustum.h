@@ -8,7 +8,7 @@
 #include <array>
 #include "../../geometry/include/vector3.h"
 #include "../../geometry/include/matrix4.h"
-#include "../../../../core/components/include/frustum_aabb.h"
+#include "../../../../core/components/include/chunk_aabb.h"
 
 
 enum PlaneType{
@@ -33,7 +33,7 @@ private:
 	std::array<Plane, 6> m_planes;
 public:
 	void update(Matrix4f* combined);
-	bool boxInFrustum(FrustumAABB* box);
+	bool boxInFrustum(ChunkAABB* box);
 };
 
 

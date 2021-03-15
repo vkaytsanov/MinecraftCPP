@@ -20,7 +20,7 @@ PerspectiveCamera::PerspectiveCamera(const float fieldOfView, const float worldW
 	m_fov = fieldOfView;
 	m_viewportWidth = worldWidth;
 	m_viewportHeight = worldHeight;
-	update(true);
+
 }
 
 void PerspectiveCamera::update(bool updateFrustum) {
@@ -29,10 +29,7 @@ void PerspectiveCamera::update(bool updateFrustum) {
 	                             m_farPlane,
 	                             m_viewportWidth / m_viewportHeight);
 
-	m_view = m_pTransform->transformMatrix;
-	//m_pTransform->transformMatrix.debug();
-
-	m_combined = m_projection * m_view;
+	m_combined = m_projection * m_pTransform->transformMatrix;
 	if (updateFrustum) {
 		m_frustum.update(&m_combined);
 	}

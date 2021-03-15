@@ -49,7 +49,7 @@ void Frustum::update(Matrix4f* combined) {
 	}
 }
 
-bool Frustum::boxInFrustum(FrustumAABB* box) {
+bool Frustum::boxInFrustum(ChunkAABB* box) {
 	for(auto& plane : m_planes){
 		if(plane.distanceToPoint(box->getPositiveFarPoint(plane.m_normal)) < 0){
 			return false;

@@ -33,6 +33,9 @@ struct Transform {
 	void translate(const Vector3f& vec);
 	void rotate(const float roll, const float pitch, const float yaw);
 	void rotate(const Vector3f& vec);
+	void rotateClampX(const Vector3f& vec, const float value);
+
+
 };
 
 

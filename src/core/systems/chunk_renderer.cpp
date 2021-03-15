@@ -14,8 +14,8 @@ void ChunkRenderer::beginChunkRendering(Camera* camera, const int renderDistance
 	m_defaultChunkShader.begin();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture->getBuffer());
-	m_defaultChunkShader.setMatrix4("viewMatrix", camera->m_view);
-	m_defaultChunkShader.setMatrix4("projMatrix", camera->m_projection);
+	m_defaultChunkShader.setMatrix4("viewMatrix", camera->getTransformMatrix());
+	m_defaultChunkShader.setMatrix4("projMatrix", camera->getProjectionMatrix());
 	m_defaultChunkShader.setInt("tex_id", 0);
 	m_defaultChunkShader.setInt("CHUNK_SIZE_X", CHUNK_SIZE_X);
 	m_defaultChunkShader.setInt("CHUNK_SIZE_Z", CHUNK_SIZE_Z);

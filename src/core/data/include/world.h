@@ -72,6 +72,7 @@ public:
 	entityx::Entity* getChunk(int16_t x, int16_t z);
 	Vector3i fromWorldCoordinatesToChunkCoordinates(const Vector3f& position);
 	Vector3i fromWorldCoordinatesToCubeCoordinates(const Vector3i& chunk, const Vector3f& position);
+	Cube* getCubeFromWorldCoordinates(const Vector3f& position);
 	bool tryAddCube(const Vector3i& chunkPos, const Vector3i& cubePos);
 	bool tryRemoveCube(const Vector3i& chunkPos, const Vector3i& cubePos);
 

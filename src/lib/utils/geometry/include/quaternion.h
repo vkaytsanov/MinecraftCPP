@@ -96,6 +96,7 @@ public:
 		return Quaternion<T>(x / q.x, y / q.y, z / q.z, w / q.w);
 	}
 
+
 	Quaternion<T> identity() {
 		this->x = 0;
 		this->y = 0;
