@@ -38,9 +38,9 @@ void PlayerSystem::handleButtons(float dt) {
 
 void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 	if (Lib::input->isKeyPressed(SDLK_ESCAPE)) {
-		shouldMouseMove = !shouldMouseMove;
+		m_shouldMouseMove = !m_shouldMouseMove;
 	}
-	if (shouldMouseMove){
+	if (m_shouldMouseMove){
 		handleMouseMovement(dt);
 	}
 	if (Lib::input->isMouseLeftClick()) {

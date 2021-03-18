@@ -9,20 +9,20 @@
 #include "../../../lib/entityx/System.h"
 #include "../../components/include/transform.h"
 #include "../../components/include/rigid_body.h"
-#include "chunk_renderer.h"
-#include "../../data/include/world.h"
 #include "../../components/include/box_collider.h"
+#include "../../data/include/world.h"
+#include "chunk_renderer.h"
 
 class PhysicsSystem : public entityx::System<PhysicsSystem>{
 private:
 	const float GRAVITY_CONSTANT = 9.81f;
-	const float FRICTION_CONSTANT = 2.32;
-	const int SIMULATING_DISTANCE = 6;
+
 	World* m_pWorld;
-	/** simulating only around the player */
+	/** TODO: simulating only around the player */
+	const int SIMULATING_DISTANCE = 6;
 	Transform* m_pPlayerTransform;
 
-	void applyForce(RigidBody* rigidBody, float dt);
+	void applyFriction(RigidBody* rigidBody, float dt);
 	void applyGravity(RigidBody* rigidBody, float dt);
 	void handleCollision(RigidBody* rigidBody, Transform* transform, BoxCollider* boxCollider, Vector3f& acceleration);
 public:

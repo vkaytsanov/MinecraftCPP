@@ -15,13 +15,13 @@
 class PlayerSystem : public entityx::System<PlayerSystem>{
 private:
 	const float CAMERA_MOVEMENT_INTENSITY = 25.f;
-	const float CHARACTER_MOVEMENT_THRUST = 20.f;
+	const float CHARACTER_MOVEMENT_THRUST = 27.f;
 	const float CHARACTER_JUMPING_THRUST = 5.0f;
 	// ray casting
 	const int MAX_CUBE_REACH = 3;
 	const float BREAKING_TIME = 0.10f;
 	bool m_firstTimeMovingMouse = true;
-	bool shouldMouseMove = true;
+	bool m_shouldMouseMove = true;
 
 	float m_breakingTimer = 0.0f;
 	World* m_pWorld;

@@ -16,18 +16,19 @@ void RenderSystem::configure(entityx::EntityManager& entities, entityx::EventMan
 	for (const auto& entity : entities.entities_with_components<PlayerController>()) {
 		m_pPlayerTransform = entity.getComponent<Transform>().get();
 	}
-
+	// follow the player
 	m_camera.m_pTransform = m_pPlayerTransform;
 
 }
 
 void RenderSystem::preUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
-//	m_camera.m_pTransform->position = m_pPlayerTransform->position + Vector3f(0, 2, 0);
-//	m_camera.m_pTransform->rotation = m_pPlayerTransform->rotation;
 }
 
 void RenderSystem::update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
-	// follow the player
+
+}
+
+void RenderSystem::postUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
 	m_camera.update(true);
 	renderSkybox();
 	renderWorld();
@@ -92,6 +93,7 @@ void RenderSystem::renderWorld() {
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 }
+
 
 
 

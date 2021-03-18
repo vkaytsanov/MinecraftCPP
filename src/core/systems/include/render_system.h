@@ -34,6 +34,7 @@ public:
 	void configure(entityx::EntityManager& entities, entityx::EventManager& events) override;
 	void update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
 	void preUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
+	void postUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
 };
 
 
