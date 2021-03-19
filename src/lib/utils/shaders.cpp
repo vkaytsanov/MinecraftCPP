@@ -128,7 +128,6 @@ void Shaders::end() {
 }
 
 Shaders::~Shaders() {
-	Lib::app->log("Shaders", "deleting");
 	glUseProgram(0);
 	glDeleteShader(vertexShaderID);
 	glDeleteShader(fragShaderID);
@@ -161,17 +160,6 @@ void Shaders::setInt(std::string name, const int number) {
 	glUniform1i(getUniformLocation(name), number);
 }
 
-void Shaders::setFloat(std::string name, const float number) {
-	glUniform1f(getUniformLocation(name), number);
-}
-
-void Shaders::setVector3f(std::string name, const float x, const float y, const float z) {
-	glUniform3f(getUniformLocation(name), x, y, z);
-}
-
-void Shaders::setVector3f(std::string name, const Vector3f& vec) {
-	glUniform3f(getUniformLocation(name), vec.x, vec.y, vec.z);
-}
 
 
 

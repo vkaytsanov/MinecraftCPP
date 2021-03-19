@@ -4,13 +4,15 @@
 
 #include "include/player_system.h"
 #include "../components/include/player_controller.h"
-#include "../../lib/utils/geometry/include/ray.h"
+
 #include "../events/chunk_regeneration_event.h"
 #include "include/terrain_system.h"
-#include "include/physics_system.h"
 
 
-PlayerSystem::PlayerSystem(World* world) : m_pWorld(world) {
+Vector3f PlayerSystem::m_sHitBoxCube;
+bool PlayerSystem::m_sIsRayHit = false;
+
+PlayerSystem::PlayerSystem(World* world) : m_pWorld(world){
 
 }
 
@@ -20,9 +22,8 @@ void PlayerSystem::configure(entityx::EntityManager& entities, entityx::EventMan
 	m_player.addComponent<PlayerController>();
 	m_playerTransform = m_player.addComponent<Transform>(Vector3f(0, 100, 0));
 	m_playerRigidBody = m_player.addComponent<RigidBody>();
-	m_player.addComponent<BoxCollider>(Vector3f(0.75f, 1.65f, 0.75f));
+	m_playerBoxCollider = m_player.addComponent<BoxCollider>(Vector3f(0.75f, 1.65f, 0.75f));
 
-	//m_cameraController.setTransform(m_pPlayerTransform.get());
 }
 
 void PlayerSystem::update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) {
@@ -42,57 +43,45 @@ void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 	}
 	if (m_shouldMouseMove){
 		handleMouseMovement(dt);
+
+		m_breakingTimer += dt;
+		rayCast();
 	}
+
 	if (Lib::input->isMouseLeftClick()) {
 		// Destroy block
-		rayCast(events, true);
+		editBlock(events, true);
 	}
 	else if (Lib::input->isMouseRightClick()) {
 		//Add block
-		rayCast(events, false);
+		editBlock(events, false);
 	}
 
 }
 
-void PlayerSystem::rayCast(entityx::EventManager& events, bool destroyBlock) {
-	Ray ray(m_playerTransform->position,
-	        m_playerTransform->forward);
-	Vector3f lastPosition;
+void PlayerSystem::rayCast() {
+	m_sIsRayHit = false;
+	m_ray = VoxelRay(m_playerTransform->position, m_playerTransform->forward);
 
-	m_breakingTimer += Lib::graphics->getDeltaTime();
-	if (m_breakingTimer > BREAKING_TIME) {
-		for (int i = 0; i < MAX_CUBE_REACH; i++) {
-			ray.shoot(1.00f);
-			Vector3f position = ray.getEndPoint();
-			if (position.y < 0 || position.y > CHUNK_SIZE_Y - 1) break;
+	for (int i = 0; i < MAX_CUBE_REACH; i++) {
+		m_ray.step();
+		m_sHitBoxCube = m_ray.getEndPoint();
 
-			if (destroyBlock) {
-				Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(position);
-				Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, position);
-				if (m_pWorld->tryRemoveCube(chunkPos, cubePos)) {
-					onRayCastEnd(chunkPos, cubePos);
-					events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
-					m_breakingTimer = 0.0f;
-					break;
-				}
-			}
-			else {
-				// place block
-				Vector3i lastChunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(lastPosition);
-				Vector3i lastCubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(lastChunkPos, lastPosition);
-				if (m_pWorld->tryAddCube(lastChunkPos, lastCubePos)) {
-					onRayCastEnd(lastChunkPos, lastCubePos);
-					events.post<ChunkRegenerationEvent>(lastChunkPos.x, lastChunkPos.z);
-					m_breakingTimer = 0.0f;
-					break;
-				}
-				lastPosition = position;
-			}
+		if (m_sHitBoxCube.y < 0 || m_sHitBoxCube.y > CHUNK_SIZE_Y - 1) break;
+		Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(m_sHitBoxCube);
+		Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, m_sHitBoxCube);
+		entityx::Entity* chunkEntity = m_pWorld->getChunk(chunkPos.x, chunkPos.z);
+		entityx::ComponentHandle<Chunk> chunk = chunkEntity->getComponent<Chunk>();
+		ChunkContentsPtr chunkContents = chunk->getChunkContents();
+		Cube* cube = &chunkContents->at(cubePos.x).at(cubePos.y).at(cubePos.z);
+		if (cube->m_type != Air && !cube->isLiquid()) {
+			m_sIsRayHit = true;
+			break;
 		}
 	}
 }
 
-void PlayerSystem::onRayCastEnd(const Vector3i& chunkPos, const Vector3i& cubePos) {
+void PlayerSystem::onEditBlockEnd(const Vector3i& chunkPos, const Vector3i& cubePos) {
 	m_pWorld->getChunk(chunkPos.x, chunkPos.z)->getComponent<ChunkMesh>()->m_chunkMeshState = UnBuilt;
 
 	if (cubePos.x == 0) {
@@ -149,4 +138,32 @@ void PlayerSystem::handleMouseMovement(float dt) {
 		m_firstTimeMovingMouse = false;
 	}
 	Lib::input->resetMouse();
+}
+
+void PlayerSystem::editBlock(entityx::EventManager& events, bool destroy) {
+	if(m_sIsRayHit){
+		if(m_breakingTimer < BREAKING_TIME) return;
+
+		if(destroy){
+			Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(m_sHitBoxCube);
+			Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, m_sHitBoxCube);
+			if (m_pWorld->tryRemoveCube(chunkPos, cubePos)) {
+				onEditBlockEnd(chunkPos, cubePos);
+				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
+				m_breakingTimer = 0.0f;
+			}
+		}
+		else{
+			m_ray.stepBack();
+			m_sHitBoxCube = m_ray.getEndPoint();
+			// place block
+			Vector3i lastChunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(m_sHitBoxCube);
+			Vector3i lastCubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(lastChunkPos, m_sHitBoxCube);
+			if (m_pWorld->tryAddCube(lastChunkPos, lastCubePos)) {
+				onEditBlockEnd(lastChunkPos, lastCubePos);
+				events.post<ChunkRegenerationEvent>(lastChunkPos.x, lastChunkPos.z);
+				m_breakingTimer = 0.0f;
+			}
+		}
+	}
 }

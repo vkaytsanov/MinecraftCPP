@@ -9,8 +9,7 @@
 #include "../../geometry/include/vector3.h"
 #include "../../geometry/include/vector2.h"
 
-class Vertex {
-public:
+struct Vertex {
 	Vector3f position;
 	Vector2f uvs;
 	uint8_t lightningLevel;

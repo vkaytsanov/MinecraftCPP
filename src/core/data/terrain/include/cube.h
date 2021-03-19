@@ -69,5 +69,4 @@ struct Cube {
 	bool isCollidable() const;
 };
 
-
 #endif //CUBE_H

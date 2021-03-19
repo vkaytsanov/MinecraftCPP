@@ -68,7 +68,6 @@ TextureCubeMap::TextureCubeMap(std::vector<std::string>& paths) {
 }
 
 TextureCubeMap::~TextureCubeMap() {
-	Lib::app->log("TextureCubeMap", "deleting");
 	glDeleteBuffers(1, &textureBuffer);
 }
 

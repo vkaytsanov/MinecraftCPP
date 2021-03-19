@@ -15,6 +15,7 @@
 #include "../../data/include/world.h"
 #include "../../../lib/utils/include/universal_viewport.h"
 #include "player_system.h"
+#include "../../data/include/hit_box.h"
 
 
 class RenderSystem : public entityx::System<RenderSystem>{
@@ -23,18 +24,24 @@ private:
 	World* m_pWorld;
 	PerspectiveCamera m_camera;
 	Transform* m_pPlayerTransform;
-	Skybox m_pSkybox;
+	Skybox m_skybox;
+
 	Shaders m_skyboxShader;
+	Shaders m_hitBoxShader;
+	Shaders m_particleShader;
 
 	ChunkRenderer m_chunkRenderer;
+	HitBox m_hitBoxRenderer;
 	void renderSkybox();
 	void renderWorld();
+	void renderHitbox();
 public:
 	RenderSystem(World* world);
 	void configure(entityx::EntityManager& entities, entityx::EventManager& events) override;
 	void update(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
 	void preUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
 	void postUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;
+	void renderParticles(entityx::EntityManager& entities);
 };
 
 

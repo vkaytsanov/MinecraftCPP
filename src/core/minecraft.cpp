@@ -13,6 +13,7 @@
 #include "../lib/utils/camera/include/first_person_camera_controller.h"
 #include "systems/include/transform_system.h"
 #include "systems/include/physics_system.h"
+#include "systems/include/particle_system.h"
 
 
 void GLAPIENTRY
@@ -30,18 +31,19 @@ MessageCallback(GLenum source,
 
 void Minecraft::create() {
 
-//	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-//	glEnable(GL_DEBUG_OUTPUT);
-//	glDebugMessageCallback(MessageCallback, 0);
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(MessageCallback, 0);
 
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_CULL_FACE);
 
 	m_entityX.systems.add<TransformSystem>();
 	m_entityX.systems.add<PlayerSystem>(&m_world);
 	m_entityX.systems.add<TerrainSystem>(&m_world);
 	m_entityX.systems.add<PhysicsSystem>(&m_world);
+	m_entityX.systems.add<ParticleSystem>();
 	m_entityX.systems.add<RenderSystem>(&m_world);
 	m_entityX.systems.add<DebugSystem>();
 
@@ -53,14 +55,7 @@ void Minecraft::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.4, 0.4, 0.4, 1.0);
 
-	const float dt = Lib::graphics->getDeltaTime();
-	m_entityX.systems.updateAll(dt);
-//	m_entityX.systems.update<PhysicsSystem>(dt);
-//	m_entityX.systems.update<TransformSystem>(dt);
-//	m_entityX.systems.update<TerrainSystem>(dt);
-//	m_entityX.systems.update<PlayerSystem>(dt);
-//	m_entityX.systems.update<RenderSystem>(dt);
-//	m_entityX.systems.update<DebugSystem>(dt);
+	m_entityX.systems.updateAll(Lib::graphics->getDeltaTime());
 }
 
 void Minecraft::pause() {

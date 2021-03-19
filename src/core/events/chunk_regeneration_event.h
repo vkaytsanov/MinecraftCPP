@@ -5,12 +5,7 @@
 #ifndef CHUNK_REGENERATION_EVENT_H
 #define CHUNK_REGENERATION_EVENT_H
 
-struct Collision {
-	Collision(entityx::Entity left, entityx::Entity right) : left(left), right(right) {}
-	Collision() {}
-
-	entityx::Entity left, right;
-};
+#include "../../lib/entityx/Entity.h"
 
 struct ChunkRegenerationEvent : public entityx::Event<ChunkRegenerationEvent>{
 public:
