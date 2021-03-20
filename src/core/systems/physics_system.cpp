@@ -117,7 +117,7 @@ void PhysicsSystem::handleCollision(RigidBody* rigidBody, Transform* transform, 
 		if (cube->isCollidable()) {
 			cubeCollider.update(Vector3f::floor(cubePos));
 			if (cubeCollider.intersectsWith(boxCollider)) {
-				transform->position.y = boxCollider->m_boundingBox.max.y;
+				transform->position.y = cubeCollider.m_boundingBox.max.y + boxCollider->m_dimensions.y;
 				rigidBody->m_velocity.y = 0;
 				rigidBody->m_isGrounded = true;
 			}

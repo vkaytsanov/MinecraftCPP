@@ -4,9 +4,7 @@
 
 #include "include/voxel_ray.h"
 
-VoxelRay::VoxelRay(const Vector3f& start, const Vector3f& direction) {
-
-
+VoxelRay::VoxelRay(const Vector3f& start, const Vector3f& direction) :m_direction(direction) {
 	m_step.x = (direction.x >= 0) ? 1 : -1;
 	m_step.y = (direction.y >= 0) ? 1 : -1;
 	m_step.z = (direction.z >= 0) ? 1 : -1;
@@ -69,4 +67,18 @@ void VoxelRay::stepBack() {
 		m_endPoint.z += m_step.z;
 		m_tMax.z -= m_tDelta.z;
 	}
+}
+
+Vector3f VoxelRay::getNormal() {
+	if(m_tMax.x < m_tMax.y){
+		if(m_tMax.x < m_tMax.z){
+			return Vector3f(1 * m_step.x, 0, 0);
+		}
+		return Vector3f(0, 0, 1 * m_step.z);
+	}
+	else if(m_tMax.y < m_tMax.z){
+		return Vector3f(0, 1 * m_step.y, 0);
+	}
+	return Vector3f(0, 0, 1 * m_step.z);
+
 }

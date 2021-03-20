@@ -12,7 +12,7 @@
 #include "../../components/include/rigid_body.h"
 #include "../../components/include/box_collider.h"
 #include "../../../lib/utils/camera/include/first_person_camera_controller.h"
-#include "../../../lib/utils/geometry/include/voxel_ray.h"
+#include "../../../lib/utils/geometry/include/ray.h"
 
 class PlayerSystem : public entityx::System<PlayerSystem>{
 private:
@@ -22,8 +22,8 @@ private:
 	const float CHARACTER_JUMPING_THRUST = 5.0f;
 
 	// ray casting
-	VoxelRay m_ray;
-	const int MAX_CUBE_REACH = 7;
+	Ray m_ray;
+	const int MAX_CUBE_REACH = 10;
 	const float BREAKING_TIME = 0.10f;
 	bool m_firstTimeMovingMouse = true;
 	bool m_shouldMouseMove = true;

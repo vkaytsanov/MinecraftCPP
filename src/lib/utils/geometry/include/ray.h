@@ -12,12 +12,17 @@ class Ray {
 private:
 	Vector3f m_startPoint;
 	Vector3f m_endPoint;
+	Vector3f m_sign;
+	Vector3f m_tVec;
+	float m_minT;
 	Vector3f m_direction;
 public:
+	Ray() = default;
 	Ray(const Vector3f& start, const Vector3f& direction);
-	void shoot(float step);
+	void step();
 	Vector3f getEndPoint();
 	float getLength();
+	Vector3f getNormal() const;
 
 };
 

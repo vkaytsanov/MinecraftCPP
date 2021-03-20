@@ -14,11 +14,13 @@ private:
 	Vector3f m_step;
 	Vector3f m_tDelta;
 	Vector3f m_tMax;
+	Vector3f m_direction;
 public:
 	VoxelRay() = default;
 	VoxelRay(const Vector3f& start, const Vector3f& direction);
 	void step();
 	void stepBack();
+	Vector3f getNormal();
 	Vector3f getEndPoint() const;
 };
 

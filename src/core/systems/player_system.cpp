@@ -61,11 +61,11 @@ void PlayerSystem::handleMouse(entityx::EventManager& events, float dt) {
 
 void PlayerSystem::rayCast() {
 	m_sIsRayHit = false;
-	m_ray = VoxelRay(m_playerTransform->position, m_playerTransform->forward);
+	m_ray = Ray(m_playerTransform->position, m_playerTransform->forward);
 
 	for (int i = 0; i < MAX_CUBE_REACH; i++) {
 		m_ray.step();
-		m_sHitBoxCube = m_ray.getEndPoint();
+		m_sHitBoxCube = Vector3f::floor(m_ray.getEndPoint());
 
 		if (m_sHitBoxCube.y < 0 || m_sHitBoxCube.y > CHUNK_SIZE_Y - 1) break;
 		Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(m_sHitBoxCube);
@@ -76,6 +76,7 @@ void PlayerSystem::rayCast() {
 		Cube* cube = &chunkContents->at(cubePos.x).at(cubePos.y).at(cubePos.z);
 		if (cube->m_type != Air && !cube->isLiquid()) {
 			m_sIsRayHit = true;
+
 			break;
 		}
 	}
@@ -154,8 +155,7 @@ void PlayerSystem::editBlock(entityx::EventManager& events, bool destroy) {
 			}
 		}
 		else{
-			m_ray.stepBack();
-			m_sHitBoxCube = m_ray.getEndPoint();
+			m_sHitBoxCube = m_ray.getEndPoint() + m_ray.getNormal();
 			// place block
 			Vector3i lastChunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(m_sHitBoxCube);
 			Vector3i lastCubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(lastChunkPos, m_sHitBoxCube);
