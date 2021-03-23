@@ -14,7 +14,7 @@ void DebugSystem::configure(entityx::EntityManager& entities, entityx::EventMana
 	for(entityx::Entity entity : entities.entities_with_components<PlayerController>()){
 		m_transform = entity.getComponent<Transform>().get();
 	}
-	std::string pixelEmulatorPath = R"(C:\Users\vikto\CLionProjects\MinecraftCPP\src\assets\fonts\pixel-emulator.ttf)";
+	std::string pixelEmulatorPath = "../src/assets/fonts/pixel-emulator.ttf";
 	m_pFont = TTF_OpenFont((pixelEmulatorPath).c_str(), 20);
 	if (!m_pFont) {
 		Lib::app->error("LabelStyle", "Can't load font.");
