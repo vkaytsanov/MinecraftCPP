@@ -6,6 +6,7 @@
 #include "../components/include/player_controller.h"
 
 #include "../events/chunk_regeneration_event.h"
+#include "../events/cube_destroyed_event.h"
 #include "include/terrain_system.h"
 
 
@@ -148,9 +149,11 @@ void PlayerSystem::editBlock(entityx::EventManager& events, bool destroy) {
 		if(destroy){
 			Vector3i chunkPos = m_pWorld->fromWorldCoordinatesToChunkCoordinates(m_sHitBoxCube);
 			Vector3i cubePos = m_pWorld->fromWorldCoordinatesToCubeCoordinates(chunkPos, m_sHitBoxCube);
+			CubeType cubeType = m_pWorld->getCubeFromWorldCoordinates(m_sHitBoxCube)->m_type;
 			if (m_pWorld->tryRemoveCube(chunkPos, cubePos)) {
 				onEditBlockEnd(chunkPos, cubePos);
 				events.post<ChunkRegenerationEvent>(chunkPos.x, chunkPos.z);
+				events.post<CubeDestroyedEvent>(m_sHitBoxCube, cubeType);
 				m_breakingTimer = 0.0f;
 			}
 		}

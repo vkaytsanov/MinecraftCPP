@@ -74,7 +74,7 @@ class BasePool {
 
 
 /**
- * Implementation of BasePool that provides type-"safe" deconstruction of
+ * Implementation of BasePool that provides cubeType-"safe" deconstruction of
  * elements in the pool.
  */
 template <typename T, std::size_t ChunkSize = 8192>

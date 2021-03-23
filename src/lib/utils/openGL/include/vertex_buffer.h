@@ -14,8 +14,9 @@ public:
 	VertexBuffer();
 	~VertexBuffer();
 	static void bufferData(GLsizeiptr size, void* data, GLenum usage);
+	static void bufferSubData(GLintptr offset, GLsizeiptr size, const GLvoid* data);
 	static void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride,
-	                         const GLvoid* pointer);
+	                                const GLvoid* pointer);
 	static void vertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid* pointer);
 	void bind() const;
 	static void unbind();

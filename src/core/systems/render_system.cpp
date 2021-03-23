@@ -5,7 +5,7 @@
 #include "include/render_system.h"
 #include "include/particle_system.h"
 #include "../components/include/player_controller.h"
-#include "../components/include/particle.h"
+#include "../components/include/particle_emitter.h"
 
 
 RenderSystem::RenderSystem(World* world) : m_pWorld(world),
@@ -37,7 +37,7 @@ void RenderSystem::postUpdate(entityx::EntityManager& entities, entityx::EventMa
 	renderSkybox();
 	renderWorld();
 	renderHitbox();
-	//renderParticles(entities);
+	renderParticles(entities);
 }
 
 void RenderSystem::renderSkybox() {
@@ -46,8 +46,7 @@ void RenderSystem::renderSkybox() {
 	m_skyboxShader.begin();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_skybox.textureCubeMap.getBuffer());
-	const Matrix4f& mat = m_camera.getCombinedMatrix().noTranslation();
-	m_skyboxShader.setMatrix4("proj", mat);
+	m_skyboxShader.setMatrix4("proj", m_camera.getCombinedMatrix().noTranslation());
 	m_skyboxShader.setInt("texSkybox", 0);
 
 	m_skybox.getVao().bind();
@@ -101,15 +100,25 @@ void RenderSystem::renderWorld() {
 }
 
 void RenderSystem::renderParticles(entityx::EntityManager& entities) {
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	m_particleShader.begin();
-	m_particleShader.setMatrix4("proj", m_camera.getCombinedMatrix().noTranslation());
-	for(entityx::Entity entity : entities.entities_with_components<Particle>()){
-		Particle* particle = entity.getComponent<Particle>().get();
-		particle->vao.bind();
-		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
-		particle->vao.unbind();
+
+	m_particleShader.setMatrix4("projView",m_camera.getCombinedMatrix());
+	m_particleShader.setVector3f("up", m_camera.m_pTransform->up);
+	m_particleShader.setVector3f("right", m_camera.m_pTransform->right);
+	m_particleShader.setInt("tex_id", 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_chunkRenderer.m_pTexture->getBuffer());
+	for(entityx::Entity entity : entities.entities_with_components<ParticleEmitter>()){
+		ParticleEmitter* particleCollection = entity.getComponent<ParticleEmitter>().get();
+		particleCollection->vao.bind();
+		glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particleCollection->particles.size());
+		particleCollection->vao.unbind();
 	}
 	m_particleShader.end();
+	glDisable(GL_BLEND);
 }
 
 void RenderSystem::renderHitbox() {
@@ -117,9 +126,7 @@ void RenderSystem::renderHitbox() {
 		glLineWidth(5.0f);
 		m_hitBoxShader.begin();
 		m_hitBoxShader.setMatrix4("combined", m_camera.getCombinedMatrix());
-		m_hitBoxShader.setInt("worldPositionX", PlayerSystem::m_sHitBoxCube.x);
-		m_hitBoxShader.setInt("worldPositionY", PlayerSystem::m_sHitBoxCube.y);
-		m_hitBoxShader.setInt("worldPositionZ", PlayerSystem::m_sHitBoxCube.z);
+		m_hitBoxShader.setVector3f("worldPosition", PlayerSystem::m_sHitBoxCube);
 
 		m_hitBoxRenderer.m_cubeVao.bind();
 		glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, nullptr);

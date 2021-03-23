@@ -37,3 +37,7 @@ void VertexBuffer::vertexAttribIPointer(GLuint index, GLint size, GLenum type, G
 	glEnableVertexAttribArray(index);
 	glVertexAttribIPointer(index, size, type, stride, pointer);
 }
+
+void VertexBuffer::bufferSubData(GLintptr offset, GLsizeiptr size, const GLvoid* data) {
+	glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+}

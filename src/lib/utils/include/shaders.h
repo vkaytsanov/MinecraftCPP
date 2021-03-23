@@ -40,6 +40,8 @@ public:
 	GLint getUniformLocation(std::string& name);
 	void setMatrix4(std::string name, const Matrix4f& mat);
 	void setInt(std::string name, int number);
+	void setVector3f(std::string name, float x, float y, float z);
+	void setVector3f(std::string name, const Vector3f& vec);
 };
 
 

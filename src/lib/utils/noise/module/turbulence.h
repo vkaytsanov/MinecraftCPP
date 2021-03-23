@@ -83,7 +83,7 @@ namespace noise {
 		///
 		/// From these initial frequency and power values, modify these values
 		/// until this noise module produce the desired changes in your terrain or
-		/// m_texture.  For example:
+		/// m_pTexture.  For example:
 		/// - Low frequency (1/8 initial frequency) and low power (1/8 initial
 		///   power) produces very minor, almost unnoticeable changes.
 		/// - Low frequency (1/8 initial frequency) and high power (8 times
@@ -91,7 +91,7 @@ namespace noise {
 		///   textures.
 		/// - High frequency (8 times initial frequency) and low power (1/8
 		///   initial power) produces a noisy version of the initial terrain or
-		///   m_texture.
+		///   m_pTexture.
 		/// - High frequency (8 times initial frequency) and high power (8 times
 		///   initial power) produces nearly pure noise, which isn't entirely
 		///   useful.

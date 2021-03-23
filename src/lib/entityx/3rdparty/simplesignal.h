@@ -16,7 +16,7 @@ template <typename, typename>
 class ProtoSignal;  // undefined
 
 /// CollectorInvocation invokes signal handlers differently depending on return
-/// type.
+/// cubeType.
 template <typename, typename>
 struct CollectorInvocation;
 
@@ -40,7 +40,7 @@ struct CollectorLast {
 template <typename Result>
 struct CollectorDefault : CollectorLast<Result> {};
 
-/// CollectorDefault specialisation for signals with void return type.
+/// CollectorDefault specialisation for signals with void return cubeType.
 template <>
 struct CollectorDefault<void> {
   typedef void CollectorResult;
@@ -57,7 +57,7 @@ struct CollectorInvocation<Collector, R(Args...)> {
   }
 };
 
-/// CollectorInvocation specialisation for signals with void return type.
+/// CollectorInvocation specialisation for signals with void return cubeType.
 template <class Collector, class... Args>
 struct CollectorInvocation<Collector, void(Args...)> {
   inline bool invoke(Collector &collector,
@@ -221,11 +221,11 @@ class ProtoSignal<R(Args...), Collector> : private CollectorInvocation<
    // namespace Simple
 
 /**
- * Signal is a template type providing an interface for arbitrary callback
+ * Signal is a template cubeType providing an interface for arbitrary callback
  * lists.
- * A signal type needs to be declared with the function signature of its
+ * A signal cubeType needs to be declared with the function signature of its
  * callbacks,
- * and optionally a return result collector class type.
+ * and optionally a return result collector class cubeType.
  * Signal callbacks can be added with operator+= to a signal and removed with
  * operator-=, using
  * a callback connection ID return by operator+= as argument.

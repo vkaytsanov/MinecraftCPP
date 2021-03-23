@@ -74,6 +74,7 @@ public:
 	Matrix4<T> noTranslation();
 	Matrix4<T> angleToMatrix(const Vector3<T>& angle);
 	Matrix4<T> fromQuaternion(const Quaternion<T>& q);
+	Matrix4<T> transpose();
 
 	T& operator[](int idx);
 	Matrix4<T> operator*(const Matrix4<T>& mat);
@@ -225,6 +226,7 @@ Matrix4<T> Matrix4<T>::setToProjection(const T fov, const T near, const T far, c
 	a[A22] = -(far + near) / (far - near);
 	a[A23] = -1;
 	a[A32] = -(2 * far * near) / (far - near);
+
 	return *this;
 }
 
@@ -281,6 +283,13 @@ Matrix4<T> Matrix4<T>::setToTransform(const Vector3<T>& position, const Quaterni
 	return Matrix4f().fromQuaternion(rotation) * Matrix4f().setForTranslation(position * (-1));
 }
 
+template<typename T>
+Matrix4<T> Matrix4<T>::transpose() {
+	return Matrix4<T>(a[A00], a[A10], a[A20], a[A30],
+	                  a[A01], a[A11], a[A21], a[A31],
+	                  a[A02], a[A12], a[A22], a[A32],
+	                  a[A03], a[A13], a[A23], a[A33]);
+}
 
 
 typedef Matrix4<float> Matrix4f;

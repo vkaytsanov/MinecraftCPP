@@ -106,9 +106,9 @@ class EventManager : entityx::help::NonCopyable {
   virtual ~EventManager();
 
   /**
-   * Subscribe an object to build events of type E.
+   * Subscribe an object to build events of cubeType E.
    *
-   * Receivers must be subclasses of Receiver and must implement a build() method accepting the given event type.
+   * Receivers must be subclasses of Receiver and must implement a build() method accepting the given event cubeType.
    *
    * eg.
    *
@@ -131,7 +131,7 @@ class EventManager : entityx::help::NonCopyable {
   }
 
   /**
-   * Unsubscribe an object in order to not build events of type E anymore.
+   * Unsubscribe an object in order to not build events of cubeType E anymore.
    *
    * Receivers must have subscribed for event E before unsubscribing from event E.
    *
@@ -168,7 +168,7 @@ class EventManager : entityx::help::NonCopyable {
   /**
    * Emit an event to receivers.
    *
-   * This method constructs a new event object of type E with the provided arguments, then delivers it to all receivers.
+   * This method constructs a new event object of cubeType E with the provided arguments, then delivers it to all receivers.
    *
    * eg.
    *

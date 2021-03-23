@@ -60,12 +60,12 @@ namespace noise {
 		///
 		/// - It can be used as an elevation value for a terrain height map
 		/// - It can be used as a grayscale (or an RGB-channel) value for a
-		///   procedural m_texture
+		///   procedural m_pTexture
 		/// - It can be used as a p_position value for controlling the movement of a
 		///   simulated lifeform.
 		///
-		/// A noise module defines a near-infinite 3-dimensional m_texture.  Each
-		/// p_position in this "m_texture" has a specific value.
+		/// A noise module defines a near-infinite 3-dimensional m_pTexture.  Each
+		/// p_position in this "m_pTexture" has a specific value.
 		///
 		/// <b>Combining noise m_modules</b>
 		///
@@ -184,7 +184,7 @@ namespace noise {
 		///
 		/// <b>Using a noise module to build terrain height maps or textures</b>
 		///
-		/// One way to build a terrain height map or a m_texture is to first
+		/// One way to build a terrain height map or a m_pTexture is to first
 		/// allocate a 2-dimensional array of floating-point values.  For each
 		/// array element, pass the array subscripts as @a x and @a y coordinates
 		/// to the GetValue() method (leaving the @a z coordinate set to zero) and

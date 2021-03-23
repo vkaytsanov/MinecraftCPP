@@ -12,28 +12,38 @@
 #include "../../../lib/utils/openGL/include/vertex_buffer.h"
 #include "../../data/terrain/include/cube.h"
 
-struct InstancedVertex{
-	Vector2f position;
-	Vector3f color;
-
-	InstancedVertex(Vector2f position, Vector3f color) : position(position), color(color){}
+const float particleVertices[] = {
+		0.5f, -0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f,
+		-0.5f, -0.5f, 0.5f,
+		-0.5f, 0.5f, 0.5f,
 };
 
-struct Particle : public entityx::Component<Particle>{
+struct ParticleVertex{
+	Vector3f vertices;
+	Vector2f uvs;
+};
+
+struct ParticleInstancedVertex{
+	Vector3f position;
+	Vector2f size;
+};
+
+struct Particle{
 	Vector3f position;
 	Vector3f velocity;
-	float lifetime;
-	CubeType cubeType;
+	Vector2f size = Vector2f(1.0f, 1.0f);
+	float lifetime = 1.0f;
+	float elapsedTime = 0.0f;
+	bool isAlive() const;
+	void update(float dt);
+	Particle(Vector3f velocity) : velocity(velocity){}
+	Particle() = default;
 
-	VertexBuffer vbo;
-	VertexBuffer instancedVbo;
-	VertexArray vao;
 
-	Particle();
-	void updateLife(float dt);
-	void setData();
-	bool isAlive();
 };
+
+
 
 
 #endif //PARTICLE_H

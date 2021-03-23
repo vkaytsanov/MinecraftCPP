@@ -161,7 +161,13 @@ void Shaders::setInt(std::string name, const int number) {
 }
 
 
+void Shaders::setVector3f(std::string name, float x, float y, float z) {
+	glUniform3f(getUniformLocation(name), x, y, z);
+}
 
+void Shaders::setVector3f(std::string name, const Vector3f& vec) {
+	setVector3f(name, vec.x, vec.y, vec.z);
+}
 
 
 

@@ -1653,7 +1653,7 @@ namespace Detail {
         static std::string convert( T const& v )
         {
             return ::Catch::toString(
-                static_cast<typename std::underlying_type<T>::type>(v)
+                static_cast<typename std::underlying_type<T>::cubeType>(v)
                 );
         }
     };
@@ -1782,7 +1782,7 @@ namespace Detail {
     }
 } // end namespace Detail
 
-/// \brief converts any type to a string
+/// \brief converts any cubeType to a string
 ///
 /// The default template forwards on to ostringstream - except when an
 /// ostringstream overload does not exist - in which case it attempts to detect
@@ -2198,7 +2198,7 @@ namespace Catch {
         __catchResult.unsetExceptionGuard(); \
         INTERNAL_CATCH_REACT( __catchResult ) \
     } while( Catch::isTrue( false && static_cast<bool>( !!(expr) ) ) ) // expr here is never evaluated at runtime but it forces the compiler to give it a look
-// The double negation silences MSVC's C4800 warning, the static_cast forces short-circuit evaluation if the type has overloaded &&.
+// The double negation silences MSVC's C4800 warning, the static_cast forces short-circuit evaluation if the cubeType has overloaded &&.
 
 #define INTERNAL_CHECK_THAT_NO_TRY( macroName, matcher, resultDisposition, arg ) \
     do { \
@@ -2234,7 +2234,7 @@ namespace Catch {
         } \
         INTERNAL_CATCH_REACT( __catchResult ) \
     } while( Catch::isTrue( false && static_cast<bool>( !!(expr) ) ) ) // expr here is never evaluated at runtime but it forces the compiler to give it a look
-    // The double negation silences MSVC's C4800 warning, the static_cast forces short-circuit evaluation if the type has overloaded &&.
+    // The double negation silences MSVC's C4800 warning, the static_cast forces short-circuit evaluation if the cubeType has overloaded &&.
 
 ///////////////////////////////////////////////////////////////////////////////
 #define INTERNAL_CATCH_IF( macroName, resultDisposition, expr ) \
@@ -3148,7 +3148,7 @@ namespace Catch {
 
 namespace Catch {
 
-    // An optional type
+    // An optional cubeType
     template<typename T>
     class Option {
     public:
@@ -4468,10 +4468,10 @@ namespace Clara {
             return str.size() >= prefix.size() && str.substr( 0, prefix.size() ) == prefix;
         }
 
-        template<typename T> struct RemoveConstRef{ typedef T type; };
-        template<typename T> struct RemoveConstRef<T&>{ typedef T type; };
-        template<typename T> struct RemoveConstRef<T const&>{ typedef T type; };
-        template<typename T> struct RemoveConstRef<T const>{ typedef T type; };
+        template<typename T> struct RemoveConstRef{ typedef T cubeType; };
+        template<typename T> struct RemoveConstRef<T&>{ typedef T cubeType; };
+        template<typename T> struct RemoveConstRef<T const&>{ typedef T cubeType; };
+        template<typename T> struct RemoveConstRef<T const>{ typedef T cubeType; };
 
         template<typename T>    struct IsBool       { static const bool value = false; };
         template<>              struct IsBool<bool> { static const bool value = true; };
@@ -4482,7 +4482,7 @@ namespace Clara {
             ss << _source;
             ss >> _dest;
             if( ss.fail() )
-                throw std::runtime_error( "Unable to convert " + _source + " to destination type" );
+                throw std::runtime_error( "Unable to convert " + _source + " to destination cubeType" );
         }
         inline void convertInto( std::string const& _source, std::string& _dest ) {
             _dest = _source;
@@ -4560,7 +4560,7 @@ namespace Clara {
         struct BoundUnaryMethod : IArgFunction<C>{
             BoundUnaryMethod( void (C::*_member)( M ) ) : member( _member ) {}
             virtual void set( C& p, std::string const& stringValue ) const {
-                typename RemoveConstRef<M>::type value;
+                typename RemoveConstRef<M>::cubeType value;
                 convertInto( stringValue, value );
                 (p.*member)( value );
             }
@@ -4600,7 +4600,7 @@ namespace Clara {
         struct BoundBinaryFunction : IArgFunction<C>{
             BoundBinaryFunction( void (*_function)( C&, T ) ) : function( _function ) {}
             virtual void set( C& obj, std::string const& stringValue ) const {
-                typename RemoveConstRef<T>::type value;
+                typename RemoveConstRef<T>::cubeType value;
                 convertInto( stringValue, value );
                 function( obj, value );
             }
@@ -4628,8 +4628,8 @@ namespace Clara {
 
         struct Token {
             enum Type { Positional, ShortOpt, LongOpt };
-            Token( Type _type, std::string const& _data ) : type( _type ), data( _data ) {}
-            Type type;
+            Token( Type _type, std::string const& _data ) : cubeType( _type ), data( _data ) {}
+            Type cubeType;
             std::string data;
         };
 
@@ -5042,10 +5042,10 @@ namespace Clara {
                     Arg const& arg = *it;
 
                     try {
-                        if( ( token.type == Parser::Token::ShortOpt && arg.hasShortName( token.data ) ) ||
-                            ( token.type == Parser::Token::LongOpt && arg.hasLongName( token.data ) ) ) {
+                        if( ( token.cubeType == Parser::Token::ShortOpt && arg.hasShortName( token.data ) ) ||
+                            ( token.cubeType == Parser::Token::LongOpt && arg.hasLongName( token.data ) ) ) {
                             if( arg.takesArg() ) {
-                                if( i == tokens.size()-1 || tokens[i+1].type != Parser::Token::Positional )
+                                if( i == tokens.size()-1 || tokens[i+1].cubeType != Parser::Token::Positional )
                                     errors.push_back( "Expected argument to option: " + token.data );
                                 else
                                     arg.boundField.set( m_config, tokens[++i].data );
@@ -5061,7 +5061,7 @@ namespace Clara {
                     }
                 }
                 if( it == itEnd ) {
-                    if( token.type == Parser::Token::Positional || !m_throwOnUnrecognisedTokens )
+                    if( token.cubeType == Parser::Token::Positional || !m_throwOnUnrecognisedTokens )
                         unusedTokens.push_back( token );
                     else if( errors.empty() && m_throwOnUnrecognisedTokens )
                         errors.push_back( "unrecognised option: " + token.data );
@@ -5090,7 +5090,7 @@ namespace Clara {
                     it->second.boundField.set( m_config, token.data );
                 else
                     unusedTokens.push_back( token );
-                if( token.type == Parser::Token::Positional )
+                if( token.cubeType == Parser::Token::Positional )
                     position++;
             }
             return unusedTokens;
@@ -5101,7 +5101,7 @@ namespace Clara {
             std::vector<Parser::Token> unusedTokens;
             for( std::size_t i = 0; i < tokens.size(); ++i ) {
                 Parser::Token const& token = tokens[i];
-                if( token.type == Parser::Token::Positional )
+                if( token.cubeType == Parser::Token::Positional )
                     m_floatingArg->boundField.set( m_config, token.data );
                 else
                     unusedTokens.push_back( token );
@@ -8483,7 +8483,7 @@ namespace Catch {
                                 ResultWas::OfType _type )
     :   macroName( _macroName ),
         lineInfo( _lineInfo ),
-        type( _type ),
+        cubeType( _type ),
         sequence( ++globalCount )
     {}
 
@@ -8605,7 +8605,7 @@ namespace Catch
             for( std::vector<MessageInfo>::const_iterator it = assertionStats.infoMessages.begin(), itEnd = assertionStats.infoMessages.end();
                     it != itEnd;
                     ++it ) {
-                if( it->type == ResultWas::Info ) {
+                if( it->cubeType == ResultWas::Info ) {
                     ResultBuilder rb( it->macroName.c_str(), it->lineInfo, "", ResultDisposition::Normal );
                     rb << it->message;
                     rb.setResultType( ResultWas::Info );
@@ -10168,7 +10168,7 @@ namespace Catch {
         }
 
         void writeStylesheetRef( std::string const& url ) {
-            m_os << "<?xml-stylesheet type=\"text/xsl\" href=\"" << url << "\"?>\n";
+            m_os << "<?xml-stylesheet cubeType=\"text/xsl\" href=\"" << url << "\"?>\n";
         }
 
         XmlWriter& writeBlankLine() {
@@ -10295,10 +10295,10 @@ namespace Catch {
                 for( std::vector<MessageInfo>::const_iterator it = assertionStats.infoMessages.begin(), itEnd = assertionStats.infoMessages.end();
                      it != itEnd;
                      ++it ) {
-                    if( it->type == ResultWas::Info && includeResults ) {
+                    if( it->cubeType == ResultWas::Info && includeResults ) {
                         m_xml.scopedElement( "Info" )
                                 .writeText( it->message );
-                    } else if ( it->type == ResultWas::Warning ) {
+                    } else if ( it->cubeType == ResultWas::Warning ) {
                         m_xml.scopedElement( "Warning" )
                                 .writeText( it->message );
                     }
@@ -10313,7 +10313,7 @@ namespace Catch {
             if( result.hasExpression() ) {
                 m_xml.startElement( "Expression" )
                     .writeAttribute( "success", result.succeeded() )
-                    .writeAttribute( "type", result.getTestMacroName() );
+                    .writeAttribute( "cubeType", result.getTestMacroName() );
 
                 writeSourceInfo( result.getSourceInfo() );
 
@@ -10323,7 +10323,7 @@ namespace Catch {
                     .writeText( result.getExpandedExpression() );
             }
 
-            // And... Print a result applicable to each result type.
+            // And... Print a result applicable to each result cubeType.
             switch( result.getResultType() ) {
                 case ResultWas::ThrewException:
                     m_xml.startElement( "Exception" );
@@ -10634,7 +10634,7 @@ namespace Catch {
                 XmlWriter::ScopedElement e = xml.scopedElement( elementName );
 
                 xml.writeAttribute( "message", result.getExpandedExpression() );
-                xml.writeAttribute( "type", result.getTestMacroName() );
+                xml.writeAttribute( "cubeType", result.getTestMacroName() );
 
                 std::ostringstream oss;
                 if( !result.getMessage().empty() )
@@ -10644,7 +10644,7 @@ namespace Catch {
                         itEnd = stats.infoMessages.end();
                             it != itEnd;
                             ++it )
-                    if( it->type == ResultWas::Info )
+                    if( it->cubeType == ResultWas::Info )
                         oss << it->message << '\n';
 
                 oss << "at " << result.getSourceInfo();
@@ -10876,7 +10876,7 @@ namespace Catch {
                         it != itEnd;
                         ++it ) {
                     // If this assertion is a warning ignore any INFO messages
-                    if( printInfoMessages || it->type != ResultWas::Info )
+                    if( printInfoMessages || it->cubeType != ResultWas::Info )
                         stream << Text( it->message, TextAttributes().setIndent(2) ) << '\n';
                 }
             }
@@ -11320,7 +11320,7 @@ namespace Catch {
 
                 for(; itMessage != itEnd; ) {
                     // If this assertion is a warning ignore any INFO messages
-                    if( printInfoMessages || itMessage->type != ResultWas::Info ) {
+                    if( printInfoMessages || itMessage->cubeType != ResultWas::Info ) {
                         stream << " '" << itMessage->message << '\'';
                         if ( ++itMessage != itEnd ) {
                             Colour colourGuard( dimColour() );

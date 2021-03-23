@@ -15,17 +15,17 @@
 
 class PhysicsSystem : public entityx::System<PhysicsSystem>{
 private:
-	const float GRAVITY_CONSTANT = 9.81f;
-
 	World* m_pWorld;
+
 	/** TODO: simulating only around the player */
 	const int SIMULATING_DISTANCE = 6;
 	Transform* m_pPlayerTransform;
-
 	void applyFriction(RigidBody* rigidBody, float dt);
+
 	void applyGravity(RigidBody* rigidBody, float dt);
 	void handleCollision(RigidBody* rigidBody, Transform* transform, BoxCollider* boxCollider, Vector3f& acceleration);
 public:
+	static constexpr float GRAVITY_CONSTANT = 9.81f;
 	PhysicsSystem(World* world);
 	void configure(entityx::EntityManager& entities, entityx::EventManager& events) override;
 	void preUpdate(entityx::EntityManager& entities, entityx::EventManager& events, entityx::TimeDelta dt) override;

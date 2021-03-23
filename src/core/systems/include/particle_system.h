@@ -12,6 +12,7 @@
 #include "../../../lib/utils/openGL/include/vertex_buffer.h"
 #include "../../../lib/utils/openGL/include/vertex_array.h"
 #include "../../events/cube_destroyed_event.h"
+#include "../../data/terrain/include/cube.h"
 
 
 
@@ -19,7 +20,7 @@
 class ParticleSystem : public entityx::System<ParticleSystem>,
                        public entityx::Receiver<ParticleSystem> {
 private:
-
+	std::queue<std::pair<Vector3f, CubeType>> m_queuedEvents;
 	void emit();
 public:
 	ParticleSystem();

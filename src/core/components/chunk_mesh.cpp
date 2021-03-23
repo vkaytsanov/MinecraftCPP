@@ -60,7 +60,7 @@ void ChunkMesh::setMesh(std::array<std::vector<Vertex>, 3>& vertices) {
 			type = " model";
 		}
 //		Lib::app->log(("ChunkMesh " + std::to_string(i)).c_str(),
-//		              (std::to_string(vertices.at(i).size()) + type +
+//		              (std::to_string(vertices.at(i).size()) + cubeType +
 //		               " m_vertices").c_str());
 		if (!vertices.at(i).empty()) {
 			m_vbo.at(i).bind();

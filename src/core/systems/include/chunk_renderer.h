@@ -12,9 +12,9 @@
 
 class ChunkRenderer {
 private:
-	const Texture* m_texture;
 	Shaders m_defaultChunkShader;
 public:
+	const Texture* m_pTexture;
 	ChunkRenderer();
 	void beginChunkRendering(Camera* camera, const int renderDistance);
 	void renderChunk(ChunkMesh* chunkMesh, int x, int z);

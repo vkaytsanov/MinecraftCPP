@@ -5,7 +5,7 @@
 #include "include/chunk_renderer.h"
 #include "../../lib/include/lib.h"
 
-ChunkRenderer::ChunkRenderer() : m_texture(AssetManager::getInstance().getSprite("spriteSheet")),
+ChunkRenderer::ChunkRenderer() : m_pTexture(AssetManager::getInstance().getSprite("spriteSheet")),
                                  m_defaultChunkShader("textures/shader.vert", "textures/shader.frag") {
 }
 
@@ -13,7 +13,7 @@ ChunkRenderer::ChunkRenderer() : m_texture(AssetManager::getInstance().getSprite
 void ChunkRenderer::beginChunkRendering(Camera* camera, const int renderDistance) {
 	m_defaultChunkShader.begin();
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture->getBuffer());
+	glBindTexture(GL_TEXTURE_2D, m_pTexture->getBuffer());
 	m_defaultChunkShader.setMatrix4("viewMatrix", camera->getTransformMatrix());
 	m_defaultChunkShader.setMatrix4("projMatrix", camera->getProjectionMatrix());
 	m_defaultChunkShader.setInt("tex_id", 0);

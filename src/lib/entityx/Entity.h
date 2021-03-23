@@ -862,7 +862,7 @@ namespace entityx {
 		 */
 		void reset();
 
-		// Retrieve the getComponent family for a type.
+		// Retrieve the getComponent family for a cubeType.
 		template<typename C>
 		static BaseComponent::Family component_family() {
 			return Component<typename std::remove_const<C>::type>::family();
@@ -961,7 +961,7 @@ namespace entityx {
 		// Each element in component_pools_ corresponds to a Pool for a Component.
 		// The index into the vector is the Component::family().
 		std::vector<BasePool*> component_pools_;
-		// Each element in component_helpers_ corresponds to a ComponentHelper for a Component type.
+		// Each element in component_helpers_ corresponds to a ComponentHelper for a Component cubeType.
 		// The index into the vector is the Component::family().
 		std::vector<BaseComponentHelper*> component_helpers_;
 		// Bitmask of getComponents associated with each entity. Index into the vector is the Entity::Id.
